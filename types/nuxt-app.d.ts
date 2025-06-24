@@ -9,6 +9,11 @@ declare global {
   // type BaseResponse<T = unknown> = {
   //   data: T
   // }
+  type NavItem = {
+    src: string
+    icon: IconsId | 'mascot'
+    text: string
+  }
 }
 
 declare module 'nuxt/app' {

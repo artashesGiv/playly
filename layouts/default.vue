@@ -1,57 +1,43 @@
 <template>
   <div class="layout">
-    <header class="layout__header">
-      <span>Header</span>
-    </header>
+    <main-header class="layout__header" />
 
     <main class="layout__content">
       <slot />
     </main>
 
-    <footer class="layout__footer">
-      <span>Bottom Nav</span>
-    </footer>
+    <main-navigation class="layout__footer" />
   </div>
 </template>
 
-<script setup>
-// ничего не требуется
-</script>
+<script setup></script>
 
 <style scoped lang="scss">
 .layout {
   height: 100vh;
 
   &__header {
-    @include center('stretch', fixed);
-    @include row;
-
-    justify-content: center;
-
-    height: 48px;
-    background-color: #fff;
-    border-bottom: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 100;
+    width: 100%;
   }
 
   &__footer {
-    @include row;
-
-    justify-content: center;
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
-    height: 56px;
-    background-color: #fff;
-    border-top: 1px solid #ccc;
     z-index: 100;
+    width: 100%;
   }
 
   &__content {
-    padding: 60px 20px 56px 20px;
-    min-height: 100vh;
-    box-sizing: border-box;
+    margin-top: var(--header-height);
+    padding: 18px 16px 18px 16px;
+    height: calc(100% - (var(--header-height) + var(--navigation-height)));
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 </style>

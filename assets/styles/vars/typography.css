@@ -1,46 +1,6 @@
 :root {
-  --font-manrope: manrope, sans-serif;
-  --h0: 900 80px/104px var(--font-manrope);
-  --h1: 700 56px/72px var(--font-manrope);
-  --h2: 600 32px/48px var(--font-manrope);
-  --sh1: 400 28px/44px var(--font-manrope);
-  --b1: 400 24px/32px var(--font-manrope);
-  --b2: 300 20px/28px var(--font-manrope);
-  --p: 500 14px/20px var(--font-manrope);
+  --font-inter: Inter, sans-serif;
 
-  /* TYPOGRAPHY */
-
-  /* display */
-  --display-l: 600 48px/52px var(--font-manrope);
-  --display-l-strong: 800 48px/52px var(--font-manrope);
-  --display-m: 600 42px/44px var(--font-manrope);
-  --display-m-strong: 800 42px/44px var(--font-manrope);
-  --display-s: 600 32px/44px var(--font-manrope);
-  --display-s-strong: 800 32px/44px var(--font-manrope);
-  --display-xs: 600 26px/44px var(--font-manrope);
-  --display-xs-strong: 800 32px/44px var(--font-manrope);
-
-  /* heading */
-  --heading-h1: 800 28px/32px var(--font-manrope);
-  --heading-h2: 800 22px/24px var(--font-manrope);
-  --heading-h3: 800 18px/20px var(--font-manrope);
-  --heading-h4: 800 16px/20px var(--font-manrope);
-  --heading-h5: 800 14px/20px var(--font-manrope);
-
-  /* body */
-  --body-xl: 400 24px/32px var(--font-manrope);
-  --body-l: 400 18px/26px var(--font-manrope);
-  --body-l-strong: 600 18px/26px var(--font-manrope);
-  --body-m: 400 16px/24px var(--font-manrope);
-  --body-m-strong: 600 16px/24px var(--font-manrope);
-  --body-s: 400 14px/20px var(--font-manrope);
-  --body-s-strong: 600 14px/20px var(--font-manrope);
-
-  /* description */
-  --description-l: 400 12px/16px var(--font-manrope);
-  --description-l-strong: 600 12px/16px var(--font-manrope);
-  --description-m: 400 11px/16px var(--font-manrope);
-  --description-m-strong: 600 11px/16px var(--font-manrope);
-  --description-s: 400 10px/12px var(--font-manrope);
-  --description-s-strong: 600 10px/12px var(--font-manrope);
+  --font-massive: 700 24px/150% var(--font-inter);
+  --font-base: 700 16px/150% var(--font-inter);
 }

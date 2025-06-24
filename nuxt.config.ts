@@ -1,16 +1,17 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-import fs from 'node:fs'
-
 export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/image', '@nuxt/fonts', '@nuxt/eslint'],
+  modules: [
+    '@nuxt/image',
+    '@nuxt/fonts',
+    '@nuxt/eslint',
+    '@nuxtjs/google-fonts',
+  ],
 
   css: ['@/assets/styles/reset.css', '@/assets/styles/vars/index.css'],
   vite: {
     server: {
-      host: true,
       allowedHosts: true,
     },
     css: {
@@ -47,5 +48,14 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'vercel',
+  },
+  googleFonts: {
+    families: {
+      Inter: [300, 400, 600, 700, 800],
+    },
+    display: 'swap',
+    preconnect: true,
+    preload: true,
+    subsets: ['latin', 'cyrillic'],
   },
 })

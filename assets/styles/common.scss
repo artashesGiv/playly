@@ -8,71 +8,22 @@ html {
 }
 
 body {
-  font-family: var(--font-manrope);
-  font-weight: 600;
-  color: var(--foreground-default);
+  font-family: var(--font-inter);
+  font-weight: 500;
+  color: var(--light-500);
+  background-color: var(--dark-1000);
 
   &.no-scroll {
     overflow: hidden;
   }
 }
 
-.notification {
-  padding: 20px;
-  pointer-events: none;
-
-  .notification-title,
-  .notification-content {
-    text-align: left;
-    font-size: 14px;
-  }
-
-  .notification-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-
-  .vue-notification {
-    cursor: pointer;
-    padding: 14px;
-    border-radius: 12px;
-    background-color: blue !important;
-    color: var(--white-color);
-    border: none;
-    pointer-events: auto;
-  }
-
-  .vue-notification.success {
-    background-color: var(--success-color) !important;
-  }
-
-  .vue-notification.info {
-    background-color: var(--info-color) !important;
-  }
-
-  .vue-notification.error {
-    background-color: var(--danger-color) !important;
-  }
-
-  .vue-notification.warn {
-    background-color: var(--warning-color) !important;
-  }
-}
-
 *::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 2px;
+  height: 2px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--gray-secondary);
+  background-color: transparent;
   border-radius: 10px;
-}
-
-.landing-container {
-  width: var(--container-width);
-  overflow: hidden;
-  margin: 0 auto;
-  padding: 10px;
 }

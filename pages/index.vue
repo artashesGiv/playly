@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>QWEQWEQW</h1>
+    <h1>{{ tg?.initDataUnsafe.user?.first_name }}</h1>
 
     <nuxt-img
       class="default__image"
