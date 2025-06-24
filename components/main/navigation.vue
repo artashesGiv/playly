@@ -25,7 +25,7 @@ import { navigation } from '@/assets/content'
   padding: 0 12px;
 
   &__item {
-    //width: 100%;
+    flex: 1 1 0;
   }
 }
 </style>

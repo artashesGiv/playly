@@ -21,8 +21,8 @@ defineProps<NavItemProps>()
   $b: &;
 
   @include column(2px);
-  align-items: center;
 
+  align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: var(--transition-base);
