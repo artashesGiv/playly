@@ -5,6 +5,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/image', '@nuxt/fonts', '@nuxt/eslint'],
 
+  css: ['@/assets/styles/reset.css', '@/assets/styles/vars/index.css'],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/styles/index.scss" as *;',
+        },
+      },
+    },
+  },
   imports: {
     dirs: ['composables/**', 'api/**'],
   },
@@ -19,7 +29,12 @@ export default defineNuxtConfig({
       meta: [
         {
           'http-equiv': 'Content-Security-Policy',
-          'content': "default-src 'self' https://*.telegram.org;",
+          // 'content': [
+          //   "default-src 'self' https://*.telegram.org",
+          //   "script-src  'self' 'unsafe-inline' https://*.telegram.org",
+          //   "style-src   'self' 'unsafe-inline'",
+          //   "connect-src 'self' https://api.telegram.org https://*.telegram.org ws:",
+          // ].join('; '),
         },
       ],
     },

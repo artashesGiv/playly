@@ -1,0 +1,17 @@
+:root {
+  /* size */
+  --border-radius-xs: 4px;
+  --border-radius-s: 6px;
+  --border-radius-m: 10px;
+  --border-radius-l: 16px;
+  --border-radius-xl: 24px;
+
+  /* shadow */
+  --gray-box-shadow-sm: 0 0 8px 0 rgb(119 119 119 / 24%);
+  --gray-box-shadow-m: 0 4px 4px 0 #44537154;
+  --gray-box-shadow: 0 4px 16px 0 rgb(165 163 174 / 45%);
+
+  /* other */
+  --transition-base: all 0.3s ease;
+  --container-width: 1500px;
+}
