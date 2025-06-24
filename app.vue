@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ tg?.initData }}
+    {{ tg?.startParam }}
   </div>
 </template>
 
