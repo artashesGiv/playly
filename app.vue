@@ -1,14 +1,17 @@
 <template>
-  <div class="app">tg: {{ tg }}</div>
+  <div class="app">
+    <nuxt-layout>
+      <nuxt-page :transition="{ name: 'fade', mode: 'out-in' }" />
+    </nuxt-layout>
+  </div>
 </template>
 
-<script lang="ts" setup>
-const { tg } = useTelegram()
-</script>
+<script lang="ts" setup></script>
 
 <style scoped lang="scss">
 .app {
-  min-height: 100vh;
-  border: 1px solid #000;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
 }
 </style>

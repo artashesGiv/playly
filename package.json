@@ -4,10 +4,13 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxi dev -p 3000",
+    "ngrok": "ngrok http 3000",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "format-icons": "node assets/js/npm/formattingIcons.js",
+    "icons": "npm run format-icons && fantasticon"
   },
   "dependencies": {
     "@nuxt/eslint": "^1.4.1",
@@ -20,6 +23,7 @@
   },
   "devDependencies": {
     "@types/telegram-web-app": "^7.10.1",
+    "oslllo-svg-fixer": "^5.0.0",
     "prettier": "^3.6.0",
     "sass": "^1.89.2"
   }

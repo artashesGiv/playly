@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import fs from 'node:fs'
+
 export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: '2025-05-15',
@@ -7,6 +9,10 @@ export default defineNuxtConfig({
 
   css: ['@/assets/styles/reset.css', '@/assets/styles/vars/index.css'],
   vite: {
+    server: {
+      host: true,
+      allowedHosts: true,
+    },
     css: {
       preprocessorOptions: {
         scss: {
@@ -22,7 +28,7 @@ export default defineNuxtConfig({
     public: {
       TG_BOT_NAME: process.env.TG_BOT_NAME,
     },
-    TG_BOT_TOKEN: process.env.TG_BOT_TOKEN, // только сервер
+    TG_BOT_TOKEN: process.env.TG_BOT_TOKEN,
   },
   app: {
     head: {
