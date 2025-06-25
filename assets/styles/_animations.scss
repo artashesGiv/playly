@@ -99,6 +99,22 @@
   }
 }
 
+/*fade move*/
+.fade-move-enter-active,
+.fade-move-leave-active {
+  transition: all 0.3s ease;
+}
+
+.fade-move-enter-from,
+.fade-move-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fade-move-move {
+  transition: transform 0.3s;
+}
+
 @keyframes rotate360 {
   0% {
     transform: rotate(0);

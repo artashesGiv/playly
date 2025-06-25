@@ -1,7 +1,7 @@
 <template>
   <article :class="classes">
     <div class="balance-card__content">
-      <span>450</span>
+      <span>{{ balance }}</span>
       <main-mascot size="s" />
     </div>
     <span v-if="size === 'xl'" class="balance-card__text">Your balance</span>
@@ -9,6 +9,8 @@
 </template>
 
 <script setup lang="ts">
+import { useBalanceStore } from '@/store'
+
 //type
 export type BalanceCardProps = {
   size?: 's' | 'xl'
@@ -17,6 +19,9 @@ export type BalanceCardProps = {
 const props = withDefaults(defineProps<BalanceCardProps>(), {
   size: 's',
 })
+
+// store
+const { balance } = storeToRefs(useBalanceStore())
 
 // computed
 const classes = computed(() => [
@@ -35,8 +40,14 @@ const classes = computed(() => [
   &__content {
     @include row(6px);
 
-    font: var(--font-base);
+    font: var(--font-base-bold);
     color: var(--white);
+    font-variant-numeric: tabular-nums;
+    align-self: center;
+  }
+
+  &__text {
+    font: var(--font-base-medium);
   }
 
   &--size {
@@ -47,6 +58,7 @@ const classes = computed(() => [
       height: 50px;
     }
     &--xl {
+      text-align: center;
       border-radius: 22px;
       padding: 0 10px;
       width: 100%;

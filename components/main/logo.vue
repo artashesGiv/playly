@@ -13,7 +13,7 @@
 
   height: 36px;
   color: var(--light-500);
-  font: var(--font-massive);
+  font: var(--font-massive-bold);
 
   &__square {
     width: 31px;

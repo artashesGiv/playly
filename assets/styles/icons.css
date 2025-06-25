@@ -1,7 +1,7 @@
 @font-face {
     font-family: "icons";
-    src: url("/fonts/icons/icons.woff?32f8447c36560b545cebde7b9bd4bbaa") format("woff"),
-url("/fonts/icons/icons.woff2?32f8447c36560b545cebde7b9bd4bbaa") format("woff2");
+    src: url("/fonts/icons/icons.woff?a554a7896783241bd6807929a92c32a9") format("woff"),
+url("/fonts/icons/icons.woff2?a554a7896783241bd6807929a92c32a9") format("woff2");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -144,15 +144,18 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 .icon-down-1:before {
     content: "\f12b";
 }
-.icon-case-1:before {
+.icon-check:before {
     content: "\f12c";
 }
-.icon-arrow-swap-vertical:before {
+.icon-case-1:before {
     content: "\f12d";
 }
-.icon-arrow-swap-horizontal:before {
+.icon-arrow-swap-vertical:before {
     content: "\f12e";
 }
-.icon-Logout:before {
+.icon-arrow-swap-horizontal:before {
     content: "\f12f";
+}
+.icon-Logout:before {
+    content: "\f130";
 }

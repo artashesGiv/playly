@@ -1,8 +1,10 @@
 :root {
   --font-inter: Inter, sans-serif;
 
-  --font-massive: 700 24px/150% var(--font-inter);
-  --font-large: 500 18px/150% var(--font-inter);
-  --font-base: 700 16px/150% var(--font-inter);
-  --font-normal: 500 14px/150% var(--font-inter);
+  --font-massive-bold: 700 24px/150% var(--font-inter);
+  --font-large-medium: 500 18px/150% var(--font-inter);
+  --font-large-semibold: 600 18px/150% var(--font-inter);
+  --font-base-bold: 700 16px/150% var(--font-inter);
+  --font-base-medium: 500 16px/150% var(--font-inter);
+  --font-normal-medium: 500 14px/150% var(--font-inter);
 }

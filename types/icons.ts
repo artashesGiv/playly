@@ -42,6 +42,7 @@ export type IconsId =
   | 'down-3'
   | 'down-2'
   | 'down-1'
+  | 'check'
   | 'case-1'
   | 'arrow-swap-vertical'
   | 'arrow-swap-horizontal'

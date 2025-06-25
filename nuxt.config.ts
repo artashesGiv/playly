@@ -7,6 +7,8 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/eslint',
     '@nuxtjs/google-fonts',
+    'motion-v/nuxt',
+    '@pinia/nuxt',
   ],
 
   css: ['@/assets/styles/reset.css', '@/assets/styles/vars/index.css'],

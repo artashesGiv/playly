@@ -26,11 +26,11 @@ defineProps<TitleProps>()
   padding-bottom: 12px;
 
   &__text {
-    font: var(--font-large);
+    font: var(--font-large-medium);
   }
 
   &__additional {
-    font: var(--font-normal);
+    font: var(--font-normal-medium);
     background-color: var(--dark-900);
     border-radius: 16px;
     padding: 10px 16px;

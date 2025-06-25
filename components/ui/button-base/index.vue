@@ -26,9 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import type { SpinnerProps } from '@/components/ui/Spinner.vue'
-import type { CSSProperties } from 'vue'
-import { fontBySize, radiusBySize, iconFontSize } from './-helpers'
+import type {SpinnerProps} from '@/components/ui/Spinner.vue'
+import type {CSSProperties} from 'vue'
+import {fontBySize, iconFontSize, radiusBySize} from './-helpers'
 
 // props
 type ButtonView = 'primary' | 'secondary' | 'icon'
@@ -62,7 +62,7 @@ export type ButtonProps = {
   loading?: boolean
   rounded?: boolean
   squared?: boolean
-  onClick?: () => void
+  onClickCb?: () => void
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -72,6 +72,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   text: undefined,
   icon: undefined,
   iconRight: undefined,
+  onClickCb: undefined,
 })
 
 // emits
@@ -128,7 +129,7 @@ const sizeStyle = computed<CSSProperties>(() => {
 const onClickButton = () => {
   emit('click')
 
-  props.onClick?.()
+  props.onClickCb?.()
 }
 
 const spinnerProps = useSpinnerProps({ view: props.view })

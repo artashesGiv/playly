@@ -1,11 +1,18 @@
 <template>
-  <nuxt-img :src="src" :style="style" />
+  <motion.div
+    :while-press="{ scale: 0.9 }"
+    :class="classes"
+    :style="style"
+    @click="emits('click')"
+  >
+    <nuxt-img :src="src" />
+  </motion.div>
 </template>
 
 <script setup lang="ts">
-// type
 import type { CSSProperties } from 'vue'
 
+// type
 type Size = 'xs' | 's' | 'm' | '3xl'
 
 export type MainMascotProps = {
@@ -13,11 +20,14 @@ export type MainMascotProps = {
   isTap?: boolean
 }
 
+type Emits = {
+  (emit: 'click'): void
+}
 // define
 const props = withDefaults(defineProps<MainMascotProps>(), {
   size: 's',
-  isTap: false,
 })
+const emits = defineEmits<Emits>()
 
 // data
 const mapSize: Record<Size, number> = {
@@ -40,8 +50,18 @@ const realSize = computed(() => mapSize[props.size])
 
 const style = computed<CSSProperties>(() => ({
   width: `${realSize.value}px`,
-  height: `${realSize.value}px`,
+  aspectRatio: props.isTap ? '1.137 / 1' : '1 / 1',
 }))
+
+const classes = computed(() => ['mascot', { 'is-tap': props.isTap }])
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.mascot {
+  user-select: none;
+
+  &.is-tap {
+    cursor: pointer;
+  }
+}
+</style>
