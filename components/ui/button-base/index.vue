@@ -4,7 +4,7 @@
     :class="classes"
     :disabled="isDisabled"
     :type="type"
-    @click="onClickButton"
+    @click="onClick"
   >
     <ui-spinner v-if="loading" v-bind="spinnerProps" />
     <template v-else>
@@ -62,7 +62,7 @@ export type ButtonProps = {
   loading?: boolean
   rounded?: boolean
   squared?: boolean
-  onClickCb?: () => void
+  onClick?: () => void
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -72,7 +72,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   text: undefined,
   icon: undefined,
   iconRight: undefined,
-  onClickCb: undefined,
+  onClick: undefined,
 })
 
 // emits
@@ -126,10 +126,9 @@ const sizeStyle = computed<CSSProperties>(() => {
 })
 
 // methods
-const onClickButton = () => {
+// eslint-disable-next-line vue/no-dupe-keys
+const onClick = () => {
   emit('click')
-
-  props.onClickCb?.()
 }
 
 const spinnerProps = useSpinnerProps({ view: props.view })
