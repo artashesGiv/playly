@@ -1,6 +1,6 @@
 <template>
   <div class="logo">
-    <div class="logo__square" />
+    <nuxt-img src="/images/main/logo.png" class="logo__square" />
     <span> Playly </span>
   </div>
 </template>
@@ -9,17 +9,14 @@
 
 <style scoped lang="scss">
 .logo {
-  @include row(12px);
+  @include row(4px);
 
-  height: 36px;
-  color: var(--light-500);
+  height: 30px;
+  color: var(--white);
   font: var(--font-massive-bold);
 
   &__square {
-    width: 31px;
-    height: 31px;
-    border-radius: 11.33px;
-    background-color: var(--light-500);
+    width: 26px;
   }
 }
 </style>

@@ -63,5 +63,10 @@ const classes = computed(() => ['mascot', { 'is-tap': props.isTap }])
   &.is-tap {
     cursor: pointer;
   }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

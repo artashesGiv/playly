@@ -1,7 +1,10 @@
 <template>
   <header class="header">
     <main-logo />
-    <balance-card size="s" />
+    <div class="header__right">
+      <robux-balance-card />
+      <balance-card />
+    </div>
   </header>
 </template>
 
@@ -15,5 +18,9 @@
   height: var(--header-height);
   background-color: var(--dark-1000);
   padding: 0 16px;
+
+  &__right {
+    @include row(12px);
+  }
 }
 </style>
