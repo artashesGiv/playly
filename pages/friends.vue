@@ -1,11 +1,94 @@
 <template>
-  <div>
-    <h1>{{ tg?.initDataUnsafe.user?.first_name }}</h1>
+  <div class="friends">
+    <div class="friends__main">
+      <nuxt-img src="/images/friends/main.png" class="friends__image" />
+      <div>
+        <h3>Invite your friends and get coins</h3>
+        <span>Get coins for each friend</span>
+      </div>
+    </div>
+    <ui-divider />
+    <div class="friends__data">
+      <ui-title
+        text="Invited friends"
+        :additional-text="`${friends.length} friends`"
+      />
+
+      <div class="friends__list">
+        <friend-card
+          v-for="friend in friends"
+          :key="friend.id"
+          v-bind="friend"
+        />
+      </div>
+    </div>
+    <ui-button-base class="friends__button" text="Invite friend" size="52" />
   </div>
 </template>
 
 <script setup lang="ts">
-const { tg } = useTelegram()
+import { useFriendsStore } from '@/store'
+
+const { friends } = storeToRefs(useFriendsStore())
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.friends {
+  @include column(18px);
+
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+
+  &__main {
+    @include column(14px);
+
+    align-items: center;
+    text-align: center;
+
+    h3 {
+      color: var(--white);
+      font: var(--font-large-semibold);
+    }
+
+    span {
+      font: var(--font-base-medium);
+    }
+  }
+
+  &__image {
+    height: 166px;
+    width: 166px;
+  }
+
+  &__data {
+    @include column;
+
+    flex-grow: 1;
+    overflow-y: hidden;
+  }
+
+  &__list {
+    @include column(8px);
+
+    overflow-y: auto;
+    padding-bottom: 60px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      height: 120px;
+      width: 100%;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(16, 15, 17, 0) 0%, #100f11 100%);
+    }
+  }
+
+  &__button {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+</style>

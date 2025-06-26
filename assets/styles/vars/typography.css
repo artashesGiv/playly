@@ -2,9 +2,10 @@
   --font-inter: Inter, sans-serif;
 
   --font-massive-bold: 700 24px/150% var(--font-inter);
-  --font-large-medium: 500 18px/150% var(--font-inter);
   --font-large-semibold: 600 18px/150% var(--font-inter);
+  --font-large-medium: 500 18px/150% var(--font-inter);
   --font-base-bold: 700 16px/150% var(--font-inter);
+  --font-base-semibold: 600 16px/150% var(--font-inter);
   --font-base-medium: 500 16px/150% var(--font-inter);
   --font-normal-medium: 500 14px/150% var(--font-inter);
 }
