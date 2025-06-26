@@ -1,6 +1,6 @@
 <template>
   <motion.div
-    :while-press="{ scale: 0.9 }"
+    :while-press="isTap ? { scale: 0.9 } : undefined"
     :class="classes"
     :style="style"
     @click="emits('click')"

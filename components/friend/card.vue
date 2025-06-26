@@ -60,6 +60,7 @@ defineProps<Friend>()
     padding: 10px;
     background-color: var(--light-800);
     color: var(--white);
+    font: var(--font-normal-semibold);
   }
 }
 </style>
