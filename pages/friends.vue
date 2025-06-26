@@ -37,13 +37,16 @@ const { friends } = storeToRefs(useFriendsStore())
 
 <style scoped lang="scss">
 .friends {
-  @include column(18px);
+  @include column;
 
   position: relative;
   height: 100%;
   overflow: hidden;
 
   &__wrapper {
+    @include column(18px);
+
+    flex: 1;
     overflow-y: auto;
 
     &::after {
@@ -87,11 +90,11 @@ const { friends } = storeToRefs(useFriendsStore())
   &__list {
     @include column(8px);
 
-    padding-bottom: 60px;
+    padding-bottom: 8px;
   }
 
   &__button {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
   }

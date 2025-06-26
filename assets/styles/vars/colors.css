@@ -97,4 +97,83 @@
   --red-800: #511515;
   --red-900: #3d1010;
   --red-1000: #290a0a;
+
+  /*gradients*/
+  --blue-gradient: linear-gradient(
+    180deg,
+    rgba(16, 142, 212, 0.4) 0%,
+    rgba(16, 142, 212, 0.2) 31.33%,
+    rgba(16, 142, 212, 0) 100%
+  );
+  --blue-gradient-active: linear-gradient(
+    180deg,
+    rgba(16, 142, 212, 0.5) 0%,
+    rgba(16, 142, 212, 0.2) 38%,
+    rgba(16, 142, 212, 0) 100%
+  );
+  --pink-gradient: linear-gradient(
+    180deg,
+    rgba(212, 16, 87, 0.4) 0%,
+    rgba(212, 16, 87, 0.2) 31.33%,
+    rgba(212, 16, 87, 0) 100%
+  );
+
+  --pink-gradient-active: linear-gradient(
+    180deg,
+    rgba(212, 16, 87, 0.5) 0%,
+    rgba(212, 16, 87, 0.2) 38%,
+    rgba(212, 16, 87, 0) 100%
+  );
+  --green-gradient: linear-gradient(
+    180deg,
+    rgba(6, 169, 55, 0.4) 0%,
+    rgba(6, 169, 55, 0.2) 31.33%,
+    rgba(6, 169, 55, 0) 100%
+  );
+
+  --green-gradient-active: linear-gradient(
+    180deg,
+    rgba(6, 169, 55, 0.5) 0%,
+    rgba(6, 169, 55, 0.2) 38%,
+    rgba(6, 169, 55, 0) 100%
+  );
+  --red-gradient: linear-gradient(
+    180deg,
+    rgba(203, 52, 52, 0.4) 0%,
+    rgba(203, 52, 52, 0.2) 31.33%,
+    rgba(203, 52, 52, 0) 100%
+  );
+
+  --red-gradient-active: linear-gradient(
+    180deg,
+    rgba(203, 52, 52, 0.5) 0%,
+    rgba(203, 52, 52, 0.2) 38%,
+    rgba(203, 52, 52, 0) 100%
+  );
+  --gray-gradient: linear-gradient(
+    180deg,
+    rgba(98, 96, 102, 0.4) 0%,
+    rgba(98, 96, 102, 0.2) 31.33%,
+    rgba(98, 96, 102, 0) 100%
+  );
+
+  --gray-gradient-active: linear-gradient(
+    180deg,
+    rgba(98, 96, 102, 0.5) 0%,
+    rgba(98, 96, 102, 0.2) 38%,
+    rgba(98, 96, 102, 0) 100%
+  );
+  --yellow-gradient: linear-gradient(
+    180deg,
+    rgba(255, 213, 74, 0.4) 0%,
+    rgba(255, 213, 74, 0.2) 31.33%,
+    rgba(255, 213, 74, 0) 100%
+  );
+
+  --yellow-gradient-active: linear-gradient(
+    180deg,
+    rgba(255, 213, 74, 0.5) 0%,
+    rgba(255, 213, 74, 0.2) 38%,
+    rgba(255, 213, 74, 0) 100%
+  );
 }
