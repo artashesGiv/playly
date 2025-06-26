@@ -1,7 +1,17 @@
 <template>
   <article :class="classes">
     <div class="balance-card__content">
-      <span>{{ balance }}</span>
+      <AnimateNumber
+        locales="ru-RU"
+        class="number"
+        :transition="{
+          visualDuration: 0.6,
+          type: 'spring',
+          bounce: 0.25,
+          opacity: { duration: 0.3, ease: 'linear' },
+        }"
+        :value="balance"
+      />
       <main-mascot size="s" />
     </div>
     <span v-if="size === 'xl'" class="balance-card__text">Your balance</span>
@@ -10,6 +20,7 @@
 
 <script setup lang="ts">
 import { useBalanceStore } from '@/store'
+import { AnimateNumber } from 'motion-plus-vue'
 
 //type
 export type BalanceCardProps = {

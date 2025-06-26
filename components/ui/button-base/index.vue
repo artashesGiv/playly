@@ -26,9 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import type {SpinnerProps} from '@/components/ui/Spinner.vue'
-import type {CSSProperties} from 'vue'
-import {fontBySize, iconFontSize, radiusBySize} from './-helpers'
+import type { SpinnerProps } from '@/components/ui/Spinner.vue'
+import type { CSSProperties } from 'vue'
+import { fontBySize, iconFontSize, radiusBySize } from './-helpers'
 
 // props
 type ButtonView = 'primary' | 'secondary' | 'icon'
