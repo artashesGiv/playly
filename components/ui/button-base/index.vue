@@ -57,6 +57,7 @@ export type ButtonProps = {
   iconRight?: Icons
   text?: string
   type?: 'button' | 'submit' | 'reset'
+  direction?: 'column' | 'row'
   isDisabled?: boolean
   maxContent?: boolean
   loading?: boolean
@@ -69,6 +70,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   view: 'primary',
   size: '40',
   type: 'button',
+  direction: 'row',
   text: undefined,
   icon: undefined,
   iconRight: undefined,
@@ -94,6 +96,7 @@ const classes = computed(() => {
     'button',
     `button--view--${props.view}`,
     `button--size--${props.size}`,
+    `button--direction--${props.direction}`,
     { 'max-content': props.maxContent },
   ]
 
@@ -147,9 +150,6 @@ function useSpinnerProps({
 .button {
   $b: &;
 
-  @include row(10px);
-
-  justify-content: center;
   border: none;
   outline: none;
   width: 100%;
@@ -158,6 +158,28 @@ function useSpinnerProps({
   white-space: nowrap;
   transition: var(--transition-base);
   max-width: 100%;
+
+  &--direction {
+    &--row {
+      @include row(10px);
+
+      justify-content: center;
+    }
+
+    &--column {
+      @include column(4px);
+
+      align-items: center;
+      height: auto !important;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      font: var(--font-base-semibold);
+
+      #{$b}__icon {
+        font-size: 28px !important;
+      }
+    }
+  }
 
   &--view {
     /* PRIMARY */

@@ -1,11 +1,25 @@
 <template>
-  <div>
-    <h1>{{ tg?.initDataUnsafe.user?.first_name }}</h1>
+  <div class="robux">
+    <div class="robux__gradient" />
+    <robux-main />
+    <robux-interactive />
+    <robux-tasks />
   </div>
 </template>
 
-<script setup lang="ts">
-const { tg } = useTelegram()
-</script>
+<script setup lang="ts"></script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.robux {
+  @include column(18px);
+
+  &__gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 226px;
+    background: var(--yellow-gradient);
+  }
+}
+</style>

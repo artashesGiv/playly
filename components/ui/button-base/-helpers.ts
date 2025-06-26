@@ -23,4 +23,4 @@ export const iconFontSize: Record<ButtonsSize, number> = {
   /* font = 20 */ 54: 20, 52: 20, 50: 20, 48: 20, 46: 20,
   /* font = 16 */ 44: 16, 42: 16,
   /* font = 14 */ 40: 14, 38: 14, 36: 14, 34: 14, 32: 14, 30: 14,
-}
+} as const
