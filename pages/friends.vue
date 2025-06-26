@@ -1,27 +1,30 @@
 <template>
   <div class="friends">
-    <div class="friends__main">
-      <nuxt-img src="/images/friends/main.png" class="friends__image" />
-      <div>
-        <h3>Invite your friends and get coins</h3>
-        <span>Get coins for each friend</span>
+    <div class="friends__wrapper">
+      <div class="friends__main">
+        <nuxt-img src="/images/friends/main.png" class="friends__image" />
+        <div>
+          <h3>Invite your friends and get coins</h3>
+          <span>Get coins for each friend</span>
+        </div>
       </div>
-    </div>
-    <ui-divider />
-    <div class="friends__data">
-      <ui-title
-        text="Invited friends"
-        :additional-text="`${friends.length} friends`"
-      />
-
-      <div class="friends__list">
-        <friend-card
-          v-for="friend in friends"
-          :key="friend.id"
-          v-bind="friend"
+      <ui-divider />
+      <div class="friends__data">
+        <ui-title
+          text="Invited friends"
+          :additional-text="`${friends.length} friends`"
         />
+
+        <div class="friends__list">
+          <friend-card
+            v-for="friend in friends"
+            :key="friend.id"
+            v-bind="friend"
+          />
+        </div>
       </div>
     </div>
+
     <ui-button-base class="friends__button" text="Invite friend" size="52" />
   </div>
 </template>
@@ -39,6 +42,20 @@ const { friends } = storeToRefs(useFriendsStore())
   position: relative;
   height: 100%;
   overflow: hidden;
+
+  &__wrapper {
+    overflow-y: auto;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      height: 120px;
+      width: 100%;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(16, 15, 17, 0) 0%, #100f11 100%);
+    }
+  }
 
   &__main {
     @include column(14px);
@@ -65,24 +82,12 @@ const { friends } = storeToRefs(useFriendsStore())
     @include column;
 
     flex-grow: 1;
-    overflow-y: hidden;
   }
 
   &__list {
     @include column(8px);
 
-    overflow-y: auto;
     padding-bottom: 60px;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      height: 120px;
-      width: 100%;
-      pointer-events: none;
-      background: linear-gradient(180deg, rgba(16, 15, 17, 0) 0%, #100f11 100%);
-    }
   }
 
   &__button {
