@@ -1,27 +1,31 @@
-export const navigation: NavItem[] = [
-  {
-    src: '/',
-    icon: 'mascot',
-    text: 'Coins',
-  },
-  {
-    src: '/friends',
-    icon: 'group-2',
-    text: 'Friends',
-  },
-  {
-    src: '/robux',
-    icon: 'robux',
-    text: 'Robux',
-  },
-  {
-    src: '/cases',
-    icon: 'case-1',
-    text: 'Cases',
-  },
-  {
-    src: '/profile',
-    icon: 'profile-1',
-    text: 'Profile',
-  },
-]
+export const useNavigation = (): NavItem[] => {
+  const { t } = useI18n()
+
+  return [
+    {
+      src: '/',
+      icon: 'mascot',
+      text: t('nav.coins'),
+    },
+    {
+      src: '/friends',
+      icon: 'group-2',
+      text: t('nav.friends'),
+    },
+    {
+      src: '/robux',
+      icon: 'robux',
+      text: t('nav.robux'),
+    },
+    {
+      src: '/cases',
+      icon: 'case-1',
+      text: t('nav.cases'),
+    },
+    {
+      src: '/profile',
+      icon: 'profile-1',
+      text: t('nav.profile'),
+    },
+  ]
+}

@@ -1,7 +1,7 @@
 <template>
   <nav class="navigation">
     <main-nav-item
-      v-for="item in navigation"
+      v-for="item in useNavigation()"
       :key="item.src"
       v-bind="item"
       class="navigation__item"
@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { navigation } from '@/assets/content'
+import { useNavigation } from '@/assets/content'
 </script>
 
 <style scoped lang="scss">

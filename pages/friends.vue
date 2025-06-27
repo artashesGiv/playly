@@ -4,15 +4,15 @@
       <div class="friends__main">
         <nuxt-img src="/images/friends/main.png" class="friends__image" />
         <div>
-          <h3>Invite your friends and get coins</h3>
-          <span>Get coins for each friend</span>
+          <h3>{{ t('friends.title') }}</h3>
+          <span>{{ t('friends.description') }}</span>
         </div>
       </div>
       <ui-divider />
       <div class="friends__data">
         <ui-title
-          text="Invited friends"
-          :additional-text="`${friends.length} friends`"
+          :text="t('friends.listTitle')"
+          :additional-text="`${t('common.friends', friends.length)}`"
         />
 
         <div class="friends__list">
@@ -25,13 +25,18 @@
       </div>
     </div>
 
-    <ui-button-base class="friends__button" text="Invite friend" size="52" />
+    <ui-button-base
+      class="friends__button"
+      :text="t('friends.inviteButton')"
+      size="52"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useFriendsStore } from '@/store'
 
+const { t } = useI18n()
 const { friends } = storeToRefs(useFriendsStore())
 </script>
 

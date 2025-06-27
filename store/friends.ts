@@ -5,25 +5,25 @@ export const useFriendsStore = defineStore('friends', () => {
     {
       id: 1,
       name: 'Алексей',
-      balance: 150,
+      balance: 0,
       avatarUrl: '/images/template/user-avatar.png',
     },
     {
       id: 2,
       name: 'Мария',
-      balance: 200,
+      balance: 1,
       avatarUrl: '/images/template/user-avatar.png',
     },
     {
       id: 3,
       name: 'Иван',
-      balance: 0,
+      balance: 2,
       avatarUrl: '/images/template/user-avatar.png',
     },
     {
       id: 4,
       name: 'Ольга',
-      balance: 75,
+      balance: 5,
       avatarUrl: '/images/template/user-avatar.png',
     },
     {

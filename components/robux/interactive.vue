@@ -2,21 +2,21 @@
   <div class="robux-interactive">
     <div class="robux-interactive__buttons">
       <ui-button-base
+        :text="t('robux.buttons.sell')"
         direction="column"
         view="secondary"
-        text="Sell"
         icon="buy-1"
       />
       <ui-button-base
+        :text="t('robux.buttons.withdraw')"
         direction="column"
         view="secondary"
-        text="Withdraw"
         icon="sp-logo"
       />
       <ui-button-base
+        :text="t('robux.buttons.share')"
         direction="column"
         view="secondary"
-        text="Share"
         icon="send-2"
       />
     </div>
@@ -24,7 +24,7 @@
     <ui-card>
       <div class="robux-interactive__card-info">
         <div class="robux-interactive__info-row">
-          <span>Owner</span>
+          <span>{{ t('common.owner') }}</span>
           <div class="robux-interactive__user-data">
             <span>
               {{ tg?.initDataUnsafe.user?.first_name }}
@@ -38,7 +38,7 @@
         </div>
         <ui-divider view="light" />
         <div class="robux-interactive__info-row">
-          <span>Price for 1 R$</span>
+          <span>{{ t('robux.priceFor') }} 1 R$</span>
           <div class="robux-interactive__price">
             <span>18</span>
             <main-mascot size="xs" />
@@ -52,6 +52,7 @@
 
 <script setup lang="ts">
 const { tg } = useTelegram()
+const { t } = useI18n()
 </script>
 
 <style scoped lang="scss">

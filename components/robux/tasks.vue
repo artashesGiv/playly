@@ -1,9 +1,11 @@
 <template>
   <div class="robux-tasks">
-    <ui-title text="Yesterday" />
+    <ui-title :text="t('common.yesterday')" />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { t } = useI18n()
+</script>
 
 <style scoped lang="scss"></style>

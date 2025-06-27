@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "coins": "Монеты",
+    "friends": "Друзья",
+    "robux": "Robux",
+    "cases": "Кейсы",
+    "profile": "Профиль"
+  },
+  "coins": {
+    "title": "Зарабатывайте монеты и обменяйте их на предметы или Robux",
+    "balanceText": "Ваш баланс",
+    "tasksTitle": "Задачи",
+    "tasks": {
+      "starPetsTg": "Присоединяйтесь к Telegram Starpets",
+      "playlyTg": "Присоединяйтесь к Playly Telegram",
+      "inviteFriend": "Пригласить друга в Playly",
+      "inviteFriendFromRoblox": "Пригласите друга, который играет в Roblox"
+    }
+  },
+  "friends": {
+    "title": "Приглашайте своих друзей и получайте монеты",
+    "description": "Получите монеты за каждого друга",
+    "listTitle": "Приглашенные друзья",
+    "inviteButton": "Пригласить друга"
+  },
+  "robux": {
+    "description": "Robux баланс",
+    "buttons": {
+      "sell": "Продать",
+      "withdraw": "Withdraw",
+      "share": "Поделиться"
+    },
+    "priceFor": "Цена за"
+  },
+  "cases": {},
+  "profile": {
+    "starPets": {
+      "link": {
+        "description": "Предметы отправляются через StarPets"
+      }
+    },
+    "community": {
+      "title": "Присоединяйтесь к сообществу"
+    },
+    "items": {
+      "your": "Ваши предметы",
+      "received": "Полученные предметы"
+    }
+  },
+  "common": {
+    "available": "доступно",
+    "completed": "выполнено",
+    "join": "Присоединиться",
+    "invite": "Пригласить",
+    "coins": "{n} монет | {n} монета | {n} монеты | {n} монет",
+    "friends": "{n} друг | {n} друга | {n} друзей",
+    "items": "{n} предметов | {n} предмет | {n} предмета | {n} предметов",
+    "owner": "Владелец",
+    "yesterday": "Сегодня",
+    "received": "получено",
+    "link": "Ссылка"
+  }
+}

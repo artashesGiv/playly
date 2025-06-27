@@ -9,13 +9,14 @@
         {{ tg?.initDataUnsafe.user?.first_name }}
         {{ tg?.initDataUnsafe.user?.last_name }}
       </h2>
-      <span>45 items received</span>
+      <span>{{ t('common.items', 45) }} {{ t('common.received') }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const { tg } = useTelegram()
+const { t } = useI18n()
 </script>
 
 <style scoped lang="scss">

@@ -1,9 +1,14 @@
 <template>
   <div class="items">
-    <ui-title text="Your items" additional-text="8 items" />
+    <ui-title
+      :text="t('profile.items.your')"
+      :additional-text="t('common.items', 8)"
+    />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { t } = useI18n()
+</script>
 
 <style scoped lang="scss"></style>

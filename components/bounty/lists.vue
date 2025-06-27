@@ -3,8 +3,8 @@
     <transition-fade>
       <div v-if="availableCards.length" class="bounty-lists__item">
         <ui-title
-          text="Free coins tasks"
-          :additional-text="`${availableCards.length} available`"
+          :text="t('coins.tasksTitle')"
+          :additional-text="`${availableCards.length} ${t('common.available')}`"
         />
         <transition-group name="fade-move">
           <component
@@ -21,7 +21,7 @@
       <div v-if="completedCards.length" class="bounty-lists__item">
         <ui-title
           text="Completed tasks"
-          :additional-text="`${completedCards.length} completed`"
+          :additional-text="`${completedCards.length} ${t('common.completed')}`"
         />
         <transition-group name="fade-move">
           <component
@@ -46,6 +46,8 @@ type BountyCard =
   | 'star-pets-tg'
 type BountyCardStatus = Record<BountyCard, boolean>
 type BountyCardComponent = Record<BountyCard, Component>
+
+const { t } = useI18n()
 
 const map = reactive<BountyCardStatus>({
   'star-pets-tg': false,

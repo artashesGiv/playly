@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'motion-v/nuxt',
     '@pinia/nuxt',
+    '@nuxtjs/i18n',
   ],
 
   css: ['@/assets/styles/reset.css', '@/assets/styles/vars/index.css'],
@@ -59,5 +60,19 @@ export default defineNuxtConfig({
     preconnect: true,
     preload: true,
     subsets: ['latin', 'cyrillic'],
+  },
+  i18n: {
+    strategy: 'no_prefix',
+    defaultLocale: 'ru',
+    lazy: true,
+    langDir: 'locales',
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json', language: 'en-US' },
+      { code: 'ru', name: 'Русский', file: 'ru.json', language: 'ru-RU' },
+    ],
+    experimental: {
+      typedOptionsAndMessages: 'all',
+    },
+    vueI18n: 'i18n.config.ts',
   },
 })

@@ -7,7 +7,7 @@
       @click="onCountBalance"
     />
     <span>
-      Earn coins and exchange them for cases with adopt me items and robux
+      {{ t('coins.title') }}
     </span>
   </div>
 </template>
@@ -17,6 +17,7 @@ import { useBalanceStore } from '@/store'
 
 // store
 const { onCountBalance } = useBalanceStore()
+const { t } = useI18n()
 </script>
 
 <style scoped lang="scss">

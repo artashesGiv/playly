@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "coins": "Home",
+    "friends": "Friends",
+    "robux": "Robux",
+    "cases": "Cases",
+    "profile": "Profile"
+  },
+  "coins": {
+    "title": "Earn coins and exchange them for cases with adopt me items and robux",
+    "balanceText": "Your balance",
+    "tasksTitle": "Free coins tasks",
+    "tasks": {
+      "starPetsTg": "Join StarPets telegram",
+      "playlyTg": "Join Playly telegram",
+      "inviteFriend": "Invite a friend to Playly",
+      "inviteFriendFromRoblox": "Invite a friend who plays Roblox"
+    }
+  },
+  "friends": {
+    "title": "Invite your friends and get coins",
+    "description": "Get coins for each friend",
+    "listTitle": "Invited friends",
+    "inviteButton": "Invite friend"
+  },
+  "robux": {
+    "description": "Robux balance",
+    "buttons": {
+      "sell": "Sell",
+      "withdraw": "Withdraw",
+      "share": "Share"
+    },
+    "priceFor": "Price for"
+  },
+  "cases": {},
+  "profile": {
+    "starPets": {
+      "link": {
+        "description": "Items are sent via StarPets"
+      }
+    },
+    "community": {
+      "title": "Join to our community"
+    },
+    "items": {
+      "your": "Your items",
+      "received": "Received items"
+    }
+  },
+  "common": {
+    "available": "available",
+    "completed": "completed",
+    "join": "Join",
+    "invite": "Invite",
+    "coins": "coins | {n} coin | {n} coins",
+    "friends": "friends | {n} friend | {n} friends",
+    "items": "no item | {n} item | {n} items",
+    "owner": "Owner",
+    "yesterday": "Yesterday",
+    "received": "received",
+    "link": "Link"
+  }
+}

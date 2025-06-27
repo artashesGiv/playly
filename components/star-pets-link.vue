@@ -2,15 +2,17 @@
   <ui-card class="star-pets">
     <div class="star-pets__left">
       <h4>StarPets ID</h4>
-      <span>Items are sent via StarPets</span>
+      <span>{{ t('profile.starPets.link.description') }}</span>
     </div>
-    <ui-button-base size="42" text="Link" max-content />
+    <ui-button-base size="42" :text="t('common.link')" max-content />
     <ui-icon-base name="sp-logo" class="star-pets__icon star-pets__icon-1" />
     <ui-icon-base name="sp-logo" class="star-pets__icon star-pets__icon-2" />
   </ui-card>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { t } = useI18n()
+</script>
 
 <style scoped lang="scss">
 .star-pets {

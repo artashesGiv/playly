@@ -1,8 +1,10 @@
 <template>
-  <bounty-card :sum="500" text="Join Playly telegram" />
+  <bounty-card :sum="500" :text="t('coins.tasks.playlyTg')" />
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
+
 // import { useBalanceStore } from '@/store'
 // import type { BountyCardProps } from './index.vue'
 //

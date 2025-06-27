@@ -11,7 +11,7 @@
     </div>
     <div class="robux-main__text">
       <h2>{{ robuxBalance }} R$</h2>
-      <span>Robux balance</span>
+      <span>{{ t('robux.description') }}</span>
     </div>
   </div>
 </template>
@@ -20,6 +20,7 @@
 import { useRobuxBalanceStore } from '@/store'
 
 const { robuxBalance } = storeToRefs(useRobuxBalanceStore())
+const { t } = useI18n()
 </script>
 
 <style scoped lang="scss">

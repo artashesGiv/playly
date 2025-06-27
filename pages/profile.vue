@@ -8,10 +8,19 @@
     <profile-your-items />
     <ui-divider />
     <profile-received-items />
+    <ui-button-base
+      v-for="l in locales"
+      :key="l.code"
+      :view="l.code === locale ? 'primary' : 'secondary'"
+      :text="l.name"
+      @click="setLocale(l.code)"
+    />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { locales, locale, setLocale } = useI18n()
+</script>
 
 <style scoped lang="scss">
 .profile {
