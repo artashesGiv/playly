@@ -8,16 +8,20 @@
       <slot />
     </main>
 
-    <main-navigation class="layout__footer" />
+    <transition-fade>
+      <main-navigation v-if="isVisibleFooter" class="layout__footer" />
+    </transition-fade>
   </div>
 </template>
 
 <script setup>
-const pagesWithoutHeader = ['/robux']
+const pagesWithoutHeader = ['/robux/balance']
+const pagesWithoutFooter = ['/robux/balance']
 
 const route = useRoute()
 
 const isVisibleHeader = computed(() => !pagesWithoutHeader.includes(route.path))
+const isVisibleFooter = computed(() => !pagesWithoutFooter.includes(route.path))
 </script>
 
 <style scoped lang="scss">

@@ -7,7 +7,9 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useBackButton()
+</script>
 
 <style scoped lang="scss">
 .robux {

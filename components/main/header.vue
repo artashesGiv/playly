@@ -2,7 +2,10 @@
   <header class="header">
     <main-logo />
     <div class="header__right">
-      <robux-balance-card />
+      <robux-balance-card
+        class="header__robux"
+        @click="navigateTo('/robux/balance')"
+      />
       <balance-card />
     </div>
   </header>
@@ -21,6 +24,10 @@
 
   &__right {
     @include row(12px);
+  }
+
+  &__robux {
+    cursor: pointer;
   }
 }
 </style>
