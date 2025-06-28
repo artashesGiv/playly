@@ -2,19 +2,19 @@
   <div class="robux-interactive">
     <div class="robux-interactive__buttons">
       <ui-button-base
-        :text="t('robux.buttons.sell')"
+        :text="t('robux.balance.buttons.sell')"
         direction="column"
         view="secondary"
         icon="buy-1"
       />
       <ui-button-base
-        :text="t('robux.buttons.withdraw')"
+        :text="t('robux.balance.buttons.withdraw')"
         direction="column"
         view="secondary"
         icon="sp-logo"
       />
       <ui-button-base
-        :text="t('robux.buttons.share')"
+        :text="t('robux.balance.buttons.share')"
         direction="column"
         view="secondary"
         icon="send-2"
@@ -38,7 +38,7 @@
         </div>
         <ui-divider view="light" />
         <div class="robux-interactive__info-row">
-          <span>{{ t('robux.priceFor') }} 1 R$</span>
+          <span>{{ t('robux.balance.priceFor') }} 1 R$</span>
           <div class="robux-interactive__price">
             <span>18</span>
             <main-mascot size="xs" />

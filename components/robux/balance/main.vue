@@ -11,7 +11,7 @@
     </div>
     <div class="robux-main__text">
       <h2>{{ robuxBalance }} R$</h2>
-      <span>{{ t('robux.description') }}</span>
+      <span>{{ t('robux.balance.description') }}</span>
     </div>
   </div>
 </template>

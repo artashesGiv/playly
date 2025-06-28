@@ -9,4 +9,5 @@
   --font-base-medium: 500 16px/150% var(--font-inter);
   --font-normal-semibold: 600 14px/150% var(--font-inter);
   --font-normal-medium: 500 14px/150% var(--font-inter);
+  --font-small-medium: 500 12px/150% var(--font-inter);
 }

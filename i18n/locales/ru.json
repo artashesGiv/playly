@@ -24,13 +24,23 @@
     "inviteButton": "Пригласить друга"
   },
   "robux": {
-    "description": "Robux баланс",
-    "buttons": {
-      "sell": "Продать",
-      "withdraw": "Withdraw",
-      "share": "Поделиться"
+    "title": "Купите R$ по отличным ценам!",
+    "description": "Мы используем метод геймпасса",
+    "input": {
+      "labelPay": "Вы заплатите",
+      "labelReceived": "Вы получите",
+      "promocodePlaceholder": "Промо-код"
     },
-    "priceFor": "Цена за"
+    "alert": "Более выгодно, чем в игре",
+    "balance": {
+      "description": "Robux баланс",
+      "buttons": {
+        "sell": "Продать",
+        "withdraw": "Withdraw",
+        "share": "Поделиться"
+      },
+      "priceFor": "Цена за"
+    }
   },
   "cases": {},
   "profile": {
@@ -58,6 +68,7 @@
     "owner": "Владелец",
     "yesterday": "Сегодня",
     "received": "получено",
-    "link": "Ссылка"
+    "link": "Ссылка",
+    "buy": "Купить {sum}"
   }
 }

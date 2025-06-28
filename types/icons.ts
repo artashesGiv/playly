@@ -1,4 +1,5 @@
 export type IconsId =
+  | 'wallet'
   | 'upload'
   | 'up-square-2'
   | 'up-square-1'
@@ -8,6 +9,7 @@ export type IconsId =
   | 'up-3'
   | 'up-2'
   | 'undo'
+  | 'ticket-2'
   | 'telegram'
   | 'swap-2'
   | 'swap-1'
@@ -50,4 +52,5 @@ export type IconsId =
   | 'buy-1'
   | 'arrow-swap-vertical'
   | 'arrow-swap-horizontal'
+  | 'alert'
   | 'Logout';

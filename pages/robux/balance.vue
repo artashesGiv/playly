@@ -1,9 +1,9 @@
 <template>
-  <div class="robux">
-    <div class="robux__gradient" />
-    <robux-main />
-    <robux-interactive />
-    <robux-tasks />
+  <div class="robux-balance">
+    <div class="robux-balance__gradient" />
+    <robux-balance-main />
+    <robux-balance-interactive />
+    <robux-balance-tasks />
   </div>
 </template>
 
@@ -12,7 +12,7 @@ useBackButton()
 </script>
 
 <style scoped lang="scss">
-.robux {
+.robux-balance {
   @include column(18px);
 
   &__gradient {

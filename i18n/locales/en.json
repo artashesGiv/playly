@@ -24,13 +24,23 @@
     "inviteButton": "Invite friend"
   },
   "robux": {
-    "description": "Robux balance",
-    "buttons": {
-      "sell": "Sell",
-      "withdraw": "Withdraw",
-      "share": "Share"
+    "title": "Purchase R$ and at great prices!",
+    "description": "We use GamePass method",
+    "input": {
+      "labelPay": "You'll pay",
+      "labelReceived": "You'll receive",
+      "promocodePlaceholder": "Promocode"
     },
-    "priceFor": "Price for"
+    "alert": "More profitable than in-game",
+    "balance": {
+      "description": "Robux balance",
+      "buttons": {
+        "sell": "Sell",
+        "withdraw": "Withdraw",
+        "share": "Share"
+      },
+      "priceFor": "Price for"
+    }
   },
   "cases": {},
   "profile": {
@@ -58,6 +68,7 @@
     "owner": "Owner",
     "yesterday": "Yesterday",
     "received": "received",
-    "link": "Link"
+    "link": "Link",
+    "buy": "Buy {sum}"
   }
 }
