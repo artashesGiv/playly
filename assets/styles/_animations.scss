@@ -107,22 +107,18 @@
   }
 
   &-enter-from {
-    opacity: 0;
     transform: translateY(100%);
   }
 
   &-enter-to {
-    opacity: 1;
     transform: translateY(0);
   }
 
   &-leave-from {
-    opacity: 1;
     transform: translateY(0);
   }
 
   &-leave-to {
-    opacity: 0;
     transform: translateY(100%);
   }
 }
