@@ -1,9 +1,9 @@
 <template>
-  <div class="title">
-    <h3 class="title__text">
+  <div class="title-base">
+    <h3 class="title-base__text">
       {{ text }}
     </h3>
-    <div v-if="additionalText" class="title__additional description">
+    <div v-if="additionalText" class="title-base__additional description">
       {{ additionalText }}
     </div>
   </div>
@@ -19,7 +19,7 @@ defineProps<TitleProps>()
 </script>
 
 <style scoped lang="scss">
-.title {
+.title-base {
   @include row(12px);
 
   justify-content: space-between;
