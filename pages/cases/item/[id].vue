@@ -82,7 +82,6 @@ const onOpenMore = () => {
 .case-item {
   @include column(18px);
 
-  padding-top: 77px;
   height: 100%;
 
   &__content {
