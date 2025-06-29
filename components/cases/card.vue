@@ -9,14 +9,13 @@
 
 <script setup lang="ts">
 import type { Case } from '@/types'
-import type { TagProps } from '@/components/ui/tag.vue'
 
 export type CaseCard = {
   id: Case['id']
   name: Case['name']
   image: Case['image']
   price: Case['price']
-  tag: TagProps
+  tag: Case['tag']
 }
 
 defineProps<CaseCard>()

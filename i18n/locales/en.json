@@ -112,7 +112,13 @@
   },
   "cases": {
     "title": "Cases",
-    "description": "Win and withdraw pets and R$!"
+    "description": "Win and withdraw pets and R$!",
+    "roulette": {
+      "button": "Open for {n}",
+      "canSell": "You can sell an item or withdraw it on your profile page",
+      "openMore": "Open more for {n}",
+      "sellItem": "Sell for {n}"
+    }
   },
   "profile": {
     "starPets": {

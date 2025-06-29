@@ -5,7 +5,12 @@
     <ui-tabs v-model="currentTab" :list="tabs" />
     <div class="cases__list-wrapper">
       <div class="cases__list">
-        <cases-card v-for="item in cases" :key="item.id" v-bind="item" />
+        <cases-card
+          v-for="item in cases"
+          :key="item.id"
+          v-bind="item"
+          @click="navigateTo(`/cases/${item.id}`)"
+        />
       </div>
     </div>
   </div>

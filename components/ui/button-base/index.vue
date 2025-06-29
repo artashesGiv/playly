@@ -141,7 +141,7 @@ function useSpinnerProps({
 }: Pick<Required<ButtonProps>, 'view'>): SpinnerProps {
   return {
     view: SPINNER_VIEW_MAP[view],
-    size: 'm',
+    size: 'l',
   }
 }
 </script>
@@ -196,7 +196,7 @@ function useSpinnerProps({
       }
 
       &.is-disabled {
-        opacity: 0.4;
+        background-color: var(--primary-300);
       }
     }
     /* SECONDARY */
