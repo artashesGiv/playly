@@ -23,7 +23,7 @@ export const useRouletteSore = defineStore('roulette', () => {
       name: 'Frost Unicorn',
       image: '/images/template/case-item.png',
       probability: 0.9,
-      tag: { text: 'Legendary', view: 'primary' },
+      tag: { text: 'Legendary', view: 'blue' },
       abilities: ['mega-neon', 'fly', 'neon'],
     },
     {

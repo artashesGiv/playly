@@ -18,7 +18,7 @@
         class="roulette__item"
         v-bind="item"
         :is-active="foundId === item.id"
-        :data-origin-index="index % caseItems.length"
+        :data-origin-id="item.id"
       />
     </div>
 
@@ -82,11 +82,11 @@ function centerNearestItem(el: HTMLElement, durationMs = 500) {
     if (progress < 1) {
       requestAnimationFrame(smoothStep)
     } else {
-      const index = Number(nearest.dataset.originIndex)
-      foundId.value = caseItems.value[index].id
+      const id = Number(nearest.dataset.originId)
+      foundId.value = id.toString()
 
       setTimeout(() => {
-        navigateTo(`/cases/item/${index}`)
+        navigateTo(`/cases/item/${id}`)
       }, 500)
     }
   }

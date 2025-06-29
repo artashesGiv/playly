@@ -7,7 +7,7 @@
 <script setup lang="ts">
 export type TagProps = {
   text: string
-  view?: 'pink' | 'green' | 'primary' | 'yellow' | 'light' | 'red' | 'dark'
+  view?: 'pink' | 'green' | 'blue' | 'yellow' | 'light' | 'red' | 'dark'
   size?: 's' | 'm'
 }
 
@@ -69,7 +69,7 @@ const classes = computed(() => [
       background-color: var(--dark-500);
       color: var(--light-600);
     }
-    &--primary {
+    &--blue {
       background-color: var(--primary-500);
       color: var(--white);
     }

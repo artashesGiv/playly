@@ -72,9 +72,9 @@ const id = route.params.id as CaseItem['id']
 const item = computed(() => caseItems.value.find(item => item.id === id))
 
 const onOpenMore = () => {
-  if (balance.value >= 500) {
-    router.back()
-  }
+  // if (balance.value >= 500) {
+  router.back()
+  // }
 }
 </script>
 
