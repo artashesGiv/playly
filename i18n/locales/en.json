@@ -110,7 +110,10 @@
       }
     }
   },
-  "cases": {},
+  "cases": {
+    "title": "Cases",
+    "description": "Win and withdraw pets and R$!"
+  },
   "profile": {
     "starPets": {
       "link": {

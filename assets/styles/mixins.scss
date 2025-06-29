@@ -62,3 +62,33 @@
     background: linear-gradient(180deg, rgba(16, 15, 17, 0) 0%, #100f11 100%);
   }
 }
+
+@mixin scroll-gradient-left($location: 'after') {
+  position: relative;
+
+  &::#{$location} {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 46px;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(16, 15, 17, 0) 0%, #100f11 100%);
+  }
+}
+
+@mixin scroll-gradient-right($location: 'before') {
+  position: relative;
+
+  &::#{$location} {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 46px;
+    pointer-events: none;
+    background: linear-gradient(-90deg, rgba(16, 15, 17, 0) 0%, #100f11 100%);
+  }
+}

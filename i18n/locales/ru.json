@@ -110,7 +110,10 @@
       }
     }
   },
-  "cases": {},
+  "cases": {
+    "title": "Кейсы",
+    "description": "Выигрывайте и выводите питомцев и R$!"
+  },
   "profile": {
     "starPets": {
       "link": {

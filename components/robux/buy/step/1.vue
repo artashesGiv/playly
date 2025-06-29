@@ -51,7 +51,6 @@ const { users, stepsData, searchName } = storeToRefs(useRobuxBuyStore())
     gap: 10px;
     grid-column: 50;
     max-height: calc(100vh - 363px);
-    border: 1px solid red;
     overflow-y: auto;
   }
 }
