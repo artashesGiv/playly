@@ -1,11 +1,11 @@
 <template>
   <ui-card :class="classes">
     <div class="bounty__left">
-      <div class="bounty__sum">
+      <div class="bounty__sum title">
         + {{ sum }}
         <main-mascot size="xs" />
       </div>
-      <span class="bounty__text">{{ text }}</span>
+      <span class="bounty__text description">{{ text }}</span>
     </div>
     <div class="bounty__right">
       <transition-fade>
@@ -62,17 +62,12 @@ const buttonText = computed(() => {
   &__sum {
     @include row(4px);
 
-    color: var(--white);
-    font: var(--font-large-semibold);
-
     &.is-disabled {
       color: var(--light-500);
     }
   }
 
   &__text {
-    font: var(--font-normal-medium);
-
     &.is-disabled {
       color: var(--dark-300);
     }

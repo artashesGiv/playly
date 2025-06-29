@@ -1,6 +1,6 @@
 <template>
   <ui-card class="robux-alert">
-    <span>{{ t('robux.alert') }}</span>
+    <span>{{ $t('robux.alert') }}</span>
     <div class="robux-alert__right">
       <div class="robux-alert__prev-price">176</div>
       <div class="robux-alert__price">
@@ -11,9 +11,7 @@
   </ui-card>
 </template>
 
-<script setup lang="ts">
-const { t } = useI18n()
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 .robux-alert {

@@ -31,3 +31,12 @@ body {
 * {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+.title {
+  font: var(--font-large-semibold);
+  color: var(--white);
+}
+
+.description {
+  font: var(--font-normal-medium);
+}

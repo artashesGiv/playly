@@ -35,6 +35,10 @@ export default defineNuxtConfig({
     TG_BOT_TOKEN: process.env.TG_BOT_TOKEN,
   },
   app: {
+    layoutTransition: {
+      name: 'fade',
+      mode: 'out-in',
+    },
     head: {
       meta: [
         {

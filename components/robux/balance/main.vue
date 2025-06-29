@@ -10,8 +10,8 @@
       <ui-icon-base name="robux" class="robux-main__icon robux-main__icon-6" />
     </div>
     <div class="robux-main__text">
-      <h2>{{ robuxBalance }} R$</h2>
-      <span>{{ t('robux.balance.description') }}</span>
+      <h2 class="title">{{ robuxBalance }} R$</h2>
+      <span>{{ $t('robux.balance.description') }}</span>
     </div>
   </div>
 </template>
@@ -20,7 +20,6 @@
 import { useRobuxBalanceStore } from '@/store'
 
 const { robuxBalance } = storeToRefs(useRobuxBalanceStore())
-const { t } = useI18n()
 </script>
 
 <style scoped lang="scss">
@@ -80,11 +79,6 @@ const { t } = useI18n()
 
   &__text {
     text-align: center;
-
-    h2 {
-      font: var(--font-large-semibold);
-      color: var(--white);
-    }
 
     span {
       font: var(--font-base-medium);

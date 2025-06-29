@@ -5,8 +5,8 @@
         <nuxt-img :src="avatarUrl" class="friend-card__avatar" />
         <div class="friend-card__data">
           <span class="friend-card__name">{{ name }}</span>
-          <span class="friend-card__balance">
-            {{ t('common.coins', balance) }}
+          <span class="friend-card__balance description">
+            {{ $t('common.coins', balance) }}
           </span>
         </div>
       </div>
@@ -22,7 +22,6 @@
 import type { Friend } from '@/types'
 
 defineProps<Friend>()
-const { t } = useI18n()
 </script>
 
 <style scoped lang="scss">
@@ -50,10 +49,6 @@ const { t } = useI18n()
   &__name {
     color: var(--white);
     font: var(--font-base-semibold);
-  }
-
-  &__balance {
-    font: var(--font-normal-medium);
   }
 
   &__bounty {

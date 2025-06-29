@@ -4,15 +4,15 @@
       <div class="friends__main">
         <nuxt-img src="/images/friends/main.png" class="friends__image" />
         <div>
-          <h3>{{ t('friends.title') }}</h3>
-          <span>{{ t('friends.description') }}</span>
+          <h3 class="title">{{ $t('friends.title') }}</h3>
+          <span>{{ $t('friends.description') }}</span>
         </div>
       </div>
       <ui-divider />
       <div class="friends__data">
         <ui-title
-          :text="t('friends.listTitle')"
-          :additional-text="`${t('common.friends', friends.length)}`"
+          :text="$t('friends.listTitle')"
+          :additional-text="`${$t('common.friends', friends.length)}`"
         />
 
         <div class="friends__list">
@@ -27,7 +27,7 @@
 
     <ui-button-base
       class="friends__button"
-      :text="t('friends.inviteButton')"
+      :text="$t('friends.inviteButton')"
       size="52"
     />
   </div>
@@ -36,7 +36,6 @@
 <script setup lang="ts">
 import { useFriendsStore } from '@/store'
 
-const { t } = useI18n()
 const { friends } = storeToRefs(useFriendsStore())
 </script>
 
@@ -54,15 +53,7 @@ const { friends } = storeToRefs(useFriendsStore())
     flex: 1;
     overflow-y: auto;
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      height: 120px;
-      width: 100%;
-      pointer-events: none;
-      background: linear-gradient(180deg, rgba(16, 15, 17, 0) 0%, #100f11 100%);
-    }
+    @include scroll-gradient;
   }
 
   &__main {
@@ -70,11 +61,6 @@ const { friends } = storeToRefs(useFriendsStore())
 
     align-items: center;
     text-align: center;
-
-    h3 {
-      color: var(--white);
-      font: var(--font-large-semibold);
-    }
 
     span {
       font: var(--font-base-medium);

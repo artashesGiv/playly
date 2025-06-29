@@ -12,7 +12,10 @@
       <span v-if="label" class="input__label">{{ label }}</span>
       <ui-icon-base v-if="isError" class="input__icon-error" name="alert" />
     </div>
-    <div v-if="isError && errorMessage" class="input__error-message">
+    <div
+      v-if="isError && errorMessage"
+      class="input__error-message description"
+    >
       {{ errorMessage }}
     </div>
   </div>
@@ -83,7 +86,6 @@ const onInput = (event: Event) => {
   &__error-message {
     align-self: flex-end;
     color: var(--red-500);
-    font: var(--font-normal-medium);
   }
 
   &__label {

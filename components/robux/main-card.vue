@@ -1,7 +1,7 @@
 <template>
   <div class="gamepass-main-card">
-    <h4>{{ t('robux.title') }}</h4>
-    <span>{{ t('robux.description') }}</span>
+    <h4 class="title">{{ $t('robux.title') }}</h4>
+    <span class="description">{{ $t('robux.description') }}</span>
     <nuxt-img
       class="gamepass-main-card__image gamepass-main-card__image-1"
       src="/images/main/robux.png"
@@ -21,9 +21,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-const { t } = useI18n()
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 .gamepass-main-card {
@@ -38,13 +36,11 @@ const { t } = useI18n()
   h4 {
     position: relative;
     z-index: 2;
-    font: var(--font-large-semibold);
-    color: var(--white);
   }
+
   span {
     position: relative;
     z-index: 2;
-    font: var(--font-normal-medium);
     color: var(--white);
   }
 
@@ -68,6 +64,8 @@ const { t } = useI18n()
 
   &__icon {
     position: absolute;
+    color: var(--white);
+    opacity: 0.3;
 
     &-1 {
       top: 5px;

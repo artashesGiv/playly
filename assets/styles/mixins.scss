@@ -48,3 +48,17 @@
   border-bottom: 2px solid #44537126;
   padding-bottom: $padding;
 }
+
+@mixin scroll-gradient() {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 120px;
+    width: 100%;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(16, 15, 17, 0) 0%, #100f11 100%);
+  }
+}

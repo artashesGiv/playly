@@ -37,6 +37,7 @@ export type IconsId =
   | 'left-3'
   | 'left-2'
   | 'left-1'
+  | 'information-circle'
   | 'group-2'
   | 'foreign'
   | 'download'

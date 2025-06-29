@@ -7,7 +7,7 @@
       @click="onCountBalance"
     />
     <span>
-      {{ t('coins.title') }}
+      {{ $t('coins.title') }}
     </span>
   </div>
 </template>
@@ -17,7 +17,6 @@ import { useBalanceStore } from '@/store'
 
 // store
 const { onCountBalance } = useBalanceStore()
-const { t } = useI18n()
 </script>
 
 <style scoped lang="scss">

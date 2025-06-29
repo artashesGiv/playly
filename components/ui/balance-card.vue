@@ -16,16 +16,13 @@
       <ui-icon-base v-else name="robux" class="balance-card__icon" />
     </div>
     <span v-if="size === 'xl'" class="balance-card__text">
-      {{ t('coins.balanceText') }}
+      {{ $t('coins.balanceText') }}
     </span>
   </article>
 </template>
 
 <script setup lang="ts">
 import { AnimateNumber } from 'motion-plus-vue'
-
-// store
-const { t } = useI18n()
 
 // type
 export type BalanceCardProps = {

@@ -1,5 +1,5 @@
 <template>
-  <bounty-card :sum="200" :text="$t('coins.tasks.inviteFriend')" is-invite />
+  <div>4</div>
 </template>
 
 <script setup lang="ts"></script>

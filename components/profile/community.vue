@@ -1,6 +1,6 @@
 <template>
   <div class="profile-community">
-    <ui-title :text="t('profile.community.title')" />
+    <ui-title :text="$t('profile.community.title')" />
     <div class="profile-community__buttons">
       <ui-button-base
         icon="telegram"
@@ -22,7 +22,6 @@
 
 <script setup lang="ts">
 const { tg } = useTelegram()
-const { t } = useI18n()
 
 const onClickPlayly = () => {
   tg?.openTelegramLink('https://t.me/omut_pamyatii')

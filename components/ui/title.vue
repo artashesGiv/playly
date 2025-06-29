@@ -3,7 +3,7 @@
     <h3 class="title__text">
       {{ text }}
     </h3>
-    <div v-if="additionalText" class="title__additional">
+    <div v-if="additionalText" class="title__additional description">
       {{ additionalText }}
     </div>
   </div>
@@ -30,7 +30,6 @@ defineProps<TitleProps>()
   }
 
   &__additional {
-    font: var(--font-normal-medium);
     background-color: var(--dark-900);
     border-radius: 16px;
     padding: 10px 16px;

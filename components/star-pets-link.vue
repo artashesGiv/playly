@@ -1,18 +1,18 @@
 <template>
   <ui-card class="star-pets">
     <div class="star-pets__left">
-      <h4>StarPets ID</h4>
-      <span>{{ t('profile.starPets.link.description') }}</span>
+      <h4 class="title">StarPets ID</h4>
+      <span class="description">
+        {{ $t('profile.starPets.link.description') }}
+      </span>
     </div>
-    <ui-button-base size="42" :text="t('common.link')" max-content />
+    <ui-button-base size="42" :text="$t('common.link')" max-content />
     <ui-icon-base name="sp-logo" class="star-pets__icon star-pets__icon-1" />
     <ui-icon-base name="sp-logo" class="star-pets__icon star-pets__icon-2" />
   </ui-card>
 </template>
 
-<script setup lang="ts">
-const { t } = useI18n()
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 .star-pets {
@@ -24,15 +24,6 @@ const { t } = useI18n()
 
   &__left {
     @include column;
-
-    h4 {
-      font: var(--font-large-semibold);
-      color: var(--white);
-    }
-
-    span {
-      font: var(--font-normal-medium);
-    }
   }
 
   &__icon {

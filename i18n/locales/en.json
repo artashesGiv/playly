@@ -40,6 +40,19 @@
         "share": "Share"
       },
       "priceFor": "Price for"
+    },
+    "buy": {
+      "title": "Select an account",
+      "description": "Enter your roblox nickname",
+      "buttons": {
+        "main": "Continue",
+        "help": "How it works"
+      },
+      "step-1": {
+        "nicknamePlaceholder": "Nickname in Roblox",
+        "empty": "Nothing found. Enter the nickname of your roblox account",
+        "selectDescription": "Select an account from list and press continue"
+      }
     }
   },
   "cases": {},

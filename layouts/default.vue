@@ -1,7 +1,7 @@
 <template>
-  <div class="layout" :class="{ 'is-header': isVisibleHeader }">
+  <div class="layout">
     <transition-fade>
-      <main-header v-if="isVisibleHeader" class="layout__header" />
+      <main-header class="layout__header" />
     </transition-fade>
 
     <main class="layout__content">
@@ -9,57 +9,27 @@
     </main>
 
     <transition-fade>
-      <main-navigation v-if="isVisibleFooter" class="layout__footer" />
+      <main-navigation class="layout__footer" />
     </transition-fade>
   </div>
 </template>
 
-<script setup>
-const pagesWithoutHeader = ['/robux/balance']
-const pagesWithoutFooter = ['/robux/balance']
-
-const route = useRoute()
-
-const isVisibleHeader = computed(() => !pagesWithoutHeader.includes(route.path))
-const isVisibleFooter = computed(() => !pagesWithoutFooter.includes(route.path))
-</script>
+<script setup></script>
 
 <style scoped lang="scss">
 .layout {
-  $b: &;
+  @include column;
 
   height: 100vh;
-  position: relative;
-
-  &__header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    width: 100%;
-  }
-
-  &__footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    width: 100%;
-  }
 
   &__content {
-    transition: var(--transition-base);
-    padding: 18px 16px 18px 16px;
-    height: calc(100% - var(--navigation-height));
+    padding: 18px 16px;
+    margin-top: -18px;
+    flex: 1 1 0;
     overflow-y: auto;
     overflow-x: hidden;
-  }
-
-  &.is-header {
-    #{$b}__content {
-      height: calc(100% - (var(--header-height) + var(--navigation-height)));
-      margin-top: var(--header-height);
-    }
+    box-sizing: border-box;
+    transition: var(--transition-base);
   }
 }
 </style>

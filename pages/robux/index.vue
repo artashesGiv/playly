@@ -5,12 +5,12 @@
       <ui-divider />
       <div class="robux__inputs">
         <ui-input-base
-          :label="t('robux.input.labelPay')"
+          :label="$t('robux.input.labelPay')"
           model-value="56"
           icon="wallet"
         />
         <ui-input-base
-          :label="t('robux.input.labelReceived')"
+          :label="$t('robux.input.labelReceived')"
           model-value="56"
           icon="robux"
           icon-color="yellow"
@@ -25,7 +25,7 @@
         </div>
         <ui-input-base
           model-value=""
-          :placeholder="t('robux.input.promocodePlaceholder')"
+          :placeholder="$t('robux.input.promocodePlaceholder')"
           icon="ticket-2"
         />
       </div>
@@ -33,20 +33,19 @@
     <div class="robux__footer">
       <robux-alert-card />
       <ui-button-base
-        :text="t('common.buy', { sum: '345 R$' })"
+        :text="$t('common.buy', { sum: '345 R$' })"
         size="52"
         icon-right="right-1"
+        @click="navigateTo('/robux/buy')"
       />
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-const { t } = useI18n()
-</script>
+<script setup lang="ts"></script>
 <style scoped lang="scss">
 .robux {
-  @include column;
+  @include column(12px);
   height: 100%;
 
   &__content {
