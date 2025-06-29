@@ -23,6 +23,8 @@ const { places, stepsData } = storeToRefs(useRobuxBuyStore())
 .robux-buy-2 {
   @include scroll-gradient;
 
+  height: 100%;
+
   &__list {
     display: grid;
     grid-template-columns: 1fr 1fr;

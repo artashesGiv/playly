@@ -32,6 +32,7 @@ const { users, stepsData, searchName } = storeToRefs(useRobuxBuyStore())
 <style scoped lang="scss">
 .robux-buy-1 {
   @include column(12px);
+  height: 100%;
 
   span {
     font: var(--font-base-medium);
@@ -40,6 +41,8 @@ const { users, stepsData, searchName } = storeToRefs(useRobuxBuyStore())
   &__list-wrapper {
     @include column(16px);
     @include scroll-gradient;
+
+    height: 100%;
   }
 
   &__users {
@@ -48,6 +51,7 @@ const { users, stepsData, searchName } = storeToRefs(useRobuxBuyStore())
     gap: 10px;
     grid-column: 50;
     max-height: calc(100vh - 363px);
+    border: 1px solid red;
     overflow-y: auto;
   }
 }

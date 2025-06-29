@@ -39,8 +39,12 @@ const { gamepasses, stepsData } = storeToRefs(useRobuxBuyStore())
 
 <style scoped lang="scss">
 .robux-buy-3 {
+  height: 100%;
+
   &__list-wrapper {
     @include scroll-gradient;
+
+    height: 100%;
   }
 
   &__list {
