@@ -1,13 +1,15 @@
 <template>
   <div class="robux-buy-2">
-    <robux-buy-item-card
-      v-for="place in places"
-      :key="place.id"
-      :text="place.text"
-      :src="place.src"
-      :is-active="place.id === stepsData.place"
-      @click="stepsData.place = place.id"
-    />
+    <div class="robux-buy-2__list">
+      <robux-buy-item-card
+        v-for="place in places"
+        :key="place.id"
+        :text="place.text"
+        :src="place.src"
+        :is-active="place.id === stepsData.place"
+        @click="stepsData.place = place.id"
+      />
+    </div>
   </div>
 </template>
 
@@ -19,11 +21,15 @@ const { places, stepsData } = storeToRefs(useRobuxBuyStore())
 
 <style scoped lang="scss">
 .robux-buy-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  grid-column: 50;
-  max-height: calc(100vh - 363px);
-  overflow-y: auto;
+  @include scroll-gradient;
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    grid-column: 50;
+    max-height: calc(100vh - 293px);
+    overflow-y: auto;
+  }
 }
 </style>

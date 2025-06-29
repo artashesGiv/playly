@@ -1,15 +1,18 @@
 <template>
   <div class="robux-buy-3">
-    <div v-if="gamepasses.length" class="robux-buy-3__list">
-      <robux-buy-item-card
-        v-for="gamepass in gamepasses"
-        :key="gamepass.id"
-        :text="gamepass.text"
-        :src="gamepass.src"
-        :is-active="gamepass.id === stepsData.gamepass"
-        @click="stepsData.gamepass = gamepass.id"
-      />
+    <div v-if="gamepasses.length" class="robux-buy-3__list-wrapper">
+      <div class="robux-buy-3__list">
+        <robux-buy-item-card
+          v-for="gamepass in gamepasses"
+          :key="gamepass.id"
+          :text="gamepass.text"
+          :src="gamepass.src"
+          :is-active="gamepass.id === stepsData.gamepass"
+          @click="stepsData.gamepass = gamepass.id"
+        />
+      </div>
     </div>
+
     <div v-else class="robux-buy-3__create">
       <div class="robux-buy-3__video">
         <ui-button-base icon="play" class="robux-buy-3__play" size="52" />
@@ -36,14 +39,17 @@ const { gamepasses, stepsData } = storeToRefs(useRobuxBuyStore())
 
 <style scoped lang="scss">
 .robux-buy-3 {
-  max-height: calc(100vh - 363px);
-  overflow-y: auto;
+  &__list-wrapper {
+    @include scroll-gradient;
+  }
 
   &__list {
     display: grid;
     grid-template-columns: 1fr;
+    max-height: calc(100vh - 293px);
     gap: 10px;
     grid-column: 50;
+    overflow-y: auto;
   }
 
   &__create {

@@ -39,8 +39,6 @@ const { users, stepsData, searchName } = storeToRefs(useRobuxBuyStore())
 
   &__list-wrapper {
     @include column(16px);
-
-    height: auto;
     @include scroll-gradient;
   }
 
