@@ -42,16 +42,71 @@
       "priceFor": "Price for"
     },
     "buy": {
-      "title": "Select an account",
-      "description": "Enter your roblox nickname",
       "buttons": {
-        "main": "Continue",
         "help": "How it works"
       },
+      "modal": {
+        "title": "How it works",
+        "description": "Follow all the steps to get the Robux to your balance",
+        "withdrawalCard": "Withdrawal amount",
+        "step-1": {
+          "title": "Select an account",
+          "description": "Select the place that GamePass will be linked to - CHANGE"
+        },
+        "step-2": {
+          "title": "Select Place",
+          "description": "Select the place that GamePass will be linked to"
+        },
+        "step-3": {
+          "title": "Select GamePass",
+          "description": "Select the place that GamePass will be linked to - CHANGE"
+        },
+        "step-4": {
+          "title": "Edit GamePass",
+          "description": "Select the place that GamePass will be linked to - CHANGE"
+        }
+      },
       "step-1": {
+        "title": "Select an account",
+        "description": "Enter your roblox nickname",
         "nicknamePlaceholder": "Nickname in Roblox",
         "empty": "Nothing found. Enter the nickname of your roblox account",
-        "selectDescription": "Select an account from list and press continue"
+        "selectDescription": "Select an account from list and press continue",
+        "nextButton": "Continue"
+      },
+      "step-2": {
+        "title": "Select Place",
+        "description": "Select the roblox place from your list",
+        "nextButton": "Continue"
+      },
+      "step-3": {
+        "titleSelect": "Select GamePass",
+        "descriptionSelect": "Select GamePass for set up",
+        "titleCreate": "Create GamePass",
+        "descriptionCreate": "Create GamePass for continue",
+        "nextButtonSelect": "Continue",
+        "nextButtonCreate": "Done!",
+        "create": {
+          "button": "Create GamePass",
+          "description": "Create at least one GamePass according to our instructions to set it up further"
+        }
+      },
+      "step-4": {
+        "title": "Set Up your GamePass",
+        "description": "Set the price in the settings",
+        "nextButton": "Done!",
+        "setGamepass": {
+          "button": "Set Up GamePass",
+          "description": "Open the settings of the selected GamePass and set the price indicated below",
+          "priceDescription": "GamePass price"
+        }
+      },
+      "step-5": {
+        "title": "Successfully!",
+        "description": "Robux will be credited within 5-7 days",
+        "cardText": "You'll receive on balance",
+        "alert": "Do not change your GamePass settings! This may cause robux delivery issues",
+        "nextButton": "Great"
       }
     }
   },

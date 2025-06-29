@@ -1,22 +1,22 @@
 <template>
-  <ui-card class="roblox-user" :class="{ 'is-active': isActive }">
+  <ui-card class="roblox-item" :class="{ 'is-active': isActive }">
     <transition-fade>
-      <div v-if="isActive" class="roblox-user__icon">
+      <div v-if="isActive" class="roblox-item__icon">
         <ui-icon-base name="check" />
       </div>
     </transition-fade>
 
-    <nuxt-img class="roblox-user__avatar" :src="avatar" />
+    <nuxt-img class="roblox-item__image" :src="src" />
     <span>
-      {{ name }}
+      {{ text }}
     </span>
   </ui-card>
 </template>
 
 <script setup lang="ts">
 export type RobloxUser = {
-  name: string
-  avatar: string
+  text: string
+  src: string
   isActive?: boolean
 }
 
@@ -24,7 +24,7 @@ defineProps<RobloxUser>()
 </script>
 
 <style scoped lang="scss">
-.roblox-user {
+.roblox-item {
   @include column(6px);
 
   position: relative;
@@ -34,7 +34,7 @@ defineProps<RobloxUser>()
   cursor: pointer;
   border: 2px solid transparent;
 
-  &__avatar {
+  &__image {
     width: 44px;
     height: 44px;
     border-radius: 12px;

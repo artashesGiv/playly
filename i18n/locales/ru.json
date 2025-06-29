@@ -42,16 +42,71 @@
       "priceFor": "Цена за"
     },
     "buy": {
-      "title": "Выберите учетную запись",
-      "description": "Введите свое прозвище Roblox",
       "buttons": {
-        "main": "Продолжить",
         "help": "Как это работает"
       },
+      "modal": {
+        "title": "Как это работает",
+        "description": "Следуйте всем шагам, чтобы вывести Robux на баланс",
+        "withdrawalCard": "Сумма снятия",
+        "step-1": {
+          "title": "Выберите учетную запись",
+          "description": "Выберите Place, c которым будет связан GamePass - CHANGE"
+        },
+        "step-2": {
+          "title": "Выберите Place",
+          "description": "Выберите Place, c которым будет связан GamePass"
+        },
+        "step-3": {
+          "title": "Выберите GamePass",
+          "description": "Выберите Place, c которым будет связан GamePass - CHANGE"
+        },
+        "step-4": {
+          "title": "Отредактируйте GamePass",
+          "description": "Выберите Place, c которым будет связан GamePass - CHANGE"
+        }
+      },
       "step-1": {
+        "title": "Выберите учетную запись",
+        "description": "Введите свое прозвище Roblox",
         "nicknamePlaceholder": "Никнейм в Roblox",
         "empty": "Ничего не найдено. Введите прозвище своей учетной записи Roblox",
-        "selectDescription": "Выберите учетную запись из списка и нажмите «Продолжить»"
+        "selectDescription": "Выберите учетную запись из списка и нажмите «Продолжить»",
+        "nextButton": "Продолжить"
+      },
+      "step-2": {
+        "title": "Выберите место",
+        "description": "Выберите место Roblox из вашего списка",
+        "nextButton": "Продолжить"
+      },
+      "step-3": {
+        "titleSelect": "Выберите GamePass",
+        "descriptionSelect": "Выберите GamePass для настройки",
+        "titleCreate": "Создайте Gamepass",
+        "descriptionCreate": "Создайте GamePass что бы продолжить",
+        "nextButtonSelect": "Продолжить",
+        "nextButtonCreate": "Готово!",
+        "create": {
+          "button": "Создайте GamePass",
+          "description": "Создайте хотя бы один GamePass в соответствии с нашими инструкциями, чтобы настроить его дальше"
+        }
+      },
+      "step-4": {
+        "title": "Установите ваш GamePass",
+        "description": "Установите цену в настройках",
+        "nextButton": "Готово!",
+        "setGamepass": {
+          "button": "Установите GamePass",
+          "description": "Откройте настройки выбранного GamePass и установите цену, указанную ниже",
+          "priceDescription": "Цена GamePass"
+        }
+      },
+      "step-5": {
+        "title": "Успешно!",
+        "description": "Robux будет зачислен в течение 5-7 дней",
+        "cardText": "Вы получите на баланс",
+        "alert": "Не меняйте настройки GamePass! Это может вызвать проблемы с доставкой",
+        "nextButton": "Отлично"
       }
     }
   },

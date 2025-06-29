@@ -18,13 +18,15 @@
 
 <style scoped lang="scss">
 .layout {
-  @include column;
+  @include column(18px);
 
+  overflow: hidden;
   height: 100vh;
 
   &__content {
     padding: 18px 16px;
     margin-top: -18px;
+    margin-bottom: -18px;
     flex: 1 1 0;
     overflow-y: auto;
     overflow-x: hidden;

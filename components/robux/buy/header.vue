@@ -1,17 +1,50 @@
 <template>
   <div class="buy-header">
     <div class="buy-header__text">
-      <h2 class="title">{{ $t('robux.buy.title') }}</h2>
-      <span class="description">{{ $t('robux.buy.description') }}</span>
+      <h2 class="title">{{ headerTextMap[step].title }}</h2>
+      <span class="description">{{ headerTextMap[step].description }}</span>
     </div>
-    <ui-stauts-bar :progress="step" :max="5" />
+    <ui-stauts-bar v-if="step !== 5" :progress="step" :max="5" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRobuxBuyStore } from '@/store'
 
-const { step } = storeToRefs(useRobuxBuyStore())
+type RobuxBuyHeader = {
+  title: string
+  description: string
+}
+
+const { step, gamepasses } = storeToRefs(useRobuxBuyStore())
+const { t } = useI18n()
+
+const headerTextMap: Record<number, RobuxBuyHeader> = {
+  1: {
+    title: t('robux.buy.step-1.title'),
+    description: t('robux.buy.step-1.description'),
+  },
+  2: {
+    title: t('robux.buy.step-2.title'),
+    description: t('robux.buy.step-2.description'),
+  },
+  3: {
+    title: gamepasses.value.length
+      ? t('robux.buy.step-3.titleSelect')
+      : t('robux.buy.step-3.titleCreate'),
+    description: gamepasses.value.length
+      ? t('robux.buy.step-3.descriptionSelect')
+      : t('robux.buy.step-3.descriptionCreate'),
+  },
+  4: {
+    title: t('robux.buy.step-4.title'),
+    description: t('robux.buy.step-4.description'),
+  },
+  5: {
+    title: t('robux.buy.step-5.title'),
+    description: t('robux.buy.step-5.description'),
+  },
+}
 </script>
 
 <style scoped lang="scss">

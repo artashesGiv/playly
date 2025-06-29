@@ -1,7 +1,25 @@
+type StepsData = {
+  user: Maybe<number>
+  place: Maybe<number>
+  gamepass: Maybe<number>
+}
+
+const defaultStepsData = () => ({
+  user: null,
+  place: null,
+  gamepass: null,
+})
+
 export const useRobuxBuyStore = defineStore('robux-buy', () => {
   const searchName = ref('')
   const step = ref(1)
-  const activeUser = ref<Maybe<number>>(null)
+  const stepsData = reactive<StepsData>(defaultStepsData())
+
+  const resetStepsData = () => {
+    step.value = 1
+    searchName.value = ''
+    Object.assign(stepsData, defaultStepsData())
+  }
 
   const users = computed(() => {
     if (!searchName.value) return []
@@ -13,10 +31,59 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     }))
   })
 
+  const places = ref([
+    {
+      id: 1,
+      text: `item-1`,
+      src: '/images/template/user-avatar.png',
+    },
+    {
+      id: 2,
+      text: `item-2`,
+      src: '/images/template/user-avatar.png',
+    },
+    {
+      id: 3,
+      text: `item-3`,
+      src: '/images/template/user-avatar.png',
+    },
+    {
+      id: 4,
+      text: `item-4`,
+      src: '/images/template/user-avatar.png',
+    },
+  ])
+
+  const gamepasses = ref<{ id: number; text: string; src: string }[]>([
+    {
+      id: 1,
+      text: `item-1`,
+      src: '/images/template/user-avatar.png',
+    },
+    {
+      id: 2,
+      text: `item-2`,
+      src: '/images/template/user-avatar.png',
+    },
+    {
+      id: 3,
+      text: `item-3`,
+      src: '/images/template/user-avatar.png',
+    },
+    {
+      id: 4,
+      text: `item-4`,
+      src: '/images/template/user-avatar.png',
+    },
+  ])
+
   return {
     searchName,
     step,
-    activeUser,
+    stepsData,
+    places,
     users,
+    gamepasses,
+    resetStepsData,
   }
 })
