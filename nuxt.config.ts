@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     'motion-v/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/i18n',
+    'nuxt-lottie',
   ],
 
   css: ['@/assets/styles/reset.css', '@/assets/styles/vars/index.css'],
@@ -58,7 +59,7 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      Inter: [300, 400, 600, 700, 800],
+      Inter: [300, 400, 500, 600, 700, 800],
     },
     display: 'swap',
     preconnect: true,
@@ -78,5 +79,9 @@ export default defineNuxtConfig({
       typedOptionsAndMessages: 'all',
     },
     vueI18n: 'i18n.config.ts',
+  },
+  lottie: {
+    componentName: 'Lottie',
+    lottieFolder: '/assets/lottie',
   },
 })

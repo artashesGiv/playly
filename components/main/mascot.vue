@@ -5,7 +5,8 @@
     :style="style"
     @click="emits('click')"
   >
-    <nuxt-img :src="src" />
+    <Lottie v-if="isTap" name="coin" autoplay loop />
+    <nuxt-img v-else :src="src" />
   </motion.div>
 </template>
 

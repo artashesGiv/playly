@@ -2,7 +2,7 @@
   <div class="friends">
     <div class="friends__wrapper">
       <div class="friends__main">
-        <nuxt-img src="/images/friends/main.png" class="friends__image" />
+        <Lottie name="friends" class="friends__image" />
         <div>
           <h3 class="title">{{ $t('friends.title') }}</h3>
           <span>{{ $t('friends.description') }}</span>
@@ -42,6 +42,7 @@ const { friends } = storeToRefs(useFriendsStore())
 <style scoped lang="scss">
 .friends {
   @include column;
+  @include scroll-gradient(80px);
 
   position: relative;
   height: 100%;
@@ -52,8 +53,6 @@ const { friends } = storeToRefs(useFriendsStore())
 
     flex: 1;
     overflow-y: auto;
-
-    @include scroll-gradient;
   }
 
   &__main {
@@ -68,8 +67,7 @@ const { friends } = storeToRefs(useFriendsStore())
   }
 
   &__image {
-    height: 166px;
-    width: 166px;
+    height: 160px;
   }
 
   &__data {
@@ -88,6 +86,7 @@ const { friends } = storeToRefs(useFriendsStore())
     position: relative;
     bottom: 0;
     width: 100%;
+    z-index: 2;
   }
 }
 </style>

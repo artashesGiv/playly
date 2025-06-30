@@ -3,15 +3,16 @@
     <div class="balance-card__content">
       <AnimateNumber
         locales="ru-RU"
-        class="number"
         :transition="{
           visualDuration: 0.6,
           type: 'spring',
           bounce: 0.25,
           opacity: { duration: 0.3, ease: 'linear' },
         }"
+        :style="{ fontSize: size === 'xl' ? '22px' : '16px' }"
         :value="sum"
       />
+
       <main-mascot v-if="type === 'coin'" size="s" />
       <ui-icon-base v-else name="robux" class="balance-card__icon" />
     </div>
@@ -45,6 +46,8 @@ const classes = computed(() => [
 
 <style scoped lang="scss">
 .balance-card {
+  $b: &;
+
   @include column(2px);
 
   background-color: var(--dark-800);

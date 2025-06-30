@@ -5,13 +5,13 @@
       <ui-divider />
       <div class="robux__inputs">
         <ui-input-base
+          v-model="payValue"
           :label="$t('robux.input.labelPay')"
-          model-value="56"
           icon="wallet"
         />
         <ui-input-base
+          v-model="getValue"
           :label="$t('robux.input.labelReceived')"
-          model-value="56"
           icon="robux"
           icon-color="yellow"
         />
@@ -19,9 +19,24 @@
       <ui-divider />
       <div class="robux__interactive">
         <div class="robux__buttons">
-          <ui-button-base view="secondary" text="150 R$" size="46" />
-          <ui-button-base view="secondary" text="300 R$" size="46" />
-          <ui-button-base view="secondary" text="500 R$" size="46" />
+          <ui-button-base
+            view="secondary"
+            text="150 R$"
+            size="46"
+            @click="getValue = 150"
+          />
+          <ui-button-base
+            view="secondary"
+            text="300 R$"
+            size="46"
+            @click="getValue = 300"
+          />
+          <ui-button-base
+            view="secondary"
+            text="500 R$"
+            size="46"
+            @click="getValue = 500"
+          />
         </div>
         <ui-input-base
           model-value=""
@@ -42,7 +57,26 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const COEFFICIENT = 4
+
+const payValue = ref(0)
+const getValue = ref(0)
+
+watch(payValue, newVal => {
+  const calculated = newVal * COEFFICIENT
+  if (getValue.value !== calculated) {
+    getValue.value = calculated
+  }
+})
+
+watch(getValue, newVal => {
+  const calculated = newVal / COEFFICIENT
+  if (payValue.value !== calculated) {
+    payValue.value = calculated
+  }
+})
+</script>
 <style scoped lang="scss">
 .robux {
   @include column(12px);

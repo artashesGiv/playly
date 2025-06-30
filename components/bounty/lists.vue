@@ -20,7 +20,7 @@
     <transition-fade>
       <div v-if="completedCards.length" class="bounty-lists__item">
         <ui-title
-          text="Completed tasks"
+          :text="$t('coins.completeTitle')"
           :additional-text="`${completedCards.length} ${$t('common.completed')}`"
         />
         <transition-group name="fade-move">

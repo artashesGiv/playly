@@ -35,6 +35,8 @@ type Emits = {
   (emit: 'click', value: BountyCardProps['sum']): void
 }
 
+const { t } = useI18n()
+
 const props = defineProps<BountyCardProps>()
 
 const emits = defineEmits<Emits>()
@@ -42,10 +44,10 @@ const emits = defineEmits<Emits>()
 const classes = computed(() => ['bounty', { 'is-disabled': props.isDisabled }])
 const buttonText = computed(() => {
   if (props.isInvite) {
-    return 'Invite'
+    return t('common.invite')
   }
 
-  return 'Join'
+  return t('common.join')
 })
 </script>
 

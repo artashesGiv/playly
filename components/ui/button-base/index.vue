@@ -158,6 +158,7 @@ function useSpinnerProps({
   white-space: nowrap;
   transition: var(--transition-base);
   max-width: 100%;
+  font-weight: 600;
 
   &--direction {
     &--row {

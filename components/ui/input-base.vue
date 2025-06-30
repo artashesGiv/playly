@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 export type InputBaseProps = {
-  modelValue: string
+  modelValue: string | number
   isError?: boolean
   placeholder?: string
   icon?: Icons

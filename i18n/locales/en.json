@@ -10,6 +10,7 @@
     "title": "Earn coins and exchange them for cases with adopt me items and robux",
     "balanceText": "Your balance",
     "tasksTitle": "Free coins tasks",
+    "completeTitle": "Completed tasks",
     "tasks": {
       "starPetsTg": "Join StarPets telegram",
       "playlyTg": "Join Playly telegram",
