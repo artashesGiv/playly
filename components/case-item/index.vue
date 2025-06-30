@@ -70,6 +70,8 @@ const backgroundStyle = computed(() => {
   &__image {
     width: 60px;
     height: 60px;
+    position: relative;
+    z-index: 2;
   }
 
   span {
