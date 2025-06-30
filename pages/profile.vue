@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <profile-main />
-    <star-pets-link />
+    <star-pets-link-card />
     <ui-divider />
     <profile-community />
     <ui-divider />
@@ -20,7 +20,6 @@
 
 <script setup lang="ts">
 const { locales, locale, setLocale } = useI18n()
-const { user } = useTelegram()
 </script>
 
 <style scoped lang="scss">

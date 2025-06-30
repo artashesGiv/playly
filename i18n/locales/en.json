@@ -154,6 +154,29 @@
       }
     }
   },
+  "starPetsLink": {
+    "title": "Link your StarPets ID to send items",
+    "description": "Find your ID on the profile page in StarPets",
+    "placeholder": "Enter your StarPets ID",
+    "buttons": {
+      "starPetsId": "How to get StarPets ID"
+    },
+    "how": {
+      "title": "How to get StarPets ID?",
+      "description": "You'll be able to withdraw your items via StarPets",
+      "text": "Log in or register on the StarPets website. Then go to the profile section and copy the ID",
+      "step-1": {
+        "title": "Log in on the StarPets",
+        "description": "STARPETS.PW",
+        "button": "StarPets"
+      },
+      "step-2": {
+        "title": "Go to the profile",
+        "description": "Copy your StarPets ID",
+        "button": "Profile"
+      }
+    }
+  },
   "common": {
     "available": "available",
     "completed": "completed",
@@ -176,6 +199,7 @@
     "close": "Close",
     "openStarPets": "Open StarPets",
     "cansel": "Cansel",
-    "gotIt": "Got it!"
+    "gotIt": "Got it!",
+    "save": "Save"
   }
 }

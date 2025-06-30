@@ -1,17 +1,21 @@
 <template>
-  <div class="how-get-item">
-    <div class="how-get-item__header">
-      <div class="how-get-item__text">
-        <h2 class="title">{{ $t('profile.howGetItem.title') }}</h2>
+  <div class="how-star-pets-link">
+    <div class="how-star-pets-link__header">
+      <div class="how-star-pets-link__text">
+        <h2 class="title">{{ $t('starPetsLink.how.title') }}</h2>
         <span class="description">
-          {{ $t('profile.howGetItem.description') }}
+          {{ $t('starPetsLink.how.description') }}
         </span>
       </div>
     </div>
     <ui-divider />
-    <div class="how-get-item__cards">
-      <profile-how-get-item-card v-for="item in 3" :key="item" :step="item" />
+    <div class="how-star-pets-link__content">
+      <div class="how-star-pets-link__cards">
+        <how-star-pets-link-card v-for="item in 2" :key="item" :step="item" />
+      </div>
+      <span class="description">{{ $t('starPetsLink.how.text') }}</span>
     </div>
+
     <ui-button-base
       :text="$t('common.gotIt')"
       size="52"
@@ -29,13 +33,19 @@ const router = useRouter()
 </script>
 
 <style scoped lang="scss">
-.how-get-item {
+.how-star-pets-link {
   @include column(18px);
 
   height: 100%;
 
   .description {
     font: var(--font-base-medium);
+  }
+
+  &__content {
+    @include column(18px);
+
+    flex-grow: 1;
   }
 
   &__text {
@@ -45,8 +55,6 @@ const router = useRouter()
 
   &__cards {
     @include column(12px);
-
-    flex-grow: 1;
   }
 }
 </style>

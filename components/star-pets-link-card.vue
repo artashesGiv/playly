@@ -6,7 +6,12 @@
         {{ $t('profile.starPets.link.description') }}
       </span>
     </div>
-    <ui-button-base size="42" :text="$t('common.link')" max-content />
+    <ui-button-base
+      size="42"
+      :text="$t('common.link')"
+      max-content
+      @click="navigateTo('/star-pets-link')"
+    />
     <ui-icon-base name="sp-logo" class="star-pets__icon star-pets__icon-1" />
     <ui-icon-base name="sp-logo" class="star-pets__icon star-pets__icon-2" />
   </ui-card>

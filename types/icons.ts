@@ -34,6 +34,7 @@ export type IconsId =
   | 'play'
   | 'login'
   | 'loader-2'
+  | 'link'
   | 'left-square-2'
   | 'left-square-1'
   | 'left-circle-2'

@@ -154,6 +154,29 @@
       }
     }
   },
+  "starPetsLink": {
+    "title": "Свяжите свой идентификатор своего StarPets, чтобы отправлять предметы",
+    "description": "Найдите свой идентификатор на странице профиля в StarPets",
+    "placeholder": "Введите ваш StarPets ID",
+    "buttons": {
+      "starPetsId": "Как получить StarPets ID"
+    },
+    "how": {
+      "title": "Как получить идентификатор StarPets?",
+      "description": "Вы сможете снять свои предметы через StarPets",
+      "text": "Войдите в систему или зарегистрируйтесь на сайте StarPets. ",
+      "step-1": {
+        "title": "Войдите на StarPets",
+        "description": "STARPETS.PW",
+        "button": "StarPets"
+      },
+      "step-2": {
+        "title": "Перейти к профилю",
+        "description": "Скопируйте свой StarPets ID",
+        "button": "Профиль"
+      }
+    }
+  },
   "common": {
     "available": "доступно",
     "completed": "выполнено",
@@ -176,6 +199,7 @@
     "close": "Закрыть",
     "openStarPets": "Открыть StarPets",
     "cansel": "Отменить",
-    "gotIt": "Понятно!"
+    "gotIt": "Понятно!",
+    "save": "Сохранить"
   }
 }
