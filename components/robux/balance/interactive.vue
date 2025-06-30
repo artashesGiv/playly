@@ -21,37 +21,43 @@
       />
     </div>
     <ui-divider />
-    <ui-card>
-      <div class="robux-interactive__card-info">
-        <div class="robux-interactive__info-row">
-          <span>{{ $t('common.owner') }}</span>
-          <div class="robux-interactive__user-data">
-            <span>
-              {{ tg?.initDataUnsafe.user?.first_name }}
-              {{ tg?.initDataUnsafe.user?.last_name }}
-            </span>
-            <nuxt-img
-              class="robux-interactive__avatar"
-              :src="tg?.initDataUnsafe.user?.photo_url"
-            />
-          </div>
+    <ui-table-data :list="dataList">
+      <template #row-1="{ value }">
+        <div class="robux-interactive__user-data">
+          <span>
+            {{ value.first_name }}
+            {{ value.last_name }}
+          </span>
+          <nuxt-img class="robux-interactive__avatar" :src="value.photo_url" />
         </div>
-        <ui-divider view="light" />
-        <div class="robux-interactive__info-row">
-          <span>{{ $t('robux.balance.priceFor') }} 1 R$</span>
-          <div class="robux-interactive__price">
-            <span>18</span>
-            <main-mascot size="xs" />
-          </div>
+      </template>
+      <template #row-2="{ value }">
+        <div class="robux-interactive__price">
+          <span>{{ value }}</span>
+          <main-mascot size="xs" />
         </div>
-      </div>
-    </ui-card>
+      </template>
+    </ui-table-data>
     <ui-divider />
   </div>
 </template>
 
 <script setup lang="ts">
+import type { TableDataProps } from '@/components/ui/table-data.vue'
+
 const { tg } = useTelegram()
+const { t } = useI18n()
+
+const dataList = computed<TableDataProps['list']>(() => [
+  {
+    title: t('common.owner'),
+    value: tg?.initDataUnsafe.user,
+  },
+  {
+    title: `${t('robux.balance.priceFor')} 1 R$`,
+    value: 18,
+  },
+])
 </script>
 
 <style scoped lang="scss">
@@ -62,28 +68,9 @@ const { tg } = useTelegram()
     @include row(10px);
   }
 
-  &__card-info {
-    @include column(14px);
-  }
-
-  &__info-row {
-    @include row(12px);
-
-    justify-content: space-between;
-
-    span {
-      font: var(--font-base-medium);
-      color: var(--white);
-    }
-  }
-
   &__user-data,
   &__price {
     @include row(8px);
-
-    span {
-      color: var(--light-500);
-    }
   }
 
   &__avatar {

@@ -15,6 +15,7 @@ export type CaseItem = {
   name: string
   image: string
   probability: number
+  price: number
   tag: TagProps
   abilities: CaseItemAbilities[]
 }

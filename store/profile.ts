@@ -1,7 +1,7 @@
 import type { CaseItem } from '@/types'
 
-export const useRouletteSore = defineStore('roulette', () => {
-  const caseItems = ref<CaseItem[]>([
+export const useProfileStore = defineStore('profile', () => {
+  const ownItems = ref<CaseItem[]>([
     {
       id: '1',
       price: 520,
@@ -48,8 +48,29 @@ export const useRouletteSore = defineStore('roulette', () => {
       abilities: ['neon'],
     },
   ])
+  const receivedItems = ref<CaseItem[]>([
+    {
+      id: '7',
+      price: 520,
+      name: 'Golden Dragon',
+      image: '/images/template/case-item.png',
+      probability: 0.5,
+      tag: { text: 'Legendary', view: 'pink' },
+      abilities: ['mega-neon', 'fly', 'ride'],
+    },
+    {
+      id: '8',
+      price: 520,
+      name: 'Shadow Wolf',
+      image: '/images/template/case-item.png',
+      probability: 1.2,
+      tag: { text: 'Ultra Rare', view: 'red' },
+      abilities: ['neon', 'fly'],
+    },
+  ])
 
   return {
-    caseItems,
+    ownItems,
+    receivedItems,
   }
 })

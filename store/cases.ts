@@ -1,4 +1,3 @@
-import type { Case } from '@/types'
 import type { CaseCard } from '@/components/cases/card.vue'
 
 export const useCasesStore = defineStore('cases', () => {

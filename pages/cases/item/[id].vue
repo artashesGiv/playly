@@ -9,28 +9,17 @@
         <nuxt-img class="case-item__image" :src="item?.image" />
         <h4 class="title">{{ item?.name }}</h4>
         <span>Egg</span>
-        <ui-card class="case-item__table">
-          <div class="case-item__data-cell">
-            <span> Properties </span>
+        <ui-table-data class="case-item__table" :list="dataList">
+          <template #row-1="{ value }">
             <div class="case-item__abilities">
               <cases-item-ability
-                v-for="ability in item?.abilities"
+                v-for="ability in value"
                 :key="ability"
                 :type="ability"
               />
             </div>
-          </div>
-          <ui-divider view="light" />
-          <div class="case-item__data-cell">
-            <span> Rarity </span>
-            <span> {{ item?.tag.text }} </span>
-          </div>
-          <ui-divider view="light" />
-          <div class="case-item__data-cell">
-            <span> Age </span>
-            <span> Post-Teen </span>
-          </div>
-        </ui-card>
+          </template>
+        </ui-table-data>
       </div>
       <span class="case-item__description">
         {{ $t('cases.roulette.canSell') }}
@@ -45,10 +34,10 @@
         @click="onOpenMore"
       />
       <ui-button-base
-        :text="$t('cases.roulette.sellItem', 342)"
+        :text="$t('cases.roulette.sellItem', item!.price)"
         icon-right="coin-1"
         size="52"
-        @click="navigateTo('/profile')"
+        @click="onSellItem(item!.price)"
       />
     </div>
   </div>
@@ -57,6 +46,7 @@
 <script setup lang="ts">
 import type { CaseItem } from '@/types'
 import { useBalanceStore, useRouletteSore } from '@/store'
+import type { TableDataProps } from '@/components/ui/table-data.vue'
 
 definePageMeta({
   layout: 'empty',
@@ -65,16 +55,37 @@ const route = useRoute()
 const router = useRouter()
 useBackButton()
 const { caseItems } = storeToRefs(useRouletteSore())
-const { balance } = storeToRefs(useBalanceStore())
+const balanceStore = useBalanceStore()
+const { balance } = storeToRefs(balanceStore)
 
 const id = route.params.id as CaseItem['id']
 
 const item = computed(() => caseItems.value.find(item => item.id === id))
 
+const dataList: TableDataProps['list'] = [
+  {
+    title: 'Properties',
+    value: item?.value?.abilities,
+  },
+  {
+    title: 'Rarity',
+    value: item?.value?.tag.text,
+  },
+  {
+    title: 'Age',
+    value: 'Post-Teen',
+  },
+]
+
 const onOpenMore = () => {
   // if (balance.value >= 500) {
   router.back()
   // }
+}
+
+const onSellItem = (sum: number) => {
+  navigateTo('/profile')
+  balanceStore.addBalance(sum)
 }
 </script>
 
@@ -86,6 +97,7 @@ const onOpenMore = () => {
 
   &__content {
     @include column(14px);
+
     flex-grow: 1;
   }
 
@@ -126,24 +138,7 @@ const onOpenMore = () => {
   }
 
   &__table {
-    @include column(14px);
-
-    align-self: stretch;
     margin-top: 33px;
-  }
-
-  &__data-cell {
-    @include row(12px);
-
-    justify-content: space-between;
-
-    span {
-      font: var(--font-base-medium);
-    }
-
-    span:first-child {
-      color: var(--white);
-    }
   }
 
   &__description {
