@@ -13,7 +13,7 @@ export const useProfileStore = defineStore('profile', () => {
     },
     {
       id: '2',
-      price: 520,
+      price: 521,
       name: 'Shadow Wolf',
       image: '/images/template/case-item.png',
       probability: 1.2,
@@ -22,7 +22,7 @@ export const useProfileStore = defineStore('profile', () => {
     },
     {
       id: '3',
-      price: 520,
+      price: 522,
       name: 'Frost Unicorn',
       image: '/images/template/case-item.png',
       probability: 0.9,
@@ -31,7 +31,7 @@ export const useProfileStore = defineStore('profile', () => {
     },
     {
       id: '4',
-      price: 520,
+      price: 525,
       name: 'Flame Tiger',
       image: '/images/template/case-item.png',
       probability: 2.5,

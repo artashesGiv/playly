@@ -6,9 +6,11 @@
           class="background"
           :style="{ background: `var(--${item?.tag.view}-gradient)` }"
         />
-        <nuxt-img class="case-item__image" :src="item?.image" />
-        <h4 class="title">{{ item?.name }}</h4>
-        <span>Egg</span>
+        <item-main-data
+          :image="item!.image"
+          :title="item!.name"
+          description="Egg"
+        />
         <ui-table-data class="case-item__table" :list="dataList">
           <template #row-1="{ value }">
             <div class="case-item__abilities">

@@ -5,9 +5,9 @@
     <ui-divider />
     <profile-community />
     <ui-divider />
-    <profile-your-items />
+    <profile-items-list type="own" />
     <ui-divider />
-    <profile-received-items />
+    <profile-items-list type="received" />
     <ui-button-base
       v-for="l in locales"
       :key="l.code"
@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 const { locales, locale, setLocale } = useI18n()
+const { user } = useTelegram()
 </script>
 
 <style scoped lang="scss">

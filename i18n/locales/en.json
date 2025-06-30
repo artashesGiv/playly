@@ -34,11 +34,6 @@
     "alert": "More profitable than in-game",
     "balance": {
       "description": "Robux balance",
-      "buttons": {
-        "sell": "Sell",
-        "withdraw": "Withdraw",
-        "share": "Share"
-      },
       "priceFor": "Price for"
     },
     "buy": {
@@ -132,6 +127,31 @@
     "items": {
       "your": "Your items",
       "received": "Received items"
+    },
+    "withdraw": {
+      "howGetItem": "How to get item",
+      "description": "You have 60 minutes to withdraw item, otherwise it will be automatically sold for coins"
+    },
+    "timerCard": {
+      "timeLeft": "Time left"
+    },
+    "howGetItem": {
+      "title": "How to get item on StarPets",
+      "description": "You can withdraw your item right now!",
+      "cards": {
+        "step-1": {
+          "title": "Log in on the StarPets",
+          "description": "STARPETS.PW"
+        },
+        "step-2": {
+          "title": "Go to the items",
+          "description": "Press “Claim items” button"
+        },
+        "step-3": {
+          "title": "Follow the instructions",
+          "description": "On the StarPets website"
+        }
+      }
     }
   },
   "common": {
@@ -146,6 +166,16 @@
     "yesterday": "Yesterday",
     "received": "received",
     "link": "Link",
-    "buy": "Buy {sum}"
+    "buy": "Buy {sum}",
+    "sellForCoins": "Sell for {n} coin | Sell for {n} coins",
+    "sell": "Sell",
+    "withdraw": "Withdraw",
+    "share": "Share",
+    "price": "Price",
+    "status": "Status",
+    "close": "Close",
+    "openStarPets": "Open StarPets",
+    "cansel": "Cansel",
+    "gotIt": "Got it!"
   }
 }

@@ -34,11 +34,6 @@
     "alert": "Более выгодно, чем в игре",
     "balance": {
       "description": "Robux баланс",
-      "buttons": {
-        "sell": "Продать",
-        "withdraw": "Withdraw",
-        "share": "Поделиться"
-      },
       "priceFor": "Цена за"
     },
     "buy": {
@@ -132,6 +127,31 @@
     "items": {
       "your": "Ваши предметы",
       "received": "Полученные предметы"
+    },
+    "withdraw": {
+      "howGetItem": "Как получить предмет",
+      "description": "У вас есть 60 минут для вывода товара, в противном случае он будет автоматически продан за монеты"
+    },
+    "timerCard": {
+      "timeLeft": "Осталось времени"
+    },
+    "howGetItem": {
+      "title": "Как получить товар на StarPets",
+      "description": "Вы можете получить свой предмет прямо сейчас!",
+      "cards": {
+        "step-1": {
+          "title": "Войдите на StarPets",
+          "description": "STARPETS.PW"
+        },
+        "step-2": {
+          "title": "Перейти к предметам",
+          "description": "Нажмите кнопку «Получение элементов»"
+        },
+        "step-3": {
+          "title": "Следуйте инструкциям",
+          "description": "На сайте StarPets"
+        }
+      }
     }
   },
   "common": {
@@ -146,6 +166,16 @@
     "yesterday": "Сегодня",
     "received": "получено",
     "link": "Ссылка",
-    "buy": "Купить {sum}"
+    "buy": "Купить {sum}",
+    "sellForCoins": "Продать за {n} монет | Продать за {n} монету | Продать за {n} монеты | Продать за {n} монет",
+    "sell": "Продать",
+    "withdraw": "Вывести",
+    "share": "Поделиться",
+    "price": "Стоимость",
+    "status": "Статус",
+    "close": "Закрыть",
+    "openStarPets": "Открыть StarPets",
+    "cansel": "Отменить",
+    "gotIt": "Понятно!"
   }
 }

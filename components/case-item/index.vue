@@ -1,8 +1,6 @@
 <template>
   <article
     class="case-item"
-    @mouseenter="isHover = true"
-    @mouseleave="isHover = false"
     @mousedown="isHover = true"
     @mouseup="isHover = false"
   >

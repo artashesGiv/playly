@@ -2,5 +2,7 @@ export const useTelegram = () => {
   const tg = (globalThis as any).Telegram?.WebApp as
     | Telegram['WebApp']
     | undefined
-  return { tg }
+
+  const user = tg?.initDataUnsafe.user
+  return { tg, user }
 }
