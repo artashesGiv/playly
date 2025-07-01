@@ -118,12 +118,5 @@ onUnmounted(() => {
   &__footer {
     @include column(10px);
   }
-
-  &__modal {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
 }
 </style>

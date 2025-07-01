@@ -2,6 +2,7 @@
   <div class="profile">
     <profile-main />
     <star-pets-link-card />
+    <language-card :language="locale as LanguageCardProps['language']" />
     <ui-divider />
     <profile-community />
     <ui-divider />
@@ -15,10 +16,14 @@
       :text="l.name"
       @click="setLocale(l.code)"
     />
+
+    {{ locale }}
   </div>
 </template>
 
 <script setup lang="ts">
+import type { LanguageCardProps } from '@/components/language-card.vue'
+
 const { locales, locale, setLocale } = useI18n()
 </script>
 

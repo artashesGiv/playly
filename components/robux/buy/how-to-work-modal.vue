@@ -1,38 +1,31 @@
 <template>
-  <transition name="slide-bottom">
-    <div v-if="isOpen" class="how-to-work">
-      <div class="how-to-work__header">
-        <span class="title">{{ $t('robux.buy.modal.title') }}</span>
-        <ui-button-base
-          view="secondary"
-          icon="close"
-          size="46"
-          @click="emits('update:isOpen', false)"
+  <ui-modal-base
+    :is-open="isOpen"
+    class="how-to-work"
+    @update:is-open="emits('update:isOpen', $event)"
+  >
+    <div class="how-to-work__content">
+      <div class="how-to-work__list">
+        <robux-buy-step-card
+          v-for="card in stepsData"
+          :key="card.stepId"
+          v-bind="card"
+          :status="getStepStatus(card.stepId)"
         />
       </div>
-      <div class="how-to-work__content">
-        <div class="how-to-work__list">
-          <robux-buy-step-card
-            v-for="card in stepsData"
-            :key="card.stepId"
-            v-bind="card"
-            :status="getStepStatus(card.stepId)"
-          />
+      <ui-divider view="light" />
+      <span>{{ $t('robux.buy.modal.description') }}</span>
+      <ui-card class="how-to-work__price">
+        <span class="how-to-work__price-description">
+          {{ $t('robux.buy.modal.withdrawalCard') }}
+        </span>
+        <div class="how-to-work__price-value">
+          540
+          <ui-icon-base name="robux" class="how-to-work__icon-robux" />
         </div>
-        <ui-divider view="light" />
-        <span>{{ $t('robux.buy.modal.description') }}</span>
-        <ui-card class="how-to-work__price">
-          <span class="how-to-work__price-description">
-            {{ $t('robux.buy.modal.withdrawalCard') }}
-          </span>
-          <div class="how-to-work__price-value">
-            540
-            <ui-icon-base name="robux" class="how-to-work__icon-robux" />
-          </div>
-        </ui-card>
-      </div>
+      </ui-card>
     </div>
-  </transition>
+  </ui-modal-base>
 </template>
 
 <script setup lang="ts">
@@ -85,18 +78,6 @@ const getStepStatus = (stepId: number): RobuxBuyStepCardProps['status'] => {
 
 <style scoped lang="scss">
 .how-to-work {
-  @include column(18px);
-
-  border-radius: 18px 18px 0 0;
-  padding: 20px 16px;
-  background-color: var(--dark-900);
-
-  &__header {
-    @include row(12px);
-
-    justify-content: space-between;
-  }
-
   &__content {
     @include column(14px);
 

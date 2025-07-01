@@ -29,8 +29,9 @@ const { robuxBalance } = storeToRefs(useRobuxBalanceStore())
   &__logo {
     @include column;
 
-    max-width: 375px;
+    min-width: 375px;
     position: relative;
+    align-self: center;
   }
 
   &__image {
