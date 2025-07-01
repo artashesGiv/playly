@@ -28,7 +28,7 @@
       size="52"
       icon-right="coin-1"
       class="roulette__button"
-      @click="startAutoScroll('up')"
+      @click="startAutoScroll"
     />
   </div>
 </template>

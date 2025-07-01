@@ -86,8 +86,10 @@ const onOpenMore = () => {
 }
 
 const onSellItem = (sum: number) => {
-  navigateTo('/profile')
-  balanceStore.addBalance(sum)
+  navigateTo('/cases')
+  setTimeout(() => {
+    balanceStore.addBalance(sum)
+  }, 800)
 }
 </script>
 

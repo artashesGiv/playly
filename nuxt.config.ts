@@ -43,6 +43,10 @@ export default defineNuxtConfig({
     head: {
       meta: [
         {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, viewport-fit=cover',
+        },
+        {
           'http-equiv': 'Content-Security-Policy',
           // 'content': [
           //   "default-src 'self' https://*.telegram.org",
