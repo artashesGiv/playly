@@ -1,5 +1,5 @@
 export type BaseRequestParams<T = unknown> = {
-  method: (...args: any[]) => Promise<BaseResponse<T>>
+  method: (...args: any[]) => Promise<T>
   callback?: (result: T) => void
   finallyCallback?: () => void
   errorCallback?: (e: any) => void
@@ -12,7 +12,7 @@ export const baseRequest = async <T = unknown>({
   errorCallback,
 }: BaseRequestParams<T>) => {
   try {
-    const { data } = await method()
+    const data = await method()
 
     if (callback) {
       callback(data)

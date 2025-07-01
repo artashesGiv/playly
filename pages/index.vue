@@ -1,6 +1,5 @@
 <template>
   <div class="index">
-    {{ isAuth }}
     {{ data }}
     <balance-main-click />
     <balance-card size="xl" />
@@ -12,7 +11,7 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/store'
 
-const { isAuth, data } = storeToRefs(useAuthStore())
+const { data } = storeToRefs(useAuthStore())
 </script>
 
 <style scoped lang="scss">
