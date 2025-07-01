@@ -6,17 +6,22 @@ declare global {
   type Timeout = ReturnType<typeof setTimeout>
   type AsyncFunction<P = unknown, T = void> = (params?: P) => Promise<T>
   type Icons = IconsId
-  // type BaseResponse<T = unknown> = {
-  //   data: T
-  // }
+  type BaseResponse<T = unknown> = {
+    data: T
+  }
   type NavItem = {
     src: string
     icon: IconsId | 'mascot'
     text: string
   }
+  type TokenData = {
+    access_token: string
+    refresh_token: string
+  }
 }
 
 declare module 'nuxt/app' {
-  // interface NuxtApp {
-  // }
+  interface NuxtApp {
+    $baseApi: BaseApi
+  }
 }

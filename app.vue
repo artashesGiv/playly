@@ -7,10 +7,15 @@
 </template>
 
 <script lang="ts" setup>
-const { tg } = useTelegram()
+// import { useAuthStore } from '@/store'
 
-onMounted(() => {
+const { tg } = useTelegram()
+// const { login } = useAuthStore()
+
+onMounted(async () => {
   tg?.disableVerticalSwipes()
+
+  // await login()
 })
 </script>
 
