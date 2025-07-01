@@ -104,6 +104,9 @@
         "alert": "Do not change your GamePass settings! This may cause robux delivery issues",
         "nextButton": "Great"
       }
+    },
+    "sell": {
+      "text": "You'll immediately receive coins to your account after the sale of robux"
     }
   },
   "cases": {
@@ -201,6 +204,7 @@
     "openStarPets": "Open StarPets",
     "cansel": "Cansel",
     "gotIt": "Got it!",
-    "save": "Save"
+    "save": "Save",
+    "r$": "{n} R$"
   }
 }

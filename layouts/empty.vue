@@ -1,7 +1,9 @@
 <template>
-  <main class="layout__content">
-    <slot />
-  </main>
+  <div class="layout">
+    <main class="layout__content">
+      <slot />
+    </main>
+  </div>
 </template>
 
 <script setup lang="ts"></script>
@@ -10,6 +12,12 @@
 .layout {
   height: 100vh;
   position: relative;
+  padding-top: calc(
+    var(--tg-content-safe-area-inset-top) + var(--tg-safe-area-inset-top)
+  );
+  padding-bottom: calc(
+    var(--tg-content-safe-area-inset-bottom) + var(--tg-safe-area-inset-bottom)
+  );
 
   &__content {
     transition: var(--transition-base);

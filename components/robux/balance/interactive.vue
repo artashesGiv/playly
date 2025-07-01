@@ -1,6 +1,9 @@
 <template>
   <div class="robux-interactive">
-    <item-interactive />
+    <item-interactive
+      @sell="navigateTo('/robux/sell')"
+      @withdraw="navigateTo('/robux/withdraw')"
+    />
     <ui-divider />
     <ui-table-data :list="dataList">
       <template #row-1>

@@ -14,7 +14,7 @@
 import type { CSSProperties } from 'vue'
 
 // type
-type Size = 'xs' | 's' | 'm' | '3xl'
+type Size = 'xs' | 's' | 'm' | 'l' | '3xl'
 
 export type MainMascotProps = {
   size?: Size
@@ -35,6 +35,7 @@ const mapSize: Record<Size, number> = {
   'xs': 16,
   's': 22,
   'm': 32,
+  'l': 54,
   '3xl': 166,
 }
 

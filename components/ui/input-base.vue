@@ -1,7 +1,9 @@
 <template>
   <div :class="classes">
     <div class="input__content">
-      <ui-icon-base v-if="icon" class="input__icon-left" :name="icon" />
+      <slot name="icon">
+        <ui-icon-base v-if="icon" class="input__icon-left" :name="icon" />
+      </slot>
       <input
         v-model="model"
         type="text"
