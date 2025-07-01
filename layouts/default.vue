@@ -26,10 +26,6 @@
     var(--tg-content-safe-area-inset-top) + var(--tg-safe-area-inset-top)
   );
 
-  &__header {
-    border: 1px solid red;
-  }
-
   &__content {
     padding: 18px 16px;
     margin-top: -18px;
