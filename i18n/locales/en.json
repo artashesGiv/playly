@@ -107,7 +107,11 @@
     },
     "sell": {
       "text": "You'll immediately receive coins to your account after the sale of robux"
-    }
+    },
+    "withdraw": {
+      "text": "You'll immediately receive coins to your account after the sale of robux"
+    },
+    "minimumWithdraw": "Minimum to withdraw"
   },
   "cases": {
     "title": "Cases",
@@ -205,6 +209,8 @@
     "cansel": "Cansel",
     "gotIt": "Got it!",
     "save": "Save",
-    "r$": "{n} R$"
+    "r$": "{n} R$",
+    "r$Amount": "R$ amount",
+    "withdrawCoins": "Withdraw {n} R$"
   }
 }

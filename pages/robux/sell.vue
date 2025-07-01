@@ -21,6 +21,7 @@
       <div class="sell__inputs">
         <ui-input-base
           v-model="payValue"
+          icon-color="yellow"
           :label="$t('robux.input.labelPay')"
           icon="robux"
         />
@@ -62,7 +63,8 @@
     </div>
     <ui-button-base
       icon="buy-1"
-      :text="$t('common.sellForCoins', 52)"
+      :text="$t('common.sellForCoins', payValue ? payValue : 0)"
+      :is-disabled="!payValue"
       size="52"
       @click="onSell"
     />
