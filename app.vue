@@ -6,7 +6,13 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const { tg } = useTelegram()
+
+onMounted(() => {
+  tg?.disableVerticalSwipes()
+})
+</script>
 
 <style scoped lang="scss">
 .app {

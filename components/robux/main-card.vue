@@ -32,6 +32,7 @@
   background: linear-gradient(134.09deg, #1477dd 25.4%, #0371e2 92.78%);
   border-radius: 22px;
   overflow: hidden;
+  min-height: 130px;
 
   h4 {
     position: relative;

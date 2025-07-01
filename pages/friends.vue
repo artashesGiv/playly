@@ -44,13 +44,14 @@ const { friends } = storeToRefs(useFriendsStore())
   @include column;
   @include scroll-gradient(80px);
 
-  position: relative;
-  height: 100%;
+  height: calc(100% + 18px);
+  margin-top: -18px;
   overflow: hidden;
 
   &__wrapper {
     @include column(18px);
 
+    padding-top: 18px;
     flex: 1;
     overflow-y: auto;
   }

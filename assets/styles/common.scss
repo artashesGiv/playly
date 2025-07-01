@@ -12,6 +12,8 @@ body {
   font-weight: 500;
   color: var(--light-500);
   background-color: var(--dark-1000);
+  //touch-action: pan-x pan-y;
+  overscroll-behavior: none;
 
   &.no-scroll {
     overflow: hidden;
