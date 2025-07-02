@@ -18,6 +18,8 @@ declare global {
     access_token: string
     refresh_token: string
   }
+
+  type LanguageCode = 'en' | 'ru'
 }
 
 declare module 'nuxt/app' {

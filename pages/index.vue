@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    {{ data }}
+    user: {{ userInfo }}
     <balance-main-click />
     <balance-card size="xl" />
     <ui-divider />
@@ -9,9 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '@/store'
+import { useUserStore } from '@/store'
 
-const { data } = storeToRefs(useAuthStore())
+const { userInfo } = storeToRefs(useUserStore())
 </script>
 
 <style scoped lang="scss">

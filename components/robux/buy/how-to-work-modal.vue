@@ -2,6 +2,7 @@
   <ui-modal-base
     :is-open="isOpen"
     class="how-to-work"
+    :title="$t('robux.buy.modal.title')"
     @update:is-open="emits('update:isOpen', $event)"
   >
     <div class="how-to-work__content">

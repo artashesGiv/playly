@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 export type LanguageCardProps = {
-  language: 'ru' | 'en'
+  language: LanguageCode
   type?: 'card' | 'select'
   isActive?: boolean
 }

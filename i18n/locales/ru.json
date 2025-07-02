@@ -185,6 +185,10 @@
       }
     }
   },
+  "language": {
+    "title": "Язык",
+    "description": "Выберите язык интерфейса в списке"
+  },
   "common": {
     "available": "доступно",
     "completed": "выполнено",

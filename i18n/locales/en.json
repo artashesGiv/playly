@@ -185,6 +185,10 @@
       }
     }
   },
+  "language": {
+    "title": "Language",
+    "description": "Select the interface language from the list"
+  },
   "common": {
     "available": "available",
     "completed": "completed",

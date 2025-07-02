@@ -14,10 +14,7 @@ body {
   background-color: var(--dark-1000);
   //touch-action: pan-x pan-y;
   overscroll-behavior: none;
-
-  &.no-scroll {
-    overflow: hidden;
-  }
+  overflow: hidden;
 }
 
 *::-webkit-scrollbar {
