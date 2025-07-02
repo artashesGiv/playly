@@ -40,25 +40,25 @@ export default defineNuxtPlugin(nuxtApp => {
             refreshPromise = null
           })
         }
-      }
 
-      // Дожидаемся обновления токена (неважно, мы инициировали или нет).
-      try {
-        await refreshPromise
-      } catch (refreshErr) {
-        // Обработка неудачного refresh – можно разлогинить пользователя.
-        console.error('Не удалось обновить токен', refreshErr)
-        throw response
-      }
+        // Дожидаемся обновления токена (неважно, мы инициировали или нет).
+        try {
+          await refreshPromise
+        } catch (refreshErr) {
+          // Обработка неудачного refresh – можно разлогинить пользователя.
+          console.error('Не удалось обновить токен', refreshErr)
+          throw response
+        }
 
-      // Повторяем исходный запрос с новым токеном.
-      await baseInstance(request as NitroFetchRequest, {
-        ...(options as NitroFetchOptions<any>),
-        headers: {
-          ...(options?.headers as Headers),
-          Authorization: `Bearer ${tokenData.value?.access_token ?? ''}`,
-        },
-      })
+        // Повторяем исходный запрос с новым токеном.
+        await baseInstance(request as NitroFetchRequest, {
+          ...(options as NitroFetchOptions<any>),
+          headers: {
+            ...(options?.headers as Headers),
+            Authorization: `Bearer ${tokenData.value?.access_token ?? ''}`,
+          },
+        })
+      }
     },
   })
 

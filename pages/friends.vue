@@ -29,6 +29,7 @@
       class="friends__button"
       :text="$t('friends.inviteButton')"
       size="52"
+      @click="useShareLink"
     />
   </div>
 </template>
@@ -37,6 +38,11 @@
 import { useFriendsStore } from '@/store'
 
 const { friends } = storeToRefs(useFriendsStore())
+const { getReferrals } = useFriendsStore()
+
+onMounted(async () => {
+  await getReferrals()
+})
 </script>
 
 <style scoped lang="scss">

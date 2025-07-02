@@ -1,7 +1,14 @@
 <template>
-  <bounty-card :sum="500" :text="$t('coins.tasks.starPetsTg')" />
+  <bounty-card
+    :sum="settings.channel_join_crystal_amount"
+    :text="$t('coins.tasks.starPetsTg')"
+  />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useCoinsStore } from '@/store'
+
+const { settings } = storeToRefs(useCoinsStore())
+</script>
 
 <style scoped lang="scss"></style>

@@ -1,13 +1,15 @@
 import type { AuthResponse } from '@/types'
-import { useUserStore } from '@/store'
+import { useCoinsStore, useUserStore } from '@/store'
 
 export const useAuthStore = defineStore('auth', () => {
   const isAuth = ref(false)
   const data = ref<Maybe<AuthResponse>>(null)
 
   const tokenData = ref<Maybe<TokenData>>(null)
+  const refLink = ref('')
 
   const { getUserInfo } = useUserStore()
+  const { getTaskSettings } = useCoinsStore()
 
   const login = async () => {
     const { tg } = useTelegram()
@@ -17,7 +19,7 @@ export const useAuthStore = defineStore('auth', () => {
         authAPI.auth({
           init_data: tg?.initData || '',
           ref_code: tg?.initDataUnsafe.start_param || '',
-          timezone_offset_minutes: 180,
+          timezone_offset_minutes: new Date().getTimezoneOffset() * -1,
         }),
       callback: async result => {
         isAuth.value = true
@@ -27,7 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
           refresh_token: result.refresh_token,
         }
 
-        await getUserInfo()
+        await Promise.all([getUserInfo(), getRefLink(), getTaskSettings()])
       },
     })
   }
@@ -44,10 +46,20 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
+  const getRefLink = async () => {
+    await baseRequest({
+      method: () => authAPI.fetchRefLink(),
+      callback: ({ ref_link }) => {
+        refLink.value = ref_link
+      },
+    })
+  }
+
   return {
     isAuth,
     data,
     tokenData,
+    refLink,
     login,
     refresh,
   }

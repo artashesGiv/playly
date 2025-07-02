@@ -2,16 +2,16 @@
   <ui-card class="friend-card">
     <div class="friend-card__content">
       <div class="friend-card__left">
-        <nuxt-img :src="avatarUrl" class="friend-card__avatar" />
+        <nuxt-img :src="photo_url" class="friend-card__avatar" />
         <div class="friend-card__data">
-          <span class="friend-card__name">{{ name }}</span>
+          <span class="friend-card__name">{{ first_name }}</span>
           <span class="friend-card__balance description">
-            {{ $t('common.coins', balance) }}
+            {{ $t('common.coins', 0) }}
           </span>
         </div>
       </div>
       <div class="friend-card__bounty">
-        <span>+ 500</span>
+        <span>+ {{ settings.ref_crystal_amount }}</span>
         <main-mascot size="xs" />
       </div>
     </div>
@@ -19,9 +19,12 @@
 </template>
 
 <script setup lang="ts">
+import { useCoinsStore } from '@/store'
 import type { Friend } from '@/types'
 
 defineProps<Friend>()
+
+const { settings } = storeToRefs(useCoinsStore())
 </script>
 
 <style scoped lang="scss">
@@ -43,7 +46,7 @@ defineProps<Friend>()
   }
 
   &__data {
-    @include column(12px);
+    @include column;
   }
 
   &__name {

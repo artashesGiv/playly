@@ -24,11 +24,11 @@
 const { tg } = useTelegram()
 
 const onClickPlayly = () => {
-  tg?.openTelegramLink('https://t.me/omut_pamyatii')
+  tg?.openTelegramLink('https://t.me/playlygg')
 }
 
 const onClickStarpets = () => {
-  tg?.openTelegramLink('https://t.me/omut_pamyatii')
+  tg?.openTelegramLink('https://t.me/starpetsgg')
 }
 </script>
 

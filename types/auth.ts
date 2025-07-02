@@ -3,6 +3,10 @@ export namespace Auth {
     export namespace UserInfo {
       export type Response = UserInfo
     }
+
+    export namespace RefLink {
+      export type Response = { ref_link: string }
+    }
   }
   export namespace POST {
     export namespace Login {

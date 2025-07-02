@@ -1,6 +1,6 @@
 <template>
   <div class="click">
-    <main-mascot size="3xl" is-tap class="click__mascot" @click="balance++" />
+    <main-mascot size="3xl" is-tap class="click__mascot" @click="onTap" />
     <span>
       {{ $t('coins.title') }}
     </span>
@@ -8,10 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/store'
+import { useCoinsStore } from '@/store'
 
 // store
-const { balance } = storeToRefs(useUserStore())
+const { onTap } = useCoinsStore()
 </script>
 
 <style scoped lang="scss">

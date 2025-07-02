@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/i18n',
     'nuxt-lottie',
+    'nuxt-eruda',
   ],
 
   css: ['@/assets/styles/reset.css', '@/assets/styles/vars/index.css'],
@@ -88,5 +89,8 @@ export default defineNuxtConfig({
   lottie: {
     componentName: 'Lottie',
     lottieFolder: '/assets/lottie',
+  },
+  eruda: {
+    enabled: true,
   },
 })

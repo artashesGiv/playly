@@ -11,7 +11,7 @@
             :is="componentsMap[card]"
             v-for="card in availableCards"
             :key="card"
-            @click="onCompleted(card, $event)"
+            @click="onCompleted(card)"
           />
         </transition-group>
       </div>
@@ -38,6 +38,7 @@
 
 <script setup lang="ts">
 import { useUserStore } from '@/store'
+import { useShareLink } from '@/composables/useShareLink'
 
 type BountyCard =
   | 'playly-friend'
@@ -47,12 +48,15 @@ type BountyCard =
 type BountyCardStatus = Record<BountyCard, boolean>
 type BountyCardComponent = Record<BountyCard, Component>
 
-const map = reactive<BountyCardStatus>({
-  'star-pets-tg': false,
-  'playly-tg': false,
+const { tg } = useTelegram()
+const { userInfo } = storeToRefs(useUserStore())
+
+const map = computed<BountyCardStatus>(() => ({
+  'star-pets-tg': userInfo?.value?.tasks.starpets_join_channel || false,
+  'playly-tg': userInfo?.value?.tasks.playly_join_channel || false,
   'playly-friend': false,
   'roblox-friend': false,
-})
+}))
 
 const componentsMap: BountyCardComponent = {
   'playly-friend': defineAsyncComponent(
@@ -70,17 +74,34 @@ const componentsMap: BountyCardComponent = {
 }
 
 const availableCards = computed<BountyCard[]>(
-  () => Object.keys(map).filter(key => !map[key as BountyCard]) as BountyCard[],
+  () =>
+    Object.keys(map.value).filter(
+      key => !map.value[key as BountyCard],
+    ) as BountyCard[],
 )
 const completedCards = computed<BountyCard[]>(
-  () => Object.keys(map).filter(key => map[key as BountyCard]) as BountyCard[],
+  () =>
+    Object.keys(map.value).filter(
+      key => map.value[key as BountyCard],
+    ) as BountyCard[],
 )
 
-const { balance } = storeToRefs(useUserStore())
+const onCompleted = (card: BountyCard) => {
+  switch (card) {
+    case 'playly-tg': {
+      tg?.openTelegramLink('https://t.me/playlygg')
+      break
+    }
 
-const onCompleted = (card: BountyCard, sum: number) => {
-  map[card] = true
-  balance.value += sum
+    case 'star-pets-tg': {
+      tg?.openTelegramLink('https://t.me/starpetsgg')
+      break
+    }
+
+    default: {
+      useShareLink()
+    }
+  }
 }
 </script>
 

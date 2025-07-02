@@ -16,7 +16,7 @@
           v-else
           :text="buttonText"
           size="42"
-          @click="emits('click', sum)"
+          @click="emits('click')"
         />
       </transition-fade>
     </div>
@@ -32,7 +32,7 @@ export type BountyCardProps = {
 }
 
 type Emits = {
-  (emit: 'click', value: BountyCardProps['sum']): void
+  (emit: 'click'): void
 }
 
 const { t } = useI18n()
