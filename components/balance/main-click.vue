@@ -1,11 +1,6 @@
 <template>
   <div class="click">
-    <main-mascot
-      size="3xl"
-      is-tap
-      class="click__mascot"
-      @click="onCountBalance"
-    />
+    <main-mascot size="3xl" is-tap class="click__mascot" @click="balance++" />
     <span>
       {{ $t('coins.title') }}
     </span>
@@ -13,10 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import { useBalanceStore } from '@/store'
+import { useUserStore } from '@/store'
 
 // store
-const { onCountBalance } = useBalanceStore()
+const { balance } = storeToRefs(useUserStore())
 </script>
 
 <style scoped lang="scss">

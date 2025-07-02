@@ -3,7 +3,7 @@ import type { UserInfo } from '@/types'
 export const useUserStore = defineStore('user', () => {
   const userInfo = ref<Maybe<UserInfo>>(null)
 
-  const balance = computed(() => {
+  const balance = computed<UserInfo['crystal_balance']>(() => {
     if (userInfo.value) {
       return userInfo.value.crystal_balance
     }
@@ -11,7 +11,7 @@ export const useUserStore = defineStore('user', () => {
     return 0
   })
 
-  const robuxBalance = computed(() => {
+  const robuxBalance = computed<UserInfo['robux_balance']>(() => {
     if (userInfo.value) {
       return userInfo.value.robux_balance
     }

@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRobuxBalanceStore } from '@/store'
+import { useUserStore } from '@/store'
 import UserData from '@/components/user-data.vue'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 
@@ -85,7 +85,7 @@ useBackButton()
 const { t } = useI18n()
 const { user } = useTelegram()
 const router = useRouter()
-const { robuxBalance } = storeToRefs(useRobuxBalanceStore())
+const { robuxBalance } = storeToRefs(useUserStore())
 
 const dataList = computed<TableDataProps['list']>(() => [
   {

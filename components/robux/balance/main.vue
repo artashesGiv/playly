@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { useRobuxBalanceStore } from '@/store'
+import { useUserStore } from '@/store'
 
-const { robuxBalance } = storeToRefs(useRobuxBalanceStore())
+const { robuxBalance } = storeToRefs(useUserStore())
 </script>
 
 <style scoped lang="scss">

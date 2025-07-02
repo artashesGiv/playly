@@ -5,6 +5,7 @@
     :style="style"
     @click="emits('click')"
   >
+    <div v-if="isTap" class="tap-banner">Tap to earn coins!</div>
     <Lottie v-if="isTap" name="coin" autoplay loop />
     <nuxt-img v-else :src="src" />
   </motion.div>
@@ -60,6 +61,7 @@ const classes = computed(() => ['mascot', { 'is-tap': props.isTap }])
 
 <style scoped lang="scss">
 .mascot {
+  position: relative;
   user-select: none;
 
   &.is-tap {
@@ -69,6 +71,21 @@ const classes = computed(() => ['mascot', { 'is-tap': props.isTap }])
   img {
     width: 100%;
     height: 100%;
+  }
+
+  .tap-banner {
+    @include row;
+
+    position: absolute;
+    top: 7px;
+    left: -22px;
+    font: var(--font-small-bold);
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 13px;
+    background-color: var(--white);
+    color: var(--dark-1000);
+    z-index: 2;
   }
 }
 </style>

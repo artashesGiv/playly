@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { useBalanceStore } from '@/store'
+import { useUserStore } from '@/store'
 
 //type
 export type BalanceProps = {
@@ -15,5 +15,5 @@ withDefaults(defineProps<BalanceProps>(), {
 })
 
 // store
-const { balance } = storeToRefs(useBalanceStore())
+const { balance } = storeToRefs(useUserStore())
 </script>

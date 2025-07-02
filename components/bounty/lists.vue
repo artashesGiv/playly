@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { useBalanceStore } from '@/store'
+import { useUserStore } from '@/store'
 
 type BountyCard =
   | 'playly-friend'
@@ -76,11 +76,11 @@ const completedCards = computed<BountyCard[]>(
   () => Object.keys(map).filter(key => map[key as BountyCard]) as BountyCard[],
 )
 
-const { addBalance } = useBalanceStore()
+const { balance } = storeToRefs(useUserStore())
 
 const onCompleted = (card: BountyCard, sum: number) => {
   map[card] = true
-  addBalance(sum)
+  balance.value += sum
 }
 </script>
 

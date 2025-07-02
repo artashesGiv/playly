@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRobuxBalanceStore } from '@/store'
+import { useUserStore } from '@/store'
 
 //type
 export type RobuxBalanceProps = {
@@ -15,5 +15,5 @@ withDefaults(defineProps<RobuxBalanceProps>(), {
 })
 
 // store
-const { robuxBalance } = storeToRefs(useRobuxBalanceStore())
+const { robuxBalance } = storeToRefs(useUserStore())
 </script>

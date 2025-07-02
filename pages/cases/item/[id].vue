@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import type { CaseItem } from '@/types'
-import { useBalanceStore, useRouletteSore } from '@/store'
+import { useUserStore, useRouletteSore } from '@/store'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 
 definePageMeta({
@@ -57,8 +57,7 @@ const route = useRoute()
 const router = useRouter()
 useBackButton()
 const { caseItems } = storeToRefs(useRouletteSore())
-const balanceStore = useBalanceStore()
-const { balance } = storeToRefs(balanceStore)
+const { balance } = storeToRefs(useUserStore())
 
 const id = route.params.id as CaseItem['id']
 
@@ -80,7 +79,7 @@ const dataList: TableDataProps['list'] = [
 ]
 
 const onOpenMore = () => {
-  // if (balance.value >= 500) {
+  // if (balance.value >= item!.price) {
   router.back()
   // }
 }
@@ -88,7 +87,7 @@ const onOpenMore = () => {
 const onSellItem = (sum: number) => {
   navigateTo('/cases')
   setTimeout(() => {
-    balanceStore.addBalance(sum)
+    balance.value += sum
   }, 800)
 }
 </script>
