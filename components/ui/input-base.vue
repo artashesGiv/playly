@@ -8,6 +8,7 @@
         v-model="model"
         type="text"
         class="input__value"
+        :enterkeyhint="enterkeyhint"
         :placeholder="placeholder"
         @input="onInput"
       />
@@ -24,6 +25,8 @@
 </template>
 
 <script setup lang="ts">
+import { undefined } from 'zod'
+
 export type InputBaseProps = {
   modelValue: string | number
   isError?: boolean
@@ -33,6 +36,14 @@ export type InputBaseProps = {
   errorMessage?: string
   iconColor?: 'base' | 'yellow'
   prefix?: string
+  enterkeyhint?:
+    | 'enter'
+    | 'done'
+    | 'go'
+    | 'next'
+    | 'previous'
+    | 'search'
+    | 'send'
 }
 
 type InputEmits = {
@@ -40,7 +51,10 @@ type InputEmits = {
   (emit: 'update:is-error', value: InputBaseProps['isError']): void
 }
 
-const props = defineProps<InputBaseProps>()
+const props = withDefaults(defineProps<InputBaseProps>(), {
+  iconColor: 'base',
+  enterkeyhint: 'done',
+})
 const emit = defineEmits<InputEmits>()
 const model = defineModel<InputBaseProps['modelValue']>()
 

@@ -5,4 +5,5 @@ export type Friend = {
   telegram_id: number
   username: string
   photo_url: string
+  crystal_amount: number
 }

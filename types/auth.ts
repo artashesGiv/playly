@@ -1,3 +1,5 @@
+import type { Friend } from '@/types/entities'
+
 export namespace Auth {
   export namespace GET {
     export namespace UserInfo {
@@ -6,6 +8,10 @@ export namespace Auth {
 
     export namespace RefLink {
       export type Response = { ref_link: string }
+    }
+
+    export namespace Referrals {
+      export type Response = Friend[]
     }
   }
   export namespace POST {

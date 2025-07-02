@@ -47,19 +47,12 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .friends {
-  @include column;
-  @include scroll-gradient(80px);
-
-  height: calc(100% + 18px);
-  margin-top: -18px;
-  overflow: hidden;
+  @include column(18px);
+  height: 100%;
 
   &__wrapper {
     @include column(18px);
-
-    padding-top: 18px;
-    flex: 1;
-    overflow-y: auto;
+    height: 100%;
   }
 
   &__main {
@@ -79,21 +72,19 @@ onMounted(async () => {
 
   &__data {
     @include column;
-
-    flex-grow: 1;
   }
 
   &__list {
     @include column(8px);
-
-    padding-bottom: 8px;
   }
 
   &__button {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    z-index: 2;
+    //position: relative;
+    //bottom: 0;
+    //width: 100%;
+    //z-index: 2;
+    //margin-top: auto;
+    flex-shrink: 0;
   }
 }
 </style>

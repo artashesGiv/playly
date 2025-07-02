@@ -24,7 +24,7 @@ export const authAPI = {
     return await this._baseApi.get('/auth/ref_link')
   },
 
-  async fetchReferrals() {
+  async fetchReferrals(): Promise<Auth.GET.Referrals.Response> {
     return await this._baseApi.get('/auth/referrals')
   },
 }

@@ -42,8 +42,6 @@ const { gamepasses, stepsData } = storeToRefs(useRobuxBuyStore())
   height: 100%;
 
   &__list-wrapper {
-    @include scroll-gradient;
-
     height: 100%;
   }
 

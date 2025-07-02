@@ -6,7 +6,7 @@
         <div class="friend-card__data">
           <span class="friend-card__name">{{ first_name }}</span>
           <span class="friend-card__balance description">
-            {{ $t('common.coins', 0) }}
+            {{ $t('common.coins', crystal_amount) }}
           </span>
         </div>
       </div>
@@ -22,7 +22,7 @@
 import { useCoinsStore } from '@/store'
 import type { Friend } from '@/types'
 
-defineProps<Friend>()
+const props = defineProps<Friend>()
 
 const { settings } = storeToRefs(useCoinsStore())
 </script>

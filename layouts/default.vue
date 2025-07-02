@@ -1,24 +1,34 @@
 <template>
   <div class="layout">
-    <transition-fade>
-      <main-header class="layout__header" />
-    </transition-fade>
-
     <main class="layout__content">
+      <main-header class="layout__header" />
       <slot />
     </main>
 
-    <transition-fade>
-      <main-navigation class="layout__footer" />
-    </transition-fade>
+    <main-navigation class="layout__footer" />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+// const resize = () => {
+//   console.log(1)
+//   const kbHeight = window.innerHeight - visualViewport.height
+//   document.querySelector('.layout__footer').style.transform =
+//     `translateX(${kbHeight}px)`
+// }
+//
+// onMounted(async () => {
+//   window.visualViewport.addEventListener('resize', resize)
+// })
+//
+// onBeforeUnmount(() => {
+//   window.visualViewport.removeEventListener('resize', resize)
+// })
+</script>
 
 <style scoped lang="scss">
 .layout {
-  @include column(18px);
+  @include column;
 
   overflow: hidden;
   height: 100vh;
@@ -29,15 +39,19 @@
     var(--tg-content-safe-area-inset-bottom) + var(--tg-safe-area-inset-bottom)
   );
 
+  &__header {
+    flex-shrink: 0;
+  }
+
   &__content {
-    padding: 18px 16px;
-    margin-top: -18px;
-    margin-bottom: -18px;
-    flex: 1 1 0;
+    @include column(18px);
+
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 18px 16px;
     box-sizing: border-box;
     transition: var(--transition-base);
+    flex: 1 1 0;
   }
 }
 </style>

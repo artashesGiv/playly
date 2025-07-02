@@ -31,9 +31,6 @@
 .robux-buy-4 {
   @include column(18px);
 
-  max-height: calc(100vh - 363px);
-  overflow-y: auto;
-
   &__video {
     position: relative;
     height: 218px;

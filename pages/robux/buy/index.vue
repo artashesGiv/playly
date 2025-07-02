@@ -113,6 +113,7 @@ onUnmounted(() => {
     @include column(18px);
 
     flex-grow: 1;
+    overflow-y: auto;
   }
 
   &__footer {

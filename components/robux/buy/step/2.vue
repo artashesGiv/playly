@@ -21,8 +21,6 @@ const { places, stepsData } = storeToRefs(useRobuxBuyStore())
 
 <style scoped lang="scss">
 .robux-buy-2 {
-  @include scroll-gradient;
-
   height: 100%;
 
   &__list {
