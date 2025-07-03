@@ -5,15 +5,16 @@
       <ui-divider />
       <div class="robux__inputs">
         <ui-input-base
-          v-model="payValue"
-          :label="$t('robux.input.labelPay')"
-          icon="wallet"
-        />
-        <ui-input-base
           v-model="getValue"
           :label="$t('robux.input.labelReceived')"
           icon="robux"
           icon-color="yellow"
+        />
+        <ui-input-base
+          v-model="payValue"
+          :label="$t('robux.input.labelPay')"
+          icon="wallet"
+          type="number"
         />
       </div>
       <ui-divider />
@@ -21,21 +22,21 @@
         <div class="robux__buttons">
           <ui-button-base
             view="secondary"
-            text="150 R$"
+            text="700 R$"
             size="46"
-            @click="getValue = 150"
+            @click="getValue = 700"
           />
           <ui-button-base
             view="secondary"
-            text="300 R$"
+            text="1000 R$"
             size="46"
-            @click="getValue = 300"
+            @click="getValue = 1000"
           />
           <ui-button-base
             view="secondary"
-            text="500 R$"
+            text="1500 R$"
             size="46"
-            @click="getValue = 500"
+            @click="getValue = 1500"
           />
         </div>
         <ui-input-base
@@ -60,8 +61,8 @@
 <script setup lang="ts">
 const COEFFICIENT = 4
 
-const payValue = ref(0)
-const getValue = ref(0)
+const getValue = ref(1000)
+const payValue = ref(250)
 
 watch(payValue, newVal => {
   const calculated = newVal * COEFFICIENT

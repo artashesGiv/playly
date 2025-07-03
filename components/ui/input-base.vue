@@ -6,7 +6,7 @@
       </slot>
       <input
         v-model="model"
-        type="text"
+        :type="type"
         class="input__value"
         :enterkeyhint="enterkeyhint"
         :placeholder="placeholder"
@@ -25,8 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { undefined } from 'zod'
-
 export type InputBaseProps = {
   modelValue: string | number
   isError?: boolean
@@ -36,6 +34,7 @@ export type InputBaseProps = {
   errorMessage?: string
   iconColor?: 'base' | 'yellow'
   prefix?: string
+  type?: 'text' | 'number'
   enterkeyhint?:
     | 'enter'
     | 'done'
@@ -54,6 +53,7 @@ type InputEmits = {
 const props = withDefaults(defineProps<InputBaseProps>(), {
   iconColor: 'base',
   enterkeyhint: 'done',
+  type: 'text',
 })
 const emit = defineEmits<InputEmits>()
 const model = defineModel<InputBaseProps['modelValue']>()

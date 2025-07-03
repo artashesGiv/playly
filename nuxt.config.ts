@@ -91,6 +91,6 @@ export default defineNuxtConfig({
     lottieFolder: '/assets/lottie',
   },
   eruda: {
-    enabled: false,
+    enabled: true,
   },
 })
