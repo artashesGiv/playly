@@ -1,21 +1,21 @@
-import type { TagProps } from '@/components/ui/tag.vue'
-
 export type Case = {
   id: string
+  image_url: string
   name: string
-  image: string
   price: number
-  tag: TagProps
 }
 
-export type CaseItemAbilities = 'mega-neon' | 'fly' | 'neon' | 'ride'
+export type CaseItemAbilities = 'mega-neon' | 'flyable' | 'neon' | 'rideable'
 
 export type CaseItem = {
+  crystal_price: number
   id: string
+  image_url: string
+  item_type: string
   name: string
-  image: string
   probability: number
-  price: number
-  tag: TagProps
-  abilities: CaseItemAbilities[]
+  rarity: string
+  flyable: Maybe<boolean>
+  pumping: Maybe<boolean>
+  rideable: Maybe<boolean>
 }

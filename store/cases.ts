@@ -1,8 +1,7 @@
-import type { CaseCard } from '@/components/cases/card.vue'
-import type { CaseItem } from '@/types'
+import type { Case, CaseItem } from '@/types'
 
 export const useCasesStore = defineStore('cases', () => {
-  const cases = ref<CaseCard[]>([])
+  const cases = ref<Case[]>([])
   const caseItems = ref<CaseItem[]>([])
   const receivedItem = ref<Maybe<CaseItem>>(null)
 
@@ -10,7 +9,7 @@ export const useCasesStore = defineStore('cases', () => {
     await baseRequest({
       method: () => caseAPI.fetchCases(),
       callback: result => {
-        cases.value = result
+        cases.value = result.map(item => ({ ...item, tag: {} }))
       },
     })
   }
@@ -19,7 +18,7 @@ export const useCasesStore = defineStore('cases', () => {
     await baseRequest({
       method: () => caseAPI.fetchCaseItems({ case_id }),
       callback: result => {
-        cases.value = result
+        caseItems.value = result
       },
     })
   }

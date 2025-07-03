@@ -12,8 +12,8 @@ export type CaseItemAbilityProps = {
 const props = defineProps<CaseItemAbilityProps>()
 
 const textMap: Record<CaseItemAbilities, string> = {
-  'fly': 'F',
-  'ride': 'R',
+  'flyable': 'F',
+  'rideable': 'R',
   'neon': 'N',
   'mega-neon': 'M',
 }
@@ -37,10 +37,10 @@ const classes = computed(() => ['ability', `ability--type--${props.type}`])
   padding-top: 1px;
 
   &--type {
-    &--fly {
+    &--flyable {
       background-color: var(--primary-500);
     }
-    &--ride {
+    &--rideable {
       background-color: var(--pink-500);
     }
     &--neon {

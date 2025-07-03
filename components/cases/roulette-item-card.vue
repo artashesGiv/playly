@@ -1,15 +1,17 @@
 <template>
   <div class="item-case" :class="{ 'is-active': isActive }">
     <div class="item-case__tags">
-      <ui-tag v-bind="tag" />
-      <ui-tag :text="`${probability}%`" view="dark" />
+      <ui-tag :text="rarity" view="pink" />
+      <ui-tag :text="`${probability.toFixed(2)}%`" view="dark" />
     </div>
-    <nuxt-img :src="image" class="item-case__image" />
+    <nuxt-img :src="image_url" class="item-case__image" />
     <h5 class="item-case__title">{{ name }}</h5>
-    <span class="item-case__description">Egg</span>
-    <div class="item-case__abilities">
-      <cases-item-ability v-for="item in abilities" :key="item" :type="item" />
-    </div>
+    <span class="item-case__description">{{ item_type }}</span>
+    <cases-item-abilities
+      :flyable="flyable"
+      :rideable="rideable"
+      class="item-case__abilities"
+    />
   </div>
 </template>
 
@@ -17,12 +19,16 @@
 import type { CaseItem } from '@/types'
 
 export type CaseRouletteItemCardProps = {
+  crystal_price: CaseItem['crystal_price']
   id: CaseItem['id']
+  image_url: CaseItem['image_url']
+  item_type: CaseItem['item_type']
   name: CaseItem['name']
-  image: CaseItem['image']
   probability: CaseItem['probability']
-  tag: CaseItem['tag']
-  abilities: CaseItem['abilities']
+  rarity: CaseItem['rarity']
+  flyable: CaseItem['flyable']
+  pumping: CaseItem['pumping']
+  rideable: CaseItem['rideable']
   isActive?: boolean
 }
 
@@ -65,8 +71,6 @@ defineProps<CaseRouletteItemCardProps>()
   }
 
   &__abilities {
-    @include row(6px);
-
     margin-top: 12px;
   }
 

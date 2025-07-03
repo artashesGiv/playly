@@ -8,6 +8,7 @@
         v-for="item in cases"
         :key="item.id"
         v-bind="item"
+        :image="item.image_url || '/images/template/template.png'"
         @click="navigateTo(`/cases/${item.id}`)"
       />
     </div>

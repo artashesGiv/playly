@@ -3,30 +3,30 @@
     <ui-icon-base
       name="roulette-arrow-left"
       class="roulette__icon roulette__icon--left"
-      :class="{ 'is-active': foundId }"
+      :class="{ 'is-active': receivedItem }"
     />
     <ui-icon-base
       name="roulette-arrow-right"
       class="roulette__icon roulette__icon--right"
-      :class="{ 'is-active': foundId }"
+      :class="{ 'is-active': receivedItem }"
     />
 
-    <div ref="wrapperRef" class="roulette__wrapper-list">
+    <div v-if="isMounted" ref="wrapperRef" class="roulette__wrapper-list">
       <cases-roulette-item-card
         v-for="(item, index) in displayedItems"
         :key="`${item.id}-${index}`"
         class="roulette__item"
         v-bind="item"
-        :is-active="foundId === item.id"
+        :is-active="receivedItem?.id === item.id"
         :data-origin-id="item.id"
       />
     </div>
 
     <ui-button-base
-      :text="$t('cases.roulette.button', currentCase!.price)"
+      :text="$t('cases.roulette.button', { n: formattedPrice })"
       :loading="isSpin"
       size="52"
-      :is-disabled="currentCase!.price < balance"
+      :is-disabled="currentCase?.price > balance"
       icon-right="coin-1"
       class="roulette__button"
       @click="startAutoScroll"
@@ -43,19 +43,31 @@ definePageMeta({ layout: 'without-padding' })
 const route = useRoute()
 const id = route.params.id as Case['id']
 
-const { getCaseItems } = useCasesStore()
-const { caseItems, cases } = storeToRefs(useCasesStore())
+const { getCaseItems, getCases, openCase } = useCasesStore()
+const { caseItems, cases, receivedItem } = storeToRefs(useCasesStore())
 const { balance } = storeToRefs(useUserStore())
+const isMounted = ref(false)
 
-const currentCase = computed(() => cases.value.find(item => item.id === id))
+const currentCase = computed<Case>(
+  () => cases.value.find(item => item.id === id)!,
+)
+
+const formattedPrice = computed(() =>
+  formatePrice(currentCase?.value?.price || 0),
+)
 
 onMounted(async () => {
+  if (!cases.value.length) {
+    await getCases()
+  }
+
   await getCaseItems(id)
+
+  isMounted.value = true
 })
 
 /* ─────────────────────────── исходные данные ──────────────────────────── */
 const isSpin = ref(false)
-const foundId = ref<Maybe<CaseItem['id']>>(null)
 
 function centerNearestItem(el: HTMLElement, durationMs = 500) {
   const containerRect = el.getBoundingClientRect()
@@ -82,7 +94,7 @@ function centerNearestItem(el: HTMLElement, durationMs = 500) {
 
   const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
 
-  const smoothStep = (now: number) => {
+  const smoothStep = async (now: number) => {
     const elapsed = now - startTime
     const progress = Math.min(elapsed / durationMs, 1) // 0–1
     const eased = easeOutCubic(progress)
@@ -93,6 +105,8 @@ function centerNearestItem(el: HTMLElement, durationMs = 500) {
     if (progress < 1) {
       requestAnimationFrame(smoothStep)
     } else {
+      await openCase(id)
+
       setTimeout(() => {
         navigateTo(`/cases/item/${id}`)
       }, 500)
@@ -117,7 +131,6 @@ function startAutoScroll(direction: Direction = 'down', peakSpeedPxS = 800) {
     rafId = null
   }
 
-  foundId.value = null
   isSpin.value = true
 
   const DURATION = 7000
@@ -150,7 +163,7 @@ function startAutoScroll(direction: Direction = 'down', peakSpeedPxS = 800) {
 /* ─────────────────────────── бесконечный список ───────────────────────── */
 const displayedItems = computed<CaseItem[]>(() => {
   const arr = caseItems.value
-  return [...arr, ...arr, ...arr]
+  return [...arr /*, ...arr, ...arr*/]
 })
 
 /* ────────────────────────── логика прокрутки ──────────────────────────── */

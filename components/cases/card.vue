@@ -1,9 +1,11 @@
 <template>
   <div class="case-card">
-    <ui-tag v-bind="tag" class="case-card__tag" />
+    <!--    <ui-tag v-bind="tag" class="case-card__tag" />-->
     <nuxt-img :src="image" class="case-card__image" />
     <h5>{{ name }}</h5>
-    <div class="case-card__price">{{ price }} <main-mascot size="xs" /></div>
+    <div class="case-card__price">
+      {{ formatePrice(price) }} <main-mascot size="xs" />
+    </div>
   </div>
 </template>
 
@@ -13,9 +15,8 @@ import type { Case } from '@/types'
 export type CaseCard = {
   id: Case['id']
   name: Case['name']
-  image: Case['image']
+  image: Case['image_url']
   price: Case['price']
-  tag: Case['tag']
 }
 
 defineProps<CaseCard>()

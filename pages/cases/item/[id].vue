@@ -4,20 +4,19 @@
       <div class="case-item__card">
         <div
           class="background"
-          :style="{ background: `var(--${receivedItem?.tag.view}-gradient)` }"
+          :style="{ background: `var(--pink-gradient)` }"
         />
         <item-main-data
-          :image="receivedItem!.image"
-          :title="receivedItem!.name"
+          :image="receivedItem?.image_url || ''"
+          :title="receivedItem?.name || ''"
           description="Egg"
         />
         <ui-table-data class="case-item__table" :list="dataList">
           <template #row-1="{ value }">
             <div class="case-item__abilities">
-              <cases-item-ability
-                v-for="ability in value"
-                :key="ability"
-                :type="ability"
+              <cases-item-abilities
+                :flyable="value.flyable"
+                :rideable="value.rideable"
               />
             </div>
           </template>
@@ -30,16 +29,20 @@
     <div class="case-item__buttons">
       <ui-button-base
         view="secondary"
-        :text="$t('cases.roulette.openMore', currentCase?.price)"
+        :text="$t('cases.roulette.openMore', { n: formattedPriceCase })"
         icon-right="coin-1"
         size="52"
         @click="onOpenMore"
       />
       <ui-button-base
-        :text="$t('cases.roulette.sellItem', receivedItem!.price)"
+        :text="
+          $t('cases.roulette.sellItem', {
+            n: formattedPriceItem,
+          })
+        "
         icon-right="coin-1"
         size="52"
-        @click="onSellItem(receivedItem!.price)"
+        @click="onSellItem(receivedItem!.crystal_price)"
       />
     </div>
   </div>
@@ -49,6 +52,7 @@
 import { useCasesStore } from '@/store'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 import type { Case } from '@/types'
+import type { ItemAbilitiesProps } from '@/components/cases/item-abilities.vue'
 
 definePageMeta({
   layout: 'empty',
@@ -63,14 +67,25 @@ const id = route.params.id as Case['id']
 
 const currentCase = computed(() => cases.value.find(item => item.id === id))
 
+const formattedPriceCase = computed(() =>
+  formatePrice(currentCase?.value?.price || 0),
+)
+
+const formattedPriceItem = computed(() =>
+  formatePrice(receivedItem?.value?.crystal_price || 0),
+)
+
 const dataList: TableDataProps['list'] = [
   {
     title: 'Properties',
-    value: receivedItem?.value?.abilities,
+    value: {
+      flyable: receivedItem.value?.flyable,
+      rideable: receivedItem.value?.rideable,
+    } as ItemAbilitiesProps,
   },
   {
     title: 'Rarity',
-    value: receivedItem?.value?.tag.text,
+    value: receivedItem?.value?.rarity,
   },
   {
     title: 'Age',
@@ -82,10 +97,16 @@ const onOpenMore = () => {
   router.back()
 }
 
-const onSellItem = (sum: number) => {
+const onSellItem = (price: number) => {
   // TODO sell item
   navigateTo('/cases')
 }
+
+onMounted(() => {
+  if (!receivedItem.value) {
+    navigateTo('/cases')
+  }
+})
 </script>
 
 <style scoped lang="scss">

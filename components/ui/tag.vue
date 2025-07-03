@@ -12,7 +12,7 @@ export type TagProps = {
 }
 
 const props = withDefaults(defineProps<TagProps>(), {
-  view: 'primary',
+  view: 'blue',
   size: 'm',
 })
 
