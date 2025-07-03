@@ -10,8 +10,10 @@
 
 <style scoped lang="scss">
 .layout {
+  @include column;
+
+  overflow: hidden;
   height: 100vh;
-  position: relative;
   padding-top: calc(
     var(--tg-content-safe-area-inset-top) + var(--tg-safe-area-inset-top)
   );
@@ -20,11 +22,14 @@
   );
 
   &__content {
-    transition: var(--transition-base);
-    padding: 32px 16px 18px;
-    height: 100%;
+    @include column;
+
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 18px 16px;
+    box-sizing: border-box;
+    transition: var(--transition-base);
+    flex: 1 1 0;
   }
 }
 </style>

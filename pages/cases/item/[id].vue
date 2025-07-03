@@ -96,7 +96,7 @@ const onSellItem = (sum: number) => {
 .case-item {
   @include column(18px);
 
-  height: 100%;
+  flex-grow: 1;
 
   &__content {
     @include column(14px);
