@@ -12,7 +12,7 @@
         :is-disabled="isButtonDisableMap[step]"
         size="52"
         :text="buttonTextMap[step]"
-        @click="onClickNext"
+        @click="nextStep"
       />
       <ui-button-base
         v-if="step !== 5"
@@ -42,7 +42,7 @@ const router = useRouter()
 const { tg } = useTelegram()
 const { t } = useI18n()
 const { step, stepsData, gamepasses } = storeToRefs(useRobuxBuyStore())
-const { resetStepsData } = useRobuxBuyStore()
+const { resetStepsData, nextStep, getCurrentWithdraw } = useRobuxBuyStore()
 
 const isOpenModal = ref(false)
 
@@ -57,7 +57,7 @@ const stepsMap: Record<number, Component> = {
 const isButtonDisableMap = computed<Record<string, boolean>>(() => ({
   1: !stepsData.value.user,
   2: !stepsData.value.place,
-  3: gamepasses.value.length ? !stepsData.value.gamepass : false,
+  3: !!gamepasses.value.length && !stepsData.value.gamepass,
   4: false,
   5: false,
 }))
@@ -75,25 +75,21 @@ const buttonTextMap = computed<Record<number, string>>(() => ({
 function handleBack() {
   if (step.value <= 1) {
     router.back()
+  } else if (step.value === 5) {
+    navigateTo('/robux')
   } else {
     step.value--
   }
 }
 
-const onClickNext = () => {
-  if (step.value !== 5) {
-    step.value++
-  } else if (step.value === 5) {
-    navigateTo('/robux')
-  }
-}
-
-onMounted(() => {
+onMounted(async () => {
   tg?.BackButton.show?.()
 
   tg?.BackButton.offClick?.(handleBack)
 
   tg?.BackButton.onClick(handleBack)
+
+  await getCurrentWithdraw()
 })
 
 onUnmounted(() => {

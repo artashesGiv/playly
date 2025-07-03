@@ -49,7 +49,8 @@
     <div class="robux__footer">
       <robux-alert-card />
       <ui-button-base
-        :text="$t('common.buy', { sum: '345 R$' })"
+        :text="$t('common.buy', { sum: `${getValue} R$` })"
+        :is-disabled="!+getValue"
         size="52"
         icon-right="right-1"
         @click="navigateTo('/robux/buy')"
@@ -59,24 +60,9 @@
 </template>
 
 <script setup lang="ts">
-const COEFFICIENT = 4
+import { useRobuxBuyStore } from '@/store'
 
-const getValue = ref(1000)
-const payValue = ref(250)
-
-watch(payValue, newVal => {
-  const calculated = newVal * COEFFICIENT
-  if (getValue.value !== calculated) {
-    getValue.value = calculated
-  }
-})
-
-watch(getValue, newVal => {
-  const calculated = newVal / COEFFICIENT
-  if (payValue.value !== calculated) {
-    payValue.value = calculated
-  }
-})
+const { getValue, payValue } = storeToRefs(useRobuxBuyStore())
 </script>
 <style scoped lang="scss">
 .robux {

@@ -1,12 +1,9 @@
 <template>
   <div class="robux-buy-5">
     <ui-card class="robux-buy-5__card">
-      <nuxt-img
-        src="/images/template/user-avatar.png"
-        class="robux-buy-5__avatar"
-      />
+      <nuxt-img :src="stepsData.user?.avatar_url" class="robux-buy-5__avatar" />
       <div class="robux-buy-5__sum">
-        <span>+345</span>
+        <span>+{{ getValue }}</span>
         <ui-icon-base name="robux" class="robux-buy-5__icon-robux" />
       </div>
       <span>{{ $t('robux.buy.step-5.cardText') }}</span>
@@ -29,7 +26,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRobuxBuyStore } from '@/store'
+
+const { getValue, stepsData } = storeToRefs(useRobuxBuyStore())
+</script>
 
 <style scoped lang="scss">
 .robux-buy-5 {

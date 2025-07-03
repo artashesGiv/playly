@@ -3,11 +3,11 @@
     <div class="robux-buy-2__list">
       <robux-buy-item-card
         v-for="place in places"
-        :key="place.id"
-        :text="place.text"
-        :src="place.src"
-        :is-active="place.id === stepsData.place"
-        @click="stepsData.place = place.id"
+        :key="place.place_id"
+        :text="place.name"
+        :src="place.image_url"
+        :is-active="place.place_id === stepsData.place?.place_id"
+        @click="stepsData.place = place"
       />
     </div>
   </div>

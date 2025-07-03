@@ -20,6 +20,7 @@ import { useCasesStore } from '@/store'
 
 const currentTab = ref(1)
 
+const { getCases } = useCasesStore()
 const { cases } = storeToRefs(useCasesStore())
 
 const tabs: TabsProps['list'] = [
@@ -48,6 +49,10 @@ const tabs: TabsProps['list'] = [
     text: 'Pets',
   },
 ]
+
+onMounted(async () => {
+  await getCases()
+})
 </script>
 
 <style scoped lang="scss">

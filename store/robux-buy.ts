@@ -1,7 +1,15 @@
+import type {
+  Gamepass,
+  RobloxPlace,
+  RobloxUser,
+  RobuxBuySteps,
+  WithdrawId,
+} from '@/types'
+
 type StepsData = {
-  user: Maybe<number>
-  place: Maybe<number>
-  gamepass: Maybe<number>
+  user: Maybe<RobloxUser>
+  place: Maybe<RobloxPlace>
+  gamepass: Maybe<Gamepass>
 }
 
 const defaultStepsData = () => ({
@@ -10,72 +18,196 @@ const defaultStepsData = () => ({
   gamepass: null,
 })
 
+const COEFFICIENT = 4
+
 export const useRobuxBuyStore = defineStore('robux-buy', () => {
   const searchName = ref('')
-  const step = ref(1)
+  const step = ref<RobuxBuySteps>(1)
   const stepsData = reactive<StepsData>(defaultStepsData())
+  const users = ref<RobloxUser[]>([])
+  const places = ref<RobloxPlace[]>([])
+  const gamepasses = ref<Gamepass[]>([])
+  const withdrawId = ref<WithdrawId>('')
+
+  let timeout: Timeout
+
+  const getValue = ref(1000)
+  const payValue = ref(250)
 
   const resetStepsData = () => {
     step.value = 1
     searchName.value = ''
+    users.value = []
+    places.value = []
+    gamepasses.value = []
+
     Object.assign(stepsData, defaultStepsData())
   }
 
-  const users = computed(() => {
-    if (!searchName.value) return []
+  // STEP 1
+  const getUsers = () => {
+    clearTimeout(timeout)
 
-    return Array.from({ length: 16 }, (_, index) => ({
-      id: index + 1,
-      name: `${searchName.value}-${index + 1}`,
-      src: '/images/template/user-avatar.png',
-    }))
+    if (searchName.value.length < 3) return
+
+    timeout = setTimeout(async () => {
+      await baseRequest({
+        method: () => robuxAPI.fetchUserInfo(searchName.value.trim()),
+        callback: result => {
+          stepsData.user = null
+          users.value = result
+        },
+      })
+    }, 500)
+  }
+
+  const setCurrentUser = async (user: RobloxUser) => {
+    await baseRequest({
+      method: () =>
+        robuxAPI.setUserInfo({
+          username: user.name,
+          roblox_id: user.roblox_id,
+        }),
+      callback: result => {
+        withdrawId.value = result.withdraw_id
+      },
+    })
+  }
+
+  // STEP 2
+  const getPlaces = async (user_id: RobloxUser['roblox_id']) => {
+    await baseRequest({
+      method: () => robuxAPI.fetchRobloxPlaces({ user_id }),
+      callback: result => {
+        places.value = result
+      },
+    })
+  }
+
+  const setCurrentPlace = async () => {
+    await baseRequest({
+      method: () =>
+        robuxAPI.setRobloxPlace({
+          place_id: stepsData.place!.place_id,
+          roblox_user_id: stepsData.user!.roblox_id,
+          universe_id: stepsData.place!.universe_id,
+          withdraw_id: withdrawId.value,
+        }),
+    })
+  }
+  // STEP 3
+  const getGamepasses = async (universe_id: RobloxPlace['universe_id']) => {
+    await baseRequest({
+      method: () =>
+        robuxAPI.fetchGamepasses({ robux_amount: getValue.value, universe_id }),
+      callback: result => {
+        gamepasses.value = result
+      },
+    })
+  }
+
+  const setCurrentGamepass = async (gamepass: Gamepass) => {
+    await baseRequest({
+      method: () => robuxAPI.setGamepass(gamepass),
+    })
+  }
+
+  // STEP 4
+
+  const setWithdraw = async () => {
+    await baseRequest({
+      method: () => robuxAPI.setWithdraw({ withdraw_id: withdrawId.value }),
+    })
+  }
+
+  // STEP 5
+
+  const nextStep = async () => {
+    switch (step.value) {
+      case 1: {
+        if (stepsData.user) {
+          try {
+            await setCurrentUser(stepsData.user)
+            await getPlaces(stepsData.user.roblox_id)
+            step.value += 1
+          } catch (e) {
+            console.error(e)
+          }
+        }
+
+        break
+      }
+      case 2: {
+        if (stepsData.place) {
+          try {
+            await setCurrentPlace()
+            await getGamepasses(stepsData.place.universe_id)
+            step.value += 1
+          } catch (e) {
+            console.error(e)
+          }
+        }
+
+        break
+      }
+      case 3: {
+        if (stepsData.gamepass) {
+          try {
+            await setCurrentGamepass(stepsData.gamepass)
+            step.value += 1
+          } catch (e) {
+            console.error(e)
+          }
+        } else {
+          const universe_id = stepsData.place?.universe_id
+          if (universe_id) {
+            await getGamepasses(universe_id)
+          }
+        }
+        break
+      }
+      case 4: {
+        try {
+          await setWithdraw()
+          step.value += 1
+        } catch (e) {
+          console.error(e)
+        }
+        break
+      }
+      case 5: {
+        navigateTo('/robux')
+        break
+      }
+    }
+  }
+
+  const getCurrentWithdraw = async () => {
+    await baseRequest({
+      method: () => robuxAPI.fetchCurrentWithdraw(),
+      callback: result => {
+        console.log(result)
+      },
+    })
+  }
+
+  watch(payValue, newVal => {
+    const calculated = newVal * COEFFICIENT
+    if (getValue.value !== calculated) {
+      getValue.value = calculated
+    }
   })
 
-  const places = ref([
-    {
-      id: 1,
-      text: `item-1`,
-      src: '/images/template/user-avatar.png',
-    },
-    {
-      id: 2,
-      text: `item-2`,
-      src: '/images/template/user-avatar.png',
-    },
-    {
-      id: 3,
-      text: `item-3`,
-      src: '/images/template/user-avatar.png',
-    },
-    {
-      id: 4,
-      text: `item-4`,
-      src: '/images/template/user-avatar.png',
-    },
-  ])
+  watch(getValue, newVal => {
+    const calculated = newVal / COEFFICIENT
+    if (payValue.value !== calculated) {
+      payValue.value = calculated
+    }
+  })
 
-  const gamepasses = ref<{ id: number; text: string; src: string }[]>([
-    {
-      id: 1,
-      text: `item-1`,
-      src: '/images/template/user-avatar.png',
-    },
-    {
-      id: 2,
-      text: `item-2`,
-      src: '/images/template/user-avatar.png',
-    },
-    {
-      id: 3,
-      text: `item-3`,
-      src: '/images/template/user-avatar.png',
-    },
-    {
-      id: 4,
-      text: `item-4`,
-      src: '/images/template/user-avatar.png',
-    },
-  ])
+  watch(searchName, () => {
+    getUsers()
+  })
 
   return {
     searchName,
@@ -84,6 +216,12 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     places,
     users,
     gamepasses,
+    getValue,
+    payValue,
     resetStepsData,
+    nextStep,
+    getCurrentWithdraw,
+    getPlaces,
+    getGamepasses,
   }
 })

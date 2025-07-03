@@ -23,9 +23,10 @@
     </div>
 
     <ui-button-base
-      :text="$t('cases.roulette.button', 500)"
+      :text="$t('cases.roulette.button', currentCase!.price)"
       :loading="isSpin"
       size="52"
+      :is-disabled="currentCase!.price < balance"
       icon-right="coin-1"
       class="roulette__button"
       @click="startAutoScroll"
@@ -35,14 +36,24 @@
 
 <script setup lang="ts">
 import type { Case, CaseItem } from '@/types'
-import { useRouletteSore } from '@/store'
+import { useCasesStore, useUserStore } from '@/store'
 
 definePageMeta({ layout: 'without-padding' })
 
-/* ─────────────────────────── исходные данные ──────────────────────────── */
 const route = useRoute()
 const id = route.params.id as Case['id']
-const { caseItems } = storeToRefs(useRouletteSore())
+
+const { getCaseItems } = useCasesStore()
+const { caseItems, cases } = storeToRefs(useCasesStore())
+const { balance } = storeToRefs(useUserStore())
+
+const currentCase = computed(() => cases.value.find(item => item.id === id))
+
+onMounted(async () => {
+  await getCaseItems(id)
+})
+
+/* ─────────────────────────── исходные данные ──────────────────────────── */
 const isSpin = ref(false)
 const foundId = ref<Maybe<CaseItem['id']>>(null)
 
@@ -82,9 +93,6 @@ function centerNearestItem(el: HTMLElement, durationMs = 500) {
     if (progress < 1) {
       requestAnimationFrame(smoothStep)
     } else {
-      const id = Number(nearest.dataset.originId)
-      foundId.value = id.toString()
-
       setTimeout(() => {
         navigateTo(`/cases/item/${id}`)
       }, 500)

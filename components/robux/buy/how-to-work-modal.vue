@@ -21,7 +21,7 @@
           {{ $t('robux.buy.modal.withdrawalCard') }}
         </span>
         <div class="how-to-work__price-value">
-          540
+          {{ getValue }}
           <ui-icon-base name="robux" class="how-to-work__icon-robux" />
         </div>
       </ui-card>
@@ -45,7 +45,7 @@ defineProps<HowToWorkModalProps>()
 const emits = defineEmits<Emits>()
 
 const { t } = useI18n()
-const { step } = storeToRefs(useRobuxBuyStore())
+const { getValue, step } = storeToRefs(useRobuxBuyStore())
 
 const stepsData: Omit<RobuxBuyStepCardProps, 'status'>[] = [
   {

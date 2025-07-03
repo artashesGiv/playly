@@ -14,9 +14,11 @@
 </template>
 
 <script setup lang="ts">
+import type { RobloxPlace } from '@/types'
+
 export type RobloxUser = {
-  text: string
-  src: string
+  text: RobloxPlace['name']
+  src: RobloxPlace['image_url']
   isActive?: boolean
 }
 

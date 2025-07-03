@@ -4,11 +4,11 @@
       <div class="case-item__card">
         <div
           class="background"
-          :style="{ background: `var(--${item?.tag.view}-gradient)` }"
+          :style="{ background: `var(--${receivedItem?.tag.view}-gradient)` }"
         />
         <item-main-data
-          :image="item!.image"
-          :title="item!.name"
+          :image="receivedItem!.image"
+          :title="receivedItem!.name"
           description="Egg"
         />
         <ui-table-data class="case-item__table" :list="dataList">
@@ -30,47 +30,47 @@
     <div class="case-item__buttons">
       <ui-button-base
         view="secondary"
-        :text="$t('cases.roulette.openMore', 500)"
+        :text="$t('cases.roulette.openMore', currentCase?.price)"
         icon-right="coin-1"
         size="52"
         @click="onOpenMore"
       />
       <ui-button-base
-        :text="$t('cases.roulette.sellItem', item!.price)"
+        :text="$t('cases.roulette.sellItem', receivedItem!.price)"
         icon-right="coin-1"
         size="52"
-        @click="onSellItem(item!.price)"
+        @click="onSellItem(receivedItem!.price)"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { CaseItem } from '@/types'
-import { useUserStore, useRouletteSore } from '@/store'
+import { useCasesStore } from '@/store'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
+import type { Case } from '@/types'
 
 definePageMeta({
   layout: 'empty',
 })
+useBackButton()
+
 const route = useRoute()
 const router = useRouter()
-useBackButton()
-const { caseItems } = storeToRefs(useRouletteSore())
-const { balance } = storeToRefs(useUserStore())
+const { receivedItem, cases } = storeToRefs(useCasesStore())
 
-const id = route.params.id as CaseItem['id']
+const id = route.params.id as Case['id']
 
-const item = computed(() => caseItems.value.find(item => item.id === id))
+const currentCase = computed(() => cases.value.find(item => item.id === id))
 
 const dataList: TableDataProps['list'] = [
   {
     title: 'Properties',
-    value: item?.value?.abilities,
+    value: receivedItem?.value?.abilities,
   },
   {
     title: 'Rarity',
-    value: item?.value?.tag.text,
+    value: receivedItem?.value?.tag.text,
   },
   {
     title: 'Age',
@@ -79,16 +79,12 @@ const dataList: TableDataProps['list'] = [
 ]
 
 const onOpenMore = () => {
-  // if (balance.value >= item!.price) {
   router.back()
-  // }
 }
 
 const onSellItem = (sum: number) => {
+  // TODO sell item
   navigateTo('/cases')
-  setTimeout(() => {
-    balance.value += sum
-  }, 800)
 }
 </script>
 

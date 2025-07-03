@@ -1,90 +1,44 @@
 import type { CaseCard } from '@/components/cases/card.vue'
+import type { CaseItem } from '@/types'
 
 export const useCasesStore = defineStore('cases', () => {
-  const cases = ref<CaseCard[]>([
-    {
-      id: '1',
-      name: 'Water Case-1',
-      price: 500,
-      image: '/images/cases/main.png',
-      tag: {
-        text: 'Hot',
-        view: 'pink',
+  const cases = ref<CaseCard[]>([])
+  const caseItems = ref<CaseItem[]>([])
+  const receivedItem = ref<Maybe<CaseItem>>(null)
+
+  const getCases = async () => {
+    await baseRequest({
+      method: () => caseAPI.fetchCases(),
+      callback: result => {
+        cases.value = result
       },
-    },
-    {
-      id: '2',
-      name: 'Water Case-2',
-      price: 500,
-      image: '/images/cases/main.png',
-      tag: {
-        text: 'Hot',
-        view: 'pink',
+    })
+  }
+
+  const getCaseItems = async (case_id: string) => {
+    await baseRequest({
+      method: () => caseAPI.fetchCaseItems({ case_id }),
+      callback: result => {
+        cases.value = result
       },
-    },
-    {
-      id: '3',
-      name: 'Water Case-3',
-      price: 500,
-      image: '/images/cases/main.png',
-      tag: {
-        text: 'Hot',
-        view: 'pink',
+    })
+  }
+
+  const openCase = async (case_id: string) => {
+    await baseRequest({
+      method: () => caseAPI.openCase({ case_id }),
+      callback: result => {
+        receivedItem.value = result
       },
-    },
-    {
-      id: '4',
-      name: 'Water Case-4',
-      price: 500,
-      image: '/images/cases/main.png',
-      tag: {
-        text: 'Hot',
-        view: 'pink',
-      },
-    },
-    {
-      id: '5',
-      name: 'Water Case-5',
-      price: 500,
-      image: '/images/cases/main.png',
-      tag: {
-        text: 'Hot',
-        view: 'pink',
-      },
-    },
-    {
-      id: '6',
-      name: 'Water Case-6',
-      price: 500,
-      image: '/images/cases/main.png',
-      tag: {
-        text: 'Hot',
-        view: 'pink',
-      },
-    },
-    {
-      id: '7',
-      name: 'Water Case-5',
-      price: 500,
-      image: '/images/cases/main.png',
-      tag: {
-        text: 'Hot',
-        view: 'pink',
-      },
-    },
-    {
-      id: '8',
-      name: 'Water Case-6',
-      price: 500,
-      image: '/images/cases/main.png',
-      tag: {
-        text: 'Hot',
-        view: 'pink',
-      },
-    },
-  ])
+    })
+  }
 
   return {
     cases,
+    caseItems,
+    receivedItem,
+    openCase,
+    getCases,
+    getCaseItems,
   }
 })

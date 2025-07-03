@@ -9,6 +9,7 @@
       icon="foreign"
       size="52"
       :text="$t('robux.buy.step-4.setGamepass.button')"
+      @click="openLink()"
     />
     <span>
       {{ $t('robux.buy.step-4.setGamepass.description') }}
@@ -18,14 +19,23 @@
         {{ $t('robux.buy.step-4.setGamepass.priceDescription') }}
       </span>
       <div class="robux-buy-4__price-value">
-        540
+        {{ getValue }}
         <ui-icon-base name="robux" class="robux-buy-4__icon-robux" />
       </div>
     </ui-card>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRobuxBuyStore } from '@/store'
+
+const { getValue } = storeToRefs(useRobuxBuyStore())
+const { tg } = useTelegram()
+
+const openLink = () => {
+  tg?.openLink('https://create.roblox.com/dashboard/creations')
+}
+</script>
 
 <style scoped lang="scss">
 .robux-buy-4 {

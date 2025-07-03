@@ -2,16 +2,24 @@
   <ui-card class="robux-alert">
     <span>{{ $t('robux.alert') }}</span>
     <div class="robux-alert__right">
-      <div class="robux-alert__prev-price">176</div>
+      <div class="robux-alert__prev-price">
+        {{ (getValue / 1.96).toFixed(0) }}
+      </div>
       <div class="robux-alert__price">
-        345
+        {{ getValue }}
         <ui-icon-base name="robux" class="robux-alert__icon" />
       </div>
     </div>
   </ui-card>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRobuxBuyStore } from '@/store'
+
+const COEFICENT = 1.96
+
+const { getValue } = storeToRefs(useRobuxBuyStore())
+</script>
 
 <style scoped lang="scss">
 .robux-alert {

@@ -11,11 +11,11 @@
         <div class="robux-buy-1__users">
           <robux-buy-item-card
             v-for="user in users"
-            :key="user.id"
+            :key="user.roblox_id"
             :text="user.name"
-            :src="user.src"
-            :is-active="user.id === stepsData.user"
-            @click="stepsData.user = user.id"
+            :src="user.avatar_url"
+            :is-active="user.roblox_id === stepsData.user?.roblox_id"
+            @click="stepsData.user = user"
           />
         </div>
       </div>
@@ -39,7 +39,7 @@ const { users, stepsData, searchName } = storeToRefs(useRobuxBuyStore())
   }
 
   &__list-wrapper {
-    @include column(16px);
+    @include column;
 
     height: 100%;
   }
