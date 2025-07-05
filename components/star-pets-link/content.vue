@@ -5,13 +5,21 @@
       <span class="description">{{ $t('starPetsLink.description') }}</span>
     </div>
     <ui-input-base
-      model-value=""
+      v-model="model!"
       :placeholder="$t('starPetsLink.placeholder')"
     />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+export type StarPetsLinkProps = {
+  modelValue: string
+}
+
+defineProps<StarPetsLinkProps>()
+
+const model = defineModel<StarPetsLinkProps['modelValue']>()
+</script>
 
 <style scoped lang="scss">
 .sp-content {

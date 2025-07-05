@@ -55,6 +55,12 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
+  const setStarpetsID = async (id: string) => {
+    await baseRequest({
+      method: () => authAPI.setStarpetsID({ starpets_id: id }),
+    })
+  }
+
   return {
     isAuth,
     data,
@@ -62,5 +68,6 @@ export const useAuthStore = defineStore('auth', () => {
     refLink,
     login,
     refresh,
+    setStarpetsID,
   }
 })

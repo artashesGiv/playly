@@ -59,4 +59,10 @@ export const robuxAPI = {
   async fetchWithdraw(): Promise<Robux.GET.Withdraws.Response> {
     return await this._baseApi.get('/robux_withdraws/withdraws')
   },
+
+  async sellRobux({ robux_amount }: Robux.POST.Sell.Params) {
+    return await this._baseApi.post(
+      `/robux_purchases/buy?robux_amount=${robux_amount}`,
+    )
+  },
 }

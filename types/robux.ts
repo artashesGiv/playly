@@ -57,6 +57,9 @@ export namespace Robux {
       export type Payload = { withdraw_id: WithdrawId }
       export type Response = undefined
     }
+    export namespace Sell {
+      export type Params = { robux_amount: string }
+    }
   }
 }
 

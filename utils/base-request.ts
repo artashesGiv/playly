@@ -22,6 +22,7 @@ export const baseRequest = async <T = unknown>({
       errorCallback(e)
     }
 
+    console.error('BASE REQUEST', e)
     throw Error(e)
   } finally {
     if (finallyCallback) {

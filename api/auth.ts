@@ -27,4 +27,10 @@ export const authAPI = {
   async fetchReferrals(): Promise<Auth.GET.Referrals.Response> {
     return await this._baseApi.get('/auth/referrals')
   },
+
+  async setStarpetsID(params: Auth.POST.Starpets.Params) {
+    return await this._baseApi.post('/auth/starpets_id', {
+      body: params,
+    })
+  },
 }

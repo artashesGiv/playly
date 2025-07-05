@@ -2,7 +2,7 @@ import type { Case, CaseItem } from '@/types'
 
 export namespace Items {
   export namespace GET {
-    export namespace Cases {
+    export namespace Sell {
       export type Response = Case[]
     }
     export namespace Items {

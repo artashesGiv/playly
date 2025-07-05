@@ -23,6 +23,13 @@ export namespace Auth {
       }
       export type Response = AuthResponse
     }
+
+    export namespace Starpets {
+      export type Params = {
+        starpets_id: string
+      }
+      export type Response = undefined
+    }
   }
 }
 

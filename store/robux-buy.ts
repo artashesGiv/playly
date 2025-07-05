@@ -51,6 +51,12 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     Object.assign(stepsData, defaultStepsData())
   }
 
+  const sellRobux = async (amount: string) => {
+    await baseRequest({
+      method: () => robuxAPI.sellRobux({ robux_amount: amount }),
+    })
+  }
+
   // STEP 1
   const getUsers = () => {
     clearTimeout(timeout)
@@ -249,5 +255,6 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     getCurrentWithdraw,
     getPlaces,
     getGamepasses,
+    sellRobux,
   }
 })

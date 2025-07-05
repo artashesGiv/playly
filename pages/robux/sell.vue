@@ -24,12 +24,14 @@
           icon-color="yellow"
           :label="$t('robux.input.labelPay')"
           icon="robux"
+          type="number"
         />
         <ui-input-base
           v-model="getValue"
           :label="$t('robux.input.labelReceived')"
           icon="robux"
           icon-color="yellow"
+          type="number"
         >
           <template #icon>
             <main-mascot size="s" class="sell__mascot" />
@@ -63,7 +65,7 @@
     </div>
     <ui-button-base
       icon="buy-1"
-      :text="$t('common.sellForCoins', payValue ? payValue : 0)"
+      :text="$t('common.sellForCoins', +getValue)"
       :is-disabled="!payValue"
       size="52"
       @click="onSell"
@@ -72,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/store'
+import { useRobuxBuyStore, useUserStore } from '@/store'
 import UserData from '@/components/user-data.vue'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 
@@ -86,6 +88,7 @@ const { t } = useI18n()
 const { user } = useTelegram()
 const router = useRouter()
 const { robuxBalance } = storeToRefs(useUserStore())
+const { sellRobux } = useRobuxBuyStore()
 
 const dataList = computed<TableDataProps['list']>(() => [
   {
@@ -117,7 +120,8 @@ watch(getValue, newVal => {
   }
 })
 
-const onSell = () => {
+const onSell = async () => {
+  await sellRobux(payValue.value.toString())
   router.back()
 }
 </script>

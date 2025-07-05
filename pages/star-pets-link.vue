@@ -2,9 +2,13 @@
   <div class="sp-link">
     <star-pets-link-header />
     <ui-divider />
-    <star-pets-link-content class="sp-link__content" />
+    <star-pets-link-content v-model="valueId" class="sp-link__content" />
     <div class="sp-link__buttons">
-      <ui-button-base :text="$t('common.save')" size="52" />
+      <ui-button-base
+        :text="$t('common.save')"
+        size="52"
+        @click="setStarpetsID(valueId)"
+      />
       <ui-button-base
         :text="$t('starPetsLink.buttons.starPetsId')"
         icon-right="information-circle"
@@ -17,11 +21,17 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from '@/store'
+
 definePageMeta({
   layout: 'empty',
 })
 
+const valueId = ref('')
+
 useBackButton()
+
+const { setStarpetsID } = useAuthStore()
 </script>
 
 <style scoped lang="scss">

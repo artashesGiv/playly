@@ -9,6 +9,7 @@
       :text="cardDataMap[step].button"
       icon-right="foreign"
       class="how-get-item-card__button"
+      @click="onOpenLink"
     />
     <nuxt-img :src="cardDataMap[step].image" class="how-get-item-card__image" />
   </div>
@@ -26,9 +27,10 @@ type Data = {
   button: string
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const { t } = useI18n()
+const { tg } = useTelegram()
 
 const cardDataMap: Record<Props['step'], Data> = {
   1: {
@@ -43,6 +45,14 @@ const cardDataMap: Record<Props['step'], Data> = {
     image: '/images/star-pets/link/step-2.png',
     button: t('starPetsLink.how.step-1.button'),
   },
+}
+
+const onOpenLink = () => {
+  if (props.step === 1) {
+    tg?.openLink('https://starpets.pw/')
+  } else {
+    tg?.openLink('https://starpets.pw/ru/profile')
+  }
 }
 </script>
 
