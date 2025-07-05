@@ -9,10 +9,11 @@ export namespace Robux {
     }
     export namespace Gamepass {
       export type Params = {
-        robux_amount: number
         universe_id: RobloxPlace['universe_id']
       }
-      export type Response = Gamepass[]
+      export type Response = {
+        gamepasses: Gamepass[]
+      }
     }
     export namespace CurrenWithdraw {
       export type Response = Withdraw
@@ -42,12 +43,17 @@ export namespace Robux {
       export type Payload = {
         withdraw_id: string
         gamepass_id: number
-        robux_amount_with_fee: number
         robux_amount_without_fee: number
       }
-      export type Response = undefined
+      export type Response = {
+        robux_amount_with_fee: number
+      }
     }
     export namespace Withdraw {
+      export type Payload = { withdraw_id: WithdrawId }
+      export type Response = undefined
+    }
+    export namespace Price {
       export type Payload = { withdraw_id: WithdrawId }
       export type Response = undefined
     }
@@ -84,10 +90,14 @@ export type Withdraw = {
 }
 
 export type Gamepass = {
-  withdraw_id: string
-  gamepass_id: number
-  robux_amount_with_fee: number
-  robux_amount_without_fee: number
+  id: number
+  isOwned: boolean
+  name: string
+  price: null
+  image_url: string
+  productId: null
+  sellerId: null
+  sellerName: string
 }
 
 export type WithdrawId = string

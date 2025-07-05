@@ -32,23 +32,26 @@ export const robuxAPI = {
     return await this._baseApi.post('/robux_withdraws/roblox_place', payload)
   },
   async fetchGamepasses({
-    robux_amount,
     universe_id,
   }: Robux.GET.Gamepass.Params): Promise<Robux.GET.Gamepass.Response> {
-    console.log(robux_amount, universe_id)
     return await this._baseApi.get(
-      `/robux_withdraws/gamepasses?robux_amount=${robux_amount}&universe_id=${universe_id}`,
+      `/robux_withdraws/gamepasses?universe_id=${universe_id}`,
     )
   },
   async setGamepass(
     payload: Robux.POST.Gamepass.Payload,
   ): Promise<Robux.POST.Gamepass.Response> {
-    return await this._baseApi.post('/robux_withdraws/gamepasses', payload)
+    return await this._baseApi.post('/robux_withdraws/gamepass', payload)
   },
   async setWithdraw(
     payload: Robux.POST.Withdraw.Payload,
   ): Promise<Robux.POST.Withdraw.Response> {
     return await this._baseApi.post('/robux_withdraws/withdraw', payload)
+  },
+  async setPrice(
+    payload: Robux.POST.Price.Payload,
+  ): Promise<Robux.POST.Price.Response> {
+    return await this._baseApi.post('/robux_withdraws/price', payload)
   },
   async fetchCurrentWithdraw(): Promise<Robux.GET.CurrenWithdraw.Response> {
     return await this._baseApi.get('/robux_withdraws/curr_withdraw')

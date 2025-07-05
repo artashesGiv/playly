@@ -1,22 +1,24 @@
 <template>
-  <transition name="slide-bottom">
-    <teleport to="body">
-      <div v-if="isOpen" class="modal">
-        <div class="modal__header">
-          <span class="title">{{ title }}</span>
-          <ui-button-base
-            view="secondary"
-            icon="close"
-            size="46"
-            @click="emits('update:isOpen', false)"
-          />
+  <div>
+    <transition name="slide-bottom">
+      <teleport to="body">
+        <div v-if="isOpen" class="modal">
+          <div class="modal__header">
+            <span class="title">{{ title }}</span>
+            <ui-button-base
+              view="secondary"
+              icon="close"
+              size="46"
+              @click="emits('update:isOpen', false)"
+            />
+          </div>
+          <div class="modal__content">
+            <slot />
+          </div>
         </div>
-        <div class="modal__content">
-          <slot />
-        </div>
-      </div>
-    </teleport>
-  </transition>
+      </teleport>
+    </transition>
+  </div>
 </template>
 
 <script setup lang="ts">

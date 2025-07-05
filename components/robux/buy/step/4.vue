@@ -19,7 +19,7 @@
         {{ $t('robux.buy.step-4.setGamepass.priceDescription') }}
       </span>
       <div class="robux-buy-4__price-value">
-        {{ getValue }}
+        {{ stepsData.robux_amount_with_fee }}
         <ui-icon-base name="robux" class="robux-buy-4__icon-robux" />
       </div>
     </ui-card>
@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { useRobuxBuyStore } from '@/store'
 
-const { getValue } = storeToRefs(useRobuxBuyStore())
+const { stepsData } = storeToRefs(useRobuxBuyStore())
 const { tg } = useTelegram()
 
 const openLink = () => {

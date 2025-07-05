@@ -95,7 +95,8 @@
           "button": "Установите GamePass",
           "description": "Откройте настройки выбранного GamePass и установите цену, указанную ниже",
           "priceDescription": "Цена GamePass"
-        }
+        },
+        "error": "Цена геймпаса не совпадает"
       },
       "step-5": {
         "title": "Успешно!",

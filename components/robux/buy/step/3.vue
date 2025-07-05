@@ -3,14 +3,14 @@
     <transition-fade>
       <div v-if="gamepasses.length" class="robux-buy-3__list-wrapper">
         <div class="robux-buy-3__list">
-          <!--        <robux-buy-item-card-->
-          <!--          v-for="gamepass in gamepasses"-->
-          <!--          :key="gamepass.gamepass_id"-->
-          <!--          :text="gamepass.text"-->
-          <!--          :src="gamepass.src"-->
-          <!--          :is-active="gamepass.id === stepsData.gamepass"-->
-          <!--          @click="stepsData.gamepass = gamepass.id"-->
-          <!--        />-->
+          <robux-buy-item-card
+            v-for="gamepass in gamepasses"
+            :key="gamepass.id"
+            :text="gamepass.name"
+            :src="gamepass.image_url"
+            :is-active="gamepass.id === stepsData.gamepass?.id"
+            @click="stepsData.gamepass = gamepass"
+          />
         </div>
       </div>
 
@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { useRobuxBuyStore } from '@/store'
 
-const { gamepasses } = storeToRefs(useRobuxBuyStore())
+const { gamepasses, stepsData } = storeToRefs(useRobuxBuyStore())
 
 const { tg } = useTelegram()
 

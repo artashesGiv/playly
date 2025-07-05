@@ -95,7 +95,8 @@
           "button": "Set Up GamePass",
           "description": "Open the settings of the selected GamePass and set the price indicated below",
           "priceDescription": "GamePass price"
-        }
+        },
+        "error": "Gamepass price not match"
       },
       "step-5": {
         "title": "Successfully!",

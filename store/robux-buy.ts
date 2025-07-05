@@ -5,17 +5,20 @@ import type {
   RobuxBuySteps,
   WithdrawId,
 } from '@/types'
+import { useUserStore } from '@/store'
 
 type StepsData = {
   user: Maybe<RobloxUser>
   place: Maybe<RobloxPlace>
   gamepass: Maybe<Gamepass>
+  robux_amount_with_fee: number
 }
 
 const defaultStepsData = () => ({
   user: null,
   place: null,
   gamepass: null,
+  robux_amount_with_fee: 0,
 })
 
 const COEFFICIENT = 4
@@ -33,6 +36,10 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
 
   const getValue = ref(1000)
   const payValue = ref(250)
+
+  const { tg } = useTelegram()
+  const { t } = useI18n()
+  const { getUserInfo } = useUserStore()
 
   const resetStepsData = () => {
     step.value = 1
@@ -98,21 +105,36 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
   // STEP 3
   const getGamepasses = async (universe_id: RobloxPlace['universe_id']) => {
     await baseRequest({
-      method: () =>
-        robuxAPI.fetchGamepasses({ robux_amount: getValue.value, universe_id }),
+      method: () => robuxAPI.fetchGamepasses({ universe_id }),
       callback: result => {
-        gamepasses.value = result
+        gamepasses.value = result.gamepasses
       },
     })
   }
 
   const setCurrentGamepass = async (gamepass: Gamepass) => {
     await baseRequest({
-      method: () => robuxAPI.setGamepass(gamepass),
+      method: () =>
+        robuxAPI.setGamepass({
+          gamepass_id: gamepass.id,
+          robux_amount_without_fee: getValue.value,
+          withdraw_id: withdrawId.value,
+        }),
+      callback: result => {
+        stepsData.robux_amount_with_fee = result.robux_amount_with_fee
+      },
     })
   }
 
   // STEP 4
+
+  const setPrice = async () => {
+    await baseRequest({
+      method: () => robuxAPI.setPrice({ withdraw_id: withdrawId.value }),
+    })
+  }
+
+  // STEP 5
 
   const setWithdraw = async () => {
     await baseRequest({
@@ -120,7 +142,7 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     })
   }
 
-  // STEP 5
+  // COMMON
 
   const nextStep = async () => {
     switch (step.value) {
@@ -168,14 +190,18 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
       }
       case 4: {
         try {
-          await setWithdraw()
+          await setPrice()
           step.value += 1
         } catch (e) {
+          tg?.showAlert(t('robux.buy.step-4.error'))
+
           console.error(e)
         }
         break
       }
       case 5: {
+        await setWithdraw()
+        await getUserInfo()
         navigateTo('/robux')
         break
       }
