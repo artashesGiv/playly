@@ -14,7 +14,7 @@ export type CaseItem = {
   item_type: string
   name: string
   probability: number
-  rarity: string
+  rarity: 'common' | 'uncommon' | 'rare' | 'ultra_rare' | 'legendary'
   flyable: Maybe<boolean>
   pumping: Maybe<boolean>
   rideable: Maybe<boolean>

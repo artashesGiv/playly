@@ -48,11 +48,9 @@ onMounted(async () => {
 <style scoped lang="scss">
 .friends {
   @include column(18px);
-  height: 100%;
 
   &__wrapper {
     @include column(18px);
-    height: 100%;
   }
 
   &__main {

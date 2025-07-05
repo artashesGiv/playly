@@ -2,6 +2,11 @@ import { useUserStore } from '@/store/user'
 import type { TaskSettings } from '@/types'
 
 export const useCoinsStore = defineStore('coins', () => {
+  const { $i18n } = useNuxtApp()
+  const t = $i18n.t.bind($i18n)
+
+  const { tg } = useTelegram()
+  const { getUserInfo } = useUserStore()
   const { balance } = storeToRefs(useUserStore())
 
   const settings = ref<TaskSettings>({
@@ -33,9 +38,15 @@ export const useCoinsStore = defineStore('coins', () => {
     clearTimeout(timeout)
 
     timeout = setTimeout(async () => {
-      await tapCoin(coins)
+      try {
+        await tapCoin(coins)
+      } catch (e) {
+        await getUserInfo()
+        console.error(e)
+        tg?.showAlert(t('coins.tapError'))
+      }
       coins = 0
-    }, 1000)
+    }, 500)
   }
 
   return {

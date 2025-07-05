@@ -56,16 +56,6 @@ const formattedPrice = computed(() =>
   formatePrice(currentCase?.value?.price || 0),
 )
 
-onMounted(async () => {
-  if (!cases.value.length) {
-    await getCases()
-  }
-
-  await getCaseItems(id)
-
-  isMounted.value = true
-})
-
 /* ─────────────────────────── исходные данные ──────────────────────────── */
 const isSpin = ref(false)
 
@@ -107,9 +97,7 @@ function centerNearestItem(el: HTMLElement, durationMs = 500) {
     } else {
       await openCase(id)
 
-      setTimeout(() => {
-        navigateTo(`/cases/item/${id}`)
-      }, 500)
+      navigateTo(`/cases/item/${id}`)
     }
   }
 
@@ -163,7 +151,7 @@ function startAutoScroll(direction: Direction = 'down', peakSpeedPxS = 800) {
 /* ─────────────────────────── бесконечный список ───────────────────────── */
 const displayedItems = computed<CaseItem[]>(() => {
   const arr = caseItems.value
-  return [...arr /*, ...arr, ...arr*/]
+  return [...arr]
 })
 
 /* ────────────────────────── логика прокрутки ──────────────────────────── */
@@ -181,21 +169,17 @@ function handleScroll(el: HTMLElement) {
 }
 
 onMounted(async () => {
-  await nextTick() // ждём отрисовки
-  const el = wrapperRef.value
-  if (!el) return
+  if (!cases.value.length) await getCases()
+  await getCaseItems(id)
+  isMounted.value = true
 
-  // Ставим прокрутку в «центральный» список
+  await nextTick() // ждём рендер
+  const el = wrapperRef.value!
   el.scrollTop = el.scrollHeight / 3
-
-  // Вешаем обработчик
   const onScroll = () => handleScroll(el)
   el.addEventListener('scroll', onScroll, { passive: true })
 
-  // Снимаем при демонтировании
-  onBeforeUnmount(() => {
-    el.removeEventListener('scroll', onScroll)
-  })
+  onBeforeUnmount(() => el.removeEventListener('scroll', onScroll))
 })
 
 useBackButton()

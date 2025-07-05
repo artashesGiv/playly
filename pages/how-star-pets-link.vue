@@ -36,8 +36,6 @@ const router = useRouter()
 .how-star-pets-link {
   @include column(18px);
 
-  height: 100%;
-
   .description {
     font: var(--font-base-medium);
   }

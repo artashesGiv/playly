@@ -25,5 +25,6 @@ declare global {
 declare module 'nuxt/app' {
   interface NuxtApp {
     $baseApi: BaseApi
+    $i18n: Composer
   }
 }

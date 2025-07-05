@@ -16,7 +16,8 @@
       "playlyTg": "Присоединяйтесь к Playly Telegram",
       "inviteFriend": "Пригласить друга в Playly",
       "inviteFriendFromRoblox": "Пригласите друга, который играет в Roblox"
-    }
+    },
+    "tapError": "На сегодня все, возвращайся завтра!"
   },
   "friends": {
     "title": "Приглашайте своих друзей и получайте монеты",
@@ -217,5 +218,32 @@
     "r$": "{n} R$",
     "r$Amount": "Количество R$",
     "withdrawCoins": "Вывести {n} R$"
+  },
+  "case_names": {
+    "common_chest": "Обычный сундук",
+    "advanced_chest": "Продвинутый сундук",
+    "victory_chest": "Сундук победы",
+    "rebirth_chest": "Сундук возрождения",
+    "friendship_chest": "Сундук дружбы",
+    "furious_chest": "Яростный сундук",
+    "warlike_chest": "Воинственный сундук",
+    "cluster_chest": "Сундук скопления",
+    "beach_chest": "Пляжный сундук",
+    "tranquility_chest": "Сундук спокойствия",
+    "evolution_chest": "Сундук эволюции",
+    "crystal_chest": "Кристальный сундук",
+    "darkness_chest": "Сундук тьмы",
+    "magic_chest": "Магический сундук",
+    "golden_chest": "Золотой сундук",
+    "royal_chest": "Королеквский сундук",
+    "paradise_chest": "Райский сундук",
+    "power_chest": "Сундук могущества"
+  },
+  "rarity": {
+    "common": "Common",
+    "uncommon": "Uncommon",
+    "rare": "Rare",
+    "ultra_rare": "Ultra rare",
+    "legendary": "Legendary"
   }
 }

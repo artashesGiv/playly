@@ -16,7 +16,8 @@
       "playlyTg": "Join Playly telegram",
       "inviteFriend": "Invite a friend to Playly",
       "inviteFriendFromRoblox": "Invite a friend who plays Roblox"
-    }
+    },
+    "tapError": "That's it for today, come back tomorrow!"
   },
   "friends": {
     "title": "Invite your friends and get coins",
@@ -217,5 +218,32 @@
     "r$": "{n} R$",
     "r$Amount": "R$ amount",
     "withdrawCoins": "Withdraw {n} R$"
+  },
+  "case_names": {
+    "common_chest": "Common Chest",
+    "advanced_chest": "Advanced Chest",
+    "victory_chest": "Victory Chest",
+    "rebirth_chest": "Rebirth Chest",
+    "friendship_chest": "Friendship Chest",
+    "furious_chest": "Furious Chest",
+    "warlike_chest": "Warlike Chest",
+    "cluster_chest": "Cluster Chest",
+    "beach_chest": "Beach Chest",
+    "tranquility_chest": "Tranquility Chest",
+    "evolution_chest": "Evolution Chest",
+    "crystal_chest": "Crystal Chest",
+    "darkness_chest": "Darkness Chest",
+    "magic_chest": "Magic Chest",
+    "golden_chest": "Golden Chest",
+    "royal_chest": "Royal Chest",
+    "paradise_chest": "Paradise Chest",
+    "power_chest": "Power Chest"
+  },
+  "rarity": {
+    "common": "Common",
+    "uncommon": "Uncommon",
+    "rare": "Rare",
+    "ultra_rare": "Ultra rare",
+    "legendary": "Legendary"
   }
 }

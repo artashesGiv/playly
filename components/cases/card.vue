@@ -2,7 +2,7 @@
   <div class="case-card">
     <!--    <ui-tag v-bind="tag" class="case-card__tag" />-->
     <nuxt-img :src="image" class="case-card__image" />
-    <h5>{{ name }}</h5>
+    <h5>{{ $t(`case_names.${name}`) }}</h5>
     <div class="case-card__price">
       {{ formatePrice(price) }} <main-mascot size="xs" />
     </div>

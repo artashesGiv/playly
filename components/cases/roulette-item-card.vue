@@ -1,11 +1,11 @@
 <template>
   <div class="item-case" :class="{ 'is-active': isActive }">
     <div class="item-case__tags">
-      <ui-tag :text="rarity" view="pink" />
+      <ui-tag :text="$t(`rarity.${rarity}`)" :view="mapRareColor[rarity]" />
       <ui-tag :text="`${probability.toFixed(2)}%`" view="dark" />
     </div>
     <nuxt-img :src="image_url" class="item-case__image" />
-    <h5 class="item-case__title">{{ name }}</h5>
+    <h5 class="item-case__title">{{ snakeToSentence(name) }}</h5>
     <span class="item-case__description">{{ item_type }}</span>
     <cases-item-abilities
       :flyable="flyable"
@@ -17,6 +17,7 @@
 
 <script setup lang="ts">
 import type { CaseItem } from '@/types'
+import type { TagProps } from '@/components/ui/tag.vue'
 
 export type CaseRouletteItemCardProps = {
   crystal_price: CaseItem['crystal_price']
@@ -33,6 +34,14 @@ export type CaseRouletteItemCardProps = {
 }
 
 defineProps<CaseRouletteItemCardProps>()
+
+const mapRareColor: Record<CaseItem['rarity'], TagProps['view']> = {
+  common: 'blue',
+  uncommon: 'pink',
+  rare: 'green',
+  ultra_rare: 'red',
+  legendary: 'yellow',
+}
 </script>
 
 <style scoped lang="scss">

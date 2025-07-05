@@ -16,11 +16,9 @@ export const caseAPI = {
     return await this._baseApi.get(`/cases/items/${case_id}`)
   },
 
-  async openCase(
-    params: Cases.POST.Open.Params,
-  ): Promise<Cases.POST.Open.Response> {
-    return await this._baseApi.post('/crystals/tasks/open', {
-      body: params,
-    })
+  async openCase({
+    case_id,
+  }: Cases.POST.Open.Params): Promise<Cases.POST.Open.Response> {
+    return await this._baseApi.post(`/cases/open?case_id=${case_id}`)
   },
 }
