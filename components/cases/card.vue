@@ -52,12 +52,13 @@ defineProps<CaseCard>()
 
   h5 {
     margin-top: 6px;
+    margin-bottom: 10px;
   }
 
   &__price {
     @include row(4px);
 
-    margin-top: 10px;
+    margin-top: auto;
     justify-content: center;
     height: 32px;
     width: 100%;

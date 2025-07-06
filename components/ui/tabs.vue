@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-type TabItem = { id: number; text: string }
+type TabItem = { id: number | string; text: string }
 
 export type TabsProps = {
   modelValue: TabItem['id']

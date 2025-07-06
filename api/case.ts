@@ -6,8 +6,12 @@ export const caseAPI = {
     return (useNuxtApp() as NuxtApp).$baseApi
   },
 
-  async fetchCases(): Promise<Cases.GET.Cases.Response> {
-    return await this._baseApi.get('/cases')
+  async fetchCases(
+    params?: Cases.GET.Cases.Params,
+  ): Promise<Cases.GET.Cases.Response> {
+    return await this._baseApi.get(`/cases`, {
+      params,
+    })
   },
 
   async fetchCaseItems({

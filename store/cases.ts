@@ -1,4 +1,4 @@
-import type { Case, CaseItem } from '@/types'
+import type { Case, CaseItem, Cases } from '@/types'
 import { useUserStore } from '@/store/user'
 
 export const useCasesStore = defineStore('cases', () => {
@@ -8,9 +8,9 @@ export const useCasesStore = defineStore('cases', () => {
 
   const { getUserInfo } = useUserStore()
 
-  const getCases = async () => {
+  const getCases = async (params?: Cases.GET.Cases.Params) => {
     await baseRequest({
-      method: () => caseAPI.fetchCases(),
+      method: () => caseAPI.fetchCases(params),
       callback: result => {
         cases.value = result.map(item => ({ ...item, tag: {} }))
       },
