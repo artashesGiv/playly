@@ -41,14 +41,13 @@ import { useUserStore } from '@/store'
 import { useShareLink } from '@/composables/useShareLink'
 
 type BountyCard =
-  | 'playly-friend'
-  | 'playly-tg'
-  | 'roblox-friend'
-  | 'star-pets-tg'
+  // | 'playly-friend'
+  'playly-tg' | 'roblox-friend' | 'star-pets-tg'
 type BountyCardStatus = Record<BountyCard, boolean>
 type BountyCardComponent = Record<BountyCard, Component>
 
 const { tg } = useTelegram()
+const { t } = useI18n()
 const { userInfo } = storeToRefs(useUserStore())
 
 const map = computed<BountyCardStatus>(() => ({
@@ -59,9 +58,9 @@ const map = computed<BountyCardStatus>(() => ({
 }))
 
 const componentsMap: BountyCardComponent = {
-  'playly-friend': defineAsyncComponent(
-    () => import('@/components/bounty/card/playly-friend.vue'),
-  ),
+  // 'playly-friend': defineAsyncComponent(
+  //   () => import('@/components/bounty/card/playly-friend.vue'),
+  // ),
   'playly-tg': defineAsyncComponent(
     () => import('@/components/bounty/card/playly-tg.vue'),
   ),
@@ -99,7 +98,7 @@ const onCompleted = (card: BountyCard) => {
     }
 
     default: {
-      useShareLink()
+      useShareLink(t('invitation'))
     }
   }
 }

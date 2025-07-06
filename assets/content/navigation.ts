@@ -8,9 +8,9 @@ export const useNavigation = (): NavItem[] => {
       text: t('nav.coins'),
     },
     {
-      src: '/friends',
-      icon: 'group-2',
-      text: t('nav.friends'),
+      src: '/cases',
+      icon: 'case-1',
+      text: t('nav.cases'),
     },
     {
       src: '/robux',
@@ -18,9 +18,9 @@ export const useNavigation = (): NavItem[] => {
       text: t('nav.robux'),
     },
     {
-      src: '/cases',
-      icon: 'case-1',
-      text: t('nav.cases'),
+      src: '/friends',
+      icon: 'group-2',
+      text: t('nav.friends'),
     },
     {
       src: '/profile',

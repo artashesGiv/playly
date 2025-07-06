@@ -27,7 +27,7 @@ type Data = {
   button: string
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const { t } = useI18n()
 const { tg } = useTelegram()
@@ -48,11 +48,9 @@ const cardDataMap: Record<Props['step'], Data> = {
 }
 
 const onOpenLink = () => {
-  if (props.step === 1) {
-    tg?.openLink('https://starpets.pw/')
-  } else {
-    tg?.openLink('https://starpets.pw/ru/profile')
-  }
+  tg?.openLink(
+    'https://starpets.pw/profile?utm_source=tg&utm_medium=playly&utm_campaign=id',
+  )
 }
 </script>
 
