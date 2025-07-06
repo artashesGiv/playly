@@ -2,11 +2,10 @@
   <div class="item-case" :class="{ 'is-active': isActive }">
     <div class="item-case__tags">
       <ui-tag :text="$t(`rarity.${rarity}`)" :view="mapRareColor[rarity]" />
-      <ui-tag :text="`${probability.toFixed(2)}%`" view="dark" />
     </div>
     <nuxt-img :src="image_url" class="item-case__image" />
     <h5 class="item-case__title">{{ snakeToSentence(name) }}</h5>
-    <span class="item-case__description">{{ item_type }}</span>
+    <span class="item-case__description">{{ snakeToSentence(item_type) }}</span>
     <cases-item-abilities
       :flyable="flyable"
       :rideable="rideable"
@@ -19,15 +18,11 @@
 import type { CaseItem } from '@/types'
 
 export type CaseRouletteItemCardProps = {
-  crystal_price: CaseItem['crystal_price']
-  id: CaseItem['id']
   image_url: CaseItem['image_url']
   item_type: CaseItem['item_type']
   name: CaseItem['name']
-  probability: CaseItem['probability']
   rarity: CaseItem['rarity']
   flyable: CaseItem['flyable']
-  pumping: CaseItem['pumping']
   rideable: CaseItem['rideable']
   isActive?: boolean
 }

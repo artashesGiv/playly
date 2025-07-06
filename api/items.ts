@@ -13,7 +13,7 @@ export const itemsAPI = {
   async fetchItem(
     params: Items.GET.Item.Params,
   ): Promise<Items.GET.Item.Response> {
-    return await this._baseApi.get('/item/my_items', {
+    return await this._baseApi.get('/item/my_item', {
       params,
     })
   },

@@ -25,7 +25,7 @@ export const useItemsStore = defineStore('items', () => {
 
   const getItem = async (id: CaseItem['id']) => {
     await baseRequest({
-      method: () => itemsAPI.fetchItem({ item_id: id }),
+      method: () => itemsAPI.fetchItem({ user_item_id: id }),
       callback: result => {
         item.value = result
       },

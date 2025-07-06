@@ -9,14 +9,14 @@
         <item-main-data
           :image="receivedItem?.image_url || ''"
           :title="snakeToSentence(receivedItem?.name || '')"
-          description="Egg"
+          :description="receivedItem?.item_type || ''"
         />
         <ui-table-data class="case-item__table" :list="dataList">
-          <template #row-1="{ value }">
+          <template #row-1>
             <div class="case-item__abilities">
               <cases-item-abilities
-                :flyable="value.flyable"
-                :rideable="value.rideable"
+                :flyable="receivedItem?.flyable"
+                :rideable="receivedItem?.rideable"
               />
             </div>
           </template>
@@ -52,7 +52,6 @@
 import { useCasesStore, useItemsStore } from '@/store'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 import type { Case } from '@/types'
-import type { ItemAbilitiesProps } from '@/components/cases/item-abilities.vue'
 import { snakeToSentence } from '@/utils/snake-to-sentence'
 
 definePageMeta({
@@ -80,18 +79,15 @@ const formattedPriceItem = computed(() =>
 
 const dataList: TableDataProps['list'] = [
   {
-    title: t('commonr'),
-    value: {
-      flyable: receivedItem.value?.flyable,
-      rideable: receivedItem.value?.rideable,
-    } as ItemAbilitiesProps,
+    title: t('common.properties'),
+    value: '',
   },
   {
-    title: 'Rarity',
+    title: t('common.rarity'),
     value: snakeToSentence(receivedItem?.value?.rarity || ''),
   },
   {
-    title: 'Age',
+    title: t('common.age'),
     value: receivedItem?.value?.age,
   },
 ]

@@ -4,7 +4,7 @@
       <item-main-data
         :image="item.image_url"
         :title="item.name"
-        description="Egg"
+        :description="item.item_type"
       />
       <ui-divider />
       <profile-timer-card :item-id="id" />

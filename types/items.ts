@@ -10,7 +10,7 @@ export namespace Items {
       export type Response = CaseItem[]
     }
     export namespace Item {
-      export type Params = { item_id: CaseItem['id'] }
+      export type Params = { user_item_id: CaseItem['id'] }
       export type Response = CaseItem
     }
   }
