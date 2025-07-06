@@ -5,7 +5,7 @@
     <ui-tabs
       v-model="currentTab"
       :list="tabs"
-      @update:model-value="onInput($event as CaseCategory)"
+      @update:model-value="onInput($event as CaseCategory & 'all')"
     />
     <div class="cases__list">
       <cases-card
@@ -38,14 +38,6 @@ const tabs: TabsProps['list'] = [
     id: 'robux',
     text: 'Robux',
   },
-  // {
-  //   id: 'pets',
-  //   text: 'Pets',
-  // },
-  // {
-  //   id: 'eggs',
-  //   text: 'Eggs',
-  // },
 ]
 
 const onInput = async (category: CaseCategory & 'all') => {

@@ -7,7 +7,10 @@ export const useItemsStore = defineStore('items', () => {
   const { tg } = useTelegram()
 
   const ownList = computed(() =>
-    items.value.filter(item => item.status === 'owned'),
+    items.value.filter(
+      item =>
+        item.status !== 'withdraw_success' && item.status !== 'sold_by_crystal',
+    ),
   )
 
   const receivedList = computed(() =>

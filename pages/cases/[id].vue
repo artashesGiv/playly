@@ -159,7 +159,7 @@ function handleScroll(el: HTMLElement) {
 
 onMounted(async () => {
   if (!cases.value.length) await getCases()
-  await getCaseItems(id)
+  await getCaseItems(id, currentCase.value.category === 'robux')
   isMounted.value = true
 
   await nextTick() // ждём рендер

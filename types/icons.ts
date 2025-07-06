@@ -55,6 +55,7 @@ export type IconsId =
   | 'down-1'
   | 'coin-1'
   | 'close'
+  | 'clock'
   | 'check'
   | 'case-1'
   | 'buy-1'

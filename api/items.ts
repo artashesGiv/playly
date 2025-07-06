@@ -10,12 +10,10 @@ export const itemsAPI = {
     return await this._baseApi.get('/item/my_items')
   },
 
-  async fetchItem(
-    params: Items.GET.Item.Params,
-  ): Promise<Items.GET.Item.Response> {
-    return await this._baseApi.get('/item/my_item', {
-      params,
-    })
+  async fetchItem({
+    user_item_id,
+  }: Items.GET.Item.Params): Promise<Items.GET.Item.Response> {
+    return await this._baseApi.get(`/item/my_item/${user_item_id}`)
   },
 
   async sellItem(params: Items.POST.Sell.Params) {

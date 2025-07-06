@@ -1,7 +1,7 @@
 @font-face {
     font-family: "icons";
-    src: url("/fonts/icons/icons.woff?ae647e03209e64ffe15f93e51c0160dc") format("woff"),
-url("/fonts/icons/icons.woff2?ae647e03209e64ffe15f93e51c0160dc") format("woff2");
+    src: url("/fonts/icons/icons.woff?b3b859bcecc1d06beb584c5632f5b04c") format("woff"),
+url("/fonts/icons/icons.woff2?b3b859bcecc1d06beb584c5632f5b04c") format("woff2");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -183,24 +183,27 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 .icon-close:before {
     content: "\f138";
 }
-.icon-check:before {
+.icon-clock:before {
     content: "\f139";
 }
-.icon-case-1:before {
+.icon-check:before {
     content: "\f13a";
 }
-.icon-buy-1:before {
+.icon-case-1:before {
     content: "\f13b";
 }
-.icon-arrow-swap-vertical:before {
+.icon-buy-1:before {
     content: "\f13c";
 }
-.icon-arrow-swap-horizontal:before {
+.icon-arrow-swap-vertical:before {
     content: "\f13d";
 }
-.icon-alert:before {
+.icon-arrow-swap-horizontal:before {
     content: "\f13e";
 }
-.icon-Logout:before {
+.icon-alert:before {
     content: "\f13f";
+}
+.icon-Logout:before {
+    content: "\f140";
 }

@@ -1,55 +1,68 @@
 <template>
-  <div v-if="item" class="case-item">
-    <div
-      class="case-item__gradient"
-      :style="{ background: `var(--${mapRareColor[item.rarity]}-gradient)` }"
-    />
-    <div class="case-item__content">
-      <item-main-data
-        :image="item.image_url"
-        :title="snakeToSentence(item.name)"
-        :description="snakeToSentence(item.age)"
+  <transition-fade>
+    <div v-if="item && isMounted" class="case-item">
+      <div
+        class="case-item__gradient"
+        :style="{ background: `var(--${mapRareColor[item.rarity]}-gradient)` }"
       />
-      <item-interactive
-        :disabled="disableButtons"
-        @sell="onSell"
-        @withdraw="onWithdraw"
-      />
-      <ui-divider />
-      <ui-table-data :list="dataListOwn">
-        <template #row-1>
-          <user-data />
-        </template>
-        <template #row-3="{ value }">
-          <div class="case-item__price">
-            <span>{{ formatePrice(value) }}</span>
-            <main-mascot size="xs" />
-          </div>
-        </template>
-      </ui-table-data>
-      <ui-table-data class="case-item__table" :list="dataListItem">
-        <template #row-1>
-          <div class="case-item__abilities">
+      <div class="case-item__content">
+        <item-main-data
+          :image="item.image_url"
+          :title="snakeToSentence(item.name)"
+          :description="snakeToSentence(item.age)"
+        />
+        <item-interactive
+          :disabled="disableButtons"
+          @sell="onSell"
+          @withdraw="onWithdraw"
+        />
+        <ui-divider />
+        <ui-table-data :list="dataListOwn">
+          <template #row-1>
+            <user-data />
+          </template>
+          <template #row-3="{ value }">
+            <div class="case-item__row">
+              <span>{{ formatePrice(value) }}</span>
+              <main-mascot size="xs" />
+            </div>
+          </template>
+        </ui-table-data>
+        <ui-table-data class="case-item__table" :list="dataListItem">
+          <template #row-1>
             <cases-item-abilities
               :flyable="item.flyable"
               :rideable="item.rideable"
               class="item-case__abilities"
             />
-          </div>
-        </template>
-      </ui-table-data>
+          </template>
+        </ui-table-data>
+        <ui-table-data class="case-item__table" :list="dataTimer">
+          <template #row-1="{ value }">
+            <div class="case-item__row">
+              <span>{{ value }}</span>
+              <ui-icon-base name="clock" />
+            </div>
+          </template>
+          <template #row-2="{ value }">
+            <div class="case-item__text">
+              {{ value }}
+            </div>
+          </template>
+        </ui-table-data>
+      </div>
+      <ui-button-base
+        class="case-item__button"
+        size="52"
+        :text="
+          isOwned
+            ? $t('common.sellForCoins', { n: formattedPrice })
+            : $t('common.close')
+        "
+        @click="onClick"
+      />
     </div>
-    <ui-button-base
-      class="case-item__button"
-      size="52"
-      :text="
-        isAvailable
-          ? $t('common.sellForCoins', item.crystal_price)
-          : $t('common.close')
-      "
-      @click="onClick"
-    />
-  </div>
+  </transition-fade>
 </template>
 
 <script setup lang="ts">
@@ -68,20 +81,34 @@ const { tg } = useTelegram()
 const route = useRoute()
 const router = useRouter()
 const id = route.params.id as CaseItem['id']
+const isMounted = ref(false)
 
 const { item } = storeToRefs(useItemsStore())
 const { userInfo } = storeToRefs(useUserStore())
 const { sellItem, withdrawItem, getItem } = useItemsStore()
+const countdown = useCountdown(item.value?.crystal_sell_timer || '')
 
-const isAvailable = computed(() => item.value?.status === 'owned')
+const isOwned = computed(() => item.value?.status === 'owned')
 const isReceived = computed(
   () =>
     item.value?.status === 'withdraw_success' ||
     item.value?.status === 'sold_by_crystal',
 )
 
-const disableButtons = computed<InteractiveProps['disabled']>(() =>
-  isReceived.value ? ['sell', 'withdraw'] : undefined,
+const disableButtons = computed<InteractiveProps['disabled']>(() => {
+  if (isReceived.value) {
+    return ['sell', 'withdraw']
+  }
+
+  if (!isOwned.value) {
+    return ['sell']
+  }
+
+  return undefined
+})
+
+const formattedPrice = computed(() =>
+  formatePrice(item.value?.crystal_price || 0),
 )
 
 const dataListOwn = computed<TableDataProps['list']>(() => [
@@ -106,7 +133,7 @@ const dataListItem = computed<TableDataProps['list']>(() => [
   },
   {
     title: t('common.rarity'),
-    value: item.value?.rarity,
+    value: t(`rarity.${item.value?.rarity}`),
   },
   {
     title: t('common.age'),
@@ -114,14 +141,26 @@ const dataListItem = computed<TableDataProps['list']>(() => [
   },
 ])
 
+const dataTimer = computed<TableDataProps['list']>(() => [
+  {
+    title: t('profile.sellTimeCard.title'),
+    value: countdown,
+  },
+  {
+    title: '',
+    value: t('profile.sellTimeCard.text'),
+  },
+])
+
 const onSell = async () => {
   if (item.value) {
     await sellItem(item.value.id, item.value.crystal_price)
+    await getItem(id)
   }
 }
 
 const onClick = () => {
-  if (isAvailable.value) {
+  if (isOwned.value) {
     onSell()
   }
 
@@ -132,7 +171,11 @@ const onClick = () => {
 
 const onWithdraw = async () => {
   if (userInfo.value?.starpets_info && item.value) {
-    await withdrawItem(item.value.id)
+    if (isOwned.value) {
+      await withdrawItem(item.value.id)
+      await getItem(id)
+    }
+
     navigateTo(`/case-item/${id}/withdraw`)
   } else {
     tg?.showAlert('Сначала привяжите аккаунт Starpets')
@@ -142,6 +185,7 @@ const onWithdraw = async () => {
 
 onMounted(async () => {
   await getItem(id)
+  isMounted.value = true
 })
 </script>
 
@@ -167,12 +211,12 @@ onMounted(async () => {
     overflow-y: auto;
   }
 
-  &__price {
+  &__row {
     @include row(8px);
   }
 
-  &__abilities {
-    @include row(8px);
+  &__text {
+    text-align: left;
   }
 
   &__button {

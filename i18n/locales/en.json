@@ -146,10 +146,14 @@
     },
     "withdraw": {
       "howGetItem": "How to get item",
-      "description": "You have 60 minutes to withdraw item, otherwise it will be automatically sold for coins"
+      "description": "You have 60 minutes to withdraw item, otherwise it will be automatically sold for coins",
+      "timerCard": {
+        "timeLeft": "Time left"
+      }
     },
-    "timerCard": {
-      "timeLeft": "Time left"
+    "sellTimeCard": {
+      "title": "Time to withdraw",
+      "text": "You have 3 days to withdraw the item. If you do not withdraw item, it will be automatically sold for coins"
     },
     "howGetItem": {
       "title": "How to get item on StarPets",

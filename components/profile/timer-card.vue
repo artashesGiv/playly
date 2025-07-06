@@ -4,14 +4,19 @@
       <ui-icon-base name="loader-2" />
     </div>
     <div class="timer-card__text">
-      <span>52:12</span>
-      <span>{{ $t('profile.timerCard.timeLeft') }}</span>
+      <span>{{ countdown }}</span>
+      <span>{{ $t('profile.withdraw.timerCard.timeLeft') }}</span>
     </div>
-    <ui-button-base size="42" :text="$t('common.cansel')" max-content />
+    <!--    <ui-button-base size="42" :text="$t('common.cansel')" max-content />-->
   </ui-card>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useItemsStore } from '@/store'
+
+const { item } = storeToRefs(useItemsStore())
+const countdown = useCountdown(item.value?.starpets_withdraw_timer || '')
+</script>
 
 <style scoped lang="scss">
 .timer-card {

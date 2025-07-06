@@ -17,18 +17,22 @@ export const useCasesStore = defineStore('cases', () => {
     })
   }
 
-  const getCaseItems = async (case_id: string) => {
+  const getCaseItems = async (case_id: string, isRobux?: boolean) => {
     await baseRequest({
-      method: () => caseAPI.fetchCaseItems({ case_id }),
+      method: isRobux
+        ? () => caseAPI.fetchRobuxCaseItems({ case_id })
+        : () => caseAPI.fetchCaseItems({ case_id }),
       callback: result => {
         caseItems.value = result
       },
     })
   }
 
-  const openCase = async (case_id: string) => {
+  const openCase = async (case_id: string, isRobux?: boolean) => {
     await baseRequest({
-      method: () => caseAPI.openCase({ case_id }),
+      method: isRobux
+        ? () => caseAPI.openRobuxCase({ case_id })
+        : () => caseAPI.openCase({ case_id }),
       callback: async result => {
         receivedItem.value = result
         await getUserInfo()

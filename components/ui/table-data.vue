@@ -2,7 +2,7 @@
   <ui-card class="table">
     <template v-for="(item, index) in list" :key="index">
       <div class="table__row">
-        <span class="table__title">{{ item.title }}</span>
+        <span v-if="item.title" class="table__title">{{ item.title }}</span>
         <div class="table__value">
           <slot :name="`row-${index + 1}`" :value="item.value">
             {{ item.value }}

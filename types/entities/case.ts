@@ -3,6 +3,7 @@ export type Case = {
   image_url: string
   name: string
   price: number
+  category: 'robux' | 'adopt_me'
 }
 
 export type CaseItemAbilities = 'mega-neon' | 'flyable' | 'neon' | 'rideable'
@@ -20,6 +21,8 @@ export type CaseItem = {
   rideable: Maybe<boolean>
   age: string
   starpets_withdraw_progress: false
+  crystal_sell_timer: string
+  starpets_withdraw_timer: Maybe<string>
   status:
     | 'owned'
     | 'sold_by_crystal'
