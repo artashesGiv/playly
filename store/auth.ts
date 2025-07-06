@@ -10,6 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const { getUserInfo } = useUserStore()
   const { getTaskSettings } = useCoinsStore()
+  const { tg } = useTelegram()
 
   const login = async () => {
     const { tg } = useTelegram()
@@ -57,7 +58,10 @@ export const useAuthStore = defineStore('auth', () => {
 
   const setStarpetsID = async (id: string) => {
     await baseRequest({
-      method: () => authAPI.setStarpetsID({ starpets_id: id }),
+      method: () => authAPI.setStarpetsID({ starpets_user_id: id }),
+      callback: () => {
+        tg?.showAlert('Starpets ID успешно привязан')
+      },
     })
   }
 

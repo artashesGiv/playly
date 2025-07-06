@@ -5,7 +5,7 @@
     <star-pets-link-content v-model="valueId" class="sp-link__content" />
     <div class="sp-link__buttons">
       <ui-button-base
-        :text="$t('common.save')"
+        :text="$t(starpetsInfo ? 'common.edit' : 'common.save')"
         size="52"
         @click="setStarpetsID(valueId)"
       />
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '@/store'
+import { useAuthStore, useUserStore } from '@/store'
 
 definePageMeta({
   layout: 'empty',
@@ -32,6 +32,13 @@ const valueId = ref('')
 useBackButton()
 
 const { setStarpetsID } = useAuthStore()
+const { starpetsInfo } = storeToRefs(useUserStore())
+
+onMounted(() => {
+  if (starpetsInfo.value) {
+    valueId.value = starpetsInfo.value.id
+  }
+})
 </script>
 
 <style scoped lang="scss">

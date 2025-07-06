@@ -10,15 +10,20 @@
     <ui-icon-base name="link" class="sp-link-header__icon" />
     <div class="sp-link-header__sp">
       <div class="sp-link-header__link">
-        <ui-icon-base name="sp-logo" />
+        <ui-icon-base v-if="!starpetsInfo" name="sp-logo" />
+        <nuxt-img v-else :src="starpetsInfo.avatar" />
       </div>
-      <span>StarPets</span>
+      <span v-if="!starpetsInfo">StarPets</span>
+      <span v-else>{{ starpetsInfo.public_username }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from '@/store'
+
 const { user } = useTelegram()
+const { starpetsInfo } = storeToRefs(useUserStore())
 </script>
 
 <style scoped lang="scss">

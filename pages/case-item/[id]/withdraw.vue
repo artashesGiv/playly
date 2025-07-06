@@ -1,20 +1,20 @@
 <template>
-  <div class="withdraw">
+  <div v-if="item" class="withdraw">
     <div class="withdraw__content">
       <item-main-data
-        :image="item!.image"
-        :title="item!.name"
+        :image="item.image_url"
+        :title="item.name"
         description="Egg"
       />
       <ui-divider />
       <profile-timer-card :item-id="id" />
       <ui-table-data class="withdraw__table" :list="dataListItem">
-        <template #row-1="{ value }">
+        <template #row-1>
           <div class="withdraw__abilities">
-            <cases-item-ability
-              v-for="ability in value"
-              :key="ability"
-              :type="ability"
+            <cases-item-abilities
+              :flyable="item.flyable"
+              :rideable="item.rideable"
+              class="item-case__abilities"
             />
           </div>
         </template>
@@ -43,8 +43,8 @@
 
 <script setup lang="ts">
 import type { CaseItem } from '@/types'
-import { useProfileStore } from '@/store'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
+import { useItemsStore } from '@/store'
 
 definePageMeta({
   layout: 'empty',
@@ -54,25 +54,23 @@ useBackButton()
 const route = useRoute()
 const id = route.params.id as CaseItem['id']
 
-const { receivedItems, ownItems } = storeToRefs(useProfileStore())
-const item = computed(() =>
-  [...receivedItems.value, ...ownItems.value].find(item => item.id === id),
-)
+const { items } = storeToRefs(useItemsStore())
+const item = computed(() => items.value.find(item => item.id === id))
 
-const dataListItem: TableDataProps['list'] = [
+const dataListItem = computed<TableDataProps['list']>(() => [
   {
-    title: 'Properties',
-    value: item?.value?.abilities,
+    title: t('common.properties'),
+    value: '',
   },
   {
-    title: 'Rarity',
-    value: item?.value?.tag.text,
+    title: t('common.rarity'),
+    value: item.value?.rarity,
   },
   {
-    title: 'Age',
-    value: 'Post-Teen',
+    title: t('common.age'),
+    value: item.value?.age,
   },
-]
+])
 
 const onClick = () => {
   console.log('to star pets')

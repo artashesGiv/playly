@@ -18,4 +18,12 @@ export type CaseItem = {
   flyable: Maybe<boolean>
   pumping: Maybe<boolean>
   rideable: Maybe<boolean>
+  age: string
+  starpets_withdraw_progress: false
+  status:
+    | 'owned'
+    | 'sold_by_crystal'
+    | 'in_withdraw_progress'
+    | 'withdraw_error'
+    | 'withdraw_success'
 }

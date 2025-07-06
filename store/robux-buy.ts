@@ -6,6 +6,7 @@ import type {
   WithdrawId,
 } from '@/types'
 import { useUserStore } from '@/store'
+import type { PayCard } from '@/components/pay-card.vue'
 
 type StepsData = {
   user: Maybe<RobloxUser>
@@ -25,12 +26,13 @@ const COEFFICIENT = 4
 
 export const useRobuxBuyStore = defineStore('robux-buy', () => {
   const searchName = ref('')
-  const step = ref<RobuxBuySteps>(1)
+  const step = ref<RobuxBuySteps>(5)
   const stepsData = reactive<StepsData>(defaultStepsData())
   const users = ref<RobloxUser[]>([])
   const places = ref<RobloxPlace[]>([])
   const gamepasses = ref<Gamepass[]>([])
   const withdrawId = ref<WithdrawId>('')
+  const activePayType = ref<Maybe<PayCard['type']>>(null)
 
   let timeout: Timeout
 
@@ -42,11 +44,12 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
   const { getUserInfo } = useUserStore()
 
   const resetStepsData = () => {
-    step.value = 1
+    step.value = 5
     searchName.value = ''
     users.value = []
     places.value = []
     gamepasses.value = []
+    activePayType.value = null
 
     Object.assign(stepsData, defaultStepsData())
   }
@@ -206,6 +209,11 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
         break
       }
       case 5: {
+        console.log('buy')
+        step.value += 1
+        break
+      }
+      case 6: {
         await setWithdraw()
         await getUserInfo()
         navigateTo('/robux')
@@ -250,6 +258,7 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     gamepasses,
     getValue,
     payValue,
+    activePayType,
     resetStepsData,
     nextStep,
     getCurrentWithdraw,

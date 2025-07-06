@@ -100,6 +100,12 @@
         "error": "Gamepass price not match"
       },
       "step-5": {
+        "title": "Robux purchase",
+        "description": "Check the details and pay for the purchase",
+        "policy": "By continuing, you accept the privacy policy and user agreement",
+        "alert": "Payments are protected by 3D Secure"
+      },
+      "step-6": {
         "title": "Successfully!",
         "description": "Robux will be credited within 5-7 days",
         "cardText": "You'll receive on balance",
@@ -167,6 +173,8 @@
   "starPetsLink": {
     "title": "Link your StarPets ID to send items",
     "description": "Find your ID on the profile page in StarPets",
+    "edit_title": "Your accounts are linked",
+    "edit_description": "You can withdraw your items right now!",
     "placeholder": "Enter your StarPets ID",
     "buttons": {
       "starPetsId": "How to get StarPets ID"
@@ -217,7 +225,13 @@
     "save": "Save",
     "r$": "{n} R$",
     "r$Amount": "R$ amount",
-    "withdrawCoins": "Withdraw {n} R$"
+    "withdrawCoins": "Withdraw {n} R$",
+    "you_pay": "You'll pay",
+    "you_receive": "You'll receive",
+    "properties": "Properties",
+    "rarity": "Rarity",
+    "age": "Age",
+    "edit": "Edit"
   },
   "case_names": {
     "common_chest": "Common Chest",
@@ -237,7 +251,10 @@
     "golden_chest": "Golden Chest",
     "royal_chest": "Royal Chest",
     "paradise_chest": "Paradise Chest",
-    "power_chest": "Power Chest"
+    "power_chest": "Power Chest",
+    "robux_4000": "Robux 4 000",
+    "robux_20000": "Robux 20 000",
+    "robux_100000": "Robux 100 000"
   },
   "rarity": {
     "common": "Common",
@@ -245,5 +262,12 @@
     "rare": "Rare",
     "ultra_rare": "Ultra rare",
     "legendary": "Legendary"
+  },
+  "case_status": {
+    "owned": "Owned",
+    "sold_by_crystal": "Sold by crystal",
+    "in_withdraw_progress": "In withdraw progress",
+    "withdraw_error": "Withdraw error",
+    "withdraw_success": "Withdraw success"
   }
 }

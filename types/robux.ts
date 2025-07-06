@@ -105,4 +105,4 @@ export type Gamepass = {
 
 export type WithdrawId = string
 
-export type RobuxBuySteps = 1 | 2 | 3 | 4 | 5
+export type RobuxBuySteps = 1 | 2 | 3 | 4 | 5 | 6

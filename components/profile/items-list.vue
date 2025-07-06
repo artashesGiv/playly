@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { useProfileStore } from '@/store'
+import { useItemsStore } from '@/store'
 import type { CaseItem } from '@/types'
 
 export type CaseItemListProps = {
@@ -25,17 +25,18 @@ export type CaseItemListProps = {
 
 defineProps<CaseItemListProps>()
 const { t } = useI18n()
-const { receivedItems, ownItems } = storeToRefs(useProfileStore())
+
+const { receivedList, ownList } = storeToRefs(useItemsStore())
 
 const titleMap: Record<CaseItemListProps['type'], string> = {
   own: t('profile.items.your'),
   received: t('profile.items.received'),
 }
 
-const listMap: Record<CaseItemListProps['type'], CaseItem[]> = {
-  own: ownItems.value,
-  received: receivedItems.value,
-}
+const listMap = computed<Record<CaseItemListProps['type'], CaseItem[]>>(() => ({
+  own: ownList.value,
+  received: receivedList.value,
+}))
 </script>
 
 <style scoped lang="scss">

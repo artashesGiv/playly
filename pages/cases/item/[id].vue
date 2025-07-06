@@ -4,11 +4,11 @@
       <div class="case-item__card">
         <div
           class="background"
-          :style="{ background: `var(--pink-gradient)` }"
+          :style="{ background: `var(--${mapRareColor.rare}-gradient)` }"
         />
         <item-main-data
           :image="receivedItem?.image_url || ''"
-          :title="receivedItem?.name || ''"
+          :title="snakeToSentence(receivedItem?.name || '')"
           description="Egg"
         />
         <ui-table-data class="case-item__table" :list="dataList">
@@ -42,17 +42,18 @@
         "
         icon-right="coin-1"
         size="52"
-        @click="onSellItem(receivedItem!.crystal_price)"
+        @click="onSellItem"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useCasesStore } from '@/store'
+import { useCasesStore, useItemsStore } from '@/store'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 import type { Case } from '@/types'
 import type { ItemAbilitiesProps } from '@/components/cases/item-abilities.vue'
+import { snakeToSentence } from '@/utils/snake-to-sentence'
 
 definePageMeta({
   layout: 'empty',
@@ -62,6 +63,8 @@ useBackButton()
 const route = useRoute()
 const router = useRouter()
 const { receivedItem, cases } = storeToRefs(useCasesStore())
+const { sellItem } = useItemsStore()
+const { t } = useI18n()
 
 const id = route.params.id as Case['id']
 
@@ -77,7 +80,7 @@ const formattedPriceItem = computed(() =>
 
 const dataList: TableDataProps['list'] = [
   {
-    title: 'Properties',
+    title: t('commonr'),
     value: {
       flyable: receivedItem.value?.flyable,
       rideable: receivedItem.value?.rideable,
@@ -85,11 +88,11 @@ const dataList: TableDataProps['list'] = [
   },
   {
     title: 'Rarity',
-    value: receivedItem?.value?.rarity,
+    value: snakeToSentence(receivedItem?.value?.rarity || ''),
   },
   {
     title: 'Age',
-    value: 'Post-Teen',
+    value: receivedItem?.value?.age,
   },
 ]
 
@@ -97,8 +100,8 @@ const onOpenMore = () => {
   router.back()
 }
 
-const onSellItem = (price: number) => {
-  // TODO sell item
+const onSellItem = async () => {
+  await sellItem(receivedItem.value!.id, receivedItem.value!.crystal_price)
   navigateTo('/cases')
 }
 

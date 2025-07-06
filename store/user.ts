@@ -4,6 +4,8 @@ export const useUserStore = defineStore('user', () => {
   const userInfo = ref<Maybe<UserInfo>>(null)
   const balance = ref(0)
 
+  const starpetsInfo = computed(() => userInfo.value?.starpets_info)
+
   const robuxBalance = computed<UserInfo['robux_balance']>(() => {
     if (userInfo.value) {
       return userInfo.value.robux_balance
@@ -26,6 +28,7 @@ export const useUserStore = defineStore('user', () => {
     balance,
     robuxBalance,
     userInfo,
+    starpetsInfo,
     getUserInfo,
   }
 })

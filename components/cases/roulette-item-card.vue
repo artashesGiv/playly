@@ -17,7 +17,6 @@
 
 <script setup lang="ts">
 import type { CaseItem } from '@/types'
-import type { TagProps } from '@/components/ui/tag.vue'
 
 export type CaseRouletteItemCardProps = {
   crystal_price: CaseItem['crystal_price']
@@ -34,14 +33,6 @@ export type CaseRouletteItemCardProps = {
 }
 
 defineProps<CaseRouletteItemCardProps>()
-
-const mapRareColor: Record<CaseItem['rarity'], TagProps['view']> = {
-  common: 'blue',
-  uncommon: 'pink',
-  rare: 'green',
-  ultra_rare: 'red',
-  legendary: 'yellow',
-}
 </script>
 
 <style scoped lang="scss">

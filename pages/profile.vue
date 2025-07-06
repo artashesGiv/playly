@@ -12,7 +12,15 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useItemsStore } from '@/store'
+
+const { getItems } = useItemsStore()
+
+onMounted(async () => {
+  await getItems()
+})
+</script>
 
 <style scoped lang="scss">
 .profile {

@@ -14,6 +14,11 @@
       />
       <span v-if="label" class="input__label">{{ label }}</span>
       <ui-icon-base v-if="isError" class="input__icon-error" name="alert" />
+      <ui-icon-base
+        v-if="iconRight"
+        class="input__icon-left"
+        :name="iconRight"
+      />
     </div>
     <div
       v-if="isError && errorMessage"
@@ -30,11 +35,13 @@ export type InputBaseProps = {
   isError?: boolean
   placeholder?: string
   icon?: Icons
+  iconRight?: Icons
   label?: string
   errorMessage?: string
   iconColor?: 'base' | 'yellow'
   prefix?: string
   type?: 'text' | 'number'
+  isDisabled?: boolean
   enterkeyhint?:
     | 'enter'
     | 'done'
@@ -61,6 +68,7 @@ const model = defineModel<InputBaseProps['modelValue']>()
 const classes = computed(() => [
   'input',
   { 'is-error': props.isError },
+  { 'is-disabled': props.isDisabled },
   `input--icon-color--${props.iconColor}`,
 ])
 
@@ -137,6 +145,12 @@ const onInput = (event: Event) => {
 
   &.is-error {
     color: var(--red-500);
+  }
+
+  &.is-disabled {
+    @include disabled;
+
+    opacity: 0.7;
   }
 }
 </style>

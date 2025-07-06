@@ -11,6 +11,7 @@
       <ui-button-base
         :is-disabled="isButtonDisableMap[step]"
         size="52"
+        :icon="step === 5 ? 'robux' : undefined"
         :text="buttonTextMap[step]"
         @click="nextStep"
       />
@@ -33,6 +34,7 @@
 
 <script setup lang="ts">
 import { useRobuxBuyStore } from '@/store'
+import type { RobuxBuySteps } from '@/types'
 
 definePageMeta({
   layout: 'empty',
@@ -41,35 +43,39 @@ definePageMeta({
 const router = useRouter()
 const { tg } = useTelegram()
 const { t } = useI18n()
-const { step, stepsData, gamepasses } = storeToRefs(useRobuxBuyStore())
+const { step, stepsData, gamepasses, getValue, activePayType } =
+  storeToRefs(useRobuxBuyStore())
 const { resetStepsData, nextStep, getCurrentWithdraw } = useRobuxBuyStore()
 
 const isOpenModal = ref(false)
 
-const stepsMap: Record<number, Component> = {
+const stepsMap: Record<RobuxBuySteps, Component> = {
   1: defineAsyncComponent(() => import('@/components/robux/buy/step/1.vue')),
   2: defineAsyncComponent(() => import('@/components/robux/buy/step/2.vue')),
   3: defineAsyncComponent(() => import('@/components/robux/buy/step/3.vue')),
   4: defineAsyncComponent(() => import('@/components/robux/buy/step/4.vue')),
   5: defineAsyncComponent(() => import('@/components/robux/buy/step/5.vue')),
+  6: defineAsyncComponent(() => import('@/components/robux/buy/step/6.vue')),
 }
 
-const isButtonDisableMap = computed<Record<string, boolean>>(() => ({
+const isButtonDisableMap = computed<Record<RobuxBuySteps, boolean>>(() => ({
   1: !stepsData.value.user,
   2: !stepsData.value.place,
   3: !!gamepasses.value.length && !stepsData.value.gamepass,
   4: false,
-  5: false,
+  5: !activePayType.value,
+  6: false,
 }))
 
-const buttonTextMap = computed<Record<number, string>>(() => ({
+const buttonTextMap = computed<Record<RobuxBuySteps, string>>(() => ({
   1: t('robux.buy.step-1.nextButton'),
   2: t('robux.buy.step-2.nextButton'),
   3: gamepasses.value.length
     ? t('robux.buy.step-3.nextButtonSelect')
     : t('robux.buy.step-3.nextButtonCreate'),
   4: t('robux.buy.step-4.nextButton'),
-  5: t('robux.buy.step-5.nextButton'),
+  5: `${t('common.buy', { sum: getValue.value })} R$`,
+  6: t('robux.buy.step-6.nextButton'),
 }))
 
 function handleBack() {

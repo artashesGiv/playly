@@ -1,26 +1,20 @@
-import type { Cases } from '@/types'
 import type { NuxtApp } from 'nuxt/app'
+import type { Items } from '@/types'
 
 export const itemsAPI = {
   get _baseApi() {
     return (useNuxtApp() as NuxtApp).$baseApi
   },
 
-  async fetchCases(): Promise<Cases.GET.Cases.Response> {
-    return await this._baseApi.get('/cases')
+  async fetchItems() {
+    return await this._baseApi.get('/item/my_items')
   },
 
-  async fetchCaseItems({
-    case_id,
-  }: Cases.GET.Items.Params): Promise<Cases.GET.Items.Response> {
-    return await this._baseApi.get(`/cases/items/${case_id}`)
+  async sellItem(params: Items.POST.Sell.Params) {
+    return await this._baseApi.post('/item/sell', params)
   },
 
-  async openCase(
-    params: Cases.POST.Open.Params,
-  ): Promise<Cases.POST.Open.Response> {
-    return await this._baseApi.post('/crystals/tasks/open', {
-      body: params,
-    })
+  async withdrawItem(params: Items.POST.Withdraw.Params) {
+    return await this._baseApi.post('/item/withdraw', params)
   },
 }

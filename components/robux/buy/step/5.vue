@@ -1,102 +1,85 @@
 <template>
   <div class="robux-buy-5">
-    <ui-card class="robux-buy-5__card">
-      <nuxt-img :src="stepsData.user?.avatar_url" class="robux-buy-5__avatar" />
-      <div class="robux-buy-5__sum">
-        <span>+{{ getValue }}</span>
-        <ui-icon-base name="robux" class="robux-buy-5__icon-robux" />
-      </div>
-      <span>{{ $t('robux.buy.step-5.cardText') }}</span>
-      <ui-icon-base
-        name="robux"
-        class="robux-buy-5__icon robux-buy-5__icon-1"
+    <ui-table-data :list="dataListOwn">
+      <template #row-1>
+        <user-data />
+      </template>
+      <template #row-3="{ value }">
+        <div class="robux-buy-5__price">
+          <span>{{ value }}</span>
+          <ui-icon-base name="robux" class="robux-buy-5__icon-robux" />
+        </div>
+      </template>
+    </ui-table-data>
+    <div class="robux-buy-5__list">
+      <pay-card
+        v-for="item in payCards"
+        :key="item"
+        :type="item"
+        :is-active="item === activePayType"
+        @click="onClick(item)"
       />
-      <ui-icon-base
-        name="robux"
-        class="robux-buy-5__icon robux-buy-5__icon-2"
-      />
-      <ui-icon-base
-        name="robux"
-        class="robux-buy-5__icon robux-buy-5__icon-3"
-      />
-    </ui-card>
-    <div class="robux-buy-5__alert">
-      <span>{{ $t('robux.buy.step-5.alert') }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRobuxBuyStore } from '@/store'
+import UserData from '@/components/user-data.vue'
+import type { TableDataProps } from '@/components/ui/table-data.vue'
+import type { PayCard } from '@/components/pay-card.vue'
 
-const { getValue, stepsData } = storeToRefs(useRobuxBuyStore())
+const { getValue, activePayType } = storeToRefs(useRobuxBuyStore())
+
+const { t } = useI18n()
+const { tg } = useTelegram()
+
+const dataListOwn = computed<TableDataProps['list']>(() => [
+  {
+    title: t('common.owner'),
+    value: tg?.initDataUnsafe?.user,
+  },
+  {
+    title: t('common.you_pay'),
+    value: '$56',
+  },
+  {
+    title: `${t('common.you_receive')}`,
+    value: getValue.value,
+  },
+])
+
+const payCards: PayCard['type'][] = [
+  'bitcoin',
+  'youmoney',
+  'mastercard',
+  'tether',
+  'visa',
+  'gpay',
+]
+
+const onClick = (item: PayCard['type']) => {
+  activePayType.value = item
+}
 </script>
 
 <style scoped lang="scss">
 .robux-buy-5 {
   @include column(18px);
 
-  &__card {
-    @include column;
-
-    position: relative;
-    align-items: center;
-    text-align: center;
-    width: 100%;
+  &__price {
+    @include row(8px);
   }
 
-  &__sum {
-    @include row(5px);
-
-    margin-top: 10px;
-    color: var(--white);
-
-    span {
-      font: var(--font-base-bold) !important;
-    }
+  &__icon-robux {
+    font-size: 22px;
+    color: var(--yellow-500);
   }
 
-  &__avatar {
-    width: 64px;
-    height: 64px;
-    border-radius: 18px;
-  }
-
-  &__alert {
-    font: var(--font-base-medium);
-  }
-
-  span {
-    font: var(--font-base-medium);
-  }
-
-  &__icon {
-    position: absolute;
-    color: var(--white);
-    opacity: 0.2;
-
-    &-robux {
-      font-size: 22px;
-      color: var(--yellow-500);
-    }
-
-    &-1 {
-      font-size: 56px;
-      top: 46px;
-      left: 35px;
-      opacity: 0.1;
-    }
-    &-2 {
-      font-size: 54px;
-      top: 23px;
-      right: 51px;
-    }
-    &-3 {
-      font-size: 40px;
-      top: 86px;
-      right: 20px;
-      opacity: 0.1;
-    }
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 }
 </style>

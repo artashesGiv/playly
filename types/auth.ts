@@ -26,7 +26,7 @@ export namespace Auth {
 
     export namespace Starpets {
       export type Params = {
-        starpets_id: string
+        starpets_user_id: string
       }
       export type Response = undefined
     }
@@ -58,4 +58,10 @@ export type UserInfo = {
   crystal_balance: number
   robux_balance: number
   tasks: { starpets_join_channel: boolean; playly_join_channel: boolean }
+  starpets_info: {
+    avatar: '2'
+    id: '68651d48dcf4615e98796abe'
+    public_username: 'arkasha1234'
+    username: 'arkasha1234'
+  }
 }

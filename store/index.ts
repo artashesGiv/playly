@@ -1,7 +1,6 @@
 export * from './friends'
 export * from './robux-buy'
 export * from './cases'
-export * from './profile'
 export * from './auth'
 export * from './user'
 export * from './coins'

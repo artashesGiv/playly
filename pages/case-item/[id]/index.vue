@@ -1,14 +1,14 @@
 <template>
-  <div class="case-item">
+  <div v-if="item" class="case-item">
     <div
       class="case-item__gradient"
-      :style="{ background: `var(--${item!.tag.view}-gradient)` }"
+      :style="{ background: `var(--${mapRareColor[item.rarity]}-gradient)` }"
     />
     <div class="case-item__content">
       <item-main-data
-        :image="item!.image"
-        :title="item!.name"
-        description="Egg"
+        :image="item.image_url"
+        :title="snakeToSentence(item.name)"
+        :description="snakeToSentence(item.age)"
       />
       <item-interactive
         :disabled="disableButtons"
@@ -22,28 +22,29 @@
         </template>
         <template #row-3="{ value }">
           <div class="case-item__price">
-            <span>{{ value }}</span>
+            <span>{{ formatePrice(value) }}</span>
             <main-mascot size="xs" />
           </div>
         </template>
       </ui-table-data>
       <ui-table-data class="case-item__table" :list="dataListItem">
-        <template #row-1="{ value }">
+        <template #row-1>
           <div class="case-item__abilities">
-            <cases-item-ability
-              v-for="ability in value"
-              :key="ability"
-              :type="ability"
+            <cases-item-abilities
+              :flyable="item.flyable"
+              :rideable="item.rideable"
+              class="item-case__abilities"
             />
           </div>
         </template>
       </ui-table-data>
     </div>
     <ui-button-base
+      class="case-item__button"
       size="52"
       :text="
         isAvailable
-          ? $t('common.sellForCoins', item!.price)
+          ? $t('common.sellForCoins', item.crystal_price)
           : $t('common.close')
       "
       @click="onClick"
@@ -53,12 +54,9 @@
 
 <script setup lang="ts">
 import type { CaseItem } from '@/types'
-import { useProfileStore } from '@/store'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 import type { InteractiveProps } from '@/components/item-interactive.vue'
-import UserData from '@/components/user-data.vue'
-
-type Status = 'received' | 'available'
+import { useItemsStore, useUserStore } from '@/store'
 
 definePageMeta({
   layout: 'empty',
@@ -71,23 +69,14 @@ const route = useRoute()
 const router = useRouter()
 const id = route.params.id as CaseItem['id']
 
-const { receivedItems, ownItems } = storeToRefs(useProfileStore())
-const item = computed<(CaseItem & { status: Status }) | null>(() => {
-  const foundInReceived = receivedItems.value.find(item => item.id === id)
-  if (foundInReceived) {
-    return { ...foundInReceived, status: 'received' as const }
-  }
+const { items } = storeToRefs(useItemsStore())
+const { userInfo } = storeToRefs(useUserStore())
+const { sellItem, withdrawItem } = useItemsStore()
 
-  const foundInOwn = ownItems.value.find(item => item.id === id)
-  if (foundInOwn) {
-    return { ...foundInOwn, status: 'available' as const }
-  }
+const item = computed<CaseItem>(() => items.value.find(item => item.id === id)!)
 
-  return null
-})
-
-const isAvailable = computed(() => item.value!.status === 'available')
-const isReceived = computed(() => item.value!.status === 'received')
+const isAvailable = computed(() => item.value?.status === 'owned')
+const isReceived = computed(() => item.value?.status !== 'owned')
 
 const disableButtons = computed<InteractiveProps['disabled']>(() =>
   isReceived.value ? ['sell', 'withdraw'] : undefined,
@@ -100,33 +89,31 @@ const dataListOwn = computed<TableDataProps['list']>(() => [
   },
   {
     title: t('common.status'),
-    value:
-      item.value!.status.charAt(0).toUpperCase() +
-      item.value!.status.slice(1).toLowerCase(),
+    value: t(`case_status.${item.value?.status}`),
   },
   {
     title: `${t('common.price')}`,
-    value: item.value!.price,
+    value: item.value?.crystal_price,
   },
 ])
 
-const dataListItem: TableDataProps['list'] = [
+const dataListItem = computed<TableDataProps['list']>(() => [
   {
-    title: 'Properties',
-    value: item?.value?.abilities,
+    title: t('common.properties'),
+    value: '',
   },
   {
-    title: 'Rarity',
-    value: item?.value?.tag.text,
+    title: t('common.rarity'),
+    value: item.value?.rarity,
   },
   {
-    title: 'Age',
-    value: 'Post-Teen',
+    title: t('common.age'),
+    value: item.value?.age,
   },
-]
+])
 
-const onSell = () => {
-  console.log('sell')
+const onSell = async () => {
+  await sellItem(item.value.id, item.value.crystal_price)
 }
 
 const onClick = () => {
@@ -139,9 +126,23 @@ const onClick = () => {
   }
 }
 
-const onWithdraw = () => {
-  navigateTo(`/case-item/${id}/withdraw`)
+const onWithdraw = async () => {
+  if (userInfo.value?.starpets_info) {
+    await withdrawItem(item.value?.id)
+    navigateTo(`/case-item/${id}/withdraw`)
+  } else {
+    tg?.showAlert('Сначала привяжите аккаунт Starpets')
+    navigateTo('/star-pets-link')
+  }
 }
+
+const { getItems } = useItemsStore()
+
+onMounted(async () => {
+  if (!items.value.length) {
+    await getItems()
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -172,6 +173,10 @@ const onWithdraw = () => {
 
   &__abilities {
     @include row(8px);
+  }
+
+  &__button {
+    flex-shrink: 0;
   }
 }
 </style>

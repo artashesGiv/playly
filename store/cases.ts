@@ -1,9 +1,12 @@
 import type { Case, CaseItem } from '@/types'
+import { useUserStore } from '@/store/user'
 
 export const useCasesStore = defineStore('cases', () => {
   const cases = ref<Case[]>([])
   const caseItems = ref<CaseItem[]>([])
   const receivedItem = ref<Maybe<CaseItem>>(null)
+
+  const { getUserInfo } = useUserStore()
 
   const getCases = async () => {
     await baseRequest({
@@ -26,8 +29,9 @@ export const useCasesStore = defineStore('cases', () => {
   const openCase = async (case_id: string) => {
     await baseRequest({
       method: () => caseAPI.openCase({ case_id }),
-      callback: result => {
+      callback: async result => {
         receivedItem.value = result
+        await getUserInfo()
       },
     })
   }

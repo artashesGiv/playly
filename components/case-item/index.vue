@@ -5,16 +5,18 @@
     @mouseup="isHover = false"
   >
     <div class="background" :style="backgroundStyle" />
-    <nuxt-img :src="image" class="case-item__image" />
-    <span>{{ name }}</span>
+    <nuxt-img :src="image_url" class="case-item__image" />
+    <span>{{ snakeToSentence(name) }}</span>
     <div class="case-item__abilities">
-      <cases-item-ability
-        v-for="ability in abilities"
-        :key="ability"
-        :type="ability"
+      <cases-item-abilities
+        :flyable="flyable"
+        :rideable="rideable"
+        class="item-case__abilities"
       />
     </div>
-    <div class="case-item__price">{{ price }} <main-mascot size="xs" /></div>
+    <div class="case-item__price">
+      {{ formatePrice(crystal_price) }} <main-mascot size="xs" />
+    </div>
   </article>
 </template>
 
@@ -22,13 +24,14 @@
 import type { CaseItem } from '@/types'
 
 export type CaseItemProps = {
+  crystal_price: CaseItem['crystal_price']
   id: CaseItem['id']
+  image_url: CaseItem['image_url']
   name: CaseItem['name']
-  image: CaseItem['image']
-  probability: CaseItem['probability']
-  price: CaseItem['price']
-  tag: CaseItem['tag']
-  abilities: CaseItem['abilities']
+  rarity: CaseItem['rarity']
+  flyable: CaseItem['flyable']
+  pumping: CaseItem['pumping']
+  rideable: CaseItem['rideable']
 }
 
 const props = defineProps<CaseItemProps>()
@@ -36,10 +39,12 @@ const isHover = ref(false)
 
 const backgroundStyle = computed(() => {
   if (isHover.value) {
-    return { background: `var(--${props.tag.view}-gradient-active)` }
+    return {
+      background: `var(--${mapRareColor[props.rarity]}-gradient-active)`,
+    }
   }
 
-  return { background: `var(--${props.tag.view}-gradient)` }
+  return { background: `var(--${mapRareColor[props.rarity]}-gradient)` }
 })
 </script>
 
@@ -55,6 +60,7 @@ const backgroundStyle = computed(() => {
   border-radius: 22px;
   overflow: hidden;
   cursor: pointer;
+  transition: var(--transition-base);
 
   .background {
     position: absolute;
@@ -78,8 +84,7 @@ const backgroundStyle = computed(() => {
   }
 
   &__abilities {
-    @include row(8px);
-
+    min-height: 30px;
     margin-top: 4px;
   }
 

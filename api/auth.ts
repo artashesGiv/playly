@@ -29,8 +29,6 @@ export const authAPI = {
   },
 
   async setStarpetsID(params: Auth.POST.Starpets.Params) {
-    return await this._baseApi.post('/auth/starpets_id', {
-      body: params,
-    })
+    return await this._baseApi.post('/auth/starpets_id', params)
   },
 }

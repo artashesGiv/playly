@@ -59,51 +59,6 @@ const formattedPrice = computed(() =>
 /* ─────────────────────────── исходные данные ──────────────────────────── */
 const isSpin = ref(false)
 
-function centerNearestItem(el: HTMLElement, durationMs = 500) {
-  const containerRect = el.getBoundingClientRect()
-  const containerCenterY = containerRect.top + containerRect.height / 2
-
-  let nearest: HTMLElement | null = null
-  let delta = 0
-
-  for (const child of Array.from(el.children) as HTMLElement[]) {
-    if (!child.classList.contains('roulette__item')) continue
-    const rect = child.getBoundingClientRect()
-    const itemCenterY = rect.top + rect.height / 2
-    const d = itemCenterY - containerCenterY
-    if (nearest === null || Math.abs(d) < Math.abs(delta)) {
-      nearest = child
-      delta = d
-    }
-  }
-
-  if (!nearest || delta === 0) return
-
-  const startScroll = el.scrollTop
-  const startTime = performance.now()
-
-  const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
-
-  const smoothStep = async (now: number) => {
-    const elapsed = now - startTime
-    const progress = Math.min(elapsed / durationMs, 1) // 0–1
-    const eased = easeOutCubic(progress)
-
-    el.scrollTop = startScroll + delta * eased
-    handleScroll(el)
-
-    if (progress < 1) {
-      requestAnimationFrame(smoothStep)
-    } else {
-      await openCase(id)
-
-      navigateTo(`/cases/item/${id}`)
-    }
-  }
-
-  requestAnimationFrame(smoothStep)
-}
-
 type Direction = 'down' | 'up'
 
 /* ──────────────────────────── автоскролл ─────────────────────────────── */
@@ -126,7 +81,7 @@ function startAutoScroll(direction: Direction = 'down', peakSpeedPxS = 800) {
   const startTime = performance.now()
   let prevTime = startTime
 
-  const step = (now: number) => {
+  const step = async (now: number) => {
     const elapsed = now - startTime
     const progress = Math.min(elapsed / DURATION, 1) // 0 → 1
     const velocity = peakSpeedPxS * Math.sin(Math.PI * progress) // px / c
@@ -139,7 +94,9 @@ function startAutoScroll(direction: Direction = 'down', peakSpeedPxS = 800) {
     if (progress < 1) {
       rafId = requestAnimationFrame(step)
     } else {
-      centerNearestItem(el)
+      await openCase(id)
+
+      navigateTo(`/cases/item/${id}`)
       isSpin.value = false
       rafId = null
     }
