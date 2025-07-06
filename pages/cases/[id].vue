@@ -42,6 +42,7 @@ definePageMeta({ layout: 'without-padding' })
 
 const route = useRoute()
 const id = route.params.id as Case['id']
+const isAutoScroll = route.query.scroll
 
 const { getCaseItems, getCases, openCase } = useCasesStore()
 const { caseItems, cases, receivedItem } = storeToRefs(useCasesStore())
@@ -139,7 +140,7 @@ async function startAutoScroll(peakSpeedPxS = 800) {
       isActiveItem.value = receivedItem.value!.id
       isSpin.value = false
       rafId = null
-      navigateTo(`/cases/item/${id}`)
+      navigateTo(`/cases/item/${id}`, { replace: true })
     }
   }
 
@@ -172,6 +173,12 @@ onMounted(async () => {
   if (!cases.value.length) await getCases()
   await getCaseItems(id, currentCase.value.category === 'robux')
   isMounted.value = true
+
+  if (isAutoScroll) {
+    setTimeout(() => {
+      startAutoScroll()
+    }, 1000)
+  }
 
   await nextTick() // ждём рендер
   const el = wrapperRef.value!

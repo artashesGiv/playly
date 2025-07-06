@@ -12,6 +12,7 @@
           :image="receivedItem?.image_url || ''"
           :title="snakeToSentence(receivedItem?.name || '')"
           :description="snakeToSentence(receivedItem?.item_type || '')"
+          class="case-item__main-data"
         />
         <ui-table-data class="case-item__table" :list="dataList">
           <template #row-1>
@@ -62,7 +63,6 @@ definePageMeta({
 useBackButton()
 
 const route = useRoute()
-const router = useRouter()
 const { receivedItem, cases } = storeToRefs(useCasesStore())
 const { sellItem } = useItemsStore()
 const { t } = useI18n()
@@ -95,7 +95,7 @@ const dataList: TableDataProps['list'] = [
 ]
 
 const onOpenMore = () => {
-  router.back()
+  navigateTo(`/cases/${currentCase.value!.id}?scroll=true`, { replace: true })
 }
 
 const onSellItem = async () => {
@@ -120,6 +120,11 @@ onMounted(() => {
     @include column(14px);
 
     flex-grow: 1;
+  }
+
+  &__main-data {
+    position: relative;
+    z-index: 2;
   }
 
   &__card {

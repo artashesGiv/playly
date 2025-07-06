@@ -9,9 +9,9 @@
     </div>
     <nuxt-img :src="image_url" class="item-case__image" />
     <h5 class="item-case__title">{{ snakeToSentence(name) }}</h5>
-    <span v-if="item_type" class="item-case__description">{{
-      snakeToSentence(item_type)
-    }}</span>
+    <span v-if="item_type" class="item-case__description">
+      {{ snakeToSentence(item_type) }}
+    </span>
     <cases-item-abilities
       v-if="flyable || rideable"
       :flyable="flyable"
