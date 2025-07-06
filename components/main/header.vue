@@ -20,7 +20,6 @@
   justify-content: space-between;
   height: var(--header-height);
   background-color: var(--dark-1000);
-  padding: 0 16px;
 
   &__right {
     @include row(12px);
