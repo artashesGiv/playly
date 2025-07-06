@@ -17,7 +17,7 @@
         :key="`${item.id}-${index}`"
         class="roulette__item"
         v-bind="item"
-        :is-active="receivedItem?.id === item.id"
+        :is-active="isActiveItem === item.id"
         :data-origin-id="item.id"
       />
     </div>
@@ -26,7 +26,7 @@
       :text="$t('cases.roulette.button', { n: formattedPrice })"
       :loading="isSpin"
       size="52"
-      :is-disabled="currentCase?.price > balance"
+      :is-disabled="currentCase?.price > balance || !isMounted"
       icon-right="coin-1"
       class="roulette__button"
       @click="startAutoScroll"
@@ -47,6 +47,7 @@ const { getCaseItems, getCases, openCase } = useCasesStore()
 const { caseItems, cases, receivedItem } = storeToRefs(useCasesStore())
 const { balance } = storeToRefs(useUserStore())
 const isMounted = ref(false)
+const isActiveItem = ref('')
 
 const currentCase = computed<Case>(
   () => cases.value.find(item => item.id === id)!,
@@ -72,6 +73,7 @@ const baseItems = computed<CaseItem[]>(() => {
 let rafId: number | null = null
 
 async function startAutoScroll(peakSpeedPxS = 800) {
+  isActiveItem.value = ''
   if (isSpin.value) return
   const el = wrapperRef.value
   if (!el) return
@@ -124,6 +126,7 @@ async function startAutoScroll(peakSpeedPxS = 800) {
     if (progress < 1) {
       rafId = requestAnimationFrame(step)
     } else {
+      isActiveItem.value = receivedItem.value!.id
       isSpin.value = false
       rafId = null
       navigateTo(`/cases/item/${id}`)
