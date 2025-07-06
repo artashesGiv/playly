@@ -59,12 +59,19 @@ const formattedPrice = computed(() =>
 /* ─────────────────────────── исходные данные ──────────────────────────── */
 const isSpin = ref(false)
 
-type Direction = 'down' | 'up'
+const baseItems = computed<CaseItem[]>(() => {
+  const arr = [...caseItems.value]
+  // гарантируем, что выпавший предмет присутствует в списке
+  if (receivedItem.value && !arr.some(i => i.id === receivedItem.value!.id)) {
+    arr.push(receivedItem.value)
+  }
+  return arr
+})
 
 /* ──────────────────────────── автоскролл ─────────────────────────────── */
 let rafId: number | null = null
 
-function startAutoScroll(direction: Direction = 'down', peakSpeedPxS = 800) {
+async function startAutoScroll(peakSpeedPxS = 800) {
   if (isSpin.value) return
   const el = wrapperRef.value
   if (!el) return
@@ -76,29 +83,50 @@ function startAutoScroll(direction: Direction = 'down', peakSpeedPxS = 800) {
 
   isSpin.value = true
 
-  const DURATION = 7000
-  const sign = direction === 'down' ? 1 : -1
+  // Получаем результат кейса до начала анимации
+  await openCase(id)
+  await nextTick() // ждём, пока элемент появится в DOM
+
+  // DOM‑элемент выпавшего предмета
+  const targetEl = el.querySelector<HTMLElement>(
+    `[data-origin-id="${receivedItem.value?.id}"]`,
+  )
+  if (!targetEl) {
+    isSpin.value = false
+    return
+  }
+
+  // Центрируем элемент
+  const startScroll = el.scrollTop
+  let targetScroll =
+    targetEl.offsetTop - el.clientHeight / 2 + targetEl.clientHeight / 2
+
+  // Принудительно прокручиваем только вниз
+  const oneListHeight = el.scrollHeight / 3
+  while (targetScroll < startScroll) {
+    targetScroll += oneListHeight
+  }
+  const distance = targetScroll - startScroll
+
+  // Рассчитываем продолжительность анимации
+  const MIN_DURATION = 7000 // мс — гарантируем минимум 7 с
+  // Оценка времени исходя из расстояния и пиковой скорости
+  const estimated = (Math.abs(distance) / peakSpeedPxS) * 800
+  const DURATION = Math.max(MIN_DURATION, estimated)
   const startTime = performance.now()
-  let prevTime = startTime
+  const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
 
-  const step = async (now: number) => {
-    const elapsed = now - startTime
-    const progress = Math.min(elapsed / DURATION, 1) // 0 → 1
-    const velocity = peakSpeedPxS * Math.sin(Math.PI * progress) // px / c
-    const dt = (now - prevTime) / 400
-    prevTime = now
-
-    el.scrollTop += sign * velocity * dt
+  const step = (now: number) => {
+    const progress = Math.min((now - startTime) / DURATION, 1)
+    el.scrollTop = startScroll + distance * easeOutCubic(progress)
     handleScroll(el)
 
     if (progress < 1) {
       rafId = requestAnimationFrame(step)
     } else {
-      await openCase(id)
-
-      navigateTo(`/cases/item/${id}`)
       isSpin.value = false
       rafId = null
+      navigateTo(`/cases/item/${id}`)
     }
   }
 
@@ -107,8 +135,9 @@ function startAutoScroll(direction: Direction = 'down', peakSpeedPxS = 800) {
 
 /* ─────────────────────────── бесконечный список ───────────────────────── */
 const displayedItems = computed<CaseItem[]>(() => {
-  const arr = caseItems.value
-  return [...arr]
+  const arr = baseItems.value
+  // три копии для бесшовной прокрутки
+  return [...arr, ...arr, ...arr]
 })
 
 /* ────────────────────────── логика прокрутки ──────────────────────────── */
