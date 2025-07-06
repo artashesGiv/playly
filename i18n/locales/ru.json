@@ -269,5 +269,6 @@
     "in_withdraw_progress": "В процессе вывода",
     "withdraw_error": "Ошибка выводы",
     "withdraw_success": "Успешно выведен"
-  }
+  },
+  "invitation": "Тут раздают бесплатные Робуксы и Петов!"
 }

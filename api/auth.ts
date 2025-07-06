@@ -12,8 +12,14 @@ export const authAPI = {
     return await this._baseApi.post('/auth/telegram', payload)
   },
 
-  async refreshToken(): Promise<Auth.POST.Login.Response> {
-    return await this._baseApi.post('/auth/refresh_token')
+  async refreshToken(
+    payload: Auth.POST.Refresh.Payload,
+  ): Promise<Auth.POST.Refresh.Response> {
+    return await this._baseApi.post('/auth/refresh_token', null, {
+      headers: {
+        Refresh: `Bearer ${payload.refresh_token}`,
+      },
+    })
   },
 
   async fetchUserInfo(): Promise<Auth.GET.UserInfo.Response> {

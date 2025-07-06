@@ -5,9 +5,13 @@ export namespace Items {
     export namespace Sell {
       export type Response = Case[]
     }
-    export namespace Items {
+    export namespace CaseItems {
       export type Params = { case_id: Case['id'] }
       export type Response = CaseItem[]
+    }
+    export namespace Item {
+      export type Params = { item_id: CaseItem['id'] }
+      export type Response = CaseItem
     }
   }
   export namespace POST {

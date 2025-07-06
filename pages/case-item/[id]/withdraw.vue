@@ -55,6 +55,7 @@ const route = useRoute()
 const id = route.params.id as CaseItem['id']
 
 const { items } = storeToRefs(useItemsStore())
+const { t } = useI18n()
 const item = computed(() => items.value.find(item => item.id === id))
 
 const dataListItem = computed<TableDataProps['list']>(() => [

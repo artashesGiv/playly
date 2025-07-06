@@ -2,6 +2,7 @@ import type { CaseItem } from '@/types'
 
 export const useItemsStore = defineStore('items', () => {
   const items = ref<CaseItem[]>([])
+  const item = ref<Maybe<CaseItem>>(null)
 
   const { tg } = useTelegram()
 
@@ -10,7 +11,7 @@ export const useItemsStore = defineStore('items', () => {
   )
 
   const receivedList = computed(() =>
-    items.value.filter(item => item.status !== 'owned'),
+    items.value.filter(item => item.status === 'withdraw_success'),
   )
 
   const getItems = async () => {
@@ -18,6 +19,15 @@ export const useItemsStore = defineStore('items', () => {
       method: () => itemsAPI.fetchItems(),
       callback: result => {
         items.value = result
+      },
+    })
+  }
+
+  const getItem = async (id: CaseItem['id']) => {
+    await baseRequest({
+      method: () => itemsAPI.fetchItem({ item_id: id }),
+      callback: result => {
+        item.value = result
       },
     })
   }
@@ -39,10 +49,12 @@ export const useItemsStore = defineStore('items', () => {
 
   return {
     items,
+    item,
     ownList,
     receivedList,
     withdrawItem,
     sellItem,
     getItems,
+    getItem,
   }
 })

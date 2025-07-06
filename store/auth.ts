@@ -37,7 +37,10 @@ export const useAuthStore = defineStore('auth', () => {
 
   const refresh = async () => {
     await baseRequest({
-      method: () => authAPI.refreshToken(),
+      method: () =>
+        authAPI.refreshToken({
+          refresh_token: tokenData.value?.refresh_token || '',
+        }),
       callback: result => {
         tokenData.value = {
           access_token: result.access_token,

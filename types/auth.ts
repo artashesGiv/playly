@@ -24,6 +24,11 @@ export namespace Auth {
       export type Response = AuthResponse
     }
 
+    export namespace Refresh {
+      export type Payload = Pick<TokenData, 'refresh_token'>
+      export type Response = AuthResponse
+    }
+
     export namespace Starpets {
       export type Params = {
         starpets_user_id: string

@@ -26,7 +26,7 @@ const COEFFICIENT = 4
 
 export const useRobuxBuyStore = defineStore('robux-buy', () => {
   const searchName = ref('')
-  const step = ref<RobuxBuySteps>(5)
+  const step = ref<RobuxBuySteps>(1)
   const stepsData = reactive<StepsData>(defaultStepsData())
   const users = ref<RobloxUser[]>([])
   const places = ref<RobloxPlace[]>([])
@@ -44,7 +44,7 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
   const { getUserInfo } = useUserStore()
 
   const resetStepsData = () => {
-    step.value = 5
+    step.value = 1
     searchName.value = ''
     users.value = []
     places.value = []

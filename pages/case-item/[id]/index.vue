@@ -69,14 +69,16 @@ const route = useRoute()
 const router = useRouter()
 const id = route.params.id as CaseItem['id']
 
-const { items } = storeToRefs(useItemsStore())
+const { item } = storeToRefs(useItemsStore())
 const { userInfo } = storeToRefs(useUserStore())
-const { sellItem, withdrawItem } = useItemsStore()
-
-const item = computed<CaseItem>(() => items.value.find(item => item.id === id)!)
+const { sellItem, withdrawItem, getItem } = useItemsStore()
 
 const isAvailable = computed(() => item.value?.status === 'owned')
-const isReceived = computed(() => item.value?.status !== 'owned')
+const isReceived = computed(
+  () =>
+    item.value?.status === 'withdraw_success' ||
+    item.value?.status === 'sold_by_crystal',
+)
 
 const disableButtons = computed<InteractiveProps['disabled']>(() =>
   isReceived.value ? ['sell', 'withdraw'] : undefined,
@@ -113,7 +115,9 @@ const dataListItem = computed<TableDataProps['list']>(() => [
 ])
 
 const onSell = async () => {
-  await sellItem(item.value.id, item.value.crystal_price)
+  if (item.value) {
+    await sellItem(item.value.id, item.value.crystal_price)
+  }
 }
 
 const onClick = () => {
@@ -127,8 +131,8 @@ const onClick = () => {
 }
 
 const onWithdraw = async () => {
-  if (userInfo.value?.starpets_info) {
-    await withdrawItem(item.value?.id)
+  if (userInfo.value?.starpets_info && item.value) {
+    await withdrawItem(item.value.id)
     navigateTo(`/case-item/${id}/withdraw`)
   } else {
     tg?.showAlert('Сначала привяжите аккаунт Starpets')
@@ -136,12 +140,8 @@ const onWithdraw = async () => {
   }
 }
 
-const { getItems } = useItemsStore()
-
 onMounted(async () => {
-  if (!items.value.length) {
-    await getItems()
-  }
+  await getItem(id)
 })
 </script>
 
