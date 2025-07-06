@@ -86,7 +86,7 @@ async function startAutoScroll(peakSpeedPxS = 800) {
   isSpin.value = true
 
   // Получаем результат кейса до начала анимации
-  await openCase(id)
+  await openCase(id, currentCase.value.category === 'robux')
   await nextTick() // ждём, пока элемент появится в DOM
 
   // DOM‑элемент выпавшего предмета

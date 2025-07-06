@@ -4,7 +4,9 @@
       <div class="case-item__card">
         <div
           class="background"
-          :style="{ background: `var(--${mapRareColor.rare}-gradient)` }"
+          :style="{
+            background: `var(--${mapRareColor[receivedItem?.rarity] || 'yellow'}-gradient)`,
+          }"
         />
         <item-main-data
           :image="receivedItem?.image_url || ''"
