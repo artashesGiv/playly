@@ -11,7 +11,7 @@
         <item-main-data
           :image="receivedItem?.image_url || ''"
           :title="snakeToSentence(receivedItem?.name || '')"
-          :description="receivedItem?.item_type || ''"
+          :description="snakeToSentence(receivedItem?.item_type || '')"
         />
         <ui-table-data class="case-item__table" :list="dataList">
           <template #row-1>

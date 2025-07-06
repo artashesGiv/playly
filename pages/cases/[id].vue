@@ -69,6 +69,11 @@ const baseItems = computed<CaseItem[]>(() => {
   return arr
 })
 
+const copyCount = computed(() => {
+  const len = baseItems.value.length
+  return len ? Math.max(3, Math.ceil(100 / len)) : 3
+})
+
 /* ──────────────────────────── автоскролл ─────────────────────────────── */
 let rafId: number | null = null
 
@@ -104,17 +109,22 @@ async function startAutoScroll(peakSpeedPxS = 800) {
     targetEl.offsetTop - el.clientHeight / 2 + targetEl.clientHeight / 2
 
   // Принудительно прокручиваем только вниз
-  const oneListHeight = el.scrollHeight / 3
+  const oneListHeight = el.scrollHeight / copyCount.value
   while (targetScroll < startScroll) {
     targetScroll += oneListHeight
   }
-  const distance = targetScroll - startScroll
+  let distance = targetScroll - startScroll
 
-  // Рассчитываем продолжительность анимации
-  const MIN_DURATION = 7000 // мс — гарантируем минимум 7 с
-  // Оценка времени исходя из расстояния и пиковой скорости
-  const estimated = (Math.abs(distance) / peakSpeedPxS) * 800
-  const DURATION = Math.max(MIN_DURATION, estimated)
+  // Мы хотим, чтобы «спин» всегда продолжался одинаковое время и шёл с
+  // приблизительно одинаковой средней скоростью. Поэтому задаём фиксированную
+  // длительность и, при необходимости, добавляем дополнительные «круги», пока
+  // расстояние не станет достаточным.
+  const DURATION = 7000 // мс — фиксированная длительность прокрутки
+  const MIN_DISTANCE = (peakSpeedPxS * DURATION) / 1000 // px — путь при такой скорости
+  while (distance < MIN_DISTANCE) {
+    targetScroll += oneListHeight
+    distance += oneListHeight
+  }
   const startTime = performance.now()
   const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
 
@@ -139,15 +149,16 @@ async function startAutoScroll(peakSpeedPxS = 800) {
 /* ─────────────────────────── бесконечный список ───────────────────────── */
 const displayedItems = computed<CaseItem[]>(() => {
   const arr = baseItems.value
-  // три копии для бесшовной прокрутки
-  return [...arr, ...arr, ...arr]
+  if (!arr.length) return []
+  // делаем `copyCount` копий, чтобы итоговая длина была ≥ 100 и сохранялась бесшовность
+  return Array.from({ length: copyCount.value }, () => arr).flat()
 })
 
 /* ────────────────────────── логика прокрутки ──────────────────────────── */
 const wrapperRef = ref<HTMLElement | null>(null)
 
 function handleScroll(el: HTMLElement) {
-  const oneListHeight = el.scrollHeight / 3
+  const oneListHeight = el.scrollHeight / copyCount.value
   if (el.scrollTop <= 0) {
     // Дошли до самого верха → перескакиваем вниз на 1 длину списка
     el.scrollTop += oneListHeight
