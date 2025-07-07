@@ -75,6 +75,12 @@ const dataListItem = computed<TableDataProps['list']>(() => [
 const onClick = () => {
   console.log('to star pets')
 }
+
+onMounted(async () => {
+  if (!item.value) {
+    navigateTo('/profile')
+  }
+})
 </script>
 
 <style scoped lang="scss">

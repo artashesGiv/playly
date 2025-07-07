@@ -1,9 +1,10 @@
+import { ref, onMounted, onUnmounted, type Ref } from 'vue'
 /**
  * Реактивный обратный отсчёт до указанной даты-времени.
- * @param isoTarget ISO-строка, например "2025-07-09T10:13:28.390000+00:00"
+ * @param isoTarget  Реактивная или обычная ISO‑строка даты‑времени (`Ref<string> | string`)
  * @returns Ref<string> c текстом таймера
  */
-export function useCountdown(isoTarget: string) {
+export function useCountdown(isoTarget: Ref<string> | string) {
   const output = ref('')
 
   let intervalId: ReturnType<typeof setInterval> | undefined
@@ -11,7 +12,18 @@ export function useCountdown(isoTarget: string) {
   const clear = () => intervalId && clearInterval(intervalId)
 
   const tick = () => {
-    const diffMs = new Date(isoTarget).getTime() - Date.now()
+    const targetIso =
+      typeof isoTarget === 'string' ? isoTarget : isoTarget.value
+    if (!targetIso) {
+      output.value = ''
+      return
+    }
+
+    const diffMs = new Date(targetIso).getTime() - Date.now()
+    if (Number.isNaN(diffMs)) {
+      output.value = ''
+      return
+    }
 
     if (diffMs <= 0) {
       output.value = '0 мин'

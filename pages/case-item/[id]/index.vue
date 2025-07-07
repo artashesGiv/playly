@@ -38,9 +38,9 @@
           </template>
         </ui-table-data>
         <ui-table-data class="case-item__table" :list="dataTimer">
-          <template #row-1="{ value }">
+          <template #row-1>
             <div class="case-item__row">
-              <span>{{ value }}</span>
+              <span>{{ countdown }}</span>
               <ui-icon-base name="clock" />
             </div>
           </template>
@@ -86,7 +86,10 @@ const isMounted = ref(false)
 const { item } = storeToRefs(useItemsStore())
 const { userInfo } = storeToRefs(useUserStore())
 const { sellItem, withdrawItem, getItem } = useItemsStore()
-const countdown = useCountdown(item.value?.crystal_sell_timer || '')
+
+const countdown = useCountdown(
+  computed(() => item.value?.crystal_sell_timer || ''),
+)
 
 const isOwned = computed(() => item.value?.status === 'owned')
 const isReceived = computed(
@@ -144,7 +147,7 @@ const dataListItem = computed<TableDataProps['list']>(() => [
 const dataTimer = computed<TableDataProps['list']>(() => [
   {
     title: t('profile.sellTimeCard.title'),
-    value: countdown,
+    value: '',
   },
   {
     title: '',

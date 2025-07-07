@@ -15,7 +15,9 @@
 import { useItemsStore } from '@/store'
 
 const { item } = storeToRefs(useItemsStore())
-const countdown = useCountdown(item.value?.starpets_withdraw_timer || '')
+const countdown = useCountdown(
+  computed(() => item.value?.starpets_withdraw_timer || ''),
+)
 </script>
 
 <style scoped lang="scss">
