@@ -5,8 +5,8 @@
     <language />
     <ui-divider />
     <profile-community />
-    <!--    <ui-divider />-->
-    <!--    <profile-items-list type="own" />-->
+    <ui-divider />
+    <profile-items-list type="own" />
     <ui-divider />
     <profile-items-list type="received" />
     <ui-divider />
