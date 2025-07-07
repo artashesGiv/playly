@@ -50,6 +50,7 @@ const emits = defineEmits<Emits>()
     font: var(--font-normal-semibold);
     transition: var(--transition-base);
     cursor: pointer;
+    white-space: nowrap;
 
     &.is-active {
       background-color: var(--dark-600);

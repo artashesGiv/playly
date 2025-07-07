@@ -14,7 +14,9 @@
         :style="{ fontSize: `${iconFontSize[size]}px` }"
         class="button__icon"
       />
-      {{ text }}
+      <div class="button__text">
+        {{ text }}
+      </div>
       <ui-icon-base
         v-if="iconRight"
         :name="iconRight"
@@ -64,6 +66,7 @@ export type ButtonProps = {
   rounded?: boolean
   squared?: boolean
   onClick?: () => void
+  isEllipsis?: boolean
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -98,6 +101,7 @@ const classes = computed(() => {
     `button--size--${props.size}`,
     `button--direction--${props.direction}`,
     { 'max-content': props.maxContent },
+    { ellipsis: props.isEllipsis },
   ]
 
   if (props.isDisabled || props.loading) {
@@ -260,6 +264,13 @@ function useSpinnerProps({
 
   &.max-content {
     width: auto;
+  }
+
+  &.ellipsis {
+    #{$b}__text {
+      @include ellipsis;
+      width: max-content;
+    }
   }
 }
 </style>

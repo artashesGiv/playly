@@ -20,6 +20,8 @@ declare global {
   }
 
   type LanguageCode = 'en' | 'ru'
+
+  type Agreements = 'term' | 'policy' | 'AML'
 }
 
 declare module 'nuxt/app' {

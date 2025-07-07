@@ -53,6 +53,7 @@ export type IconsId =
   | 'down-3'
   | 'down-2'
   | 'down-1'
+  | 'document'
   | 'coin-1'
   | 'close'
   | 'clock'

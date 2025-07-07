@@ -276,14 +276,20 @@
   },
   "invitation": "Free robux and pet are distributed here!",
   "agreement": {
-    "TermsOfUse": {
-      "button": ""
+    "term": {
+      "button": "Terms of use",
+      "title": "Terms of use",
+      "description": "Revision date 12.04.2025"
     },
-    "AML_KYC": {
-      "button": ""
+    "policy": {
+      "button": "AML KYC",
+      "title": "AML KYC",
+      "description": "Revision date 12.04.2025"
     },
-    "PrivacyPolicy": {
-      "button": ""
+    "AML": {
+      "button": "Privacy policy",
+      "title": "Privacy policy",
+      "description": "Revision date 12.04.2025"
     }
   }
 }
