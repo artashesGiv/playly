@@ -23,40 +23,11 @@ export namespace Robux {
     }
   }
   export namespace POST {
-    export namespace UserInfo {
-      export type Payload = {
-        username: RobloxUser['name']
-        roblox_id: RobloxUser['roblox_id']
-      }
-      export type Response = { withdraw_id: WithdrawId }
-    }
-    export namespace Place {
-      export type Payload = {
-        withdraw_id: string
-        roblox_user_id: RobloxUser['roblox_id']
-        universe_id: RobloxPlace['universe_id']
-        place_id: RobloxPlace['place_id']
-      }
-      export type Response = undefined
-    }
-    export namespace Gamepass {
-      export type Payload = {
-        withdraw_id: string
-        gamepass_id: number
-        robux_amount_without_fee: number
-      }
-      export type Response = {
-        robux_amount_with_fee: number
-      }
-    }
     export namespace Withdraw {
-      export type Payload = { withdraw_id: WithdrawId }
+      export type Payload = BuyRobuxData
       export type Response = undefined
     }
-    export namespace Price {
-      export type Payload = { withdraw_id: WithdrawId }
-      export type Response = undefined
-    }
+
     export namespace Sell {
       export type Params = { robux_amount: string }
     }
@@ -103,6 +74,12 @@ export type Gamepass = {
   sellerName: string
 }
 
-export type WithdrawId = string
-
 export type RobuxBuySteps = 1 | 2 | 3 | 4 | 5 | 6
+
+export type BuyRobuxData = {
+  username: string
+  roblox_id: number
+  universe_id: number
+  gamepass_id: number
+  robux_amount_without_fee: number
+}

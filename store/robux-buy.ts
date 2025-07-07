@@ -1,25 +1,21 @@
 import type {
+  BuyRobuxData,
   Gamepass,
   RobloxPlace,
   RobloxUser,
   RobuxBuySteps,
-  WithdrawId,
 } from '@/types'
 import { useUserStore } from '@/store'
 import type { PayCard } from '@/components/pay-card.vue'
 
-type StepsData = {
-  user: Maybe<RobloxUser>
-  place: Maybe<RobloxPlace>
-  gamepass: Maybe<Gamepass>
-  robux_amount_with_fee: number
-}
+type StepsData = BuyRobuxData
 
 const defaultStepsData = () => ({
-  user: null,
-  place: null,
-  gamepass: null,
-  robux_amount_with_fee: 0,
+  username: '',
+  roblox_id: 0,
+  universe_id: 0,
+  gamepass_id: 0,
+  robux_amount_without_fee: 0,
 })
 
 const COEFFICIENT = 4
@@ -31,7 +27,6 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
   const users = ref<RobloxUser[]>([])
   const places = ref<RobloxPlace[]>([])
   const gamepasses = ref<Gamepass[]>([])
-  const withdrawId = ref<WithdrawId>('')
   const activePayType = ref<Maybe<PayCard['type']>>(null)
 
   let timeout: Timeout
@@ -70,24 +65,11 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
       await baseRequest({
         method: () => robuxAPI.fetchUserInfo(searchName.value.trim()),
         callback: result => {
-          stepsData.user = null
+          stepsData.username = ''
           users.value = result
         },
       })
     }, 500)
-  }
-
-  const setCurrentUser = async (user: RobloxUser) => {
-    await baseRequest({
-      method: () =>
-        robuxAPI.setUserInfo({
-          username: user.name,
-          roblox_id: user.roblox_id,
-        }),
-      callback: result => {
-        withdrawId.value = result.withdraw_id
-      },
-    })
   }
 
   // STEP 2
@@ -100,17 +82,6 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     })
   }
 
-  const setCurrentPlace = async () => {
-    await baseRequest({
-      method: () =>
-        robuxAPI.setRobloxPlace({
-          place_id: stepsData.place!.place_id,
-          roblox_user_id: stepsData.user!.roblox_id,
-          universe_id: stepsData.place!.universe_id,
-          withdraw_id: withdrawId.value,
-        }),
-    })
-  }
   // STEP 3
   const getGamepasses = async (universe_id: RobloxPlace['universe_id']) => {
     await baseRequest({
@@ -121,45 +92,25 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     })
   }
 
-  const setCurrentGamepass = async (gamepass: Gamepass) => {
-    await baseRequest({
-      method: () =>
-        robuxAPI.setGamepass({
-          gamepass_id: gamepass.id,
-          robux_amount_without_fee: getValue.value,
-          withdraw_id: withdrawId.value,
-        }),
-      callback: result => {
-        stepsData.robux_amount_with_fee = result.robux_amount_with_fee
-      },
-    })
-  }
-
   // STEP 4
 
-  const setPrice = async () => {
+  const setWithdraw = async () => {
     await baseRequest({
-      method: () => robuxAPI.setPrice({ withdraw_id: withdrawId.value }),
+      method: () => robuxAPI.setWithdraw(stepsData),
     })
   }
 
   // STEP 5
-
-  const setWithdraw = async () => {
-    await baseRequest({
-      method: () => robuxAPI.setWithdraw({ withdraw_id: withdrawId.value }),
-    })
-  }
 
   // COMMON
 
   const nextStep = async () => {
     switch (step.value) {
       case 1: {
-        if (stepsData.user) {
+        if (stepsData.roblox_id) {
           try {
-            await setCurrentUser(stepsData.user)
-            await getPlaces(stepsData.user.roblox_id)
+            await getPlaces(stepsData.roblox_id)
+            stepsData.robux_amount_without_fee = getValue.value
             step.value += 1
           } catch (e) {
             console.error(e)
@@ -169,10 +120,9 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
         break
       }
       case 2: {
-        if (stepsData.place) {
+        if (stepsData.universe_id) {
           try {
-            await setCurrentPlace()
-            await getGamepasses(stepsData.place.universe_id)
+            await getGamepasses(stepsData.universe_id)
             step.value += 1
           } catch (e) {
             console.error(e)
@@ -182,24 +132,20 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
         break
       }
       case 3: {
-        if (stepsData.gamepass) {
+        if (stepsData.gamepass_id) {
           try {
-            await setCurrentGamepass(stepsData.gamepass)
             step.value += 1
           } catch (e) {
             console.error(e)
           }
         } else {
-          const universe_id = stepsData.place?.universe_id
-          if (universe_id) {
-            await getGamepasses(universe_id)
-          }
+          await getGamepasses(stepsData.universe_id)
         }
         break
       }
       case 4: {
         try {
-          await setPrice()
+          await setWithdraw()
           step.value += 1
         } catch (e) {
           tg?.showAlert(t('robux.buy.step-4.error'))
@@ -220,15 +166,6 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
         break
       }
     }
-  }
-
-  const getCurrentWithdraw = async () => {
-    await baseRequest({
-      method: () => robuxAPI.fetchCurrentWithdraw(),
-      callback: result => {
-        console.log(result)
-      },
-    })
   }
 
   watch(payValue, newVal => {
@@ -261,7 +198,6 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     activePayType,
     resetStepsData,
     nextStep,
-    getCurrentWithdraw,
     getPlaces,
     getGamepasses,
     sellRobux,

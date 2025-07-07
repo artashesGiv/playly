@@ -6,8 +6,8 @@
         :key="place.place_id"
         :text="place.name"
         :src="place.image_url"
-        :is-active="place.place_id === stepsData.place?.place_id"
-        @click="stepsData.place = place"
+        :is-active="place.universe_id === stepsData.universe_id"
+        @click="stepsData.universe_id = place.universe_id"
       />
     </div>
   </div>

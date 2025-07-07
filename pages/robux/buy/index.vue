@@ -45,7 +45,7 @@ const { tg } = useTelegram()
 const { t } = useI18n()
 const { step, stepsData, gamepasses, getValue, activePayType } =
   storeToRefs(useRobuxBuyStore())
-const { resetStepsData, nextStep, getCurrentWithdraw } = useRobuxBuyStore()
+const { resetStepsData, nextStep } = useRobuxBuyStore()
 
 const isOpenModal = ref(false)
 
@@ -59,9 +59,9 @@ const stepsMap: Record<RobuxBuySteps, Component> = {
 }
 
 const isButtonDisableMap = computed<Record<RobuxBuySteps, boolean>>(() => ({
-  1: !stepsData.value.user,
-  2: !stepsData.value.place,
-  3: !!gamepasses.value.length && !stepsData.value.gamepass,
+  1: !stepsData.value.roblox_id,
+  2: !stepsData.value.universe_id,
+  3: !!gamepasses.value.length && !stepsData.value.gamepass_id,
   4: false,
   5: !activePayType.value,
   6: false,
@@ -88,14 +88,12 @@ function handleBack() {
   }
 }
 
-onMounted(async () => {
+onMounted(() => {
   tg?.BackButton.show?.()
 
   tg?.BackButton.offClick?.(handleBack)
 
   tg?.BackButton.onClick(handleBack)
-
-  await getCurrentWithdraw()
 })
 
 onUnmounted(() => {
