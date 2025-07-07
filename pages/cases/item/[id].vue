@@ -133,15 +133,17 @@ const onOpenMore = () => {
   navigateTo(`/cases/${currentCase.value!.id}?scroll=true`, { replace: true })
 }
 
-const onSellItem = () => {
-  sellItem(
-    receivedItem.value!.id,
-    receivedItem.value!.crystal_price,
-    isRobuxCase.value,
-  ).then(() => {
-    isSellForCoins.value = true
-    navigateTo('/cases')
-  })
+const onSellItem = async () => {
+  if (isRobuxCase.value) {
+    await sellItemRobux(receivedItem.value!.id)
+  } else {
+    sellItem(receivedItem.value!.id, receivedItem.value!.crystal_price).then(
+      () => {
+        isSellForCoins.value = true
+        navigateTo('/cases')
+      },
+    )
+  }
 }
 
 onMounted(() => {
