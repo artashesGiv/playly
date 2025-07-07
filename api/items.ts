@@ -20,6 +20,10 @@ export const itemsAPI = {
     return await this._baseApi.post('/item/sell', params)
   },
 
+  async sellItemRobux(params: Items.POST.SellRobux.Params) {
+    return await this._baseApi.post('/item/sell/robux', params)
+  },
+
   async withdrawItem(params: Items.POST.Withdraw.Params) {
     return await this._baseApi.post('/item/withdraw', params)
   },

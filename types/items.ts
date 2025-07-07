@@ -19,6 +19,12 @@ export namespace Items {
       export type Params = {
         user_item_id: string
         price: number
+        is_robux_item?: boolean
+      }
+    }
+    export namespace SellRobux {
+      export type Params = {
+        user_item_robux_id: string
       }
     }
     export namespace Withdraw {

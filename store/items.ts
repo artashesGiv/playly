@@ -1,8 +1,10 @@
 import type { CaseItem } from '@/types'
+import { useUserStore } from '@/store/user'
 
 export const useItemsStore = defineStore('items', () => {
   const items = ref<CaseItem[]>([])
   const item = ref<Maybe<CaseItem>>(null)
+  const { getUserInfo } = useUserStore()
 
   const { tg } = useTelegram()
 
@@ -20,8 +22,9 @@ export const useItemsStore = defineStore('items', () => {
   const getItems = async () => {
     await baseRequest({
       method: () => itemsAPI.fetchItems(),
-      callback: result => {
+      callback: async result => {
         items.value = result
+        await getUserInfo()
       },
     })
   }
@@ -29,15 +32,30 @@ export const useItemsStore = defineStore('items', () => {
   const getItem = async (id: CaseItem['id']) => {
     await baseRequest({
       method: () => itemsAPI.fetchItem({ user_item_id: id }),
-      callback: result => {
+      callback: async result => {
         item.value = result
+        await getUserInfo()
       },
     })
   }
 
-  const sellItem = async (id: CaseItem['id'], price: number) => {
+  const sellItem = async (
+    id: CaseItem['id'],
+    price: number,
+    isRobux = false,
+  ) => {
     await baseRequest({
-      method: () => itemsAPI.sellItem({ user_item_id: id, price }),
+      method: () =>
+        itemsAPI.sellItem({ user_item_id: id, price, is_robux_item: isRobux }),
+      callback: () => {
+        tg?.showAlert('Предмет успешно продан')
+      },
+    })
+  }
+
+  const sellItemRobux = async (id: CaseItem['id']) => {
+    await baseRequest({
+      method: () => itemsAPI.sellItemRobux({ user_item_robux_id: id }),
       callback: () => {
         tg?.showAlert('Предмет успешно продан')
       },
@@ -59,5 +77,6 @@ export const useItemsStore = defineStore('items', () => {
     sellItem,
     getItems,
     getItem,
+    sellItemRobux,
   }
 })

@@ -23,6 +23,7 @@ export type CaseItem = {
   starpets_withdraw_progress: false
   crystal_sell_timer: string
   starpets_withdraw_timer: Maybe<string>
+  robux_amount?: number
   status:
     | 'owned'
     | 'sold_by_crystal'

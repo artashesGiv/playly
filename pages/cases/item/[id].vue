@@ -10,17 +10,32 @@
         />
         <item-main-data
           :image="receivedItem?.image_url || ''"
-          :title="snakeToSentence(receivedItem?.name || '')"
+          :title="title"
           :description="snakeToSentence(receivedItem?.item_type || '')"
           class="case-item__main-data"
         />
-        <ui-table-data class="case-item__table" :list="dataList">
+        <ui-table-data
+          v-if="!isRobuxCase"
+          class="case-item__table"
+          :list="dataList"
+        >
           <template #row-1>
             <div class="case-item__abilities">
               <cases-item-abilities
                 :flyable="receivedItem?.flyable"
                 :rideable="receivedItem?.rideable"
               />
+            </div>
+          </template>
+        </ui-table-data>
+        <ui-table-data v-else :list="robuxDataList" class="case-item__table">
+          <template #row-1>
+            <user-data />
+          </template>
+          <template #row-2="{ value }">
+            <div class="case-item__price">
+              <span>{{ value }}</span>
+              <main-mascot size="xs" />
             </div>
           </template>
         </ui-table-data>
@@ -56,6 +71,7 @@ import { useCasesStore, useItemsStore } from '@/store'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 import type { Case } from '@/types'
 import { snakeToSentence } from '@/utils/snake-to-sentence'
+import UserData from '@/components/user-data.vue'
 
 definePageMeta({
   layout: 'empty',
@@ -64,12 +80,20 @@ useBackButton()
 
 const route = useRoute()
 const { receivedItem, cases } = storeToRefs(useCasesStore())
-const { sellItem } = useItemsStore()
+const { sellItem, sellItemRobux } = useItemsStore()
 const { t } = useI18n()
+const { user } = useTelegram()
+const isSellForCoins = ref(false)
 
 const id = route.params.id as Case['id']
 
 const currentCase = computed(() => cases.value.find(item => item.id === id))
+const isRobuxCase = computed(() => currentCase.value?.category === 'robux')
+const title = computed(() => {
+  return isRobuxCase.value
+    ? `${receivedItem.value?.robux_amount} R$`
+    : snakeToSentence(receivedItem.value?.name || '')
+})
 
 const formattedPriceCase = computed(() =>
   formatePrice(currentCase?.value?.price || 0),
@@ -94,18 +118,41 @@ const dataList: TableDataProps['list'] = [
   },
 ]
 
+const robuxDataList = computed<TableDataProps['list']>(() => [
+  {
+    title: t('common.owner'),
+    value: user,
+  },
+  {
+    title: `${t('robux.balance.priceFor')} 1 R$`,
+    value: 18,
+  },
+])
+
 const onOpenMore = () => {
   navigateTo(`/cases/${currentCase.value!.id}?scroll=true`, { replace: true })
 }
 
-const onSellItem = async () => {
-  await sellItem(receivedItem.value!.id, receivedItem.value!.crystal_price)
-  navigateTo('/cases')
+const onSellItem = () => {
+  sellItem(
+    receivedItem.value!.id,
+    receivedItem.value!.crystal_price,
+    isRobuxCase.value,
+  ).then(() => {
+    isSellForCoins.value = true
+    navigateTo('/cases')
+  })
 }
 
 onMounted(() => {
   if (!receivedItem.value) {
     navigateTo('/cases')
+  }
+})
+
+onBeforeUnmount(async () => {
+  if (!isSellForCoins.value) {
+    await sellItemRobux(receivedItem.value!.id)
   }
 })
 </script>
@@ -165,10 +212,15 @@ onMounted(() => {
 
   &__table {
     margin-top: 33px;
+    background-color: var(--dark-700);
   }
 
   &__description {
     font: var(--font-base-medium);
+  }
+
+  &__price {
+    @include row(8px);
   }
 
   &__buttons {
