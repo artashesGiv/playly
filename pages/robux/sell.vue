@@ -75,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import { useItemsStore, useRobuxBuyStore, useUserStore } from '@/store'
+import { useUserStore } from '@/store'
 import UserData from '@/components/user-data.vue'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 
@@ -89,7 +89,7 @@ const { t } = useI18n()
 const { user } = useTelegram()
 const router = useRouter()
 const { robuxBalance } = storeToRefs(useUserStore())
-const { sellItemRobux } = useItemsStore()
+// const { sellItemRobux } = useItemsStore()
 const dataList = computed<TableDataProps['list']>(() => [
   {
     title: t('common.owner'),
@@ -121,7 +121,7 @@ watch(getValue, newVal => {
 })
 
 const onSell = async () => {
-  await sellItemRobux(payValue.value.toString())
+  // await sellItemRobux(payValue.value.toString())
   router.back()
 }
 </script>
