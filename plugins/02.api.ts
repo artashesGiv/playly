@@ -25,7 +25,13 @@ export default defineNuxtPlugin(nuxtApp => {
         } as Headers
       }
 
-      console.log(options.method, 'Request to:', request)
+      console.log(
+        options.method,
+        'Request from:',
+        request,
+        options.body,
+        options.params,
+      )
     },
     // Перехватчик ответов
     onResponse({ request, response, options }) {
