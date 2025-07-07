@@ -4,7 +4,7 @@
       <h2 class="title">{{ headerTextMap[step].title }}</h2>
       <span class="description">{{ headerTextMap[step].description }}</span>
     </div>
-    <ui-stauts-bar v-if="step !== 5" :progress="step" :max="5" />
+    <ui-stauts-bar :progress="step" :max="6" />
   </div>
 </template>
 
@@ -43,6 +43,10 @@ const headerTextMap: Record<number, RobuxBuyHeader> = {
   5: {
     title: t('robux.buy.step-5.title'),
     description: t('robux.buy.step-5.description'),
+  },
+  6: {
+    title: t('robux.buy.step-6.title'),
+    description: t('robux.buy.step-6.description'),
   },
 }
 </script>

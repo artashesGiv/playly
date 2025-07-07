@@ -4,9 +4,9 @@
       <h2 class="title">
         {{ $t(`starPetsLink.${starpetsInfo ? 'edit_' : ''}title`) }}
       </h2>
-      <span class="description">{{
-        $t(`starPetsLink.${starpetsInfo ? 'edit_' : ''}description`)
-      }}</span>
+      <span class="description">
+        {{ $t(`starPetsLink.${starpetsInfo ? 'edit_' : ''}description`) }}
+      </span>
     </div>
     <ui-input-base
       v-model="model!"

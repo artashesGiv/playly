@@ -35,6 +35,8 @@ export default defineNuxtPlugin(nuxtApp => {
         'Response from:',
         request,
         response,
+        options.body,
+        options.params,
       )
     },
     // Перехватчик ошибок

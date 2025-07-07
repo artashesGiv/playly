@@ -9,6 +9,7 @@
           :label="$t('robux.input.labelReceived')"
           icon="robux"
           icon-color="yellow"
+          type="number"
         />
         <ui-input-base
           v-model="payValue"

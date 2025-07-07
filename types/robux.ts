@@ -9,11 +9,21 @@ export namespace Robux {
     }
     export namespace Gamepass {
       export type Params = {
+        robux_amount: number
         universe_id: RobloxPlace['universe_id']
       }
       export type Response = {
         gamepasses: Gamepass[]
+        robux_amount_with_fee: number
       }
+    }
+    export namespace GamepassPrice {
+      export type Params = {
+        gamepass_id: Gamepass['id']
+        universe_id: RobloxPlace['universe_id']
+        robux_amount_with_fee: number
+      }
+      export type Response = undefined
     }
     export namespace CurrenWithdraw {
       export type Response = Withdraw

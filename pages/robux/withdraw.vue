@@ -24,6 +24,7 @@
           icon-color="yellow"
           :label="$t('common.r$Amount')"
           icon="robux"
+          type="number"
         />
       </div>
       <ui-divider />
@@ -53,17 +54,16 @@
     </div>
     <ui-button-base
       icon="robux"
-      :text="$t('common.withdrawCoins', value ? value : 0)"
+      :text="$t('common.withdrawCoins', +value ? +value : 0)"
       :is-disabled="!value"
       size="52"
-      @click="onWitdhraw"
+      @click="onWithdraw"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/store'
-import UserData from '@/components/user-data.vue'
+import { useUserStore, useRobuxBuyStore } from '@/store'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 
 definePageMeta({
@@ -74,9 +74,8 @@ useBackButton()
 
 const { t } = useI18n()
 const { user } = useTelegram()
-const router = useRouter()
 const { robuxBalance } = storeToRefs(useUserStore())
-
+const { getValue } = storeToRefs(useRobuxBuyStore())
 const value = ref(0)
 
 const dataList = computed<TableDataProps['list']>(() => [
@@ -90,8 +89,9 @@ const dataList = computed<TableDataProps['list']>(() => [
   },
 ])
 
-const onWitdhraw = () => {
-  router.back()
+const onWithdraw = () => {
+  getValue.value = value.value
+  navigateTo('/robux/buy?isWithdraw=true')
 }
 </script>
 

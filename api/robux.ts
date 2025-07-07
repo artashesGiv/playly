@@ -21,11 +21,20 @@ export const robuxAPI = {
   },
 
   async fetchGamepasses({
+    robux_amount,
     universe_id,
   }: Robux.GET.Gamepass.Params): Promise<Robux.GET.Gamepass.Response> {
     return await this._baseApi.get(
-      `/robux_withdraws/gamepasses?universe_id=${universe_id}`,
+      `/robux_withdraws/gamepasses?robux_amount=${robux_amount}&universe_id=${universe_id}`,
     )
+  },
+
+  async fetchGamepassPrice(
+    params: Robux.GET.GamepassPrice.Params,
+  ): Promise<Robux.GET.GamepassPrice.Response> {
+    return await this._baseApi.get(`/robux_withdraws/check_gamepass_price`, {
+      params,
+    })
   },
 
   async setWithdraw(
@@ -36,11 +45,5 @@ export const robuxAPI = {
 
   async fetchWithdraws(): Promise<Robux.GET.Withdraws.Response> {
     return await this._baseApi.get('/robux_withdraws/withdraws')
-  },
-
-  async sellRobux({ robux_amount }: Robux.POST.Sell.Params) {
-    return await this._baseApi.post(
-      `/robux_purchases/buy?robux_amount=${robux_amount}`,
-    )
   },
 }

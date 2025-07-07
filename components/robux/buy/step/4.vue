@@ -19,7 +19,7 @@
         {{ $t('robux.buy.step-4.setGamepass.priceDescription') }}
       </span>
       <div class="robux-buy-4__price-value">
-        {{ stepsData.robux_amount_without_fee }}
+        {{ stepsData.robux_amount_with_fee }}
         <ui-icon-base name="robux" class="robux-buy-4__icon-robux" />
       </div>
     </ui-card>

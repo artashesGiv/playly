@@ -13,7 +13,7 @@
         size="52"
         :icon="step === 5 ? 'robux' : undefined"
         :text="buttonTextMap[step]"
-        @click="nextStep"
+        @click="nextStep(!!isWithdraw)"
       />
       <ui-button-base
         v-if="step !== 5"
@@ -41,6 +41,7 @@ definePageMeta({
 })
 
 const router = useRouter()
+const route = useRoute()
 const { tg } = useTelegram()
 const { t } = useI18n()
 const { step, stepsData, gamepasses, getValue, activePayType } =
@@ -48,6 +49,8 @@ const { step, stepsData, gamepasses, getValue, activePayType } =
 const { resetStepsData, nextStep } = useRobuxBuyStore()
 
 const isOpenModal = ref(false)
+
+const isWithdraw = route.query.isWithdraw
 
 const stepsMap: Record<RobuxBuySteps, Component> = {
   1: defineAsyncComponent(() => import('@/components/robux/buy/step/1.vue')),

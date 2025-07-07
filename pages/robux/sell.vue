@@ -66,6 +66,7 @@
     <ui-button-base
       icon="buy-1"
       :text="$t('common.sellForCoins', +getValue)"
+      :style="{ flexShrink: 0 }"
       :is-disabled="!payValue"
       size="52"
       @click="onSell"
@@ -74,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRobuxBuyStore, useUserStore } from '@/store'
+import { useItemsStore, useRobuxBuyStore, useUserStore } from '@/store'
 import UserData from '@/components/user-data.vue'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 
@@ -88,8 +89,7 @@ const { t } = useI18n()
 const { user } = useTelegram()
 const router = useRouter()
 const { robuxBalance } = storeToRefs(useUserStore())
-const { sellRobux } = useRobuxBuyStore()
-
+const { sellItemRobux } = useItemsStore()
 const dataList = computed<TableDataProps['list']>(() => [
   {
     title: t('common.owner'),
@@ -121,7 +121,7 @@ watch(getValue, newVal => {
 })
 
 const onSell = async () => {
-  await sellRobux(payValue.value.toString())
+  await sellItemRobux(payValue.value.toString())
   router.back()
 }
 </script>
@@ -130,7 +130,6 @@ const onSell = async () => {
 .sell {
   @include column(18px);
   text-align: center;
-  height: 100%;
 
   .description {
     text-align: left;
@@ -139,9 +138,6 @@ const onSell = async () => {
 
   &__content {
     @include column(18px);
-
-    flex-grow: 1;
-    overflow-y: auto;
   }
 
   &__text {

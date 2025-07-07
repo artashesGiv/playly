@@ -11,6 +11,7 @@
         :enterkeyhint="enterkeyhint"
         :placeholder="placeholder"
         @input="onInput"
+        @keydown.enter.prevent.stop="onDone"
       />
       <span v-if="label" class="input__label">{{ label }}</span>
       <ui-icon-base v-if="isError" class="input__icon-error" name="alert" />
@@ -61,6 +62,12 @@ const props = withDefaults(defineProps<InputBaseProps>(), {
   iconColor: 'base',
   enterkeyhint: 'done',
   type: 'text',
+  placeholder: '',
+  icon: undefined,
+  iconRight: undefined,
+  label: '',
+  errorMessage: '',
+  prefix: '',
 })
 const emit = defineEmits<InputEmits>()
 const model = defineModel<InputBaseProps['modelValue']>()
@@ -75,6 +82,10 @@ const classes = computed(() => [
 const onInput = (event: Event) => {
   emit('update:modelValue', (event.target as HTMLInputElement).value)
   emit('update:is-error', false)
+}
+
+const onDone = (event: KeyboardEvent) => {
+  ;(event.target as HTMLInputElement).blur()
 }
 </script>
 
