@@ -7,15 +7,17 @@
       :list="tabs"
       @update:model-value="onInput($event as CaseCategory & 'all')"
     />
-    <div class="cases__list">
-      <cases-card
-        v-for="item in cases"
-        :key="item.id"
-        v-bind="item"
-        :image="item.image_url || '/images/template/template.png'"
-        @click="navigateTo(`/cases/${item.id}`)"
-      />
-    </div>
+    <transition-fade>
+      <div :key="JSON.stringify(cases)" class="cases__list">
+        <cases-card
+          v-for="item in cases"
+          :key="item.id"
+          v-bind="item"
+          :image="item.image_url || '/images/template/template.png'"
+          @click="navigateTo(`/cases/${item.id}`)"
+        />
+      </div>
+    </transition-fade>
   </div>
 </template>
 
