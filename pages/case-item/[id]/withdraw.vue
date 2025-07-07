@@ -3,8 +3,8 @@
     <div class="withdraw__content">
       <item-main-data
         :image="item.image_url"
-        :title="item.name"
-        :description="item.item_type"
+        :title="snakeToSentence(item.name)"
+        :description="snakeToSentence(item.item_type)"
       />
       <ui-divider />
       <profile-timer-card :item-id="id" />

@@ -91,7 +91,10 @@ const countdown = useCountdown(
   computed(() => item.value?.crystal_sell_timer || ''),
 )
 
-const isOwned = computed(() => item.value?.status === 'owned')
+const isOwned = computed(
+  () =>
+    item.value?.status === 'owned' || item.value?.status === 'withdraw_error',
+)
 const isReceived = computed(
   () =>
     item.value?.status === 'withdraw_success' ||
