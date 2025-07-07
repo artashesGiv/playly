@@ -99,7 +99,7 @@ const onWithdraw = () => {
 .withdraw {
   @include column(18px);
 
-  height: 100%;
+  //height: 100%;
 
   .description {
     text-align: left;
@@ -109,8 +109,8 @@ const onWithdraw = () => {
   &__content {
     @include column(18px);
 
-    flex-grow: 1;
-    overflow-y: auto;
+    //flex-grow: 1;
+    //overflow-y: auto;
   }
 
   &__price {
