@@ -274,5 +274,16 @@
     "withdraw_error": "Withdraw error",
     "withdraw_success": "Withdraw success"
   },
-  "invitation": "Free robux and pet are distributed here!"
+  "invitation": "Free robux and pet are distributed here!",
+  "agreement": {
+    "TermsOfUse": {
+      "button": ""
+    },
+    "AML_KYC": {
+      "button": ""
+    },
+    "PrivacyPolicy": {
+      "button": ""
+    }
+  }
 }

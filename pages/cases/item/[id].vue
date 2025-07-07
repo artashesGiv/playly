@@ -135,15 +135,13 @@ const onOpenMore = () => {
 
 const onSellItem = async () => {
   if (isRobuxCase.value) {
-    await sellItemRobux(receivedItem.value!.id)
+    await sellItemRobux(receivedItem.value!.robux_amount!)
   } else {
-    sellItem(receivedItem.value!.id, receivedItem.value!.crystal_price).then(
-      () => {
-        isSellForCoins.value = true
-        navigateTo('/cases')
-      },
-    )
+    await sellItem(receivedItem.value!.id, receivedItem.value!.crystal_price)
   }
+
+  isSellForCoins.value = true
+  navigateTo('/cases')
 }
 
 onMounted(() => {
@@ -154,7 +152,7 @@ onMounted(() => {
 
 onBeforeUnmount(async () => {
   if (!isSellForCoins.value && isRobuxCase.value) {
-    await sellItemRobux(receivedItem.value!.id)
+    await sellItemRobux(receivedItem.value!.robux_amount!)
   }
 })
 </script>

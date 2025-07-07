@@ -48,11 +48,12 @@ export const useItemsStore = defineStore('items', () => {
     })
   }
 
-  const sellItemRobux = async (id: CaseItem['id']) => {
+  const sellItemRobux = async (robux_amount: number) => {
     await baseRequest({
-      method: () => itemsAPI.sellItemRobux({ user_item_robux_id: id }),
-      callback: () => {
-        tg?.showAlert('Предмет успешно продан')
+      method: () => itemsAPI.sellItemRobux({ robux_amount }),
+      callback: async () => {
+        await getUserInfo()
+        tg?.showAlert('Robux`ы успешно проданы')
       },
     })
   }

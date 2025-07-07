@@ -23,7 +23,7 @@ export namespace Items {
     }
     export namespace SellRobux {
       export type Params = {
-        user_item_robux_id: string
+        robux_amount: number
       }
     }
     export namespace Withdraw {
