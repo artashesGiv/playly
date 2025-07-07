@@ -11,7 +11,9 @@
     <ui-divider />
     <div class="agreement__content">
       <ui-tabs v-model="currentTab" :list="tabs" />
-      <div class="agreement__text">text</div>
+      <div class="agreement__text">
+        {{ $t(`agreement.${currentTab}.text`) }}
+      </div>
     </div>
   </div>
 </template>
@@ -61,6 +63,10 @@ onMounted(() => {
 
   &__content {
     @include column(20px);
+  }
+
+  &__text {
+    font: var(--font-base-medium);
   }
 }
 </style>
