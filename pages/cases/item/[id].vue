@@ -153,7 +153,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(async () => {
-  if (!isSellForCoins.value) {
+  if (!isSellForCoins.value && isRobuxCase.value) {
     await sellItemRobux(receivedItem.value!.id)
   }
 })

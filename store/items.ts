@@ -39,14 +39,9 @@ export const useItemsStore = defineStore('items', () => {
     })
   }
 
-  const sellItem = async (
-    id: CaseItem['id'],
-    price: number,
-    isRobux = false,
-  ) => {
+  const sellItem = async (id: CaseItem['id'], price: number) => {
     await baseRequest({
-      method: () =>
-        itemsAPI.sellItem({ user_item_id: id, price, is_robux_item: isRobux }),
+      method: () => itemsAPI.sellItem({ user_item_id: id, price }),
       callback: () => {
         tg?.showAlert('Предмет успешно продан')
       },
