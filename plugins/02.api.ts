@@ -10,7 +10,7 @@ export default defineNuxtPlugin(nuxtApp => {
   let refreshPromise: Promise<void> | null = null
 
   const baseInstance = $fetch.create({
-    baseURL: (apiUrl as string) || 'https://playzy-03ed4e830c91.herokuapp.com',
+    baseURL: (apiUrl as string) || 'https://api.playly.gg',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
