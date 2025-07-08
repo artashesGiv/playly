@@ -256,9 +256,9 @@
     "royal_chest": "Королевский сундук",
     "paradise_chest": "Райский сундук",
     "power_chest": "Сундук могущества",
-    "robux_4000": "Robux 4 000",
-    "robux_20000": "Robux 20 000",
-    "robux_100000": "Robux 100 000"
+    "robux_chest": "Сундук с робуксами",
+    "big_robux_chest": "Большой сундук робуксов",
+    "huge_robux_chest": "Огромный сундук робуксов"
   },
   "rarity": {
     "common": "Common",

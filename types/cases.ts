@@ -23,4 +23,4 @@ export namespace Cases {
   }
 }
 
-export type CaseCategory = 'robux' | 'pets' | 'eggs'
+export type CaseCategory = 'robux' | 'adopt_me'

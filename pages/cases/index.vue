@@ -8,9 +8,9 @@
       @update:model-value="onInput($event as CaseCategory & 'all')"
     />
     <transition-fade>
-      <div :key="JSON.stringify(cases)" class="cases__list">
+      <div :key="JSON.stringify(sortableCases)" class="cases__list">
         <cases-card
-          v-for="item in cases"
+          v-for="item in sortableCases"
           :key="item.id"
           v-bind="item"
           :image="item.image_url || '/images/template/template.png'"
@@ -29,12 +29,16 @@ import type { CaseCategory } from '@/types'
 const currentTab = ref('all')
 
 const { getCases } = useCasesStore()
-const { cases } = storeToRefs(useCasesStore())
+const { sortableCases } = storeToRefs(useCasesStore())
 
 const tabs: TabsProps['list'] = [
   {
     id: 'all',
     text: 'All',
+  },
+  {
+    id: 'adopt_me',
+    text: 'AdoptMe',
   },
   {
     id: 'robux',

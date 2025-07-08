@@ -7,6 +7,9 @@ export const useCasesStore = defineStore('cases', () => {
   const receivedItem = ref<Maybe<CaseItem>>(null)
 
   const { getUserInfo } = useUserStore()
+  const sortableCases = computed(() =>
+    [...cases.value].sort((a, b) => a.price - b.price),
+  )
 
   const getCases = async (params?: Cases.GET.Cases.Params) => {
     await baseRequest({
@@ -43,6 +46,7 @@ export const useCasesStore = defineStore('cases', () => {
   return {
     cases,
     caseItems,
+    sortableCases,
     receivedItem,
     openCase,
     getCases,

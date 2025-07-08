@@ -15,24 +15,24 @@ export const useAuthStore = defineStore('auth', () => {
   const login = async () => {
     const { tg } = useTelegram()
 
-    await baseRequest({
-      method: () =>
-        authAPI.auth({
-          init_data: tg?.initData || '',
-          ref_code: tg?.initDataUnsafe.start_param || '',
-          timezone_offset_minutes: new Date().getTimezoneOffset() * -1,
-        }),
-      callback: async result => {
-        isAuth.value = true
-        data.value = result
-        tokenData.value = {
-          access_token: result.access_token,
-          refresh_token: result.refresh_token,
-        }
-
-        await Promise.all([getUserInfo(), getRefLink(), getTaskSettings()])
-      },
-    })
+    // await baseRequest({
+    //   method: () =>
+    //     authAPI.auth({
+    //       init_data: tg?.initData || '',
+    //       ref_code: tg?.initDataUnsafe.start_param || '',
+    //       timezone_offset_minutes: new Date().getTimezoneOffset() * -1,
+    //     }),
+    //   callback: async result => {
+    //     isAuth.value = true
+    //     data.value = result
+    //     tokenData.value = {
+    //       access_token: result.access_token,
+    //       refresh_token: result.refresh_token,
+    //     }
+    //
+    //     await Promise.all([getUserInfo(), getRefLink(), getTaskSettings()])
+    //   },
+    // })
   }
 
   const refresh = async () => {

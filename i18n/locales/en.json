@@ -256,9 +256,9 @@
     "royal_chest": "Royal Chest",
     "paradise_chest": "Paradise Chest",
     "power_chest": "Power Chest",
-    "robux_4000": "Robux 4 000",
-    "robux_20000": "Robux 20 000",
-    "robux_100000": "Robux 100 000"
+    "robux_chest": "Robux Chest",
+    "big_robux_chest": "Big Robux Chest",
+    "huge_robux_chest": "Huge Robux Chest"
   },
   "rarity": {
     "common": "Common",

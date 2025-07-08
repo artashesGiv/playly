@@ -60,9 +60,6 @@ export default defineNuxtConfig({
       ],
     },
   },
-  nitro: {
-    preset: 'vercel',
-  },
   googleFonts: {
     families: {
       Inter: [300, 400, 500, 600, 700, 800],
@@ -91,6 +88,6 @@ export default defineNuxtConfig({
     lottieFolder: '/assets/lottie',
   },
   eruda: {
-    enabled: false,
+    enabled: true,
   },
 })
