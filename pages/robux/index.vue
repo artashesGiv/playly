@@ -2,6 +2,12 @@
   <div class="robux">
     <div class="robux__content">
       <robux-main-card />
+      <ui-button-base text="success" @click="navigateTo('/robux/buy?step=6')" />
+      <ui-button-base
+        text="failed"
+        view="secondary"
+        @click="navigateTo('/robux/buy?step=5&error=true')"
+      />
       <ui-divider />
       <div class="robux__inputs">
         <ui-input-base
@@ -54,7 +60,7 @@
         :is-disabled="!+getValue"
         size="52"
         icon-right="right-1"
-        @click="navigateTo('/robux/buy')"
+        @click="navigateTo('/robux/buy?step=1')"
       />
     </div>
   </div>

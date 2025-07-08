@@ -30,9 +30,22 @@
 </template>
 
 <script setup lang="ts">
-import { useRobuxBuyStore } from '@/store'
+import { useRobuxBuyStore, useUserStore } from '@/store'
+import { LocalStorageKeys } from '@/types'
 
-const { getValue } = storeToRefs(useRobuxBuyStore())
+const { getValue, stepsData } = storeToRefs(useRobuxBuyStore())
+const { setWithdraw } = useRobuxBuyStore()
+const { getUserInfo } = useUserStore()
+
+onMounted(() => {
+  setWithdraw(stepsData.value).then(async () => {
+    await getUserInfo()
+  })
+})
+
+onBeforeUnmount(() => {
+  localStorage.removeItem(LocalStorageKeys.STEPS_DATA_LOCAL_STORAGE_KEY)
+})
 </script>
 
 <style scoped lang="scss">

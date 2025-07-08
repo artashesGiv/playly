@@ -8,8 +8,8 @@
             :key="gamepass.id"
             :text="gamepass.name"
             :src="gamepass.image_url"
-            :is-active="gamepass.id === stepsData.gamepass_id"
-            @click="stepsData.gamepass_id = gamepass.id"
+            :is-active="gamepass.id === stepsData.gamepass?.id"
+            @click="stepsData.gamepass = gamepass"
           />
         </div>
       </div>

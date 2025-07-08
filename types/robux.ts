@@ -84,7 +84,14 @@ export type Gamepass = {
   sellerName: string
 }
 
-export type RobuxBuySteps = 1 | 2 | 3 | 4 | 5 | 6
+export enum RobuxBuySteps {
+  USER = 1,
+  PLACE,
+  GAMEPASS,
+  GAMEPASS_PRICE,
+  PAY,
+  SUCCESS,
+}
 
 export type BuyRobuxData = {
   username: string

@@ -33,6 +33,8 @@ const { getValue, activePayType } = storeToRefs(useRobuxBuyStore())
 
 const { t } = useI18n()
 const { tg } = useTelegram()
+const route = useRoute()
+const isErrorPay = route.query.error === 'true'
 
 const dataListOwn = computed<TableDataProps['list']>(() => [
   {
@@ -61,6 +63,14 @@ const payCards: PayCard['type'][] = [
 const onClick = (item: PayCard['type']) => {
   activePayType.value = item
 }
+
+onMounted(() => {
+  if (isErrorPay) {
+    nextTick(() => {
+      tg?.showAlert('Произошла ошибка при оплате, попробуйте еще раз')
+    })
+  }
+})
 </script>
 
 <style scoped lang="scss">

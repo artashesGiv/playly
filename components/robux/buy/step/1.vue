@@ -14,8 +14,8 @@
             :key="user.roblox_id"
             :text="user.name"
             :src="user.avatar_url"
-            :is-active="user.roblox_id === stepsData.roblox_id"
-            @click="onClick(user)"
+            :is-active="user.roblox_id === stepsData.user?.roblox_id"
+            @click="stepsData.user = user"
           />
         </div>
       </div>
@@ -25,14 +25,8 @@
 
 <script setup lang="ts">
 import { useRobuxBuyStore } from '@/store'
-import type { RobloxUser } from '@/types'
 
 const { users, stepsData, searchName } = storeToRefs(useRobuxBuyStore())
-
-const onClick = (user: RobloxUser) => {
-  stepsData.value.username = user.name
-  stepsData.value.roblox_id = user.roblox_id
-}
 </script>
 
 <style scoped lang="scss">

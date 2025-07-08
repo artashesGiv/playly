@@ -1,22 +1,24 @@
-import type {
-  BuyRobuxData,
-  Gamepass,
-  RobloxPlace,
-  RobloxUser,
-  RobuxBuySteps,
+import {
+  type Gamepass,
+  LocalStorageKeys,
+  type RobloxPlace,
+  type RobloxUser,
+  type RobuxBuySteps,
 } from '@/types'
-import { useUserStore } from '@/store'
 import type { PayCard } from '@/components/pay-card.vue'
 
-type StepsData = BuyRobuxData & {
+type StepsData = {
+  user: Maybe<RobloxUser>
+  place: Maybe<RobloxPlace>
+  gamepass: Maybe<Gamepass>
+  robux_amount_without_fee: number
   robux_amount_with_fee: number
 }
 
-const defaultStepsData = () => ({
-  username: '',
-  roblox_id: 0,
-  universe_id: 0,
-  gamepass_id: 0,
+const defaultStepsData = (): StepsData => ({
+  user: null,
+  place: null,
+  gamepass: null,
   robux_amount_without_fee: 0,
   robux_amount_with_fee: 0,
 })
@@ -39,7 +41,7 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
 
   const { tg } = useTelegram()
   const { t } = useI18n()
-  const { getUserInfo } = useUserStore()
+  const route = useRoute()
 
   const resetStepsData = () => {
     step.value = 1
@@ -53,6 +55,35 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     Object.assign(stepsData, defaultStepsData())
   }
 
+  const setStepsDataFromLocalStorage = () => {
+    const stepsDataRaw = localStorage.getItem(
+      LocalStorageKeys.STEPS_DATA_LOCAL_STORAGE_KEY,
+    )
+
+    if (!stepsDataRaw) return
+
+    const localStepsData: StepsData & {
+      amount: number
+      places: RobloxPlace[]
+      gamepasses: Gamepass[]
+    } = JSON.parse(stepsDataRaw)
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    localStepsData.user && (users.value = [localStepsData.user])
+
+    const {
+      amount,
+      places: currPlaces,
+      gamepasses: currGamepasses,
+      ...otherData
+    } = localStepsData
+
+    getValue.value = amount
+    places.value = currPlaces
+    gamepasses.value = currGamepasses
+
+    Object.assign(stepsData, otherData)
+  }
+
   // STEP 1
   const getUsers = () => {
     clearTimeout(timeout)
@@ -63,7 +94,7 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
       await baseRequest({
         method: () => robuxAPI.fetchUserInfo(searchName.value.trim()),
         callback: result => {
-          stepsData.username = ''
+          stepsData.user = null
           users.value = result
         },
       })
@@ -112,9 +143,16 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
   // STEP 5
   // STEP 6
 
-  const setWithdraw = async () => {
+  const setWithdraw = async (stepsData: NonNullable<StepsData>) => {
     await baseRequest({
-      method: () => robuxAPI.setWithdraw(stepsData),
+      method: () =>
+        robuxAPI.setWithdraw({
+          username: stepsData.user!.name,
+          roblox_id: stepsData.user!.roblox_id,
+          universe_id: stepsData.place!.universe_id,
+          gamepass_id: stepsData.gamepass!.id,
+          robux_amount_without_fee: stepsData.robux_amount_without_fee,
+        }),
     })
   }
 
@@ -123,9 +161,9 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
   const nextStep = async (isWithdraw: boolean) => {
     switch (step.value) {
       case 1: {
-        if (stepsData.roblox_id) {
+        if (stepsData.user?.roblox_id) {
           try {
-            await getPlaces(stepsData.roblox_id)
+            await getPlaces(stepsData.user.roblox_id)
             stepsData.robux_amount_without_fee = getValue.value
             step.value += 1
           } catch (e) {
@@ -136,9 +174,9 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
         break
       }
       case 2: {
-        if (stepsData.universe_id) {
+        if (stepsData.place?.universe_id) {
           try {
-            await getGamepasses(stepsData.universe_id)
+            await getGamepasses(stepsData.place.universe_id)
             step.value += 1
           } catch (e) {
             console.error(e)
@@ -148,22 +186,22 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
         break
       }
       case 3: {
-        if (stepsData.gamepass_id) {
+        if (stepsData.gamepass?.id) {
           try {
             step.value += 1
           } catch (e) {
             console.error(e)
           }
         } else {
-          await getGamepasses(stepsData.universe_id)
+          await getGamepasses(stepsData.place!.universe_id)
         }
         break
       }
       case 4: {
         try {
           await getGamepassPrice(
-            stepsData.gamepass_id,
-            stepsData.universe_id,
+            stepsData.gamepass!.id,
+            stepsData.place!.universe_id,
             stepsData.robux_amount_with_fee,
           )
           if (isWithdraw) {
@@ -184,9 +222,6 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
         break
       }
       case 6: {
-        setWithdraw().then(async () => {
-          await getUserInfo()
-        })
         navigateTo('/robux')
         break
       }
@@ -211,6 +246,19 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     getUsers()
   })
 
+  watch([step, getValue], () => {
+    localStorage.setItem(
+      LocalStorageKeys.STEPS_DATA_LOCAL_STORAGE_KEY,
+      JSON.stringify({
+        ...stepsData,
+        amount: getValue.value,
+        places: places.value,
+        gamepasses: gamepasses.value,
+        step: step.value,
+      }),
+    )
+  })
+
   return {
     searchName,
     step,
@@ -225,5 +273,7 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     nextStep,
     getPlaces,
     getGamepasses,
+    setWithdraw,
+    setStepsDataFromLocalStorage,
   }
 })

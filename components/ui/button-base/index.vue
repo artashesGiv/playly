@@ -14,7 +14,7 @@
         :style="{ fontSize: `${iconFontSize[size]}px` }"
         class="button__icon"
       />
-      <div class="button__text">
+      <div v-if="text" class="button__text">
         {{ text }}
       </div>
       <ui-icon-base

@@ -40,17 +40,18 @@ definePageMeta({
   layout: 'empty',
 })
 
-const router = useRouter()
 const route = useRoute()
 const { tg } = useTelegram()
 const { t } = useI18n()
 const { step, stepsData, gamepasses, getValue, activePayType } =
   storeToRefs(useRobuxBuyStore())
-const { resetStepsData, nextStep } = useRobuxBuyStore()
+const { resetStepsData, nextStep, setStepsDataFromLocalStorage } =
+  useRobuxBuyStore()
 
 const isOpenModal = ref(false)
 
 const isWithdraw = route.query.isWithdraw
+const currentStep = Number(route.query.step)
 
 const stepsMap: Record<RobuxBuySteps, Component> = {
   1: defineAsyncComponent(() => import('@/components/robux/buy/step/1.vue')),
@@ -62,9 +63,9 @@ const stepsMap: Record<RobuxBuySteps, Component> = {
 }
 
 const isButtonDisableMap = computed<Record<RobuxBuySteps, boolean>>(() => ({
-  1: !stepsData.value.roblox_id,
-  2: !stepsData.value.universe_id,
-  3: !!gamepasses.value.length && !stepsData.value.gamepass_id,
+  1: !stepsData.value.user?.roblox_id,
+  2: !stepsData.value.place?.universe_id,
+  3: !!gamepasses.value.length && !stepsData.value.gamepass?.id,
   4: false,
   5: !activePayType.value,
   6: false,
@@ -83,13 +84,37 @@ const buttonTextMap = computed<Record<RobuxBuySteps, string>>(() => ({
 
 function handleBack() {
   if (step.value <= 1) {
-    router.back()
-  } else if (step.value === 5) {
+    navigateTo('/robux/buy')
+  } else if (step.value === 6) {
     navigateTo('/robux')
   } else {
     step.value--
   }
 }
+
+setStepsDataFromLocalStorage()
+
+watch(
+  () => route.query.step,
+  value => {
+    const queryStep = Number(value)
+    if (!isNaN(queryStep) && queryStep !== step.value) {
+      step.value = queryStep
+    }
+  },
+  { immediate: true },
+)
+
+watch(
+  () => step.value,
+  value => {
+    const queryStep = Number(route.query.step)
+    if (!isNaN(queryStep) && queryStep !== value) {
+      navigateTo({ path: '/robux/buy', query: { ...route.query, step: value } })
+    }
+  },
+  { immediate: true },
+)
 
 onMounted(() => {
   tg?.BackButton.show?.()

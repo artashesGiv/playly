@@ -30,8 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import type { RobuxBuyStepCardProps } from '@/components/robux/buy/step/step-card.vue'
 import { useRobuxBuyStore } from '@/store'
+import type { RobuxBuyStepCardProps } from '@/components/robux/buy/step/card.vue'
 
 export type HowToWorkModalProps = {
   isOpen: boolean
