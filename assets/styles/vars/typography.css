@@ -1,0 +1,19 @@
+:root {
+  --font-inter: Inter, sans-serif;
+
+  --font-massive-bold: 700 24px/150% var(--font-inter);
+  --font-very-large-bold: 700 22px/150% var(--font-inter);
+  --font-very-large-semibold: 600 22px/150% var(--font-inter);
+  --font-large-bold: 700 18px/150% var(--font-inter);
+  --font-large-semibold: 600 18px/150% var(--font-inter);
+  --font-large-medium: 500 18px/150% var(--font-inter);
+  --font-base-bold: 700 16px/150% var(--font-inter);
+  --font-base-semibold: 600 16px/150% var(--font-inter);
+  --font-base-medium: 500 16px/150% var(--font-inter);
+  --font-normal-bold: 700 14px/150% var(--font-inter);
+  --font-normal-semibold: 600 14px/150% var(--font-inter);
+  --font-normal-medium: 500 14px/150% var(--font-inter);
+  --font-small-bold: 700 12px/150% var(--font-inter);
+  --font-small-medium: 500 12px/150% var(--font-inter);
+  --font-tiny-bold: 700 10px/150% var(--font-inter);
+}
