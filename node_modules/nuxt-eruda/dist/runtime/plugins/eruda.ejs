@@ -1,0 +1,24 @@
+import eruda from 'eruda'
+import { defineNuxtPlugin } from '#imports'
+
+<% if(options.availablePlugins.length > 0) { %>
+  <% options.availablePlugins.forEach((pkg) => { %>
+    import <%= pkg.const %> from '<%= pkg.name %>'
+  <% }) %>
+<% } %>
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.hook('app:mounted', () => {
+
+    eruda.init(<%= JSON.stringify(options.initOptions) %>)
+
+    <% if(options.availablePlugins.length > 0) { %>
+      <% options.availablePlugins.forEach((pkg) => { %>
+
+        eruda.add(<%= pkg.const %>)
+
+      <% }) %>
+    <% } %>
+
+  })
+})

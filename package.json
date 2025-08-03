@@ -1,0 +1,45 @@
+{
+  "name": "playly-dev",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node .output/server/index.mjs",
+    "build": "nuxt build",
+    "heroku-postbuild": "nuxt build",
+    "dev": "nuxi dev",
+    "tunnel": "tuna http localhost:3000 --subdomain=playly --location=nl",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "format-icons": "node assets/js/npm/formattingIcons.js",
+    "icons": "npm run format-icons && fantasticon"
+  },
+  "dependencies": {
+    "@nuxt/eslint": "^1.4.1",
+    "@nuxt/fonts": "^0.11.4",
+    "@nuxt/image": "^1.10.0",
+    "@pinia/nuxt": "^0.11.1",
+    "eslint": "^9.29.0",
+    "gsap": "^3.13.0",
+    "js-base64": "^3.7.7",
+    "motion-plus-vue": "^1.2.1",
+    "motion-v": "^1.3.0",
+    "nuxt": "^3.17.5",
+    "nuxt-lottie": "^1.0.3",
+    "pinia": "^3.0.3",
+    "vue": "^3.5.17",
+    "vue-router": "^4.5.1",
+    "vue-tg": "^0.9.0-beta.10",
+    "vue3-lottie": "^3.3.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "@nuxtjs/i18n": "^9.5.6",
+    "@types/telegram-web-app": "^7.10.1",
+    "nuxt-eruda": "^1.1.0",
+    "oslllo-svg-fixer": "^5.0.0",
+    "prettier": "^3.6.0",
+    "sass": "^1.89.2",
+    "vue-i18n": "^11.1.7"
+  }
+}

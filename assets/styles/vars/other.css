@@ -1,0 +1,8 @@
+:root {
+  /* size */
+  --header-height: 82px;
+  --navigation-height: 77px;
+
+  /* other */
+  --transition-base: all 0.3s ease;
+}

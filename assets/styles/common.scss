@@ -1,0 +1,45 @@
+html,
+body {
+  scrollbar-gutter: stable;
+}
+
+html {
+  font-size: 12px;
+}
+
+body {
+  font-family: var(--font-inter);
+  font-weight: 500;
+  color: var(--light-500);
+  background-color: var(--dark-1000);
+  //touch-action: pan-x pan-y;
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+*::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.title {
+  font: var(--font-large-semibold);
+  color: var(--white);
+}
+
+.description {
+  font: var(--font-normal-medium);
+}
+
+.error {
+  color: var(--red-500);
+}
