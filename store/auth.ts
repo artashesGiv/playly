@@ -30,8 +30,8 @@ export const useAuthStore = defineStore('auth', () => {
     return await baseRequest({
       method: () =>
         authAPI.auth({
-          // init_data: tg?.initData || '',
-          init_data: 'user=%7B%22id%22%3A430212610%2C%22first_name%22%3A%22%D0%90%D1%80%D1%82%D0%B0%D1%88%D0%B5%D1%81%22%2C%22last_name%22%3A%22%D0%94%D0%B6%D0%B8%D0%B2%D0%B0%D0%BD%D1%8F%D0%BD%22%2C%22username%22%3A%22ArtashesGiv%22%2C%22language_code%22%3A%22ru%22%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2FFJtFwUP98ZYYSzPzTd1BGQHAjVUDIdzH6EmkxASZqFU.svg%22%7D&chat_instance=-4559555048510857361&chat_type=private&start_param=ref430212610&auth_date=1754197518&signature=HW0vNaoRSg6kf1b8ghC_-wCB9vu99UvIPL4OkB-x_tjXH2B-qhoLpkytcvzpoJeuEJtg4mBC_I2sWe6_PRrABQ&hash=30484f8d6ae7cc43359b0aa8b3c6c64202be56ea946babca8419c22c582a0efc',
+          init_data: tg?.initData || '',
+          // init_data: 'user=%7B%22id%22%3A430212610%2C%22first_name%22%3A%22%D0%90%D1%80%D1%82%D0%B0%D1%88%D0%B5%D1%81%22%2C%22last_name%22%3A%22%D0%94%D0%B6%D0%B8%D0%B2%D0%B0%D0%BD%D1%8F%D0%BD%22%2C%22username%22%3A%22ArtashesGiv%22%2C%22language_code%22%3A%22ru%22%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2FFJtFwUP98ZYYSzPzTd1BGQHAjVUDIdzH6EmkxASZqFU.svg%22%7D&chat_instance=-4559555048510857361&chat_type=private&start_param=ref430212610&auth_date=1754197518&signature=HW0vNaoRSg6kf1b8ghC_-wCB9vu99UvIPL4OkB-x_tjXH2B-qhoLpkytcvzpoJeuEJtg4mBC_I2sWe6_PRrABQ&hash=30484f8d6ae7cc43359b0aa8b3c6c64202be56ea946babca8419c22c582a0efc',
           ref_code: ref,
           timezone_offset_minutes: new Date().getTimezoneOffset() * -1,
         }),
