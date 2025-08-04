@@ -90,9 +90,9 @@
       <ui-button-base
         class="case-item__button"
         size="52"
-        :icon-right="isOwned ? 'coin-1' : undefined"
+        :icon-right="isOwned && item.crystal_price ? 'coin-1' : undefined"
         :text="
-          isCanSell
+          isOwned && item.crystal_price
             ? $t('common.sellForCoins', { n: formattedPrice })
             : $t('common.close')
         "
@@ -162,14 +162,12 @@ const isReceived = computed(
     item.value?.status === 'sold_by_crystal',
 )
 
-const isCanSell = computed(() => isOwned.value || item.value?.crystal_price)
-
 const disableButtons = computed<InteractiveProps['disabled']>(() => {
   if (isReceived.value) {
     return ['sell', 'withdraw']
   }
 
-  if (!isCanSell.value) {
+  if (!isOwned.value || !item.value?.crystal_price) {
     return ['sell']
   }
 
@@ -193,11 +191,11 @@ const dataListOwn = computed<TableDataProps['list']>(() => [
   },
   ...(item.value?.crystal_price
     ? [
-        {
-          title: `${t('common.price')}`,
-          value: item.value?.crystal_price,
-        },
-      ]
+      {
+        title: `${t('common.price')}`,
+        value: item.value?.crystal_price,
+      },
+    ]
     : []),
 ])
 
