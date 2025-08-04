@@ -269,7 +269,8 @@
     "tap": "Нажми на меня!",
     "in_stock": "В наличии: {value}",
     "subtype": "Подтип",
-    "go_to_withdraw": "Перейти к выводу"
+    "go_to_withdraw": "Перейти к выводу",
+    "copy": "Копировать"
   },
   "case_names": {
     "common_chest": "Обычный сундук",
@@ -384,7 +385,7 @@
       "button": "Разрешить"
     },
     "search": {
-      "placeholder": "Поиск игр и приложений"
+      "placeholder": "Поиск предметов"
     },
     "robux_banner": {
       "title": "Покупка робуксов",
@@ -399,5 +400,8 @@
       "robux": "Робуксы",
       "item": "Предметы"
     }
+  },
+  "referral_card": {
+    "title": "Ваша ссылка"
   }
 }

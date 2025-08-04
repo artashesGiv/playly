@@ -58,6 +58,7 @@ export type IconsId =
   | 'down-2'
   | 'down-1'
   | 'document'
+  | 'copy-1'
   | 'coin-1'
   | 'close'
   | 'close-circle'

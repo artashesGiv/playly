@@ -17,7 +17,7 @@
         class="item-case__abilities"
       />
     </div>
-    <div class="case-item__price">
+    <div v-if="crystal_price" class="case-item__price">
       {{ formatePrice(crystal_price) }} <main-mascot size="xs" />
     </div>
   </article>

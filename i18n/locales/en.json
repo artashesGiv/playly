@@ -269,7 +269,8 @@
     "tap": "Tap to earn coins!",
     "in_stock": "In stock: {value}",
     "subtype": "Subtype",
-    "go_to_withdraw": "Go to withdraw"
+    "go_to_withdraw": "Go to withdraw",
+    "copy": "Copy"
   },
   "case_names": {
     "common_chest": "Common Chest",
@@ -384,7 +385,7 @@
       "button": "Allow"
     },
     "search": {
-      "placeholder": "Search for games and applications"
+      "placeholder": "Search items"
     },
     "robux_banner": {
       "title": "Buying robux",
@@ -399,5 +400,8 @@
       "robux": "Robux",
       "item": "Items"
     }
+  },
+  "referral_card": {
+    "title": "Your referral link"
   }
 }

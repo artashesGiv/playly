@@ -2,7 +2,7 @@
   <div class="robux-interactive">
     <item-interactive
       @sell="navigateTo('/robux/sell')"
-      @withdraw="navigateTo('/robux/withdraw')"
+      @withdraw="onWithdraw"
     />
     <ui-divider />
     <ui-table-data :list="dataList">
@@ -25,7 +25,7 @@ import type { TableDataProps } from '@/components/ui/table-data.vue'
 import UserData from '@/components/user-data.vue'
 import { useAuthStore } from '@/store'
 
-const { user } = useTelegram()
+const { user, tg } = useTelegram()
 const { t } = useI18n()
 const { rates } = storeToRefs(useAuthStore())
 
@@ -39,6 +39,12 @@ const dataList = computed<TableDataProps['list']>(() => [
     value: rates.value?.robux2crystal,
   },
 ])
+
+const onWithdraw = async () => {
+  if (await tg.requestWriteAccess()) {
+    navigateTo('/robux/withdraw')
+  }
+}
 </script>
 
 <style scoped lang="scss">

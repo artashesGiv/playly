@@ -7,7 +7,7 @@
       :placeholder="$t('market.search.placeholder')"
     />
     <market-robux-banner />
-    <ui-tabs v-model="currentTab" :list="tabs" no-scroll />
+    <!--    <ui-tabs v-model="currentTab" :list="tabs" no-scroll />-->
     <ui-divider />
     <div class="market__list">
       <market-item-card
@@ -23,32 +23,30 @@
 <script setup lang="ts">
 import { useMarketStore } from '@/store'
 import type { MarketItem } from '@/types'
-import type { TabsProps } from '@/components/ui/tabs.vue'
 
 const { tg } = useTelegram()
-const { t } = useI18n()
 
-const { search, items, currentTab } = storeToRefs(useMarketStore())
+const { search, items } = storeToRefs(useMarketStore())
 const { getItems } = useMarketStore()
 
 const router = useRouter()
 
 const isWriteAccess = computed(() => tg.initDataUnsafe.user?.allows_write_to_pm)
 
-const tabs: TabsProps<MarketItem['category'] | 'all'>['list'] = [
-  {
-    id: 'all',
-    text: t('market.tabs.all'),
-  },
-  {
-    id: 'robux',
-    text: t('market.tabs.robux'),
-  },
-  {
-    id: 'growagarden',
-    text: t('market.tabs.item'),
-  },
-]
+// const tabs: TabsProps<MarketItem['category'] | 'all'>['list'] = [
+//   {
+//     id: 'all',
+//     text: t('market.tabs.all'),
+//   },
+//   {
+//     id: 'robux',
+//     text: t('market.tabs.robux'),
+//   },
+//   {
+//     id: 'growagarden',
+//     text: t('market.tabs.item'),
+//   },
+// ]
 
 const onBuy = (item: MarketItem) => {
   router.push({

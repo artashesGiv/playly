@@ -2,6 +2,8 @@ import type { PayCard } from '@/components/pay-card.vue'
 import type { Market, MarketItem } from '@/types'
 import { paymentIdMap } from '@/utils/payment-id-map'
 import type { TabItem } from '@/components/ui/tabs.vue'
+import { useItemsStore } from '@/store/items'
+import { useUserStore } from '@/store/user'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 let timeout: Timeout
@@ -18,6 +20,9 @@ export const useMarketStore = defineStore('market', () => {
   const isLoading = ref(false)
 
   const currentTab = ref<TabItem<MarketItem['category']>['id'] | 'all'>('all')
+
+  const { itemNeedUpdate } = storeToRefs(useItemsStore())
+  const { userInfo } = storeToRefs(useUserStore())
 
   const { tg } = useTelegram()
 
@@ -80,6 +85,7 @@ export const useMarketStore = defineStore('market', () => {
       })
 
       tg.openLink(uri)
+      itemNeedUpdate.value = true
     } catch {
       // error
     } finally {
@@ -104,6 +110,10 @@ export const useMarketStore = defineStore('market', () => {
       }, 500)
     },
   )
+
+  onMounted(() => {
+    email.value = userInfo.value?.email || ''
+  })
 
   return {
     search,

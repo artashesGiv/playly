@@ -41,8 +41,8 @@ const useLoginFlow = async (ref: string, route?: string) => {
       navigateTo('/onboarding')
       return
     }
-  } catch (e) {
-    console.error(e)
+  } catch {
+    // ignore error and fall back to route navigation below
   }
 
   if (route) navigateTo(route)

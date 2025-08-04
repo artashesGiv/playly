@@ -71,6 +71,7 @@ export type UserInfo = {
   id: string
   telegram_id: number
   starpets_id: Maybe<number>
+  email: string
   first_name: string
   last_name: string
   username: string

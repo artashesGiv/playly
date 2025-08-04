@@ -3,6 +3,8 @@
     <main-coin />
     <balance-card size="xl" />
     <ui-divider />
+    <referral-link-card />
+    <ui-divider />
     <bounty-lists />
   </div>
 </template>

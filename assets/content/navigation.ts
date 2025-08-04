@@ -8,6 +8,11 @@ export const useNavigation = (): NavItem[] => {
       text: t('nav.coins'),
     },
     {
+      src: '/cases',
+      icon: 'case-1',
+      text: t('nav.cases'),
+    },
+    {
       src: '/market',
       icon: 'buy-1',
       text: t('nav.market'),
@@ -22,11 +27,7 @@ export const useNavigation = (): NavItem[] => {
     //   icon: 'group-2',
     //   text: t('nav.friends'),
     // },
-    {
-      src: '/cases',
-      icon: 'case-1',
-      text: t('nav.cases'),
-    },
+
     {
       src: '/profile',
       icon: 'profile-1',

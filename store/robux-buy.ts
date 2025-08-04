@@ -10,6 +10,7 @@ import type { PayCard } from '@/components/pay-card.vue'
 import { LocalStorageKeys } from '@/types/enums'
 import { useAuthStore } from '@/store/auth'
 import { paymentIdMap } from '@/utils/payment-id-map'
+import { useUserStore } from '@/store/user'
 
 type StepsData = {
   user: Maybe<RobloxUser>
@@ -71,6 +72,7 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
   const payValue = ref(769)
 
   const { rates } = storeToRefs(useAuthStore())
+  const { userInfo } = storeToRefs(useUserStore())
   const rate = computed(() => rates.value?.rub2robux || 1)
 
   const getValue = computed<number>({
@@ -235,7 +237,7 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
       callback: result => {
         withdrawId.value = result.withdraw_id
         amount.value = result.amount_rub
-        email.value = result.email || ''
+        email.value = userInfo.value?.email || ''
       },
     })
   }
