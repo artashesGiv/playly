@@ -7,11 +7,24 @@
       name="ticket-2"
     />
 
-    <div class="referral-link__right">
+    <div class="referral-link__top">
       <span class="title">{{ $t('referral_card.title') }}</span>
       <span class="description">{{ refLink }}</span>
     </div>
-    <ui-button-base :icon size="52" @click="onClick" />
+    <div class="referral-link__buttons">
+      <ui-button-base
+        icon="send-2"
+        :text="$t('common.share')"
+        size="42"
+        @click="useShareLink($t('invitation'))"
+      />
+      <ui-button-base
+        :icon
+        :text="$t('common.copy')"
+        size="42"
+        @click="onClick"
+      />
+    </div>
   </ui-card>
 </template>
 
@@ -42,7 +55,7 @@ const onClick = () => {
 
 <style scoped lang="scss">
 .referral-link {
-  @include row(12px);
+  @include column(12px);
 
   justify-content: space-between;
   overflow: hidden;
@@ -52,23 +65,29 @@ const onClick = () => {
     z-index: 2;
   }
 
-  &__right {
+  &__top {
     @include column;
   }
 
   &__icon {
     position: absolute;
 
+    color: var(--dark-500);
+
     &--1 {
-      top: -16px;
-      right: 140px;
-      font-size: 54px;
+      top: -9px;
+      right: 38px;
+      font-size: 31px;
     }
     &--2 {
-      bottom: -11px;
-      right: 110px;
-      font-size: 44px;
+      top: 12px;
+      right: -10px;
+      font-size: 50px;
     }
+  }
+
+  &__buttons {
+    @include row(12px);
   }
 }
 </style>
