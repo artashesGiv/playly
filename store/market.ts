@@ -81,7 +81,7 @@ export const useMarketStore = defineStore('market', () => {
         email: email.value,
         payment_method_id: paymentIdMap[activePayType.value!]!,
         withdraw_id: market_withdraw_id,
-        withdraw_type: item.category === 'robux' ? 'robux' : 'item',
+        withdraw_type: 'item',
       })
 
       tg.openLink(uri)
@@ -106,6 +106,7 @@ export const useMarketStore = defineStore('market', () => {
       clearTimeout(timeout)
 
       timeout = setTimeout(async () => {
+        currentTab.value = 'all'
         await getItems()
       }, 500)
     },

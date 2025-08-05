@@ -33,7 +33,7 @@ export namespace Market {
 
 export type MarketItem = {
   id: string
-  category: 'growagarden' | 'robux'
+  category: 'growagarden' | 'gg_money'
   currency: 'RUB' | 'USD'
   image_url: string
   name: string

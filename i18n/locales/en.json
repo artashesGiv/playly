@@ -398,7 +398,8 @@
     "tabs": {
       "all": "All",
       "robux": "Robux",
-      "item": "Items"
+      "item": "Items",
+      "money": "Money"
     }
   },
   "referral_card": {

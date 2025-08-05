@@ -191,11 +191,11 @@ const dataListOwn = computed<TableDataProps['list']>(() => [
   },
   ...(item.value?.crystal_price
     ? [
-      {
-        title: `${t('common.price')}`,
-        value: item.value?.crystal_price,
-      },
-    ]
+        {
+          title: `${t('common.price')}`,
+          value: item.value?.crystal_price,
+        },
+      ]
     : []),
 ])
 
@@ -277,7 +277,7 @@ const onSell = async () => {
 }
 
 const onClick = () => {
-  if (isOwned.value) {
+  if (isOwned.value && item.value?.crystal_price) {
     onSell()
   } else {
     router.back()
