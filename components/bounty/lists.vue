@@ -7,10 +7,10 @@
           :additional-text="`${availableCards.length} ${$t('common.available')}`"
         />
         <transition-group name="fade-move">
-          <component
-            :is="componentsMap[card]"
+          <bounty-card
             v-for="card in availableCards"
             :key="card"
+            v-bind="mapPropsCard[card]"
             @click="onCompleted(card)"
           />
         </transition-group>
@@ -27,10 +27,10 @@
           :additional-text="`${completedCards.length + friends.length} ${$t('common.completed')}`"
         />
         <transition-group name="fade-move">
-          <component
-            :is="componentsMap[card]"
+          <bounty-card
             v-for="card in completedCards"
             :key="card"
+            v-bind="mapPropsCard[card]"
             is-disabled
           />
           <friend-card
@@ -47,98 +47,72 @@
 <script setup lang="ts">
 import { useAuthStore, useFriendsStore, useUserStore } from '@/store'
 import { useShareLink } from '@/composables/useShareLink'
-import type { UserInfo } from '@/types'
-
-type BountyCard =
-  | 'playly-tg'
-  | 'roblox-friend'
-  | 'star-pets-tg'
-  | 'star-pets-light'
-type BountyCardStatus = Partial<Record<BountyCard, boolean>>
-type BountyCardComponent = Record<BountyCard, Component>
+import { type BountyCard, useBountyMaps } from './-helpers'
 
 const { tg, haptic } = useTelegram()
 const { t } = useI18n()
-const { userInfo } = storeToRefs(useUserStore())
 const { getUserInfo } = useUserStore()
 const { checkSubscription } = useAuthStore()
 const { friends } = storeToRefs(useFriendsStore())
 
-const tasks = computed<Maybe<UserInfo['tasks']>>(() => userInfo?.value?.tasks)
-
-const map = computed<BountyCardStatus>(() => ({
-  ...('playly_join_channel' in tasks.value! && {
-    'playly-tg': tasks?.value?.playly_join_channel || false,
-  }),
-  ...('starpets_join_channel' in tasks.value! && {
-    'star-pets-tg': tasks?.value?.starpets_join_channel || false,
-  }),
-  ...('starpets_light_join_channel' in tasks.value! && {
-    'star-pets-light': tasks?.value?.starpets_light_join_channel || false,
-  }),
-  'roblox-friend': false,
-}))
-
-const componentsMap: BountyCardComponent = {
-  'playly-tg': defineAsyncComponent(
-    () => import('@/components/bounty/card/playly-tg.vue'),
-  ),
-  'roblox-friend': defineAsyncComponent(
-    () => import('@/components/bounty/card/roblox-friend.vue'),
-  ),
-  'star-pets-tg': defineAsyncComponent(
-    () => import('@/components/bounty/card/star-pets-tg.vue'),
-  ),
-  'star-pets-light': defineAsyncComponent(
-    () => import('@/components/bounty/card/star-pets-light.vue'),
-  ),
-}
-
-const availableCards = computed<BountyCard[]>(
-  () =>
-    Object.keys(map.value).filter(
-      key => !map.value[key as BountyCard],
-    ) as BountyCard[],
-)
-const completedCards = computed<BountyCard[]>(
-  () =>
-    Object.keys(map.value).filter(
-      key => map.value[key as BountyCard],
-    ) as BountyCard[],
-)
+const { mapLinkTasks, mapPropsCard, completedCards, availableCards } =
+  useBountyMaps()
 
 const onCompleted = async (card: BountyCard) => {
   switch (card) {
-    case 'playly-tg': {
+    case 'playly_join_channel': {
       haptic.impactOccurred('heavy')
       const data = await checkSubscription()
       if (data.channels_awarded.includes('playly')) {
         await getUserInfo()
       } else {
-        tg?.openTelegramLink('https://t.me/+bmusTP1u7VMwMmJi')
+        tg?.openTelegramLink(mapLinkTasks.playly_join_channel)
       }
       break
     }
 
-    case 'star-pets-tg': {
+    case 'starpets_join_channel': {
       haptic.impactOccurred('heavy')
       const data = await checkSubscription()
       if (data.channels_awarded.includes('starpets')) {
         await getUserInfo()
       } else {
-        tg?.openTelegramLink('https://t.me/+qDSL72dv7kI2N2My')
+        tg?.openTelegramLink(mapLinkTasks.starpets_join_channel)
       }
       break
     }
 
-    case 'star-pets-light': {
+    case 'starpets_light_join_channel': {
       haptic.impactOccurred('heavy')
       const data = await checkSubscription()
       if (data.channels_awarded.includes('starpets-light')) {
         await getUserInfo()
       } else {
-        tg?.openTelegramLink('https://t.me/+6P1jbEPGoBs5Njgy')
+        tg?.openTelegramLink(mapLinkTasks.starpets_light_join_channel)
       }
+      break
+    }
+
+    case 'playly_boost_channel': {
+      haptic.impactOccurred('heavy')
+      const data = await checkSubscription()
+      if (data.channels_awarded.includes('playly-boost')) {
+        await getUserInfo()
+      } else {
+        tg?.openTelegramLink(mapLinkTasks.playly_boost_channel)
+      }
+      break
+    }
+
+    case 'item_buy': {
+      haptic.impactOccurred('heavy')
+      navigateTo(mapLinkTasks.item_buy)
+      break
+    }
+    case 'robux_buy_100':
+    case 'robux_buy_500': {
+      haptic.impactOccurred('heavy')
+      navigateTo(mapLinkTasks.robux_buy_100)
       break
     }
 

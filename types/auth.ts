@@ -67,6 +67,16 @@ export type AuthResponse = {
   first_enter: boolean
 } & TokenData
 
+export type UserTasks = {
+  starpets_join_channel?: boolean
+  playly_join_channel: boolean
+  starpets_light_join_channel?: boolean
+  playly_boost_channel?: boolean
+  robux_buy_100?: boolean
+  robux_buy_500?: boolean
+  item_buy?: boolean
+}
+
 export type UserInfo = {
   id: string
   telegram_id: number
@@ -78,11 +88,7 @@ export type UserInfo = {
   photo_url: string
   crystal_balance: number
   robux_balance: number
-  tasks: {
-    starpets_join_channel?: boolean
-    playly_join_channel: boolean
-    starpets_light_join_channel?: boolean
-  }
+  tasks: UserTasks
   starpets_info: {
     avatar: string
     id: string

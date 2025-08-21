@@ -9,22 +9,36 @@ export const useStartApp = async () => {
     tg?.initDataUnsafe?.start_param ??
     new URLSearchParams(window.location.search).get('tgWebAppStartParam') // fallback на десктоп Web
 
+  console.log('STARTAPP PARAMS: ', raw)
+
   let ref = ''
   let route = ''
+  const query: Record<string, string> = {}
+
   if (raw) {
-    if (raw.startsWith('ref') || raw.startsWith('link')) {
-      ref = raw
-    } else {
-      try {
-        const data = linkDecode(raw)
-        ref = data?.ref || ''
-        route = data?.route || ''
-      } catch {
-        console.error('not base64 params')
-        ref = raw
+    const params = raw.split('_')
+    params.forEach(param => {
+      if (param.startsWith('ref')) {
+        ref = param
       }
-    }
+
+      if (param.startsWith('item')) {
+        const id = param.slice('item'.length)
+
+        route = `/item/${id}`
+      }
+
+      if (param.startsWith('messageId')) {
+        query.message_id = param.slice('messageId'.length)
+      }
+    })
   }
+
+  if (Object.keys(query).length) {
+    const search = new URLSearchParams(query).toString()
+    route += `?${search}`
+  }
+
   await useLoginFlow(ref, route)
   setLang(locale.value as LanguageCode).then()
 }

@@ -78,6 +78,34 @@ export const useItemsStore = defineStore('items', () => {
     })
   }
 
+  const shareItem = async (id: CaseItem['id']) => {
+    const data = await baseRequest({
+      method: () => itemsAPI.shareItem({ user_item_id: id }),
+    })
+
+    return data.prepared_id
+  }
+
+  const getItemUser = async (id: CaseItem['id']) => {
+    return await baseRequest({
+      method: () => itemsAPI.fetchItemUser({ user_item_id: id }),
+    })
+  }
+
+  const shareRobux = async () => {
+    const data = await baseRequest({
+      method: () => itemsAPI.shareRobux(),
+    })
+
+    return data.prepared_id
+  }
+
+  const getRobuxData = async (message_id: string) => {
+    return await baseRequest({
+      method: () => itemsAPI.fetchRobuxData({ message_id }),
+    })
+  }
+
   return {
     items,
     item,
@@ -91,5 +119,9 @@ export const useItemsStore = defineStore('items', () => {
     getItems,
     getItem,
     sellItemRobux,
+    shareItem,
+    getItemUser,
+    shareRobux,
+    getRobuxData,
   }
 })

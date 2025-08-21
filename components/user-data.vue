@@ -1,18 +1,37 @@
 <template>
   <div class="user-data">
     <span>
-      {{ tg?.initDataUnsafe?.user?.first_name }}
-      {{ tg?.initDataUnsafe?.user?.last_name }}
+      {{ user.name }}
     </span>
-    <nuxt-img
-      class="user-data__avatar"
-      :src="tg?.initDataUnsafe?.user?.photo_url"
-    />
+    <nuxt-img class="user-data__avatar" :src="user.photo_url" />
   </div>
 </template>
 
 <script setup lang="ts">
 const { tg } = useTelegram()
+
+type UserDataWithProps = {
+  name: string
+  photo_url: string
+}
+
+type UserDataWithoutProps = {
+  name?: never
+  photo_url?: never
+}
+
+export type UserDataProps = UserDataWithProps | UserDataWithoutProps
+
+const props = defineProps<UserDataProps>()
+
+const user = computed(() =>
+  props.name
+    ? props
+    : {
+        name: `${tg?.initDataUnsafe?.user?.first_name} ${tg?.initDataUnsafe?.user?.last_name}`,
+        photo_url: tg?.initDataUnsafe?.user?.photo_url,
+      },
+)
 </script>
 
 <style scoped lang="scss">

@@ -8,26 +8,30 @@ export const useNavigation = (): NavItem[] => {
       text: t('nav.coins'),
     },
     {
-      src: '/cases',
-      icon: 'case-1',
-      text: t('nav.cases'),
-    },
-    {
-      src: '/market',
+      src: '/shop',
       icon: 'buy-1',
-      text: t('nav.market'),
+      text: t('nav.shop'),
     },
     {
-      src: '/robux',
-      icon: 'robux',
-      text: t('nav.robux'),
+      src: '/sell',
+      icon: 'buy-3',
+      text: t('nav.shop'),
     },
+    // {
+    //   src: '/robux',
+    //   icon: 'robux',
+    //   text: t('nav.robux'),
+    // },
     // {
     //   src: '/friends',
     //   icon: 'group-2',
     //   text: t('nav.friends'),
     // },
-
+    {
+      src: '/cases',
+      icon: 'case-1',
+      text: t('nav.cases'),
+    },
     {
       src: '/profile',
       icon: 'profile-1',

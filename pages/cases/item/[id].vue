@@ -237,7 +237,7 @@ const onSellItem = async () => {
   if (isRobux.value) {
     await sellItemRobux(receivedItem.value!.robux_amount!)
   } else {
-    await sellItem(receivedItem.value!.id, receivedItem.value!.crystal_price)
+    await sellItem(receivedItem.value!.id, receivedItem.value!.crystal_price!)
   }
 
   isSellForCoins.value = true

@@ -10,7 +10,7 @@
       <div class="case-item__content">
         <item-main-data
           :image="item.image_url"
-          :title="snakeToSentence(item.name)"
+          :title="shopItemNameMap[item.name] || snakeToSentence(item.name)"
           :description="
             ('item_type' in item.data &&
               snakeToSentence(item.data.item_type)) ||
@@ -108,6 +108,7 @@ import type { TableDataProps } from '@/components/ui/table-data.vue'
 import type { InteractiveProps } from '@/components/item-interactive.vue'
 import { useItemsStore, useUserStore } from '@/store'
 import { snakeToSentence } from '@/utils/snake-to-sentence'
+import { shopItemNameMap } from '@/pages/shop/-helpers'
 
 definePageMeta({
   layout: 'empty',
@@ -123,27 +124,24 @@ const isMounted = ref(false)
 
 const { item } = storeToRefs(useItemsStore())
 const { userInfo } = storeToRefs(useUserStore())
-const { sellItem, withdrawItem, getItem } = useItemsStore()
+const { sellItem, withdrawItem, getItem, shareItem } = useItemsStore()
 const { isGrowagarden } = useCaseGame(item)
 
-useHead(() => ({
-  title: 'Я получил AWP | Worm God (Field-Tested) в RFL Blast',
-  meta: [
-    {
-      property: 'og:title',
-      content: 'Я получил AWP | Worm God (Field-Tested) в RFL Blast',
-    },
-    { property: 'og:description', content: 'RFL Blast: кейсы CS2' },
-    { property: 'og:image', content: 'https://yourdomain.com/path/to/awp.png' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: item.value?.image_url },
-  ],
-}))
+const loadingButtons = ref<InteractiveProps['loading']>([])
 
-const onShare = () => {
-  // tg?.openTelegramLink(
-  //   `https://t.me/share/url?url=${encodeURIComponent(`https://playly.gg/case-item/${item.value?.id}`)}&text=qweqweqweqweqwe`,
-  // )
+const onShare = async () => {
+  try {
+    loadingButtons.value = ['share']
+    const shareId = await shareItem(id)
+
+    tg.shareMessage(shareId)
+      .then()
+      .catch(() => Telegram.WebApp.showAlert('Не удалось поделиться'))
+  } catch {
+    // error
+  } finally {
+    loadingButtons.value = []
+  }
 }
 
 const countdown = useCountdown(
@@ -173,8 +171,6 @@ const disableButtons = computed<InteractiveProps['disabled']>(() => {
 
   return undefined
 })
-
-const loadingButtons = ref<InteractiveProps['loading']>([])
 
 const formattedPrice = computed(() =>
   formatePrice(item.value?.crystal_price || 0),

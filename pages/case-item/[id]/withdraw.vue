@@ -3,14 +3,14 @@
     <div class="withdraw__content">
       <item-main-data
         :image="item.image_url"
-        :title="snakeToSentence(item.name)"
+        :title="shopItemNameMap[item.name] || snakeToSentence(item.name)"
         :description="
           ('item_type' in item.data && snakeToSentence(item.data.item_type)) ||
           ''
         "
       />
       <ui-divider />
-      <profile-timer-card v-if="!isGrowagarden" :item-id="id" />
+      <profile-timer-card v-if="isAdoptMe || isMM2" :item-id="id" />
       <ui-table-data
         v-if="item.game === 'adopt_me'"
         class="case-item__table"
@@ -29,7 +29,7 @@
         class="case-item__table"
         :list="mm2DataListItem"
       />
-      <span v-if="!isGrowagarden" class="description">
+      <span v-if="isAdoptMe || isMM2" class="description">
         {{ $t('profile.withdraw.description') }}
       </span>
       <span v-if="isGrowagarden" class="description">
@@ -53,7 +53,7 @@
         @click="onClick"
       />
       <ui-button-base
-        v-if="!isGrowagarden"
+        v-if="isAdoptMe || isMM2"
         :text="$t('profile.withdraw.howGetItem')"
         size="52"
         view="secondary"
@@ -69,6 +69,7 @@ import type { CaseItem } from '@/types'
 import type { TableDataProps } from '@/components/ui/table-data.vue'
 import { useItemsStore } from '@/store'
 import { snakeToSentence } from '@/utils/snake-to-sentence'
+import { shopItemNameMap } from '@/pages/shop/-helpers'
 
 definePageMeta({
   layout: 'empty',
@@ -81,7 +82,7 @@ const id = route.params.id as CaseItem['id']
 const { item } = storeToRefs(useItemsStore())
 const { t } = useI18n()
 const { tg } = useTelegram()
-const { isGrowagarden } = useCaseGame(item)
+const { isGrowagarden, isAdoptMe, isMM2 } = useCaseGame(item)
 
 const isWriteAccess = computed(() => tg.initDataUnsafe.user?.allows_write_to_pm)
 
@@ -144,7 +145,7 @@ const onClick = async () => {
 }
 
 const mainButtonText = computed(() => {
-  if (isGrowagarden.value) {
+  if (!isAdoptMe.value && !isMM2.value) {
     return t('common.go_to_withdraw')
   }
 

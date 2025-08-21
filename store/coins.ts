@@ -13,8 +13,8 @@ export const useCoinsStore = defineStore('coins', () => {
   const { balance } = storeToRefs(useUserStore())
 
   const settings = ref<TaskSettings>({
-    channel_join_crystal_amount: 300,
-    ref_crystal_amount: 200,
+    channel_join_crystal_amount: 100,
+    ref_crystal_amount: 500,
   })
 
   const tapCoin = async (amount: number) => {
@@ -27,7 +27,7 @@ export const useCoinsStore = defineStore('coins', () => {
     await baseRequest({
       method: () => coinsAPI.fetchTaskSettings(),
       callback: result => {
-        settings.value = result
+        settings.value = { ...settings.value, ...result }
       },
     })
   }

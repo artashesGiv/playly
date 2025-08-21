@@ -20,7 +20,7 @@
     />
     <ui-button-base
       :text="$t('common.share')"
-      is-disabled
+      :loading="loading?.includes('share')"
       direction="column"
       view="secondary"
       icon="send-2"

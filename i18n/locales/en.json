@@ -5,7 +5,8 @@
     "robux": "Robux",
     "cases": "Cases",
     "profile": "Profile",
-    "market": "Market"
+    "shop": "Market",
+    "sell": "Sell"
   },
   "coins": {
     "title": "Earn coins and exchange them for cases with adopt me items and robux",
@@ -17,7 +18,17 @@
       "starPetsTgLight": "Join StarPets Lite telegram",
       "playlyTg": "Join Playly telegram",
       "inviteFriend": "Invite a friend to Playly",
-      "inviteFriendFromRoblox": "Invite a friend who plays Roblox"
+      "inviteFriendFromRoblox": "Invite a friend who plays Roblox",
+      "boostPlayly": "Boost Playly",
+      "itemBuy": "Buy item in a store",
+      "robuxBuy100": "Buy Robux for an amount of more than 100 rubles",
+      "robuxBuy500": "Buy Robux for an amount of more than 500 rubles"
+    },
+    "taskButton": {
+      "join": "Join",
+      "invite": "Invite",
+      "boost": "Boost",
+      "buy": "Buy"
     },
     "tapError": "That's it for today, come back to slip tomorrow! In the meantime, invite friends!"
   },
@@ -378,7 +389,7 @@
     "button": "Continue with Telegram",
     "alert": "By continuing, you agree to our Terms of use and Privacy Policy"
   },
-  "market": {
+  "shop": {
     "access_write_banner": {
       "title": "Allow notifications",
       "description": "Give access to the bot to obtain important notifications",
@@ -394,15 +405,66 @@
     },
     "buy": {
       "button": "Buy"
-    },
-    "tabs": {
-      "all": "All",
-      "robux": "Robux",
-      "item": "Items",
-      "money": "Money"
     }
   },
   "referral_card": {
     "title": "Your referral link"
+  },
+  "sell": {
+    "search": {
+      "placeholder": "Search items"
+    },
+    "banner": {
+      "title": "Fast sale of items",
+      "description": "Robux will immediately go to your Playly balance"
+    },
+    "item_card": {
+      "button": "Add"
+    },
+    "cart": {
+      "button": "To sale",
+      "title": "Items for sale",
+      "description": "Select items for sale",
+      "alert": "To sell items, the sales amount must be at least {min} R$ and no more than {max} R$",
+      "minimum_sum": "The minimum sales amount",
+      "continue": "Continue",
+      "step-1": {
+        "continue": "Sell for {n} R$",
+        "seller": "Seller",
+        "will_be_sold": "Will be sold",
+        "will_get": "Will get",
+        "n_items": "{n} items",
+        "alert": "You will receive a message in the bot with instructions on what to do next"
+      },
+      "step-2": {
+        "continue": "Open messages",
+        "how_it_work_button": "How does this work",
+        "title": "Successfully!",
+        "description": "You have sent a pets application",
+        "alert": "You received a message in the bot with instructions for further actions"
+      }
+    },
+    "how_to_work_modal": {
+      "title": "Sale of items",
+      "button": "Understood!",
+      "step": "Step {n}",
+      "ready": "Ready!",
+      "step-1": {
+        "title": "Choose the product",
+        "description": "Select the product for sale and write to the manager"
+      },
+      "step-2": {
+        "title": "Wait for the manager",
+        "description": "Wait for the manager to take your application to the work"
+      },
+      "step-3": {
+        "title": "Submit items",
+        "description": "Submit objects to the manager and wait until he confirms the receipt"
+      },
+      "step-4": {
+        "title": "Get robux",
+        "description": "Robux will go to your Playly account"
+      }
+    }
   }
 }

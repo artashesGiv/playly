@@ -1,5 +1,5 @@
 {
-  "name": "playly-dev",
+  "name": "nuxt-app",
   "private": true,
   "type": "module",
   "scripts": {

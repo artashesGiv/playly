@@ -1,7 +1,7 @@
 @font-face {
     font-family: "icons";
-    src: url("/fonts/icons/icons.woff?9962ff8ad6748c7ae93f37b870acb2b9") format("woff"),
-url("/fonts/icons/icons.woff2?9962ff8ad6748c7ae93f37b870acb2b9") format("woff2");
+    src: url("/fonts/icons/icons.woff?cf8f8117dde7b3941bea03554a64f34e") format("woff"),
+url("/fonts/icons/icons.woff2?cf8f8117dde7b3941bea03554a64f34e") format("woff2");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -15,222 +15,231 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-wallet:before {
+.icon-alert:before {
     content: "\f101";
 }
-.icon-volume-slash:before {
+.icon-arrow-swap-horizontal:before {
     content: "\f102";
 }
-.icon-volume-high:before {
+.icon-arrow-swap-vertical:before {
     content: "\f103";
 }
-.icon-upload:before {
+.icon-buy-1:before {
     content: "\f104";
 }
-.icon-up-square-2:before {
+.icon-buy-3:before {
     content: "\f105";
 }
-.icon-up-square-1:before {
+.icon-case-1:before {
     content: "\f106";
 }
-.icon-up-circle-2:before {
+.icon-check-circle:before {
     content: "\f107";
 }
-.icon-up-circle-1:before {
+.icon-check:before {
     content: "\f108";
 }
-.icon-up-1:before {
+.icon-clock:before {
     content: "\f109";
 }
-.icon-up-3:before {
+.icon-close-circle:before {
     content: "\f10a";
 }
-.icon-up-2:before {
+.icon-close:before {
     content: "\f10b";
 }
-.icon-undo:before {
+.icon-coin-1:before {
     content: "\f10c";
 }
-.icon-ticket-2:before {
+.icon-copy-1:before {
     content: "\f10d";
 }
-.icon-telegram:before {
+.icon-delete-2:before {
     content: "\f10e";
 }
-.icon-swap-2:before {
+.icon-document:before {
     content: "\f10f";
 }
-.icon-swap-1:before {
+.icon-down-1:before {
     content: "\f110";
 }
-.icon-sp-logo:before {
+.icon-down-2:before {
     content: "\f111";
 }
-.icon-send-2:before {
+.icon-down-3:before {
     content: "\f112";
 }
-.icon-search-3:before {
+.icon-down-circle-1:before {
     content: "\f113";
 }
-.icon-roulette-arrow-right:before {
+.icon-down-circle-2:before {
     content: "\f114";
 }
-.icon-roulette-arrow-left:before {
+.icon-down-square-1:before {
     content: "\f115";
 }
-.icon-rotate-right:before {
+.icon-down-square-2:before {
     content: "\f116";
 }
-.icon-rotate-left:before {
+.icon-download:before {
     content: "\f117";
 }
-.icon-robux:before {
+.icon-foreign:before {
     content: "\f118";
 }
-.icon-right-square-2:before {
+.icon-group-2:before {
     content: "\f119";
 }
-.icon-right-square-1:before {
+.icon-information-circle:before {
     content: "\f11a";
 }
-.icon-right-circle-2:before {
+.icon-left-1:before {
     content: "\f11b";
 }
-.icon-right-circle-1:before {
+.icon-left-2:before {
     content: "\f11c";
 }
-.icon-right-3:before {
+.icon-left-3:before {
     content: "\f11d";
 }
-.icon-right-2:before {
+.icon-left-circle-1:before {
     content: "\f11e";
 }
-.icon-right-1:before {
+.icon-left-circle-2:before {
     content: "\f11f";
 }
-.icon-refresh-2:before {
+.icon-left-square-1:before {
     content: "\f120";
 }
-.icon-refresh-1:before {
+.icon-left-square-2:before {
     content: "\f121";
 }
-.icon-redo:before {
+.icon-link:before {
     content: "\f122";
 }
-.icon-profile-1:before {
+.icon-loader-2:before {
     content: "\f123";
 }
-.icon-play:before {
+.icon-login:before {
     content: "\f124";
 }
-.icon-message-22:before {
+.icon-Logout:before {
     content: "\f125";
 }
-.icon-login:before {
+.icon-message-22:before {
     content: "\f126";
 }
-.icon-loader-2:before {
+.icon-minus:before {
     content: "\f127";
 }
-.icon-link:before {
+.icon-play:before {
     content: "\f128";
 }
-.icon-left-square-2:before {
+.icon-plus:before {
     content: "\f129";
 }
-.icon-left-square-1:before {
+.icon-profile-1:before {
     content: "\f12a";
 }
-.icon-left-circle-2:before {
+.icon-redo:before {
     content: "\f12b";
 }
-.icon-left-circle-1:before {
+.icon-refresh-1:before {
     content: "\f12c";
 }
-.icon-left-3:before {
+.icon-refresh-2:before {
     content: "\f12d";
 }
-.icon-left-2:before {
+.icon-right-1:before {
     content: "\f12e";
 }
-.icon-left-1:before {
+.icon-right-2:before {
     content: "\f12f";
 }
-.icon-information-circle:before {
+.icon-right-3:before {
     content: "\f130";
 }
-.icon-group-2:before {
+.icon-right-circle-1:before {
     content: "\f131";
 }
-.icon-foreign:before {
+.icon-right-circle-2:before {
     content: "\f132";
 }
-.icon-download:before {
+.icon-right-square-1:before {
     content: "\f133";
 }
-.icon-down-square-2:before {
+.icon-right-square-2:before {
     content: "\f134";
 }
-.icon-down-square-1:before {
+.icon-robux:before {
     content: "\f135";
 }
-.icon-down-circle-2:before {
+.icon-rotate-left:before {
     content: "\f136";
 }
-.icon-down-circle-1:before {
+.icon-rotate-right:before {
     content: "\f137";
 }
-.icon-down-3:before {
+.icon-roulette-arrow-left:before {
     content: "\f138";
 }
-.icon-down-2:before {
+.icon-roulette-arrow-right:before {
     content: "\f139";
 }
-.icon-down-1:before {
+.icon-search-3:before {
     content: "\f13a";
 }
-.icon-document:before {
+.icon-send-2:before {
     content: "\f13b";
 }
-.icon-copy-1:before {
+.icon-sp-logo:before {
     content: "\f13c";
 }
-.icon-coin-1:before {
+.icon-swap-1:before {
     content: "\f13d";
 }
-.icon-close:before {
+.icon-swap-2:before {
     content: "\f13e";
 }
-.icon-close-circle:before {
+.icon-telegram:before {
     content: "\f13f";
 }
-.icon-clock:before {
+.icon-ticket-2:before {
     content: "\f140";
 }
-.icon-check:before {
+.icon-undo:before {
     content: "\f141";
 }
-.icon-check-circle:before {
+.icon-up-2:before {
     content: "\f142";
 }
-.icon-case-1:before {
+.icon-up-3:before {
     content: "\f143";
 }
-.icon-buy-3:before {
+.icon-up-1:before {
     content: "\f144";
 }
-.icon-buy-1:before {
+.icon-up-circle-1:before {
     content: "\f145";
 }
-.icon-arrow-swap-vertical:before {
+.icon-up-circle-2:before {
     content: "\f146";
 }
-.icon-arrow-swap-horizontal:before {
+.icon-up-square-1:before {
     content: "\f147";
 }
-.icon-alert:before {
+.icon-up-square-2:before {
     content: "\f148";
 }
-.icon-Logout:before {
+.icon-upload:before {
     content: "\f149";
+}
+.icon-volume-high:before {
+    content: "\f14a";
+}
+.icon-volume-slash:before {
+    content: "\f14b";
+}
+.icon-wallet:before {
+    content: "\f14c";
 }

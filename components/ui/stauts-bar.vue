@@ -1,5 +1,5 @@
 <template>
-  <div class="status-bar">
+  <div class="status-bar" :class="classes">
     <div class="status-bar__progress" :style="{ width: `${progressWidth}%` }" />
     <div
       class="status-bar__progress-next"
@@ -13,11 +13,16 @@ export type StatusBarProps = {
   progress: number
   min?: number
   max?: number
+  isShowSuccess?: boolean
+  errorLimit?: number
+  nextStep?: number
 }
 
 const props = withDefaults(defineProps<StatusBarProps>(), {
   min: 0,
   max: 100,
+  errorLimit: undefined,
+  nextStep: 1,
 })
 
 const progressWidth = computed(() => {
@@ -35,8 +40,20 @@ const progressNextWidth = computed(() => {
 
   if (progress >= max) return 0
 
-  return (100 / max) * (progress + 1)
+  return (100 / max) * (progress + props.nextStep)
 })
+
+const isFilled = computed(() => {
+  const { progress, max } = props
+  return progress >= max
+})
+
+const classes = computed(() => [
+  {
+    'is-success': props.isShowSuccess && isFilled.value,
+    'is-error': props.errorLimit && props.progress >= props.errorLimit,
+  },
+])
 </script>
 
 <style scoped lang="scss">
@@ -59,9 +76,22 @@ const progressNextWidth = computed(() => {
     transition: var(--transition-base);
   }
 
+  &__progress {
+    z-index: 2;
+  }
+
   &__progress-next {
     width: 100px;
     opacity: 0.3;
+    z-index: 1;
+  }
+
+  .is-success &__progress {
+    background-color: var(--green-500);
+  }
+
+  .is-error &__progress {
+    background-color: var(--red-500);
   }
 }
 </style>

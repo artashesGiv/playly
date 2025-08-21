@@ -48,11 +48,19 @@ const emits = defineEmits<Emits>()
   left: 0;
   width: 100%;
   z-index: 100;
+  max-height: 90vh;
 
   &__header {
     @include row(12px);
 
     justify-content: space-between;
+  }
+
+  &__content {
+    overflow: auto;
+
+    margin-bottom: -16px;
+    padding-bottom: 16px;
   }
 }
 </style>

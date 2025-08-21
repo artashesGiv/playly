@@ -5,10 +5,11 @@
       :additional-text="$t('common.items', listMap[type].length)"
     />
     <div class="items__list">
-      <case-item
+      <case-item-card
         v-for="item in listMap[type]"
         :key="item.id"
         v-bind="item"
+        :name="shopItemNameMap[item.name] || snakeToSentence(item.name)"
         @click="navigateTo(`/case-item/${item.id}`)"
       />
     </div>
@@ -18,6 +19,7 @@
 <script setup lang="ts">
 import { useItemsStore } from '@/store'
 import type { CaseItem } from '@/types'
+import { shopItemNameMap } from '@/pages/shop/-helpers'
 
 export type CaseItemListProps = {
   type: 'own' | 'sold' | 'in_withdraw_progress' | 'withdraw_success'

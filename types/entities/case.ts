@@ -18,6 +18,15 @@ type BaseCaseItem = {
   robux_amount?: number
 }
 
+type UserBaseCaseItem = {
+  case_item_image_url: string
+  crystal_price: number
+  game: CaseCategory
+  telegram_photo_url: string
+  telegram_username: string
+  item_name: string
+}
+
 export type Case = {
   id: string
   image_url: string
@@ -55,6 +64,11 @@ export type CaseItem =
   | (BaseCaseItem & { game: 'mm2'; data: MM2 })
   | (BaseCaseItem & { game: 'growagarden'; data: Growagarden })
   | (BaseCaseItem & { game: 'robux'; data: object })
+
+export type UserCaseItem =
+  | (UserBaseCaseItem & { game: 'adopt_me'; data: AdoptMe })
+  | (UserBaseCaseItem & { game: 'mm2'; data: MM2 })
+  | (UserBaseCaseItem & { game: 'growagarden'; data: Growagarden })
 
 export type PersonalCaseItemData = {
   crystal_sell_timer: string

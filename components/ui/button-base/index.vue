@@ -11,7 +11,7 @@
       <ui-icon-base
         v-if="icon"
         :name="icon"
-        :style="{ fontSize: `${iconFontSize[size]}px` }"
+        :style="{ fontSize: `${iconFontSize[size!]}px` }"
         class="button__icon"
       />
       <div v-if="text" class="button__text">
@@ -20,17 +20,20 @@
       <ui-icon-base
         v-if="iconRight"
         :name="iconRight"
-        :style="{ fontSize: `${iconFontSize[size]}px` }"
+        :style="{ fontSize: `${iconFontSize[size!]}px` }"
         class="button__icon"
       />
     </template>
+    <span v-if="$slots.badge" class="button__badge">
+      <slot name="badge" />
+    </span>
   </button>
 </template>
 
 <script setup lang="ts">
-import type { SpinnerProps } from '@/components/ui/Spinner.vue'
+import type { SpinnerProps } from '@/components/ui/spinner.vue'
 import type { CSSProperties } from 'vue'
-import { fontBySize, iconFontSize, radiusBySize } from './-helpers'
+import { fontBySize, iconFontSize, radiusBySize } from './-helpers' // props
 
 // props
 type ButtonView = 'primary' | 'secondary' | 'secondary-light' | 'icon'
@@ -157,6 +160,7 @@ function useSpinnerProps({
 .button {
   $b: &;
 
+  position: relative;
   border: 1px solid transparent;
   outline: none;
   width: 100%;
@@ -257,6 +261,22 @@ function useSpinnerProps({
         opacity: 0.7;
       }
     }
+  }
+
+  &__badge {
+    @include row;
+
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    justify-content: center;
+    height: 24px;
+    min-width: 24px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: var(--white);
+    font: var(--font-small-bold);
+    color: var(--dark-800);
   }
 
   &.is-disabled {

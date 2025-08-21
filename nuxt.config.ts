@@ -124,7 +124,6 @@ export default defineNuxtConfig({
     lottieFolder: '/assets/lottie',
   },
   eruda: {
-    enabled: true,
-    // enabled: process.env.NODE_ENV === 'development',
+    enabled: process.env.NODE_ENV === 'development',
   },
 })

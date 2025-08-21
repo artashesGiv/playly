@@ -1,4 +1,4 @@
-import type { Case, CaseItem, PersonalCaseItem } from '@/types'
+import type { Case, CaseItem, PersonalCaseItem, UserCaseItem } from '@/types'
 
 export namespace Items {
   export namespace GET {
@@ -12,6 +12,24 @@ export namespace Items {
     export namespace Item {
       export type Params = { user_item_id: CaseItem['id'] }
       export type Response = PersonalCaseItem
+    }
+    export namespace UserItem {
+      export type Params = { user_item_id: CaseItem['id'] }
+      export type Response = UserCaseItem
+    }
+    export namespace Share {
+      export type Params = {
+        user_item_id: CaseItem['id']
+      }
+      export type Response = {
+        prepared_id: string
+      }
+    }
+    export namespace UserRobux {
+      export type Params = {
+        message_id: string
+      }
+      export type Response = UserRobuxData
     }
   }
   export namespace POST {
@@ -35,4 +53,10 @@ export namespace Items {
       }
     }
   }
+}
+
+export type UserRobuxData = {
+  telegram_username: string
+  telegram_photo_url: string
+  robux_amount: number
 }
