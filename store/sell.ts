@@ -78,6 +78,10 @@ export const useSellStore = defineStore('sell', () => {
     cart.value = rest
   }
 
+  const clearCart = () => {
+    cart.value = {}
+  }
+
   watch(
     () => currentTab.value,
     async () => {
@@ -111,5 +115,6 @@ export const useSellStore = defineStore('sell', () => {
     addToCart,
     removeFromCart,
     removeAllItem,
+    clearCart,
   }
 })

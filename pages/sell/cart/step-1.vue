@@ -60,7 +60,7 @@ const { t } = useI18n()
 const { user, popup } = useTelegram()
 
 const { cart, totalSum, totalItems } = storeToRefs(useSellStore())
-const { sell, MAXIMUM_SUM_FOR_SELL } = useSellStore()
+const { sell, MAXIMUM_SUM_FOR_SELL, clearCart } = useSellStore()
 
 const dataList = computed<TableDataProps['list']>(() => [
   {
@@ -82,6 +82,7 @@ const onSell = async () => {
     isLoading.value = true
     await sell()
     navigateTo('/sell/cart/step-2')
+    clearCart()
   } catch (e) {
     console.log(e)
     popup.showAlert('Что то пошло не так...')
