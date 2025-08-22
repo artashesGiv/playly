@@ -17,11 +17,11 @@ export const useNavigation = (): NavItem[] => {
       icon: 'buy-3',
       text: t('nav.sell'),
     },
-    // {
-    //   src: '/robux',
-    //   icon: 'robux',
-    //   text: t('nav.robux'),
-    // },
+    {
+      src: '/robux',
+      icon: 'robux',
+      text: t('nav.robux'),
+    },
     // {
     //   src: '/friends',
     //   icon: 'group-2',
