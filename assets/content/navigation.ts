@@ -15,7 +15,7 @@ export const useNavigation = (): NavItem[] => {
     {
       src: '/sell',
       icon: 'buy-3',
-      text: t('nav.shop'),
+      text: t('nav.sell'),
     },
     // {
     //   src: '/robux',
