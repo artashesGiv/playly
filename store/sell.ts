@@ -28,6 +28,14 @@ export const useSellStore = defineStore('sell', () => {
     }, 0)
   })
 
+  const currentTypeCart = computed<Maybe<SellItem['income_category']>>(() => {
+    if (!totalItems.value) {
+      return null
+    }
+
+    return Object.values(cart.value)[0].income_category
+  })
+
   const getItems = async () => {
     await baseRequest({
       method: () =>
@@ -110,6 +118,7 @@ export const useSellStore = defineStore('sell', () => {
     cart,
     totalSum,
     totalItems,
+    currentTypeCart,
     getItems,
     sell,
     addToCart,

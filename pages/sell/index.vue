@@ -22,19 +22,20 @@ import type { SellItem } from '@/types'
 import type { TabsProps } from '@/components/ui/tabs.vue'
 
 const { t } = useI18n()
-const { items, search, currentTab } = storeToRefs(useSellStore())
+const { items, search, currentTab, currentTypeCart } =
+  storeToRefs(useSellStore())
 const { getItems } = useSellStore()
 
-const tabs: TabsProps<SellItem['income_category']>['list'] = [
-  {
-    id: 'cheap',
-    text: t('sell.category.cheap'),
-  },
-  {
-    id: 'expensive',
-    text: t('sell.category.expensive'),
-  },
-]
+const tabs = computed<TabsProps<SellItem['income_category']>['list']>(() => {
+  const make = (id: 'cheap' | 'expensive') => ({
+    id,
+    text: t(`sell.category.${id}`),
+  })
+
+  return !currentTypeCart.value
+    ? [make('cheap'), make('expensive')]
+    : [make(currentTab.value as 'cheap' | 'expensive')]
+})
 
 onMounted(async () => {
   await getItems()
