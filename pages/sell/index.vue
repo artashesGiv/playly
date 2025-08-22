@@ -6,6 +6,7 @@
       :placeholder="$t('sell.search.placeholder')"
     />
     <sell-banner />
+    <ui-tabs v-model="currentTab" :list="tabs" />
     <ui-divider />
     <div class="sell__list">
       <sell-item-card v-for="item in items" :key="item.id" v-bind="item" />
@@ -17,9 +18,23 @@
 
 <script setup lang="ts">
 import { useSellStore } from '@/store'
+import type { SellItem } from '@/types'
+import type { TabsProps } from '@/components/ui/tabs.vue'
 
-const { items, search } = storeToRefs(useSellStore())
+const { t } = useI18n()
+const { items, search, currentTab } = storeToRefs(useSellStore())
 const { getItems } = useSellStore()
+
+const tabs: TabsProps<SellItem['income_category']>['list'] = [
+  {
+    id: 'cheap',
+    text: t('sell.category.cheap'),
+  },
+  {
+    id: 'expensive',
+    text: t('sell.category.expensive'),
+  },
+]
 
 onMounted(async () => {
   await getItems()

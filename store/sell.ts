@@ -12,7 +12,7 @@ export const useSellStore = defineStore('sell', () => {
   const items = ref<Maybe<SellItem[]>>(null)
   const isLoading = ref(false)
 
-  const currentTab = ref<TabItem<SellItem['category']>['id']>('growagarden')
+  const currentTab = ref<TabItem<SellItem['income_category']>['id']>('cheap')
 
   const cart = ref<Record<SellItem['id'], SellItem & { count: number }>>({})
 
@@ -32,7 +32,7 @@ export const useSellStore = defineStore('sell', () => {
     await baseRequest({
       method: () =>
         sellAPI.getItems({
-          category: currentTab.value,
+          income_category: currentTab.value,
           ...(search.value && {
             name_prefix: search.value,
           }),
@@ -91,7 +91,6 @@ export const useSellStore = defineStore('sell', () => {
       clearTimeout(timeout)
 
       timeout = setTimeout(async () => {
-        currentTab.value = 'growagarden'
         await getItems()
       }, 500)
     },

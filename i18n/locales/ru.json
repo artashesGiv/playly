@@ -421,6 +421,10 @@
     "item_card": {
       "button": "Добавить"
     },
+    "category": {
+      "cheap": "Дешевые",
+      "expensive": "Дорогие"
+    },
     "cart": {
       "button": "К продаже",
       "title": "Предметы на продажу",

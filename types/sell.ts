@@ -3,6 +3,7 @@ export namespace Sell {
     export namespace Items {
       export type Params = {
         category?: SellItem['category']
+        income_category?: SellItem['income_category']
         offset?: number
         limit?: number
         name_prefix?: string
@@ -39,4 +40,5 @@ export type SellItem = {
   image_url: string
   name: string
   price_robux: number
+  income_category: 'expensive' | 'cheap'
 }

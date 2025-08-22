@@ -421,6 +421,10 @@
     "item_card": {
       "button": "Add"
     },
+    "category": {
+      "cheap": "Cheap",
+      "expensive": "Expensive"
+    },
     "cart": {
       "button": "To sale",
       "title": "Items for sale",
