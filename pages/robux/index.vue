@@ -98,6 +98,8 @@ const onClick = () => {
   navigateTo('/robux/buy?step=1')
 }
 
+useBackButton()
+
 onMounted(async () => {
   await fetchStock()
 })

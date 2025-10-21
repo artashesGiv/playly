@@ -71,7 +71,7 @@ export type UserCaseItem =
   | (UserBaseCaseItem & { game: 'growagarden'; data: Growagarden })
 
 export type PersonalCaseItemData = {
-  crystal_sell_timer: string
+  crystal_sell_timer: Maybe<string>
   starpets_withdraw_timer: Maybe<string>
   status:
     | 'owned'
@@ -80,6 +80,10 @@ export type PersonalCaseItemData = {
     | 'waiting_manager'
     | 'withdraw_error'
     | 'withdraw_success'
+  manager_withdraw_info?: {
+    manager_username: string
+    manager_withdraw_id: string
+  }
 }
 
 export type PersonalCaseItem = CaseItem & PersonalCaseItemData

@@ -2,8 +2,12 @@
   <div>
     <transition name="slide-bottom">
       <teleport to="body">
-        <div v-if="isOpen" class="modal">
-          <div class="modal__header">
+        <div
+          v-if="isOpen"
+          class="modal"
+          :class="[{ 'is-full-height': fullHeight }, `modal--view--${view}`]"
+        >
+          <div v-if="!withoutHeader" class="modal__header">
             <span class="title">{{ title }}</span>
             <ui-button-base
               view="secondary"
@@ -25,13 +29,19 @@
 export type ModalProps = {
   isOpen: boolean
   title?: string
+  fullHeight?: boolean
+  view?: 'light' | 'dark'
+  withoutHeader?: boolean
 }
 
 type Emits = {
   (e: 'update:isOpen', value: boolean): void
 }
 
-defineProps<ModalProps>()
+withDefaults(defineProps<ModalProps>(), {
+  title: '',
+  view: 'light',
+})
 const emits = defineEmits<Emits>()
 </script>
 
@@ -41,7 +51,6 @@ const emits = defineEmits<Emits>()
 
   border-radius: 18px 18px 0 0;
   padding: 20px 16px;
-  background-color: var(--dark-900);
 
   position: absolute;
   bottom: 0;
@@ -49,6 +58,26 @@ const emits = defineEmits<Emits>()
   width: 100%;
   z-index: 100;
   max-height: 90vh;
+
+  &--view {
+    &--light {
+      background-color: var(--dark-900);
+    }
+
+    &--dark {
+      background-color: var(--dark-1000);
+    }
+  }
+
+  &.is-full-height {
+    min-height: 100vh;
+
+    border-radius: 0;
+
+    .modal__content {
+      flex: 1 1 0;
+    }
+  }
 
   &__header {
     @include row(12px);
@@ -58,6 +87,7 @@ const emits = defineEmits<Emits>()
 
   &__content {
     overflow: auto;
+    position: relative;
 
     margin-bottom: -16px;
     padding-bottom: 16px;

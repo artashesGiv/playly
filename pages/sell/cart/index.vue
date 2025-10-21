@@ -13,6 +13,7 @@
           v-for="item in Object.values(cart)"
           :key="item.id"
           v-bind="item"
+          :price_robux="item.price_robux * item.count"
           direction="horizontal"
         />
       </div>

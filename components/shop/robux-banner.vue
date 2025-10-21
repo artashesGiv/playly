@@ -2,13 +2,27 @@
   <div class="robux-banner">
     <nuxt-img
       v-for="item in 2"
-      :key="item"
-      src="/images/onboarding/decor.png"
+      :key="`robux-${item}`"
+      :src="`/images/shop/banner/gift-${item}.png`"
       :class="['robux-banner__image', `robux-banner__image--${item}`]"
+    />
+    <ui-icon-base
+      v-for="item in 2"
+      :key="`star-${item}`"
+      name="star"
+      class="robux-banner__icon-star"
+      :class="`robux-banner__icon-star--${item}`"
     />
     <nuxt-img
       src="/images/main/robux.png"
       class="robux-banner__image robux-banner__image--robux"
+    />
+    <ui-icon-base
+      v-for="item in 2"
+      :key="item"
+      name="robux"
+      class="robux-banner__icon"
+      :class="`robux-banner__icon--${item}`"
     />
     <div class="robux-banner__price">
       100 ₽ = {{ rates!.rub2robux * 100 }} R$
@@ -21,6 +35,7 @@
       <ui-button-base
         :text="$t('shop.robux_banner.button')"
         size="42"
+        view="white"
         class="robux-banner__button"
         @click="navigateTo('/robux')"
       />
@@ -59,19 +74,17 @@ const { rates } = storeToRefs(useAuthStore())
 
   &__image {
     position: absolute;
+    width: 88px;
+    z-index: 1;
 
     &--1 {
-      width: 179px;
-      top: 0;
-      left: -104px;
-      transform: rotate(16deg);
+      top: 12px;
+      left: 15px;
     }
 
     &--2 {
-      width: 167px;
-      top: 20px;
-      right: -70px;
-      transform: rotate(-16deg);
+      top: 54px;
+      right: 4px;
     }
 
     &--robux {
@@ -79,6 +92,40 @@ const { rates } = storeToRefs(useAuthStore())
 
       top: 14px;
       width: 82px;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    color: var(--white);
+    opacity: 0.2;
+    top: 38px;
+    z-index: 2;
+    font-size: 74px;
+
+    &--1 {
+      top: 73px;
+      left: -23px;
+    }
+    &--2 {
+      top: 8px;
+      right: -32px;
+    }
+  }
+
+  &__icon-star {
+    position: absolute;
+    color: var(--white);
+
+    &--1 {
+      font-size: 21px;
+      top: 123px;
+      left: 63px;
+    }
+    &--2 {
+      font-size: 28px;
+      top: 5px;
+      right: 75px;
     }
   }
 

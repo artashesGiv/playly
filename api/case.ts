@@ -37,4 +37,8 @@ export const caseAPI = {
   }: Cases.POST.Open.Params): Promise<Cases.POST.Open.Response> {
     return await this._baseApi.post(`/cases/v3/open/robux?case_id=${case_id}`)
   },
+
+  async fetchCasesOnboarding(): Promise<Cases.GET.Cases.Response> {
+    return await this._baseApi.get(`/cases/onboarding`)
+  },
 }

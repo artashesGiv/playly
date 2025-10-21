@@ -5,9 +5,7 @@
       {{ $t('contacts.text') }}
     </span>
     <a href="mailto:support@playly.gg">support@playly.gg</a>
-    <a @click="tg.openTelegramLink('https://t.me/playlysupport')">
-      @playlysupport
-    </a>
+    <a @click="tg.openTelegramLink('https://t.me/playlycare')"> @playlycare </a>
   </div>
 </template>
 

@@ -12,7 +12,8 @@ export const useSellStore = defineStore('sell', () => {
   const items = ref<Maybe<SellItem[]>>(null)
   const isLoading = ref(false)
 
-  const currentTab = ref<TabItem<SellItem['income_category']>['id']>('cheap')
+  const currentTab =
+    ref<TabItem<SellItem['income_category']>['id']>('expensive')
 
   const cart = ref<Record<SellItem['id'], SellItem & { count: number }>>({})
 

@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <main-banner />
     <main-coin />
     <balance-card size="xl" />
     <ui-divider />

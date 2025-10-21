@@ -95,6 +95,7 @@ export type UserInfo = {
     public_username: string
     username: string
   }
+  money_balance: Record<Currency, string>
 }
 
 export type CheckSubscriptionData = {

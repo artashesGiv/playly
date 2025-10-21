@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <main class="layout__content">
+    <main class="layout__content container">
       <slot />
     </main>
   </div>
@@ -26,7 +26,6 @@
 
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0 16px;
     box-sizing: border-box;
     transition: var(--transition-base);
     flex: 1 1 0;

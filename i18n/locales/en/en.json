@@ -1,0 +1,472 @@
+{
+  "nav": {
+    "coins": "Home",
+    "friends": "Friends",
+    "robux": "Robux",
+    "cases": "Cases",
+    "profile": "Profile",
+    "shop": "Market",
+    "sell": "Sell"
+  },
+  "coins": {
+    "title": "Earn coins and exchange them for cases with adopt me items and robux",
+    "balanceText": "Your balance",
+    "tasksTitle": "Free coins tasks",
+    "completeTitle": "Completed tasks",
+    "tasks": {
+      "starPetsTg": "Join StarPets telegram",
+      "starPetsTgLight": "Join StarPets Lite telegram",
+      "playlyTg": "Join Playly telegram",
+      "inviteFriend": "Invite a friend to Playly",
+      "inviteFriendFromRoblox": "Invite a friend who plays Roblox",
+      "boostPlayly": "Boost Playly",
+      "itemBuy": "Buy item in a store",
+      "robuxBuy100": "Buy Robux for an amount of more than 100 rubles",
+      "robuxBuy500": "Buy Robux for an amount of more than 500 rubles"
+    },
+    "taskButton": {
+      "join": "Join",
+      "invite": "Invite",
+      "boost": "Boost",
+      "buy": "Buy"
+    },
+    "tapError": "That's it for today, come back to slip tomorrow! In the meantime, invite friends!",
+    "banner": {
+      "title": "Buying robux",
+      "button": "Buy robux"
+    }
+  },
+  "friends": {
+    "title": "Invite your friends and get coins",
+    "description": "Get coins for each friend",
+    "listTitle": "Invited friends",
+    "inviteButton": "Invite friend"
+  },
+  "robux": {
+    "title": "Purchase R$ and at great prices!",
+    "description": "We use GamePass method",
+    "input": {
+      "labelPay": "₽ You'll pay",
+      "labelReceived": "R$ You'll receive",
+      "promocodePlaceholder": "Promocode"
+    },
+    "alert": "More profitable than in-game",
+    "balance": {
+      "description": "Robux balance",
+      "priceFor": "Price for"
+    },
+    "buy": {
+      "buttons": {
+        "help": "How it works"
+      },
+      "modal": {
+        "title": "How it works",
+        "description": "Follow all the steps to get the Robux to your balance",
+        "withdrawalCard": "Withdrawal amount",
+        "step-1": {
+          "title": "Select an account",
+          "description": "Select the place that GamePass will be linked to - CHANGE"
+        },
+        "step-2": {
+          "title": "Select Place",
+          "description": "Select the place that GamePass will be linked to"
+        },
+        "step-3": {
+          "title": "Select GamePass",
+          "description": "Select the place that GamePass will be linked to - CHANGE"
+        },
+        "step-4": {
+          "title": "Edit GamePass",
+          "description": "Select the place that GamePass will be linked to - CHANGE"
+        }
+      },
+      "step-1": {
+        "title": "Select an account",
+        "description": "Enter your roblox nickname",
+        "nicknamePlaceholder": "Nickname in Roblox",
+        "empty": "Nothing found. Enter the nickname of your roblox account",
+        "selectDescription": "Select an account from list and press continue",
+        "nextButton": "Continue"
+      },
+      "step-2": {
+        "title": "Select Place",
+        "description": "Select the roblox place from your list",
+        "nextButton": "Continue"
+      },
+      "step-3": {
+        "titleSelect": "Select GamePass",
+        "descriptionSelect": "Select GamePass for set up",
+        "titleCreate": "Create GamePass",
+        "descriptionCreate": "Create GamePass for continue",
+        "nextButtonSelect": "Continue",
+        "nextButtonCreate": "Done!",
+        "create": {
+          "button": "Create GamePass",
+          "description": "Create at least one GamePass according to our instructions to set it up further"
+        }
+      },
+      "step-4": {
+        "title": "Set Up your GamePass",
+        "description": "Set the price in the settings",
+        "nextButton": "Done!",
+        "setGamepass": {
+          "button": "Set Up GamePass",
+          "description": "Open the settings of the selected GamePass and set the price indicated below",
+          "priceDescription": "GamePass price"
+        },
+        "error": "Gamepass price not match"
+      },
+      "step-5": {
+        "title": "Robux purchase",
+        "description": "Check the details and pay for the purchase",
+        "policy": "By continuing, you accept the privacy policy and user agreement",
+        "alert": "Payments are protected by 3D Secure"
+      },
+      "step-6": {
+        "title": "Successfully!",
+        "description": "Robux will be credited within 5-7 days",
+        "cardText": "You'll receive on balance",
+        "alert": "Do not change your GamePass settings! This may cause robux delivery issues",
+        "nextButton": "Great"
+      },
+      "errors": {
+        "required_field": "Required fields",
+        "select_place": "Select place to continue",
+        "select_gamepass": "Choose GamePass to continue",
+        "create_gamepass": "Create GamePass to continue",
+        "setup_gamepass": "Set Up GamePass to continue"
+      }
+    },
+    "sell": {
+      "text": "You'll immediately receive coins to your account after the sale of robux"
+    },
+    "withdraw": {
+      "text": "You'll immediately receive coins to your account after the sale of robux"
+    },
+    "minimumWithdraw": "Minimum to withdraw",
+    "transactions": {
+      "sell_robux": "Successfully sold!",
+      "from_case": "Received from the case",
+      "withdraw": "Received",
+      "withdraw_failed": "Withdraw error",
+      "rbxspace_withdraw_failed": "Withdraw error"
+    }
+  },
+  "cases": {
+    "title": "Cases",
+    "description": "Win and withdraw pets and R$!",
+    "roulette": {
+      "button": "Open for {n}",
+      "canSell": "You can sell an item or withdraw it on your profile page",
+      "coins": "Coins will be credited to your account",
+      "openMore": "Open more for {n}",
+      "sellItem": "Sell for {n}"
+    }
+  },
+  "profile": {
+    "starPets": {
+      "link": {
+        "description": "Items are sent via StarPets"
+      }
+    },
+    "community": {
+      "title": "Join to our community"
+    },
+    "items": {
+      "own": "Your items",
+      "sold": "Sold items",
+      "in_withdraw_progress": "In the withdraw process",
+      "withdraw_success": "Received items",
+      "not_received_pet": "Not I received a pet"
+    },
+    "withdraw": {
+      "howGetItem": "How to get item",
+      "description": "You have 60 minutes to withdraw item, otherwise it will be automatically sold for coins",
+      "timerCard": {
+        "timeLeft": "Time left"
+      },
+      "growagarden": {
+        "description": "You received a message from our bot in Telegram. Go to the chat with it and follow the instructions"
+      },
+      "write_access": {
+        "title": "Pay attention",
+        "description": "To turn on the notifications and withdrawal, click on the \"Go to the conclusion\" button",
+        "banner": "Our bot will send you instructions for output of the subject"
+      }
+    },
+    "sellTimeCard": {
+      "title": "Time to withdraw",
+      "text": "You have 3 days to withdraw the item. If you do not withdraw item, it will be automatically sold for coins"
+    },
+    "howGetItem": {
+      "title": "How to get item on StarPets",
+      "description": "You can withdraw your item right now!",
+      "cards": {
+        "step-1": {
+          "title": "Log in on the StarPets",
+          "description": "STARPETS.PW"
+        },
+        "step-2": {
+          "title": "Go to the items",
+          "description": "Press “Claim items” button"
+        },
+        "step-3": {
+          "title": "Follow the instructions",
+          "description": "On the StarPets website"
+        }
+      }
+    },
+    "manager_data": {
+      "main": {
+        "title": "Output of the subject",
+        "chat_button": "Manager",
+        "what_to_do_button": "What to do?"
+      },
+      "data": {
+        "name": "Name",
+        "id_withdraw": "ID of conclusion",
+        "nickname": "Nickname in the game",
+        "copy_button": "Copy data",
+        "nickname_placeholder": "Nickname in the Roblox",
+        "manager": "Manager"
+      },
+      "what_to_do_modal": {
+        "title": "What to do?",
+        "alert": "Copy data for the output and send to the chat according to the button below adding your game nickname to the message",
+        "chat_button": "Manager {chat_id}",
+        "copy_button": "Copy data"
+      }
+    }
+  },
+  "starPetsLink": {
+    "title": "Link your StarPets ID to send items",
+    "description": "Find your ID on the profile page in StarPets",
+    "edit_title": "Your accounts are linked",
+    "edit_description": "You can withdraw your items right now!",
+    "placeholder": "Enter your StarPets ID",
+    "buttons": {
+      "starPetsId": "How to get StarPets ID"
+    },
+    "how": {
+      "title": "How to get StarPets ID?",
+      "description": "You'll be able to withdraw your items via StarPets",
+      "text": "Log in or register on the StarPets website. Then go to the profile section and copy the ID",
+      "step-1": {
+        "title": "Log in on the StarPets",
+        "description": "STARPETS.PW",
+        "button": "StarPets"
+      },
+      "step-2": {
+        "title": "Go to the profile",
+        "description": "Copy your StarPets ID",
+        "button": "Profile"
+      }
+    }
+  },
+  "language": {
+    "title": "Language",
+    "description": "Select the interface language from the list"
+  },
+  "case_names": {
+    "common_chest": "Common Chest",
+    "advanced_chest": "Advanced Chest",
+    "victory_chest": "Victory Chest",
+    "rebirth_chest": "Rebirth Chest",
+    "friendship_chest": "Friendship Chest",
+    "furious_chest": "Furious Chest",
+    "warlike_chest": "Warlike Chest",
+    "cluster_chest": "Cluster Chest",
+    "beach_chest": "Beach Chest",
+    "tranquility_chest": "Tranquility Chest",
+    "evolution_chest": "Evolution Chest",
+    "crystal_chest": "Crystal Chest",
+    "darkness_chest": "Darkness Chest",
+    "magic_chest": "Magic Chest",
+    "golden_chest": "Golden Chest",
+    "royal_chest": "Royal Chest",
+    "paradise_chest": "Paradise Chest",
+    "power_chest": "Power Chest",
+    "mini_robux_chest": "Mini Robux Chest",
+    "robux_chest": "Robux Chest",
+    "big_robux_chest": "Big Robux Chest",
+    "huge_robux_chest": "Huge Robux Chest",
+    "beginner_chest": "Beginner Chest",
+    "suspect_chest": "Suspect Chest",
+    "detective_chest": "Detective Chest",
+    "hunter_chest": "Hunter Chest",
+    "sheriff_chest": "Sheriff Chest",
+    "revealer_chest": "Revealer Chest",
+    "legend_chest": "Legend Chest",
+    "mafia_boss_chest": "Mafia Boss Chest",
+    "beginning_farmer": "Beginning Farmer",
+    "advanced_farming": "Advanced Farming",
+    "loot_of_the_big_farm": "Loot Of The Big Farm",
+    "giant_plantation": "Giant Plantation",
+    "luxury_estate": "Luxury Estate",
+    "lord_of_the_bestiary": "Lord Of The Bestiary"
+  },
+  "rarity": {
+    "common": "Common",
+    "uncommon": "Uncommon",
+    "rare": "Rare",
+    "ultra_rare": "Ultra rare",
+    "legendary": "Legendary",
+    "godly": "Godly",
+    "vintage": "Vintage",
+    "mythical": "Mythical",
+    "ancient": "Ancient",
+    "divine": "Divine",
+    "prismatic": "Prismatic",
+    "unknown": "Unknown"
+  },
+  "case_status": {
+    "owned": "Owned",
+    "sold_by_crystal": "Sold by crystal",
+    "in_withdraw_progress": "In withdraw progress",
+    "waiting_manager": "In withdraw progress",
+    "withdraw_error": "Withdraw error",
+    "withdraw_success": "Withdraw success"
+  },
+  "invitation": "Free robux and pets for invitation friends are handed out here",
+  "agreement": {
+    "term": {
+      "button": "Terms of use",
+      "title": "Terms of use",
+      "description": "Revision date 07.07.2025",
+      "text": "Welcome to Playly (the “App”), a Telegram-based companion application for Roblox® players. These Terms of Service (\"Terms\") form a legally binding agreement between you (“you”, “your” or “User”) and the entity operating Playly (“we”, “our”, or “us”). By accessing or using the App you acknowledge that you have read, understood and agree to be bound by these Terms, our Privacy Policy, and any additional policies referenced herein (collectively, the “Agreement”).\nIf you do not agree to any part of the Agreement you must discontinue use of the App immediately.\n\n1. Definitions\nTerm\nMeaning\n“Coins”\nAn in‑app, non‑transferable, non‑redeemable virtual reward point issued exclusively by Playly and having no monetary value.\n“Case” / “Cases”\nA feature within the App that allows Users to spend Coins to receive random virtual items related to Roblox games (initially Adopt Me!).\n“Robux Purchas”\nA transaction whereby a User pays real money to have Roblox‑brand virtual currency (Robux) deposited directly to the User’s Roblox account.\n“Virtual Item(s)”\nDigital game items obtained from opening Cases, which may be (i) exported to a compatible Roblox account or (ii) sold back to Playly for additional Coins.\n“Service”\nAll functionality provided by the App, including but not limited to referral programmes, daily Coin taps, Cases, Robux Purchases, social‑media integrations and customer support.\n\n\n2. Eligibility & Account Registration\nAge. You must be at least 13 years old (or the minimum digital‑consent age in your jurisdiction) to use the App. If you are under the age of majority, you represent that your parent or legal guardian has reviewed and accepted these Terms on your behalf.\nTelegram Account. The App is delivered via Telegram. You must maintain an active Telegram account, remain in good standing with Telegram, and comply with its terms of service.\nRoblox Account. Certain Services (e.g., exporting Virtual Items or receiving Robux) require a valid Roblox account. You are solely responsible for compliance with Roblox’s terms of use.\nAccurate Information. You agree to provide true, complete and current information and to update it promptly when it changes.\n\n3. Description of Services\n3.1 Coins\nEarned daily by tapping a Coin icon (up to 100 Coins per day), through referral bonuses, or by other promotional actions made available by Playly.\nCannot be purchased, withdrawn, exchanged for Robux, or converted into cash or any other thing of value.\n3.2 Referral Programme\nFor each new User who joins via your unique link and completes the onboarding process, you receive 500 Coins.\nPlayly reserves the right to disqualify referrals generated by bots, fake accounts, or other abusive behaviour.\n3.3 Cases & Virtual Items\nOpening a Case consumes the listed amount of Coins and delivers one random Virtual Item.\nVirtual Items do not confer real‑world ownership rights and have no monetary value.\nItems may be (a) exported to your Roblox account (subject to technical availability) or (b) sold back to Playly in exchange for a specified amount of Coins.\n3.4 Robux Purchases\nReal‑money Robux Purchases are processed by approved third‑party payment providers. Prices and availability are displayed at the point of sale.\nPurchased Robux are credited directly to your linked Roblox account; you will not receive Coins for these transactions.\nAll sales are final unless otherwise required by applicable law.\n3.5 Social‑Media Actions\nYou may receive Coins for following Playly’s official social‑media accounts. \n\n4. License & Acceptable Use\nPlayly grants you a personal, revocable, non‑exclusive, non‑transferable, limited licence to use the App in accordance with the Agreement.\nYou agree not to:\nviolate any applicable law or Roblox/Telegram policy;\nattempt to decompile, reverse engineer, or otherwise derive source code from the App;\nuse automation (scripts, bots) to farm Coins, referrals, or Virtual Items;\nexploit bugs or undocumented features;\npost or transmit any content that is illegal, harassing, defamatory, obscene or otherwise objectionable;\nimpersonate others or misrepresent your affiliation with any person.\nWe may suspend or terminate your access and confiscate Coins or Virtual Items gained in breach of these Terms.\n\n5. Payments, Taxes & Chargebacks\nPayment Processing. All Robux Purchases are handled by third‑party payment processors. Playly does not store your full payment‑card information.\nTaxes. You are responsible for any applicable taxes, duties or fees arising from your transactions.\nChargebacks. If Playly receives a chargeback or payment dispute we may suspend your account, reverse the Robux delivery, and/or deduct Coins or Virtual Items of equivalent value.\n\n6. Ownership & Intellectual Property\nPlayly and its licensors retain all intellectual‑property rights in the App, including trademarks, logos, graphics and software.\nRoblox® and Robux® are trademarks of Roblox Corporation. Playly is not affiliated with, endorsed, sponsored, or specifically approved by Roblox Corporation.\nYou may not use our trademarks without prior written permission.\n\n7. User Content\nResponsibility. You are solely responsible for content you submit (e.g., profile images, usernames, chat messages).\nLicence to Playly. By submitting content you grant Playly a worldwide, royalty‑free, sublicensable licence to use, reproduce, modify and display such content for the purpose of operating and improving the Services.\n\n8. Privacy\nOur collection and processing of personal data is governed by the Playly Privacy Policy, which forms part of this Agreement. Please review it carefully.\n\n9. Disclaimers\nNo Gambling. Coins cannot be purchased with real money and have no cash value; Cases therefore do not constitute gambling under applicable law.\nService “AS IS”. The App and Services are provided “AS IS” and “AS AVAILABLE” without warranties of any kind, express or implied.\nPlatform Risk. Exporting Virtual Items to Roblox relies on third‑party APIs. We do not guarantee continuous compatibility.\n\n10. Limitation of Liability\nTo the maximum extent permitted by law, Playly shall not be liable for indirect, incidental, special, consequential or punitive damages, or for any loss of profits, revenues, data or goodwill arising out of or related to the Agreement or your use of the App.\n\n11. Indemnity\nYou agree to indemnify and hold harmless Playly, its affiliates, directors, employees and agents from any claims, damages, liabilities and expenses (including legal fees) arising from your breach of the Agreement or misuse of the Services.\n\n12. Termination\nPlayly may suspend or terminate your access at any time with or without notice if we believe you have violated these Terms or pose a risk to other users or to Playly. Upon termination all licences granted to you shall immediately cease and any unused Coins or Virtual Items will be forfeited.\n\n13. Changes to the Services or Terms\nWe may modify these Terms at any time, without prior notice. It is your responsibility to review the Terms regularly for any updates. Continued use after the effective date constitutes acceptance of the revised Terms.\n\n14. Governing Law & Dispute Resolution\n\nThese Terms shall be governed by and construed exclusively in accordance with the laws of the Republic of Vanuatu, without regard to its conflict-of-law rules.\nAny dispute, controversy, or claim arising out of or relating to these Terms (including their existence, validity, interpretation, performance, breach, or termination) shall be finally settled by binding arbitration administered by the Vanuatu International Arbitration Centre (VIAC) in accordance with the VIAC Rules in force on the date the Notice of Arbitration is submitted.\nSeat (place) of arbitration: Port Vila, Vanuatu.\nLanguage of arbitration: English.\nNumber of arbitrators: One, appointed by VIAC.\nConfidentiality: The existence of the arbitration, all submissions, correspondence, evidence, and any award shall be strictly confidential.\nNo class or representative proceedings: Each party waives any right to participate in a class, consolidated, collective, or representative action or arbitration.\nJudgment on the arbitral award may be entered and enforced in any court of competent jurisdiction. Each party irrevocably waives any objection to venue, personal jurisdiction, or inconvenient forum with respect to the arbitration proceedings or the enforcement of any award.\n\n\n15. Severability\nIf any provision of these Terms is held invalid or unenforceable, the remaining provisions shall remain in full force and effect.\n\n16. Entire Agreement\nThe Agreement constitutes the entire agreement between you and Playly regarding the App and supersedes all prior understandings.\n"
+    },
+    "policy": {
+      "button": "AML KYC",
+      "title": "AML KYC",
+      "description": "Revision date 07.07.2025",
+      "text": "PLEASE READ THIS USER AGREEMENT CAREFULLY BEFORE USING PLAYLY. BY ACCESSING OR USING THE PLAYLY TELEGRAM APPLICATION OR ANY OF ITS RELATED SERVICES (COLLECTIVELY, THE “SERVICES”), YOU (“USER”, “YOU”, “YOUR”) CONFIRM THAT YOU HAVE READ, UNDERSTOOD AND AGREE TO BE BOUND BY THIS USER AGREEMENT (THE “AGREEMENT”). IF YOU DO NOT AGREE, DO NOT USE THE SERVICES.\nEffective Date: 7 July 2025\n\n1. BASIC TERMS AND DEFINITIONS\nTerm\nDefinition\n\n\n\n\n“Services”\nAll features made available through the Playly Telegram App, website and affiliated software tools, including but not limited to Coins, Cases, Virtual Items, referral programmes, Robux Purchases and customer support.\n“User”\nAny natural person who accesses or uses the Services.\n“Coins”\nIn‑app, non‑redeemable virtual points issued by Playly. Coins have no monetary value and cannot be purchased or withdrawn.\n“Case” / “Cases”\nA mechanic that allows Users to spend Coins for a random virtual item.\n“Virtual Item(s)”\nDigital game items that can be exported to Roblox accounts or sold back to Playly for Coins.\n“Robux Purchase”\nA real‑money transaction to deliver Roblox virtual currency (Robux) directly to the User’s Roblox account.\n“Offer Acceptance”\nFull and unconditional acceptance of this Agreement by accessing or continuing to use the Services.\n“Website”\nhttps://www.playly.gg and any subdomains.\n\n\n2. MAIN PROVISIONS\n2.1 This Agreement governs the legal relationship between Playly and the User regarding the use of the Services.\n2.2 Capabilities of the Services include without limitation:\nBrowsing information about Coins, Cases, Virtual Items and Robux Purchases;\nPlacing Robux Purchase orders via integrated payment systems;\nEarning, spending and managing Coins;\nInviting friends via referral links;\nReceiving technical and customer support via Telegram or email.\n2.3 Playly guarantees that Virtual Items obtained via Cases function as described at the moment of delivery. Further use of Virtual Items within Roblox is at the User’s own risk.\n2.4 Detailed instructions for purchasing, exporting or selling Virtual Items, as well as Robux Purchases, are published within the bot and on the Website.\n\n3. SUBJECT‑MATTER OF THE AGREEMENT\n3.1 Playly grants the User a free, non‑exclusive, non‑transferable, revocable licence to use the Services for their intended purpose.\n3.2 The licence is valid for as long as the Services remain accessible to the User.\n3.3  User Restrictions: The User shall not:\nCircumvent technical limitations of the Services;\nReverse engineer, decompile or disassemble any Playly software except as permitted by law;\nCopy the Website or bot design or create derivative works without permission;\nModify or interfere with the functionality or performance of the Services;\nAllow third parties to access the User’s Playly account;\nEngage in fraud, spoofing or use third‑party software that manipulates in‑game transactions;\nUse stolen or unauthorised payment methods, IDs or documents.\n\n4. PERSONAL DATA\n4.1 By using the Services, the User consents to Playly processing Personal Data in accordance with the Playly Privacy Policy.\n4.2 Processing includes collection, storage, use, transfer (including cross‑border) and deletion of Personal Data necessary to operate and improve the Services or comply with legal obligations.\n\n5. DISPUTE RESOLUTION & CLAIMS\n5.1 If you have a dispute or complaint, you must submit it using the Google Form available in the \"Profile\" section of the app.\n5.2 We will review the submitted claim at our sole discretion and in our own time. There is no guaranteed response time.\n5.3 Submitting a complaint via any other channel (e.g., email, bot chat) may result in it being ignored.\n\n6. LIMITATION OF LIABILITY\n6.1 Playly is not liable for losses arising from unauthorised access to a User account.\n6.2 Service interruptions due to software/hardware failures or force‑majeure events release Playly from liability.\n6.3 The Services are provided “AS IS” without warranties. Playly does not guarantee uninterrupted, error‑free operation or fitness for a particular purpose.\n6.4 Playly may, without prior notice, at its sole discretion:\nRefuse or suspend transactions;\nRemove Virtual Items from inventory;\nReset Coin balances;\nBlacklist payment methods;\nBlock User accounts.\n6.4.1 The User may appeal such actions by contacting support.\n\n7. REFUNDS\n7.1 Unused Robux Purchase balances may be refunded upon request if Coins or Virtual Items were not spent/exported.\n7.2 Once Coins are spent on Cases or Robux is delivered, all sales are final and non‑refundable, except as required by law.\n7.3 Refund requests may be submitted at any time and may require proof of payment.\n\n8. FINANCIAL OPERATIONS\n8.1 The User must use valid, authorised payment methods that belong to them.\n8.2 Withdrawal of unused real‑money balances (if ever enabled) may require identity verification and is only possible 10 days after deposit.\n8.3 Subscription fees (if any) are non‑refundable once the billing period has begun. You may cancel renewal at any time; service continues until the end of the paid period.\n\n9. CHANGES TO THIS AGREEMENT\n9.1 Playly may unilaterally amend this Agreement at any time without prior notice by posting an updated version at https://playly.app/terms or within the bot.\n9.2 Continued use of the Services after changes take effect constitutes acceptance of the revised Agreement. If you do not agree, discontinue use immediately.\n\n10. NEWSLETTERS & COMMUNICATIONS\n10.1 By registering, the User consents to receive service announcements and promotional emails or messages.\n10.2 Users may opt out of marketing communications at any time via the unsubscribe link or bot settings; service‑related notices are mandatory.\n10.3 Playly does not sell or share email addresses with third parties for marketing purposes and complies with anti‑spam laws.\n\n11. FINAL PROVISIONS\n11.1 If any provision of this Agreement is held invalid, the remaining provisions remain in effect.\n11.2 This Agreement, together with the Terms of Service and Privacy Policy, constitutes the entire agreement between the User and Playly.\n"
+    },
+    "AML": {
+      "button": "Privacy policy",
+      "title": "Privacy policy",
+      "description": "Revision date 07.07.2025",
+      "text": "This Privacy Policy (the “Policy”) explains how Playly (“we”, “our”, or “us”) collects, uses, discloses and safeguards personal data when you (“you”, “your”, or “User”) access or use the Playly Telegram application, related websites, and any other online products or services that link to this Policy (collectively, the “Services”).\nBy using the Services, you acknowledge that you have read and understood this Policy. If you do not agree with any part of it, you must discontinue use of the Services immediately.\n\n1. Definitions\nTerm\nMeaning\n“Personal Data”\nAny information that directly or indirectly identifies an individual.\n“Processing”\nAny operation performed on Personal Data (collection, recording, storage, use, disclosure, deletion, etc.).\n“Cookies”\nSmall text files placed on a device when visiting a website.\n“Services”\nThe Playly Telegram app, http://www.playly.gg and other affiliated domains, APIs, customer‑support channels and marketing communications.\n“User”\nAn individual who accesses or uses the Services.\n\n\n2. General Provisions\nUsing the Services signifies acceptance of this Policy and the Playly Terms of Service.\nPlayly does not control and is not responsible for third‑party services linked from the Services.\nWe may modify this Policy at any time without prior notice. The “Revision Date” above will reflect the latest version. Continued use after an update constitutes acceptance of the revised Policy.\n\n3. Information We Collect\n3.1 Data Provided by You\nCategory\nExamples\nPurpose\nIdentification\nTelegram user‑ID, Telegram username, display name, avatar\nAccount creation, personalization, support\nContact Details\nEmail address (optional)\nSupport, marketing with consent\nRoblox Details\nRoblox user‑name / UID (optional)\nExport of Virtual Items, Robux deliveries\nFeedback\nMessages, support tickets\nService improvement\n\n3.2 Data Collected Automatically\nUsage Data — bot commands, button taps, feature interactions, timestamps.\nDevice & Log Data — IP address, browser/OS (website), language, referral source.\nCookies & Similar Tech (web‑only) — session cookies, analytics cookies, preference cookies.\n3.3 Payment Data\nReal‑money Robux purchases are processed by authorised payment processors (e.g., Stripe, UnitPay). We receive transaction IDs and status but never store full card details.\n\n4. Legal Bases for Processing (EEA/UK)\nWe process Personal Data on one or more of the following bases:\nContract – to provide the Services under the Terms of Service;\nLegitimate Interest – to secure, maintain and improve the Services;\nConsent – for optional marketing or analytics cookies;\nLegal Obligation – to comply with applicable laws (e.g., AML/KYC, taxation).\n\n5. How We Use Personal Data\nProvide, operate and maintain the Services;\nManage referrals, Coins, Cases and Virtual Items;\nDeliver Robux to linked Roblox accounts;\nRespond to inquiries and provide customer support;\nMonitor for fraud, abuse and security incidents;\nConduct analytics and improve product features;\nSend service‑related notifications (e.g., transaction confirmations);\n(With consent) deliver marketing communications.\n\n6. Disclosure of Personal Data\nWe share Personal Data only as necessary:\nRecipient\nPurpose\nPayment processors\nComplete Robux purchases and handle chargebacks\nRoblox Corporation\nCredit Robux, transfer Virtual Items\nCloud hosting & analytics providers\nService hosting, diagnostics, analytics\nAdvertising partners (opt‑in)\nDisplay targeted ads\nCompetent authorities\nComply with law, legal process, or enforce our rights\n\n\n7. International Transfers\nPlayly operates globally. Where Personal Data is transferred outside your jurisdiction, we rely on appropriate safeguards such as Standard Contractual Clauses or equivalent.\n\n8. Data Retention\nWe retain Personal Data for as long as necessary to fulfil the purposes outlined in this Policy, comply with legal obligations, resolve disputes and enforce agreements. Telegram chat history may be retained until you request deletion.\n\n9. Security\nWe implement technical and organisational measures to protect Personal Data, including encryption at rest and in transit, role‑based access controls, and regular security audits. No method of transmission is 100% secure; we cannot guarantee absolute security.\n\n10. Your Rights\nDepending on your location, you may have the right to:\nAccess the Personal Data we hold about you;\nRequest correction or deletion of your data;\nObject to or restrict Processing;\nWithdraw consent at any time (without affecting prior Processing);\nReceive a copy of your data in portable format.\nTo exercise any of these rights, contact us. We may need to verify your identity before fulfilling the request.\n\n11. U.S. State Privacy Rights (e.g., California, Colorado)\nRight to Know / Access – Information about categories and specific pieces of Personal Data collected.\nRight to Delete – Request deletion of Personal Data we collected from you.\nRight to Correct – Rectify inaccurate Personal Data.\nRight to Opt‑Out – of sale, sharing, profiling and targeted advertising. Playly does not sell Personal Data. You may opt out of targeted advertising via cookie settings.\nRight to Appeal – Appeal a refusal to act on a privacy request.\nWe honour the Global Privacy Control (GPC) signal for browser‑based opt‑out requests.\n\n12. Cookies & Similar Technologies\nStrictly Necessary Cookies – Essential for website operation (cannot be disabled).\nAnalytics Cookies – Help us understand usage (e.g., Google Analytics). Set only with consent where required.\nFunctionality Cookies – Remember preferences like language.\nAdvertising Cookies – Serve personalised ads; disabled by default in the EU/UK unless consent is given.\nYou may manage cookies in your browser settings. Disabling cookies may affect website functionality.\n\n13. Children’s Privacy\nThe Services are not directed to children under 13. We do not knowingly collect Personal Data from children under 13. If you believe we have collected such data, contact us to delete it.\n\n14. Third‑Party Links & Integrations\nOur Services may contain links to third‑party sites or services. We are not responsible for their privacy practices. We encourage you to review their policies.\n\n15. Changes to This Policy\nWe may update this Policy at any time without prior notice. Material changes will be highlighted for 30 days via a banner or bot message where feasible. The revised Policy is effective immediately upon posting."
+    }
+  },
+  "contacts": {
+    "navigate": "Contacts",
+    "text": "For all questions to write by"
+  },
+  "onboarding": {
+    "button": "Continue",
+    "step-1": {
+      "title": "Welcome to Playly!",
+      "description": "Get free items and make any game purchases at the best prices"
+    },
+    "step-2": {
+      "title": "Enter the community and be up to date with everything",
+      "description": "News, distribution of robux and draws of objects"
+    },
+    "step-3": {
+      "title": "Invite your friends - Get objects and robux!",
+      "description": "Get coins for inviting friends and exchange them for prizes"
+    }
+  },
+  "auth": {
+    "title": "Sign in to continue",
+    "description": "Sign in to open cases and shear wining with your friends",
+    "button": "Continue with Telegram",
+    "alert": "By continuing, you agree to our Terms of use and Privacy Policy"
+  },
+  "shop": {
+    "access_write_banner": {
+      "title": "Allow notifications",
+      "description": "Give access to the bot to obtain important notifications",
+      "button": "Allow"
+    },
+    "search": {
+      "placeholder": "Search items"
+    },
+    "robux_banner": {
+      "title": "Buying robux",
+      "description": "Officially from Playly",
+      "button": "Buy robux"
+    },
+    "buy": {
+      "button": "Buy"
+    }
+  },
+  "referral_card": {
+    "title": "Your referral link"
+  },
+  "sell": {
+    "search": {
+      "placeholder": "Search items"
+    },
+    "banner": {
+      "title": "Fast sale of items",
+      "description": "Robux will immediately go to your Playly balance",
+      "how_it_work_button": "How does this work?"
+    },
+    "item_card": {
+      "button": "Add"
+    },
+    "category": {
+      "cheap": "Cheap",
+      "expensive": "Expensive"
+    },
+    "cart": {
+      "button": "To sale",
+      "title": "Items for sale",
+      "description": "Select items for sale",
+      "alert": "To sell items, the sales amount must be at least {min} R$ and no more than {max} R$",
+      "minimum_sum": "The minimum sales amount",
+      "continue": "Continue",
+      "step-1": {
+        "continue": "Sell for {n} R$",
+        "seller": "Seller",
+        "will_be_sold": "Will be sold",
+        "will_get": "Will get",
+        "n_items": "{n} items",
+        "alert": "You will receive a message in the bot with instructions on what to do next"
+      },
+      "step-2": {
+        "continue": "Open messages",
+        "how_it_work_button": "How does this work",
+        "title": "Successfully!",
+        "description": "You have sent a pets application",
+        "alert": "You received a message in the bot with instructions for further actions"
+      }
+    },
+    "how_to_work_modal": {
+      "title": "Sale of items",
+      "button": "Understood!",
+      "step": "Step {n}",
+      "ready": "Ready!",
+      "step-1": {
+        "title": "Choose the product",
+        "description": "Select the product for sale and write to the manager"
+      },
+      "step-2": {
+        "title": "Wait for the manager",
+        "description": "Wait for the manager to take your application to the work"
+      },
+      "step-3": {
+        "title": "Submit items",
+        "description": "Submit objects to the manager and wait until he confirms the receipt"
+      },
+      "step-4": {
+        "title": "Get robux",
+        "description": "Robux will go to your Playly account"
+      }
+    },
+    "onboarding_modal": {
+      "title": "Sale of items",
+      "banner": {
+        "title": "Sell items for robux",
+        "description": "We will buy your items and accrue robux"
+      },
+      "card": {
+        "title": "Get robux quickly!",
+        "description": "We will accrue robux instantly as soon as the Playly manager redeems the item"
+      },
+      "button": "Sell",
+      "how_it_work_button": "How this work"
+    }
+  }
+}

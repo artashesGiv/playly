@@ -48,7 +48,9 @@ useBackButton()
 
 const isOpenModal = ref(false)
 
+const { tg } = useTelegram()
 const { totalSum, totalItems } = storeToRefs(useSellStore())
+const { clearCart } = useSellStore()
 
 onMounted(() => {
   if (totalItems.value === 0) {
@@ -56,8 +58,12 @@ onMounted(() => {
   }
 })
 
+onBeforeUnmount(() => {
+  clearCart()
+})
+
 const onOpenMessages = () => {
-  console.log('open messages')
+  tg.openTelegramLink('https://t.me/playlygg_bot')
 
   navigateTo('/sell')
 }

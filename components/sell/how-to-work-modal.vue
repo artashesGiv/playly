@@ -15,10 +15,10 @@
           <ui-tag v-bind="getTagProps(index)" class="card__tag" />
           <div class="card__text">
             <span class="title">
-              {{ $t(`sell.how_to_work_modal.step-${index + 1}.title`) }}
+              {{ item.title }}
             </span>
             <span class="description">
-              {{ $t(`sell.how_to_work_modal.step-${index + 1}.description`) }}
+              {{ item.description }}
             </span>
           </div>
         </div>
@@ -33,6 +33,8 @@
 </template>
 
 <script setup lang="ts">
+import type { TagProps } from '@/components/ui/tag.vue'
+
 export type HowToWorkModalProps = {
   isOpen: boolean
 }

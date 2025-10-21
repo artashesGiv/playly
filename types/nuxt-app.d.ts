@@ -1,4 +1,4 @@
-import type { IconsId } from '@/types'
+import type { IconsId, KeysLoading } from '@/types'
 
 export {}
 declare global {
@@ -19,11 +19,15 @@ declare global {
     refresh_token: string
   }
 
+  type KeyLoading = KeysLoading
+
   type LanguageCode = 'en' | 'ru'
 
   type Agreements = 'term' | 'policy' | 'AML'
 
   type OnboardingStep = 1 | 2 | 3
+
+  type Currency = 'RUB' | 'USD'
 
   type Payments =
     | 'bitcoin'
@@ -34,6 +38,10 @@ declare global {
     | 'gpay'
     | 'cards'
     | 'SBP'
+
+  type PartialRecord<K extends keyof any, T> = {
+    [P in K]?: T
+  }
 }
 
 declare module 'nuxt/app' {

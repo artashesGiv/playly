@@ -5,6 +5,7 @@ export const useUserStore = defineStore('user', () => {
   const balance = ref(0)
 
   const starpetsInfo = computed(() => userInfo.value?.starpets_info)
+  const currencyBalance = computed(() => userInfo.value?.money_balance)
 
   const robuxBalance = computed<UserInfo['robux_balance']>(() => {
     if (userInfo.value) {
@@ -27,6 +28,7 @@ export const useUserStore = defineStore('user', () => {
   return {
     balance,
     robuxBalance,
+    currencyBalance,
     userInfo,
     starpetsInfo,
     getUserInfo,

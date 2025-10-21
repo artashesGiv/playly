@@ -37,6 +37,39 @@
             </div>
           </template>
         </ui-table-data>
+        <!-- MANAGER DATA -->
+        <ui-table-data
+          v-if="item.manager_withdraw_info"
+          class="case-item__table"
+          :list="managerMain"
+        >
+          <template #row-2>
+            <div class="case-item__manager-buttons">
+              <ui-button-base
+                :text="$t('profile.manager_data.main.chat_button')"
+                icon-right="foreign"
+                size="42"
+                @click="
+                  tg.openTelegramLink(
+                    `https://t.me/${item.manager_withdraw_info.manager_username}`,
+                  )
+                "
+              />
+              <ui-button-base
+                :text="$t('profile.manager_data.main.what_to_do_button')"
+                icon-right="information-circle"
+                size="42"
+                view="secondary-light"
+                @click="whatToDoModalOpen = true"
+              />
+            </div>
+          </template>
+        </ui-table-data>
+        <profile-manager-withdraw-data
+          v-if="item?.manager_withdraw_info"
+          :item="item"
+        />
+        <!-- ADOPT ME -->
         <ui-table-data
           v-if="item.game === 'adopt_me'"
           class="case-item__table"
@@ -50,11 +83,13 @@
             />
           </template>
         </ui-table-data>
+        <!-- MM2 -->
         <ui-table-data
           v-if="item.game === 'mm2'"
           class="case-item__table"
           :list="mm2DataListItem"
         />
+        <!-- GROWAGARDEN -->
         <ui-table-data
           v-if="isGrowagarden"
           class="case-item__table"
@@ -98,6 +133,12 @@
         "
         @click="onClick"
       />
+
+      <!-- MODAL -->
+      <profile-manager-what-to-do-modal
+        v-model:is-open="whatToDoModalOpen"
+        :item="item"
+      />
     </div>
   </transition-fade>
 </template>
@@ -128,6 +169,7 @@ const { sellItem, withdrawItem, getItem, shareItem } = useItemsStore()
 const { isGrowagarden } = useCaseGame(item)
 
 const loadingButtons = ref<InteractiveProps['loading']>([])
+const whatToDoModalOpen = ref(false)
 
 const onShare = async () => {
   try {
@@ -193,6 +235,17 @@ const dataListOwn = computed<TableDataProps['list']>(() => [
         },
       ]
     : []),
+])
+
+const managerMain = computed<TableDataProps['list']>(() => [
+  {
+    title: t('profile.manager_data.main.title'),
+    value: '',
+  },
+  {
+    title: '',
+    value: '',
+  },
 ])
 
 const adoptMeDataListItem = computed<TableDataProps['list']>(() => [
@@ -360,6 +413,12 @@ onMounted(async () => {
 
   &__button {
     flex-shrink: 0;
+  }
+
+  &__manager-buttons {
+    @include row(12px);
+
+    width: 100%;
   }
 }
 </style>

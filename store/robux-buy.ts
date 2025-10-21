@@ -121,7 +121,7 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
 
   const setStepsDataFromLocalStorage = (step: number) => {
     const stepsDataRaw = localStorage.getItem(
-      LocalStorageKeys.STEPS_DATA_LOCAL_STORAGE_KEY,
+      LocalStorageKeys.BUT_ROBUX_STEPS_DATA,
     )
 
     if (!stepsDataRaw) return
@@ -387,7 +387,7 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
 
   watch([step, getValue], () => {
     localStorage.setItem(
-      LocalStorageKeys.STEPS_DATA_LOCAL_STORAGE_KEY,
+      LocalStorageKeys.BUT_ROBUX_STEPS_DATA,
       JSON.stringify({
         ...stepsData,
         amount: getValue.value,

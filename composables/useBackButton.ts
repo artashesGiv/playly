@@ -10,7 +10,17 @@ export const useBackButton = (callback?: () => void) => {
 
   const handleBackButtonClick = () => {
     const cb = callbackStack[callbackStack.length - 1]
-    if (cb) cb()
+    if (cb) {
+      cb()
+      return
+    }
+
+    const hasBack = !!window.history.state?.back
+    if (hasBack) {
+      router.back()
+    } else {
+      router.replace('/')
+    }
   }
 
   onMounted(() => {

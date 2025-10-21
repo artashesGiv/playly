@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: [],
+    transpile: ['gsap'],
   },
 
   nitro: {
@@ -111,8 +111,8 @@ export default defineNuxtConfig({
     lazy: true,
     langDir: 'locales',
     locales: [
-      { code: 'en', name: 'English', file: 'en.json', language: 'en-US' },
-      { code: 'ru', name: 'Русский', file: 'ru.json', language: 'ru-RU' },
+      { code: 'en', name: 'English', file: 'en/index.ts', language: 'en-US' },
+      { code: 'ru', name: 'Русский', file: 'ru/index.ts', language: 'ru-RU' },
     ],
     experimental: {
       typedOptionsAndMessages: 'all',

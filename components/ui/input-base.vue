@@ -6,7 +6,10 @@
       </slot>
       <input
         v-model="model"
+        :value="type === 'number' && Number(model) === 0 ? '' : model"
         :type="type"
+        :min="type === 'number' ? (min ?? undefined) : undefined"
+        :max="type === 'number' ? (max ?? undefined) : undefined"
         class="input__value"
         :enterkeyhint="enterkeyhint"
         :placeholder="placeholder"
@@ -42,6 +45,8 @@ export type InputBaseProps = {
   iconColor?: 'base' | 'yellow'
   postfix?: string
   type?: 'text' | 'number' | 'email'
+  min?: number
+  max?: number
   isDisabled?: boolean
   enterkeyhint?:
     | 'enter'
@@ -51,11 +56,13 @@ export type InputBaseProps = {
     | 'previous'
     | 'search'
     | 'send'
+  textRight?: boolean
 }
 
 type InputEmits = {
   (emit: 'update:modelValue', value: InputBaseProps['modelValue']): void
   (emit: 'update:is-error', value: InputBaseProps['isError']): void
+  (emit: 'done'): void
 }
 
 const props = withDefaults(defineProps<InputBaseProps>(), {
@@ -68,7 +75,10 @@ const props = withDefaults(defineProps<InputBaseProps>(), {
   label: '',
   errorMessage: '',
   postfix: '',
+  min: undefined,
+  max: undefined,
 })
+
 const emit = defineEmits<InputEmits>()
 const model = defineModel<InputBaseProps['modelValue']>()
 
@@ -76,16 +86,39 @@ const classes = computed(() => [
   'input',
   { 'is-error': props.isError },
   { 'is-disabled': props.isDisabled },
+  { 'is-text-right': props.textRight },
   `input--icon-color--${props.iconColor}`,
 ])
 
 const onInput = (event: Event) => {
-  emit('update:modelValue', (event.target as HTMLInputElement).value)
-  emit('update:is-error', false)
+  const value = (event.target as HTMLInputElement).value
+
+  let isError = false
+  if (props.type === 'number' && value !== '') {
+    const n = Number(value)
+    if (Number.isNaN(n)) {
+      isError = true
+    } else {
+      const hasMin = typeof props.min === 'number'
+      const hasMax = typeof props.max === 'number'
+
+      if (hasMin && hasMax) {
+        isError = n < (props.min as number) || n > (props.max as number)
+      } else if (hasMin) {
+        isError = n < (props.min as number)
+      } else if (hasMax) {
+        isError = n > (props.max as number)
+      }
+    }
+  }
+
+  emit('update:is-error', isError)
+  emit('update:modelValue', value)
 }
 
 const onDone = (event: KeyboardEvent) => {
   ;(event.target as HTMLInputElement).blur()
+  emit('done')
 }
 
 onMounted(() => {
@@ -116,6 +149,8 @@ function handleTouchOutside(event: TouchEvent) {
   $b: &;
 
   @include column(6px);
+
+  width: 100%;
 
   &__content {
     @include row(12px);
@@ -184,6 +219,12 @@ function handleTouchOutside(event: TouchEvent) {
     @include disabled;
 
     opacity: 0.7;
+  }
+
+  &.is-text-right {
+    #{$b}__value {
+      text-align: right;
+    }
   }
 }
 </style>

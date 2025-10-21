@@ -7,21 +7,28 @@
       class="sell-banner__icon"
       :class="`sell-banner__icon--${item}`"
     />
-    <nuxt-img
-      v-for="item in 2"
-      :key="item"
-      src="/images/main/robux.png"
-      class="sell-banner__image"
-      :class="`sell-banner__image--${item}`"
-    />
+    <nuxt-img src="/images/sell/banner/bg.png" class="sell-banner__image" />
     <span class="title">{{ $t('sell.banner.title') }}</span>
     <span class="description">
       {{ $t('sell.banner.description') }}
     </span>
+    <ui-button-base
+      :text="$t('sell.banner.how_it_work_button')"
+      size="44"
+      view="white"
+      class="sell-banner__button"
+      @click="$emit('click-how-it-work')"
+    />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+type Emit = {
+  (e: 'click-how-it-work'): void
+}
+
+defineEmits<Emit>()
+</script>
 
 <style scoped lang="scss">
 .sell-banner {
@@ -33,7 +40,7 @@
   border-radius: 22px;
   background-color: var(--primary-600);
   padding: 14px;
-  height: 130px;
+  height: 190px;
 
   & > * {
     position: relative;
@@ -42,40 +49,33 @@
 
   span {
     color: var(--white);
+    text-align: center;
   }
 
   &__icon {
     position: absolute;
     color: var(--white);
     opacity: 0.2;
+    font-size: 66px;
+    top: 38px;
 
     &--1 {
-      font-size: 56px;
-      top: 5px;
-      left: 14px;
+      left: -25px;
     }
     &--2 {
-      font-size: 70px;
-      bottom: -42px;
-      right: 82px;
+      right: -25px;
     }
   }
 
   &__image {
-    position: absolute;
+    @include center('horizontal');
 
-    &--1 {
-      width: 70px;
-      height: 70px;
-      top: -23px;
-      right: 86px;
-    }
-    &--2 {
-      width: 110px;
-      height: 110px;
-      top: 1px;
-      right: -55px;
-    }
+    top: 0;
+    width: 282px;
+  }
+
+  &__button {
+    margin-top: 12px;
   }
 }
 </style>

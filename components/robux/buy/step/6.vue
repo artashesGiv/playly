@@ -14,7 +14,7 @@ import { LocalStorageKeys } from '@/types/enums'
 const { getValue } = storeToRefs(useRobuxBuyStore())
 
 onBeforeUnmount(() => {
-  localStorage.removeItem(LocalStorageKeys.STEPS_DATA_LOCAL_STORAGE_KEY)
+  localStorage.removeItem(LocalStorageKeys.BUT_ROBUX_STEPS_DATA)
 })
 </script>
 

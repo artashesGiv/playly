@@ -70,9 +70,20 @@
             : $t('cases.roulette.canSell')
         }}
       </span>
+      <div v-if="isOnboarding" class="case-item__text">
+        <h2>{{ $t('onboarding-v2.step-4.title') }}</h2>
+        <span>{{ $t('onboarding-v2.step-4.description') }}</span>
+      </div>
     </div>
     <div class="case-item__buttons">
       <ui-button-base
+        v-if="isOnboarding"
+        :text="$t('common.continue')"
+        size="52"
+        @click="() => navigateTo('/onboarding-v2?step=5')"
+      />
+      <ui-button-base
+        v-if="!isOnboarding"
         view="secondary"
         :text="$t('cases.roulette.openMore', { n: formattedPriceCase })"
         icon-right="coin-1"
@@ -80,7 +91,7 @@
         @click="onOpenMore"
       />
       <ui-button-base
-        v-if="!isCoinsItem"
+        v-if="!isCoinsItem && !isOnboarding"
         :text="
           $t('cases.roulette.sellItem', {
             n: formattedPriceItem,
@@ -125,10 +136,13 @@ const { user } = useTelegram()
 const isSellForCoins = ref(false)
 
 const id = route.params.id as Case['id']
+const isOnboarding = !!route.query.onboarding
 
 useBackButton(() => {
-  stopAudio()
-  router.back()
+  if (!isOnboarding) {
+    stopAudio()
+    router.back()
+  }
 })
 
 const currentCase = computed(() => cases.value.find(item => item.id === id))
@@ -325,6 +339,23 @@ onBeforeUnmount(() => {
 
   &__buttons {
     @include column(12px);
+  }
+
+  &__text {
+    @include column(6px);
+
+    align-items: center;
+    text-align: center;
+
+    h2 {
+      font: var(--font-large-semibold);
+      color: var(--white);
+    }
+
+    span {
+      font: var(--font-large-medium);
+      color: var(--light-500);
+    }
   }
 }
 </style>

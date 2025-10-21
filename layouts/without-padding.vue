@@ -1,5 +1,5 @@
 <template>
-  <main class="layout__content">
+  <main class="layout__content container">
     <slot />
   </main>
 </template>
@@ -14,7 +14,6 @@
   &__content {
     transition: var(--transition-base);
     height: 100%;
-    padding: 0 16px;
     overflow-y: auto;
     overflow-x: hidden;
   }

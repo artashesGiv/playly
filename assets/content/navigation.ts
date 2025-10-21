@@ -7,16 +7,21 @@ export const useNavigation = (): NavItem[] => {
       icon: 'mascot',
       text: t('nav.coins'),
     },
+    // {
+    //   src: '/shop',
+    //   icon: 'buy-1',
+    //   text: t('nav.shop') + 'v1',
+    // },
     {
-      src: '/shop',
+      src: '/shop-v2',
       icon: 'buy-1',
       text: t('nav.shop'),
     },
-    {
-      src: '/sell',
-      icon: 'buy-3',
-      text: t('nav.sell'),
-    },
+    // {
+    //   src: '/sell',
+    //   icon: 'buy-3',
+    //   text: t('nav.sell'),
+    // },
     {
       src: '/robux',
       icon: 'robux',

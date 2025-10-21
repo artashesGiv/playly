@@ -1,7 +1,7 @@
 <template>
   <transition-fade>
     <ui-button-base
-      v-if="totalCountCart"
+      v-if="totalItems"
       icon="buy-1"
       :text="$t('sell.cart.button')"
       max-content
@@ -11,7 +11,7 @@
     >
       <template #badge>
         <div class="cart-button__badge">
-          {{ countView(totalCountCart) }}
+          {{ countView(totalItems) }}
         </div>
       </template>
     </ui-button-base>
@@ -21,11 +21,7 @@
 <script setup lang="ts">
 import { useSellStore } from '@/store'
 
-const { cart } = storeToRefs(useSellStore())
-
-const totalCountCart = computed(() => {
-  return Object.values(cart.value).reduce((acc, item) => acc + item.count, 0)
-})
+const { totalItems } = storeToRefs(useSellStore())
 </script>
 
 <style scoped lang="scss"></style>

@@ -1,7 +1,11 @@
 <template>
   <div class="shop-item">
     <div class="shop-item__image-wrapper">
-      <nuxt-img :src="image_url" class="shop-item__image" :class="{'shop-item__image--full': category !== 'growagarden' }"/>
+      <nuxt-img
+        :src="image_url"
+        class="shop-item__image"
+        :class="{ 'shop-item__image--full': category !== 'growagarden' }"
+      />
     </div>
     <div class="shop-item__info">
       <span class="shop-item__price">{{ price }} ₽</span>
@@ -11,6 +15,7 @@
       icon="buy-3"
       :text="$t('shop.buy.button')"
       size="42"
+      class="shop-item__button"
       @click="emit('click')"
     />
   </div>
@@ -72,6 +77,10 @@ const emit = defineEmits<Emit>()
 
   &__name {
     font: var(--font-normal-medium);
+  }
+
+  &__button {
+    margin-top: auto;
   }
 }
 </style>

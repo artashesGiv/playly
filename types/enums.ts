@@ -1,3 +1,4 @@
 export enum LocalStorageKeys {
-  STEPS_DATA_LOCAL_STORAGE_KEY = 'buy_robux_steps_data',
+  BUT_ROBUX_STEPS_DATA = 'buy_robux_steps_data',
+  MARKET_STEPS_DATA = 'market_steps_data',
 }

@@ -1,6 +1,18 @@
 <template>
   <div v-if="!isLoading" class="profile">
     <profile-main />
+    <ui-button-base
+      :text="$t('market.orders.buttonText')"
+      view="secondary-light"
+      size="50"
+      icon="Bag-7"
+      badge-view="primary"
+      @click="navigateTo('/shop-v2/orders')"
+    >
+      <template v-if="allWithdraws.length" #badge>
+        {{ allWithdraws.length }}
+      </template>
+    </ui-button-base>
     <star-pets-link-card />
     <language />
     <ui-divider />
@@ -20,11 +32,12 @@
 </template>
 
 <script setup lang="ts">
-import { useItemsStore } from '@/store'
+import { useItemsStore, useShopV2Store } from '@/store'
 
 const isLoading = ref(false)
 
 const { getItems } = useItemsStore()
+const { allWithdraws } = storeToRefs(useShopV2Store())
 
 onMounted(async () => {
   try {

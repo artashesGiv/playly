@@ -60,6 +60,7 @@
     width: 100%;
     pointer-events: none;
     background: linear-gradient(180deg, rgba(16, 15, 17, 0) 0%, #100f11 100%);
+    z-index: 3;
   }
 }
 
@@ -74,6 +75,7 @@
     width: 100%;
     pointer-events: none;
     background: linear-gradient(180deg, #100f11 0%, rgba(16, 15, 17, 0) 100%);
+    z-index: 3;
   }
 }
 

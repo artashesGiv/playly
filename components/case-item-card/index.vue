@@ -17,16 +17,22 @@
         class="item-case__abilities"
       />
     </div>
-    <div v-if="crystal_price" class="case-item__price">
-      {{ formatePrice(crystal_price) }} <main-mascot size="xs" />
+    <div class="case-item__bottom">
+      <div v-if="manager_withdraw_info" class="case-item__manager">
+        @{{ manager_withdraw_info.manager_username }}
+      </div>
+
+      <div v-if="crystal_price" class="case-item__price">
+        {{ formatePrice(crystal_price) }} <main-mascot size="xs" />
+      </div>
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
-import type { CaseItem } from '@/types'
+import type { PersonalCaseItem } from '@/types'
 
-export type CaseItemProps = CaseItem
+export type CaseItemProps = PersonalCaseItem
 
 const props = defineProps<CaseItemProps>()
 
@@ -87,10 +93,27 @@ const backgroundStyle = computed(() => {
     margin-top: 4px;
   }
 
+  &__bottom {
+    @include column(12px);
+
+    align-items: center;
+    margin-top: auto;
+    width: 100%;
+  }
+
+  &__manager {
+    font: var(--font-small-medium);
+    padding: 3px 6px;
+    border-radius: 16px;
+    width: max-content;
+    font: var(--font-normal-bold);
+    background-color: var(--dark-600);
+    transition: var(--transition-base);
+  }
+
   &__price {
     @include row(4px);
 
-    margin-top: 18px;
     justify-content: center;
     height: 32px;
     width: 100%;

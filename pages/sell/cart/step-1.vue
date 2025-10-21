@@ -21,6 +21,7 @@
           v-for="item in Object.values(cart)"
           :key="item.id"
           v-bind="item"
+          :price_robux="item.price_robux * item.count"
           :disable="getIsAddItemDisabled(item)"
           direction="horizontal"
         />
@@ -57,10 +58,11 @@ useBackButton()
 const isLoading = ref(false)
 
 const { t } = useI18n()
+const { tg } = useTelegram()
 const { user, popup } = useTelegram()
 
 const { cart, totalSum, totalItems } = storeToRefs(useSellStore())
-const { sell, MAXIMUM_SUM_FOR_SELL, clearCart } = useSellStore()
+const { sell, MAXIMUM_SUM_FOR_SELL } = useSellStore()
 
 const dataList = computed<TableDataProps['list']>(() => [
   {
@@ -78,16 +80,17 @@ const dataList = computed<TableDataProps['list']>(() => [
 ])
 
 const onSell = async () => {
-  try {
-    isLoading.value = true
-    await sell()
-    navigateTo('/sell/cart/step-2')
-    clearCart()
-  } catch (e) {
-    console.log(e)
-    popup.showAlert('Что то пошло не так...')
-  } finally {
-    isLoading.value = false
+  if (await tg.requestWriteAccess()) {
+    try {
+      isLoading.value = true
+      await sell()
+      navigateTo('/sell/cart/step-2')
+    } catch (e) {
+      console.log(e)
+      popup.showAlert('Что то пошло не так...')
+    } finally {
+      isLoading.value = false
+    }
   }
 }
 

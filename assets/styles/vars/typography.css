@@ -17,3 +17,49 @@
   --font-small-medium: 500 12px/150% var(--font-inter);
   --font-tiny-bold: 700 10px/150% var(--font-inter);
 }
+
+.font-massive-bold {
+    font: var(--font-massive-bold);
+}
+.font-very-large-bold {
+    font: var(--font-very-large-bold);
+}
+.font-very-large-semibold {
+    font: var(--font-very-large-semibold);
+}
+.font-large-bold {
+    font: var(--font-large-bold);
+}
+.font-large-semibold {
+    font: var(--font-large-semibold);
+}
+.font-large-medium {
+    font: var(--font-large-medium);
+}
+.font-base-bold {
+    font: var(--font-base-bold);
+}
+.font-base-semibold {
+    font: var(--font-base-semibold);
+}
+.font-base-medium {
+    font: var(--font-base-medium);
+}
+.font-normal-bold {
+    font: var(--font-normal-bold);
+}
+.font-normal-semibold {
+    font: var(--font-normal-semibold);
+}
+.font-normal-medium {
+    font: var(--font-normal-medium);
+}
+.font-small-bold {
+    font: var(--font-small-bold);
+}
+.font-small-medium {
+    font: var(--font-small-medium);
+}
+.font-tiny-bold {
+    font: var(--font-tiny-bold);
+}

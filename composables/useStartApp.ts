@@ -9,8 +9,6 @@ export const useStartApp = async () => {
     tg?.initDataUnsafe?.start_param ??
     new URLSearchParams(window.location.search).get('tgWebAppStartParam') // fallback на десктоп Web
 
-  console.log('STARTAPP PARAMS: ', raw)
-
   let ref = ''
   let route = ''
   const query: Record<string, string> = {}
@@ -48,7 +46,8 @@ const useLoginFlow = async (ref: string, route?: string) => {
   const { tg } = useTelegram()
 
   try {
-    const { first_enter } = await login(ref)
+    const { first_enter, access_token } = await login(ref)
+    useWs(access_token)
 
     if (first_enter) {
       await tg.requestWriteAccess()

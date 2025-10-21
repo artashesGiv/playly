@@ -16,6 +16,7 @@
         icon="plus"
         :text="$t('sell.item_card.button')"
         size="42"
+        class="sell-item__button"
         @click="addToCart(props)"
       />
       <sell-counter
@@ -105,6 +106,8 @@ const remove = (item: SellItem) => {
   &__name {
     @include ellipsis;
 
+    white-space: normal;
+    word-break: break-word;
     font: var(--font-normal-medium);
   }
 
@@ -112,19 +115,24 @@ const remove = (item: SellItem) => {
     color: var(--yellow-500);
   }
 
+  &__button,
+  &__counter {
+    margin-top: auto;
+  }
+
   &--direction {
     &--horizontal {
       @include row(12px);
 
       #{$b}__image-wrapper {
-        width: 70px;
-        height: 70px;
+        width: 50px;
+        height: 50px;
         margin: 0;
       }
 
       #{$b}__image {
-        width: 54px;
-        height: 54px;
+        width: 40px;
+        height: 40px;
       }
 
       #{$b}__counter {

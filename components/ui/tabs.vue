@@ -6,7 +6,10 @@
           v-for="item in list"
           :key="item.id"
           class="tabs__item"
-          :class="{ 'is-active': modelValue === item.id }"
+          :class="{
+            'is-active': modelValue === item.id,
+            'is-disabled': disabledIds?.includes(item.id),
+          }"
           @click="emits('update:modelValue', item.id)"
         >
           {{ item.text }}
@@ -23,6 +26,7 @@ export type TabsProps<T = string | number> = {
   modelValue: TabItem['id']
   list: TabItem<T>[]
   noScroll?: boolean
+  disabledIds?: TabItem['id'][]
 }
 
 type Emits = {
@@ -63,6 +67,12 @@ const emits = defineEmits<Emits>()
     &.is-active {
       background-color: var(--dark-600);
       color: var(--white);
+    }
+
+    &.is-disabled {
+      @include disabled;
+
+      opacity: 0.3;
     }
   }
 

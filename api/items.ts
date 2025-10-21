@@ -1,12 +1,12 @@
 import type { NuxtApp } from 'nuxt/app'
-import type { Items } from '@/types'
+import type { Items, PersonalCaseItem } from '@/types'
 
 export const itemsAPI = {
   get _baseApi() {
     return (useNuxtApp() as NuxtApp).$baseApi
   },
 
-  async fetchItems() {
+  async fetchItems(): Promise<PersonalCaseItem[]> {
     return await this._baseApi.get('/item/v2/my_items')
   },
 

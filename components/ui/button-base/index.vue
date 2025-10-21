@@ -24,7 +24,11 @@
         class="button__icon"
       />
     </template>
-    <span v-if="$slots.badge" class="button__badge">
+    <span
+      v-if="$slots.badge"
+      class="button__badge"
+      :class="[`button__badge--view--${badgeView}`]"
+    >
       <slot name="badge" />
     </span>
   </button>
@@ -36,7 +40,7 @@ import type { CSSProperties } from 'vue'
 import { fontBySize, iconFontSize, radiusBySize } from './-helpers' // props
 
 // props
-type ButtonView = 'primary' | 'secondary' | 'secondary-light' | 'icon'
+type ButtonView = 'primary' | 'secondary' | 'secondary-light' | 'icon' | 'white'
 type ButtonSize =
   | '30'
   | '32'
@@ -71,6 +75,7 @@ export type ButtonProps = {
   onClick?: () => void
   isEllipsis?: boolean
   isError?: boolean
+  badgeView?: 'base' | 'primary'
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -82,6 +87,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   icon: undefined,
   iconRight: undefined,
   onClick: undefined,
+  badgeView: 'base',
 })
 
 // emits
@@ -92,6 +98,7 @@ const SPINNER_VIEW_MAP: Record<ButtonView, SpinnerProps['view']> = {
   'primary': 'light',
   'secondary': 'light',
   'icon': 'dark',
+  'white': 'dark',
 }
 
 type ButtonEmit = {
@@ -114,7 +121,7 @@ const classes = computed(() => {
     classes.push('is-disabled')
   }
 
-  if (props.icon && !props.text) {
+  if ((props.icon || props.iconRight) && !props.text) {
     classes.push('is-only-icon')
   }
 
@@ -249,9 +256,28 @@ function useSpinnerProps({
       }
     }
 
+    /*WHiTE*/
+    &--white {
+      background-color: var(--white);
+      color: var(--dark-500);
+
+      &:hover {
+        background-color: var(--light-100);
+      }
+
+      &:active {
+        background-color: var(--light-100);
+      }
+
+      &.is-disabled {
+        background-color: var(--light-200);
+        opacity: 0.4;
+      }
+    }
+
     &--icon {
       background-color: transparent;
-      color: var(--gray-300);
+      color: var(--light-300);
 
       &:hover {
         color: var(--primary-default);
@@ -274,9 +300,19 @@ function useSpinnerProps({
     min-width: 24px;
     padding: 5px;
     border-radius: 10px;
-    background-color: var(--white);
     font: var(--font-small-bold);
-    color: var(--dark-800);
+
+    &--view {
+      &--base {
+        background-color: var(--white);
+        color: var(--dark-800);
+      }
+
+      &--primary {
+        background-color: var(--primary-500);
+        color: var(--white);
+      }
+    }
   }
 
   &.is-disabled {

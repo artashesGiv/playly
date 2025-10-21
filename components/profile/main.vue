@@ -23,14 +23,11 @@ const { items } = storeToRefs(useItemsStore())
 
 <style scoped lang="scss">
 .profile-main {
-  @include column(18px);
-
-  align-items: center;
-  text-align: center;
+  @include row(14px);
 
   &__avatar {
-    width: 128px;
-    height: 128px;
+    width: 74px;
+    height: 74px;
     border-radius: 50%;
   }
 }

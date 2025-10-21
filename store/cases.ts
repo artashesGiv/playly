@@ -3,6 +3,7 @@ import { useUserStore } from '@/store/user'
 
 export const useCasesStore = defineStore('cases', () => {
   const cases = ref<Case[]>([])
+  const casesOnboarding = ref<Case[]>([])
   const caseItems = ref<CaseItem[]>([])
   const receivedItem = ref<Maybe<CaseItem>>(null)
   const musicUrl = ref('')
@@ -50,6 +51,15 @@ export const useCasesStore = defineStore('cases', () => {
     }
   }
 
+  const fetchCasesOnboarding = async () => {
+    await baseRequest({
+      method: () => caseAPI.fetchCasesOnboarding(),
+      callback: result => {
+        casesOnboarding.value = result
+      },
+    })
+  }
+
   return {
     cases,
     caseItems,
@@ -57,8 +67,10 @@ export const useCasesStore = defineStore('cases', () => {
     receivedItem,
     musicUrl,
     currentTab,
+    casesOnboarding,
     openCase,
     getCases,
     getCaseItems,
+    fetchCasesOnboarding,
   }
 })
