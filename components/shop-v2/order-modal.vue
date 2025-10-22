@@ -229,6 +229,8 @@ const game = computed<Maybe<ShopV2DataCard['game']>>(() => {
 
   &__footer {
     @include column(12px);
+
+    padding-bottom: 20px;
   }
 }
 </style>

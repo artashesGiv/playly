@@ -71,7 +71,13 @@ const emits = defineEmits<Emits>()
 
   &.is-full-height {
     min-height: 100vh;
-
+    padding-top: calc(
+      var(--tg-content-safe-area-inset-top) + var(--tg-safe-area-inset-top)
+    );
+    padding-bottom: calc(
+      var(--tg-content-safe-area-inset-bottom) +
+        var(--tg-safe-area-inset-bottom)
+    );
     border-radius: 0;
 
     .modal__content {
