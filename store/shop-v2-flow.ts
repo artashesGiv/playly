@@ -159,24 +159,26 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
       case 4: {
         try {
           if (marketFlowData.value.item) {
-            const { shop_withdraw_id } = await buy({
+            const { shop_withdraw_id, status } = await buy({
               shop_item_id: marketFlowData.value.itemId!,
               currency: marketFlowData.value.item?.currency,
               roblox_username: marketFlowData.value.user!.name,
               roblox_id: marketFlowData.value.user!.roblox_id,
             })
 
-            marketFlowData.value.withdrawId = shop_withdraw_id
+            if (status === 'payment_pending') {
+              marketFlowData.value.withdrawId = shop_withdraw_id
 
-            const { uri } = await payment({
-              email: marketFlowData.value.email,
-              payment_method_id:
-                paymentIdMap[marketFlowData.value.activePayType!]!,
-              withdraw_id: shop_withdraw_id,
-              withdraw_type: 'item',
-            })
+              const { uri } = await payment({
+                email: marketFlowData.value.email,
+                payment_method_id:
+                  paymentIdMap[marketFlowData.value.activePayType!]!,
+                withdraw_id: shop_withdraw_id,
+                withdraw_type: 'item',
+              })
 
-            tg.openLink(uri)
+              tg.openLink(uri)
+            }
 
             isOpenPaid.value = true
           }

@@ -28,6 +28,7 @@ export namespace ShopV2 {
       }
       export type Response = {
         shop_withdraw_id: string
+        status: 'paid' | 'payment_pending'
       }
     }
 
