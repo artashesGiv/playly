@@ -42,13 +42,13 @@
         </span>
       </div>
       <div class="order-modal__footer">
-        <ui-card v-if="isPaid" class="order-modal__timer" view="light">
-          <span>{{ $t('market.steps.5.steps.1.timer.title') }}</span>
-          <div class="order-modal__timer-right">
-            <span>{{ $t('market.steps.5.steps.1.timer.description') }}</span>
-            <ui-spinner view="light" />
-          </div>
-        </ui-card>
+        <!--        <ui-card v-if="isPaid" class="order-modal__timer" view="light">-->
+        <!--          <span>{{ $t('market.steps.5.steps.1.timer.title') }}</span>-->
+        <!--          <div class="order-modal__timer-right">-->
+        <!--            <span>{{ $t('market.steps.5.steps.1.timer.description') }}</span>-->
+        <!--            <ui-spinner view="light" />-->
+        <!--          </div>-->
+        <!--        </ui-card>-->
         <template v-if="isFindManager && item.supplier_info">
           <ui-button-base
             :text="$t('market.steps.5.steps.2.buttons.link')"
@@ -56,7 +56,7 @@
             icon-right="foreign"
             @click="
               tg.openLink(
-                `https://www.roblox.com/users/${item.supplier_info.supplier_id}/profile`,
+                `https://www.roblox.com/users/${item.supplier_info.supplier_roblox_id}/profile`,
               )
             "
           />

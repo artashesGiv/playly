@@ -97,7 +97,7 @@ export type ShopV2Withdraw = {
     | 'withdraw_failed'
   category_status?: 'paid' | 'friend' | 'in_game' | 'success' | 'cancel'
   supplier_info?: {
-    supplier_id: number
+    supplier_roblox_id: number
     supplier_roblox_url: string
     supplier_roblox_username: string
     supplier_roblox_avatar?: Maybe<string>
