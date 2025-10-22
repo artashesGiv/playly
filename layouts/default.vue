@@ -34,7 +34,7 @@
 
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 18px 16px;
+    padding: 0 16px;
     box-sizing: border-box;
     transition: var(--transition-base);
     flex: 1 1 0;
