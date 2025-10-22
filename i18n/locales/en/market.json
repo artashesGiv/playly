@@ -1,1 +1,138 @@
-{}
+{
+  "games": {
+    "search": {
+      "placeholder": "Search for games"
+    },
+    "popular": "Popular",
+    "all": "All games",
+    "card": {
+      "count": "{n} items | {n} item | {n} items | {n} items"
+    }
+  },
+  "items": {
+    "search": {
+      "placeholder": "Search for items"
+    }
+  },
+  "item": {
+    "description": "An item for the game \"{game}\" of type \"{item_type}\" with rarity \"{rarity}\""
+  },
+  "steps": {
+    "select_item": "Selected item",
+    "select_game": "Selected game",
+    "1": {
+      "title": "Choose an item",
+      "headerDescription": "",
+      "description": "Select the desired item from the catalog"
+    },
+    "2": {
+      "title": "Choose an account",
+      "headerDescription": "You will receive the item on this account",
+      "description": "Select your account from the list and click Continue",
+      "search_placeholder": "Roblox nickname",
+      "search_error": "This field is required",
+      "empty_list_message": "Nothing found. Enter your Roblox account nickname",
+      "select_error": "Please select your account"
+    },
+    "3": {
+      "title": "Choose a payment method",
+      "headerDescription": "Select a convenient payment method",
+      "description": "Choose the payment method that works best for you",
+      "data": {
+        "item": "Item",
+        "account": "Account",
+        "price": "Amount to pay"
+      }
+    },
+    "4": {
+      "title": "Check your details",
+      "headerDescription": "Pay for your order if everything is correct",
+      "description": "Make sure all details are correct before proceeding to payment",
+      "data": {
+        "payment_method": "Payment method",
+        "account": "Account",
+        "price": "Item price",
+        "commission": "Commission",
+        "summary_price": "Total amount"
+      },
+      "buttonPay": "Pay",
+      "buttonWait": "Please wait for the payment to complete"
+    },
+    "5": {
+      "title": "Almost done!",
+      "headerDescription": "To receive your order, you need to log into the game. Follow the instructions below",
+      "steps": {
+        "1": {
+          "description": "Please wait until our specialist is available. It may take about 5 minutes for them to join the game",
+          "timer": {
+            "title": "Time remaining:",
+            "description": "Approximately 5 minutes"
+          }
+        },
+        "2": {
+          "users": {
+            "description": "Accept or send a friend request to the specialist to proceed with your purchase"
+          },
+          "buttons": {
+            "link": "Add to friends"
+          }
+        },
+        "3": {
+          "description": "Join the server and accept the trade from our specialist",
+          "buttons": {
+            "link": "Join VIP Server"
+          }
+        }
+      }
+    }
+  },
+  "modal": {
+    "title": "How does it work?",
+    "headerDescription": "",
+    "description": "You will receive your item within 15 minutes after completing the purchase"
+  },
+  "filters": {
+    "title": "Filters",
+    "from": "From",
+    "to": "To",
+    "price": "Price",
+    "rarity": "Rarity",
+    "mutation": "Mutation",
+    "buttons": {
+      "complete": "Show {n} products | Show {n} product | Show {n} products | Show {n} products",
+      "not_find": "Nothing found",
+      "clear": "Reset filters"
+    }
+  },
+  "orders": {
+    "buttonText": "My orders",
+    "header": {
+      "title": "My orders",
+      "description": "Here you can find all your orders"
+    },
+    "description": "Please note: if you do not join the server during item transfer at the scheduled time, the order will be canceled!",
+    "filters": {
+      "search": "Search orders",
+      "active": "Active",
+      "completed": "Completed"
+    },
+    "empty": {
+      "title": "Nothing found",
+      "description": "Your order list will appear here after you purchase your first item",
+      "button": "Go to market"
+    }
+  },
+  "withdraw_statuses": {
+    "paid": "Paid",
+    "order_created": "Pending",
+    "find_manager": "Manager assigned",
+    "friend": "Adding to friends",
+    "in_game": "Item delivery",
+    "success": "Completed",
+    "failed": "Failed"
+  },
+  "active_withdraws_card": {
+    "title": "Receive your items",
+    "description": "You have active orders"
+  }
+}
