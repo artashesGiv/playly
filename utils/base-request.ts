@@ -35,7 +35,7 @@ export const baseRequest = async <T = unknown>({
     }
 
     console.error('BASE REQUEST', e)
-    throw Error(e)
+    throw e
   } finally {
     if (keyLoading) {
       removeKeyLoading(keyLoading)

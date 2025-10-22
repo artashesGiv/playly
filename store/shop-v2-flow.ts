@@ -90,11 +90,9 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
   }
 
   const payment = async (data: ShopV2.POST.Payment.Params) => {
-    const { uri } = await baseRequest({
+    return await baseRequest({
       method: () => shopV2API.payment(data),
     })
-
-    return uri
   }
 
   const prevStep = () => {
@@ -170,7 +168,7 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
 
             marketFlowData.value.withdrawId = shop_withdraw_id
 
-            const uri = await payment({
+            const { uri } = await payment({
               email: marketFlowData.value.email,
               payment_method_id:
                 paymentIdMap[marketFlowData.value.activePayType!]!,
@@ -182,8 +180,14 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
 
             isOpenPaid.value = true
           }
-        } catch {
-          popup?.showAlert?.('Произошла ошибка при оплате, попробуйте еще раз')
+        } catch (error: any) {
+          if (error.data.detail) {
+            popup?.showAlert?.(error.data.detail)
+          } else {
+            popup?.showAlert?.(
+              'Произошла ошибка при оплате, попробуйте еще раз',
+            )
+          }
         }
         break
       }

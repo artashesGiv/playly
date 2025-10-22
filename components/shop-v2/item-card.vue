@@ -143,7 +143,7 @@ const classes = computed(() => [
 
       #{$b}__image {
         width: 80px;
-        height: 80px;
+        height: auto;
       }
 
       #{$b}__indicator {
