@@ -41,7 +41,7 @@ const { t } = useI18n()
 
 const id = route.params.id as ShopV2Item['id']
 
-const { marketFlowData } = storeToRefs(useShopV2FlowStore())
+const { marketFlowData, isOpenPaid } = storeToRefs(useShopV2FlowStore())
 const { itemsPool, items } = storeToRefs(useShopV2Store())
 const { getItems } = useShopV2Store()
 
@@ -67,6 +67,7 @@ const dataList = computed<TableDataProps['list']>(() => [
 ])
 
 onMounted(async () => {
+  isOpenPaid.value = false
   if (marketFlowData.value.gameId) {
     await getItems(marketFlowData.value.gameId)
 
