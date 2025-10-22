@@ -27,7 +27,6 @@
 
   &__header {
     flex-shrink: 0;
-    border: 1px solid red;
   }
 
   &__content {
