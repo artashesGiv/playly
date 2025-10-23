@@ -58,6 +58,10 @@ export function useWs(accessToken?: string) {
             }
           }
         },
+        autoReconnect: {
+          retries: 10,
+          delay: 3000,
+        },
       },
     )
   }
