@@ -12,6 +12,7 @@
         {{ description }}
       </span>
     </div>
+    <slot name="right" />
   </div>
 </template>
 

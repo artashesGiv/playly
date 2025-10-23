@@ -5,7 +5,19 @@
       :description="$t('market.orders.header.description')"
       class="orders__header"
       :on-click="() => navigateTo('/profile')"
-    />
+    >
+      <template #right>
+        <div class="orders__refresh">
+          <ui-button-base
+            icon="refresh-2"
+            :loading="loading"
+            :is-disabled="isButtonDisabled"
+            view="secondary-light"
+            @click="handleClickWithCooldown"
+          />
+        </div>
+      </template>
+    </back-header>
     <div v-if="!loading" class="orders__content">
       <empty-search-block
         v-if="isEmpty"
@@ -37,7 +49,9 @@
     </div>
     <ui-spinner v-else size="xl" class="orders__spinner" />
     <div v-if="!loading" class="orders__footer">
-      <span>{{ $t('market.orders.description') }}</span>
+      <span class="font-base-medium">
+        {{ $t('market.orders.description') }}
+      </span>
     </div>
 
     <shop-v2-order-modal
@@ -61,8 +75,7 @@ const route = useRoute()
 const withdrawId = route.query.withdraw_id as string
 
 const { getWithdraws } = useShopV2Store()
-const { allWithdraws, isVisitOrders, allWithdrawsPool } =
-  storeToRefs(useShopV2Store())
+const { allWithdraws, isVisitOrders } = storeToRefs(useShopV2Store())
 const { isOpenOrder } = storeToRefs(useShopV2FlowStore())
 const { getSummaryStatus } = useShopV2FlowStore()
 
@@ -72,6 +85,21 @@ const currentWithdrawId = ref<Maybe<ShopV2Withdraw['id']>>(null)
 
 const loading = useKeyLoading('get-market-orders')
 const isEmpty = computed(() => !loading.value && !allWithdraws.value.length)
+
+const isButtonDisabled = ref(false)
+
+const handleClickWithCooldown = async () => {
+  if (isButtonDisabled.value) return
+
+  isButtonDisabled.value = true
+  try {
+    await getWithdraws()
+  } finally {
+    setTimeout(() => {
+      isButtonDisabled.value = false
+    }, 5000)
+  }
+}
 
 const isOpen = computed<boolean>({
   get: () => !!(isOpenOrder.value && currentWithdrawId.value),
@@ -141,6 +169,10 @@ onMounted(async () => {
     @include row(12px);
 
     cursor: pointer;
+  }
+
+  &__refresh {
+    margin-left: auto;
   }
 
   &__item-text {
