@@ -47,8 +47,8 @@ export function useWs(accessToken?: string) {
               await getWithdraws()
             }
             updateWithdraw(withdrawData.withdraw_id, {
-              status: 'in_withdraw_progress',
-              category_status: 'friend',
+              status: withdrawData.status,
+              category_status: withdrawData.category_status,
             })
 
             if (route.fullPath === '/shop-v2/flow') {
