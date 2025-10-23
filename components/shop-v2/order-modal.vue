@@ -17,7 +17,6 @@
       <ui-button-base
         :loading="loading"
         :is-disabled="isButtonDisabled"
-        view="secondary"
         icon="refresh-2"
         class="order-modal__refresh"
         @click="handleClickWithCooldown"
