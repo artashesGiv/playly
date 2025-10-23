@@ -1,23 +1,23 @@
 <template>
   <ui-modal-base
-    :is-open="isOpen"
-    class="order-modal"
-    full-height
-    view="dark"
-    without-header
+      :is-open="isOpen"
+      class="order-modal"
+      full-height
+      view="dark"
+      without-header
   >
     <div v-if="withdraw && shopItem && game" class="order-modal__wrapper">
       <ui-button-base
-        view="secondary"
-        icon="close"
-        size="46"
-        class="order-modal__close"
-        @click="emits('update:isOpen', false)"
+          view="secondary"
+          icon="close"
+          size="46"
+          class="order-modal__close"
+          @click="emits('update:isOpen', false)"
       />
       <div class="order-modal__header">
         <div
-          class="order-modal__icon-wrapper"
-          :class="{ 'order-modal__icon-wrapper--failed': isFailed }"
+            class="order-modal__icon-wrapper"
+            :class="{ 'order-modal__icon-wrapper--failed': isFailed }"
         >
           <ui-icon-base :name="isFailed ? 'close-circle' : 'check-square'" />
         </div>
@@ -28,9 +28,9 @@
       </div>
       <div class="order-modal__content">
         <shop-v2-withdraw-users
-          v-if="isFindManager && withdraw.supplier_info"
-          :user="withdraw.roblox_account"
-          :supplier="withdraw.supplier_info"
+            v-if="isFindManager && withdraw.supplier_info"
+            :user="withdraw.roblox_account"
+            :supplier="withdraw.supplier_info"
         />
 
         <!--        <div>-->
@@ -40,8 +40,8 @@
         <!--        </div>-->
 
         <ui-divider
-          v-if="isFindManager && withdraw.supplier_info"
-          view="light"
+            v-if="isFindManager && withdraw.supplier_info"
+            view="light"
         />
 
         <shop-v2-data-card :item="shopItem" :game="game" />
@@ -53,7 +53,7 @@
           <div class="order-modal__specialist-data">
             <span>{{ withdraw.supplier_info?.supplier_roblox_username }}</span>
             <nuxt-img
-              :src="
+                :src="
                 withdraw.supplier_info?.supplier_roblox_avatar ||
                 'https://playly.b-cdn.net/playly_ico.png'
               "
@@ -94,28 +94,29 @@
         <!--        />-->
         <template v-if="isFindManager && withdraw.supplier_info">
           <ui-button-base
-            :text="$t('market.steps.5.steps.2.buttons.link')"
-            size="52"
-            icon-right="foreign"
-            @click="
+              :text="$t('market.steps.5.steps.2.buttons.link')"
+              size="52"
+              icon-right="foreign"
+              @click="
               tg.openLink(
                 `https://www.roblox.com/users/${withdraw.supplier_info.supplier_roblox_id}/profile`,
               )
             "
           />
           <ui-button-base
-            icon-right="copy-1"
-            view="secondary-light"
-            :text="withdraw.supplier_info.supplier_roblox_username"
-            size="52"
+              :icon-right="icon"
+              view="secondary-light"
+              :text="withdraw.supplier_info.supplier_roblox_username"
+              size="52"
+              @click="onClick"
           />
         </template>
         <template v-if="isInGame">
           <ui-button-base
-            :text="$t('market.steps.5.steps.3.buttons.link')"
-            size="52"
-            icon-right="foreign"
-            @click="
+              :text="$t('market.steps.5.steps.3.buttons.link')"
+              size="52"
+              icon-right="foreign"
+              @click="
               tg.openLink(withdraw.supplier_info?.supplier_roblox_url || '')
             "
           />
@@ -236,6 +237,27 @@ const game = computed<Maybe<ShopV2DataCard['game']>>(() => {
 
   return null
 })
+
+// COPY BUTTON
+const icon = ref<Icons>('copy-1')
+const onClick = () => {
+  navigator.clipboard
+      .writeText(withdraw.value!.supplier_info!.supplier_roblox_username)
+      .then(() => {
+        console.log(
+            'Referral link copied:',
+            withdraw.value!.supplier_info!.supplier_roblox_username,
+        )
+      })
+      .catch(err => {
+        console.error('Failed to copy referral link:', err)
+      })
+
+  icon.value = 'check'
+  setTimeout(() => {
+    icon.value = 'copy-1'
+  }, 2000)
+}
 
 onMounted(() => {
   if (!props.withdrawId) {
