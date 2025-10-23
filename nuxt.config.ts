@@ -22,12 +22,6 @@ export default defineNuxtConfig({
 
   build: {
     transpile: ['gsap'],
-    terserOptions: {
-      compress: {
-        drop_console: false,
-        drop_debugger: true,
-      },
-    },
   },
 
   nitro: {
