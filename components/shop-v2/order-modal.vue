@@ -14,6 +14,14 @@
         class="order-modal__close"
         @click="emits('update:isOpen', false)"
       />
+      <ui-button-base
+        :loading="loading"
+        :is-disabled="isButtonDisabled"
+        view="secondary"
+        icon="refresh-2"
+        class="order-modal__refresh"
+        @click="handleClickWithCooldown"
+      />
       <div class="order-modal__header">
         <div
           class="order-modal__icon-wrapper"
@@ -132,7 +140,7 @@ export type ShopV2OrderModalProps = {
 
 const { tg } = useTelegram()
 const { allWithdrawsPool } = storeToRefs(useShopV2Store())
-// const { updateWithdraw } = useShopV2Store()
+const { updateWithdraw, getOneWithdraw } = useShopV2Store()
 const { getSummaryStatus } = useShopV2FlowStore()
 
 type LocalStatus = 'paid' | 'find_manager' | 'in_game' | 'success' | 'failed'
@@ -162,6 +170,24 @@ const shopItem = computed<Maybe<ShopV2DataCard['item']>>(() => {
 
   return null
 })
+
+const loading = useKeyLoading('get-withdraw')
+
+const isButtonDisabled = ref(false)
+
+const handleClickWithCooldown = async () => {
+  if (isButtonDisabled.value) return
+
+  isButtonDisabled.value = true
+  try {
+    const withdraw = await getOneWithdraw(props.withdrawId!)
+    updateWithdraw(props.withdrawId!, withdraw)
+  } finally {
+    setTimeout(() => {
+      isButtonDisabled.value = false
+    }, 5000)
+  }
+}
 
 const summaryStatus = computed<ShopV2SummaryStatus>(() => {
   if (!withdraw.value) return 'order_created'
@@ -274,6 +300,12 @@ onMounted(() => {
     position: absolute;
     top: 16px;
     right: 0;
+  }
+
+  &__refresh {
+    position: absolute;
+    top: 16px;
+    left: 0;
   }
 
   &__header {

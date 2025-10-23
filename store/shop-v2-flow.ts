@@ -244,17 +244,6 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
     )
   }
 
-  const getCurrentWithdraw = async () => {
-    if (!marketFlowData.value.withdrawId) return
-
-    return await baseRequest({
-      method: () =>
-        shopV2API.fetchWithdraw({
-          withdraw_id: marketFlowData.value.withdrawId!,
-        }),
-    })
-  }
-
   watch(searchName, () => {
     errors[2].select = false
     getUsers()
@@ -322,7 +311,6 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
     errors,
     commissionPercent,
     getSummaryPrice,
-    getCurrentWithdraw,
     isOpenPaid,
     canPurchaseCurrentItem,
     getSummaryStatus,

@@ -59,6 +59,17 @@ export const useShopV2Store = defineStore('shop-v2', () => {
       keyLoading: 'get-market-orders',
     })
   }
+
+  const getOneWithdraw = async (id: ShopV2Withdraw['id']) => {
+    return await baseRequest({
+      method: () =>
+        shopV2API.fetchWithdraw({
+          withdraw_id: id,
+        }),
+      keyLoading: 'get-withdraw',
+    })
+  }
+
   const isVisitOrders = ref(false)
 
   // GAMES
@@ -198,6 +209,7 @@ export const useShopV2Store = defineStore('shop-v2', () => {
     allWithdrawsPool,
     isVisitOrders,
     updateWithdraw,
+    getOneWithdraw,
   }
 })
 
