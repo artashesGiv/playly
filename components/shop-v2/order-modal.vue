@@ -33,11 +33,11 @@
           :supplier="withdraw.supplier_info"
         />
 
-        <div>
-          {{ withdraw.status }}
-          <br />
-          {{ withdraw.category_status }}
-        </div>
+        <!--        <div>-->
+        <!--          {{ withdraw.status }}-->
+        <!--          <br />-->
+        <!--          {{ withdraw.category_status }}-->
+        <!--        </div>-->
 
         <ui-divider
           v-if="isFindManager && withdraw.supplier_info"
