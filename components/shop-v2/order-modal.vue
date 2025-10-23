@@ -15,12 +15,15 @@
         @click="emits('update:isOpen', false)"
       />
       <div class="order-modal__header">
-        <div class="order-modal__icon-wrapper">
-          <ui-icon-base name="check-square" />
+        <div
+          class="order-modal__icon-wrapper"
+          :class="{ 'order-modal__icon-wrapper--failed': isFailed }"
+        >
+          <ui-icon-base :name="isFailed ? 'close-circle' : 'check-square'" />
         </div>
         <div class="order-modal__text">
-          <span>{{ $t(`market.steps.5.title`) }}</span>
-          <span>{{ $t(`market.steps.5.headerDescription`) }}</span>
+          <span>{{ textMap[globalStatus].title }}</span>
+          <span>{{ textMap[globalStatus].description }}</span>
         </div>
       </div>
       <div class="order-modal__content">
@@ -30,11 +33,11 @@
           :supplier="withdraw.supplier_info"
         />
 
-        <div>
-          {{ withdraw.status }}
-          <br />
-          {{ withdraw.category_status }}
-        </div>
+        <!--        <div>-->
+        <!--          {{ withdraw.status }}-->
+        <!--          <br />-->
+        <!--          {{ withdraw.category_status }}-->
+        <!--        </div>-->
 
         <ui-divider
           v-if="isFindManager && withdraw.supplier_info"
@@ -43,6 +46,20 @@
 
         <shop-v2-data-card :item="shopItem" :game="game" />
         <ui-divider v-if="isPaid || isInGame" view="light" />
+        <ui-card v-if="isInGame" class="order-modal__specialist">
+          <span class="order-modal__specialist-title">
+            {{ $t('market.steps.5.steps.3.specialist') }}
+          </span>
+          <div class="order-modal__specialist-data">
+            <span>{{ withdraw.supplier_info?.supplier_roblox_username }}</span>
+            <nuxt-img
+              :src="
+                withdraw.supplier_info?.supplier_roblox_avatar ||
+                'https://playly.b-cdn.net/playly_ico.png'
+              "
+            />
+          </div>
+        </ui-card>
         <span v-if="isPaid" class="font-base-medium">
           {{ $t('market.steps.5.steps.1.description') }}
         </span>
@@ -58,6 +75,23 @@
         <!--            <ui-spinner view="light" />-->
         <!--          </div>-->
         <!--        </ui-card>-->
+        <!--        <ui-button-base-->
+        <!--          text="test"-->
+        <!--          size="52"-->
+        <!--          @click="-->
+        <!--            updateWithdraw(withdrawId!, {-->
+        <!--              status: 'withdraw_success',-->
+        <!--              category_status: '',-->
+        <!--              supplier_info: {-->
+        <!--                supplier_id: 123456,-->
+        <!--                supplier_roblox_avatar: null,-->
+        <!--                supplier_roblox_id: 1,-->
+        <!--                supplier_roblox_url: '',-->
+        <!--                supplier_roblox_username: 'string',-->
+        <!--              },-->
+        <!--            })-->
+        <!--          "-->
+        <!--        />-->
         <template v-if="isFindManager && withdraw.supplier_info">
           <ui-button-base
             :text="$t('market.steps.5.steps.2.buttons.link')"
@@ -103,6 +137,7 @@ export type ShopV2OrderModalProps = {
 
 const { tg } = useTelegram()
 const { allWithdrawsPool } = storeToRefs(useShopV2Store())
+// const { updateWithdraw } = useShopV2Store()
 const { getSummaryStatus } = useShopV2FlowStore()
 
 type LocalStatus = 'paid' | 'find_manager' | 'in_game' | 'success' | 'failed'
@@ -113,6 +148,8 @@ type Emits = {
 
 const props = defineProps<ShopV2OrderModalProps>()
 const emits = defineEmits<Emits>()
+
+const { t } = useI18n()
 
 const withdraw = computed({
   get: () => allWithdrawsPool.value[props.withdrawId!],
@@ -135,6 +172,32 @@ const summaryStatus = computed<ShopV2SummaryStatus>(() => {
   if (!withdraw.value) return 'order_created'
   return getSummaryStatus(withdraw.value)
 })
+
+const globalStatus = computed(() => {
+  switch (localStatus.value) {
+    case 'failed':
+      return 'failed'
+    case 'success':
+      return 'success'
+    default:
+      return 'base'
+  }
+})
+
+const textMap = {
+  base: {
+    title: t(`market.steps.5.title`),
+    description: t(`market.steps.5.headerDescription`),
+  },
+  success: {
+    title: t(`market.steps.5.titleSuccess`),
+    description: t(`market.steps.5.headerDescriptionSuccess`),
+  },
+  failed: {
+    title: t(`market.steps.5.titleFailed`),
+    description: t(`market.steps.5.headerDescriptionFailed`),
+  },
+}
 
 const localStatus = computed<LocalStatus>(() => {
   switch (summaryStatus.value) {
@@ -161,7 +224,6 @@ const localStatus = computed<LocalStatus>(() => {
 const isPaid = computed(() => localStatus.value === 'paid')
 const isFindManager = computed(() => localStatus.value === 'find_manager')
 const isInGame = computed(() => localStatus.value === 'in_game')
-const isSuccess = computed(() => localStatus.value === 'success')
 const isFailed = computed(() => localStatus.value === 'failed')
 
 const game = computed<Maybe<ShopV2DataCard['game']>>(() => {
@@ -217,6 +279,12 @@ onMounted(() => {
       font-size: 28px;
       color: var(--green-500);
     }
+
+    &--failed {
+      i {
+        color: var(--red-500);
+      }
+    }
   }
 
   &__text {
@@ -252,6 +320,26 @@ onMounted(() => {
 
     &-right {
       @include row(8px);
+    }
+  }
+
+  &__specialist {
+    @include row(12px);
+
+    justify-content: space-between;
+    font: var(--font-base-medium);
+
+    &-title {
+      color: var(--white);
+    }
+
+    &-data {
+      @include row(8px);
+
+      img {
+        width: 28px;
+        height: 28px;
+      }
     }
   }
 

@@ -62,6 +62,10 @@
     "5": {
       "title": "Almost done!",
       "headerDescription": "To receive your order, you need to log into the game. Follow the instructions below",
+      "titleFailed": "Purchase not completed",
+      "headerDescriptionFailed": "The item cost will be credited to your balance",
+      "titleSuccess": "Purchase completed",
+      "headerDescriptionSuccess": "Come back to us again",
       "steps": {
         "1": {
           "description": "Please wait until our specialist is available. It may take about 5 minutes for them to join the game",
@@ -80,6 +84,7 @@
         },
         "3": {
           "description": "Join the server and accept the trade from our specialist",
+          "specialist": "Specialist",
           "buttons": {
             "link": "Join VIP Server"
           }
