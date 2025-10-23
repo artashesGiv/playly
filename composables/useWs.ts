@@ -10,7 +10,8 @@ interface SocketMessage {
 let socketInstance: ReturnType<typeof useWebSocket<SocketMessage>> | null = null
 
 export function useWs(accessToken?: string) {
-  const { getWithdraws } = useShopV2Store()
+  const { getWithdraws, updateWithdraw } = useShopV2Store()
+  const { allWithdrawsPool } = storeToRefs(useShopV2Store())
   const route = useRoute()
 
   if (!socketInstance && accessToken) {
@@ -42,9 +43,14 @@ export function useWs(accessToken?: string) {
           console.log('EVENT DATA', eventData)
           if (eventData.withdraw_id) {
             const withdrawData = eventData as WithdrawSocketData
-            await getWithdraws()
+            if (!allWithdrawsPool.value[withdrawData.withdraw_id]) {
+              await getWithdraws()
+            }
+            updateWithdraw(withdrawData.withdraw_id, {
+              status: 'in_withdraw_progress',
+              category_status: 'friend',
+            })
 
-            console.log('ROUTE', route.fullPath)
             if (route.fullPath === '/shop-v2/flow') {
               navigateTo(
                 `/shop-v2/orders?withdraw_id=${withdrawData.withdraw_id}`,

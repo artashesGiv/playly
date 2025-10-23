@@ -4,7 +4,11 @@
     <ui-divider view="light" />
     <ui-table-data :list="dataListCommon">
       <template #row-1="{ value }">
+        <span v-if="canPurchaseCurrentItem()">
+          {{ $t('market.steps.4.data.balance_payment_method') }}
+        </span>
         <nuxt-img
+          v-else
           :src="`/images/pay-cards/${value}.png`"
           class="shop-v2-step-4__pay-type"
         />
@@ -25,7 +29,7 @@ import type { ShopV2Game, ShopV2Item } from '@/types'
 const { t } = useI18n()
 
 const { marketFlowData, commissionPercent } = storeToRefs(useShopV2FlowStore())
-const { getSummaryPrice } = useShopV2FlowStore()
+const { getSummaryPrice, canPurchaseCurrentItem } = useShopV2FlowStore()
 const currentItem = computed<ShopV2Item>(() => marketFlowData.value.item!)
 const currentGame = computed<ShopV2Game>(() => marketFlowData.value.game!)
 

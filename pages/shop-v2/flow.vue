@@ -17,6 +17,7 @@
           size="52"
           :text="payButtonText"
           :is-disabled="isOpenPaid"
+          :loading="loading"
           @click="nextStep"
         />
       </template>
@@ -47,6 +48,8 @@ const stepComponents = computed(() => ({
   3: defineAsyncComponent(() => import('@/components/shop-v2/step/3.vue')),
   4: defineAsyncComponent(() => import('@/components/shop-v2/step/4.vue')),
 }))
+
+const loading = useKeyLoading('buy-item')
 
 onMounted(async () => {
   if (!marketFlowData.value.game || !marketFlowData.value.item) {

@@ -132,6 +132,7 @@ export type ShopV2SummaryStatus =
 
 export type WithdrawSocketData = {
   cancel_reason: Maybe<string>
-  status: string
+  status: ShopV2Withdraw['status']
+  category_status?: ShopV2Withdraw['category_status']
   withdraw_id: string
 }

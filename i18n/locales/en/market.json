@@ -50,6 +50,7 @@
       "description": "Make sure all details are correct before proceeding to payment",
       "data": {
         "payment_method": "Payment method",
+        "balance_payment_method": "Your balance",
         "account": "Account",
         "price": "Item price",
         "commission": "Commission",

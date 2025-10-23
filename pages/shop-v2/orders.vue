@@ -20,7 +20,7 @@
             v-for="item in allWithdraws"
             :key="item.id"
             class="orders__item"
-            @click="openOrder(item)"
+            @click="openOrder(item.id)"
           >
             <shop-v2-item-card
               size="xs"
@@ -42,9 +42,8 @@
 
     <shop-v2-order-modal
       v-model:is-open="isOpen"
-      :item="currentWithdraw!"
-      :summary-status="currentWithdrawStatus || 'order_created'"
-      @update:is-open="currentWithdraw = null"
+      :withdraw-id="currentWithdrawId"
+      @update:is-open="currentWithdrawId = null"
     />
   </div>
 </template>
@@ -62,63 +61,31 @@ const route = useRoute()
 const withdrawId = route.query.withdraw_id as string
 
 const { getWithdraws } = useShopV2Store()
-const { allWithdraws, allWithdrawsPool, isVisitOrders } =
+const { allWithdraws, isVisitOrders, allWithdrawsPool } =
   storeToRefs(useShopV2Store())
 const { isOpenOrder } = storeToRefs(useShopV2FlowStore())
+const { getSummaryStatus } = useShopV2FlowStore()
 
 const { t } = useI18n()
 
-const currentWithdraw = ref<Maybe<ShopV2Withdraw>>(null)
-
-const currentWithdrawStatus = computed(() => {
-  if (!currentWithdraw.value) return
-
-  return getSummaryStatus(currentWithdraw.value)
-})
+const currentWithdrawId = ref<Maybe<ShopV2Withdraw['id']>>(null)
 
 const loading = useKeyLoading('get-market-orders')
 const isEmpty = computed(() => !loading.value && !allWithdraws.value.length)
 
 const isOpen = computed<boolean>({
-  get: () => !!(isOpenOrder.value && currentWithdraw.value),
+  get: () => !!(isOpenOrder.value && currentWithdrawId.value),
   set: (value: boolean) => {
     if (!value) {
-      currentWithdraw.value = null
+      currentWithdrawId.value = null
     }
     isOpenOrder.value = value
   },
 })
 
-const openOrder = (item: ShopV2Withdraw) => {
-  currentWithdraw.value = item
+const openOrder = (id: ShopV2Withdraw['id']) => {
+  currentWithdrawId.value = id
   isOpenOrder.value = true
-}
-
-const getSummaryStatus = ({
-  status,
-  category_status,
-}: ShopV2Withdraw): ShopV2SummaryStatus => {
-  if (status === 'paid' && !category_status) {
-    return 'paid'
-  }
-
-  if (status === 'in_withdraw_progress') {
-    if (!category_status) {
-      return 'order_created'
-    }
-
-    if (category_status === 'paid') {
-      return 'find_manager'
-    }
-    if (category_status === 'friend') {
-      return 'friend'
-    }
-    if (category_status === 'in_game') {
-      return 'in_game'
-    }
-  }
-
-  return 'order_created'
 }
 
 const summaryStatusTextMap: Record<ShopV2SummaryStatus, string> = {
@@ -139,11 +106,7 @@ onMounted(async () => {
   isVisitOrders.value = true
 
   if (withdrawId) {
-    const order = allWithdrawsPool.value[withdrawId]
-
-    if (order) {
-      openOrder(order)
-    }
+    openOrder(withdrawId)
   }
 })
 </script>

@@ -50,6 +50,7 @@
       "description": "Убедитесь, что всё указано верно, перед оплатой",
       "data": {
         "payment_method": "Метод оплаты",
+        "balance_payment_method": "Ваш баланс",
         "account": "Аккаунт",
         "price": "Цена предмета",
         "commission": "Комиссия",

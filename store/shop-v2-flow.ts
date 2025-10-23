@@ -1,6 +1,14 @@
-import type { RobloxUser, ShopV2, ShopV2Game, ShopV2Item } from '@/types'
+import type {
+  RobloxUser,
+  ShopV2,
+  ShopV2Game,
+  ShopV2Item,
+  ShopV2SummaryStatus,
+  ShopV2Withdraw,
+} from '@/types'
 import { LocalStorageKeys } from '@/types/enums'
 import type { PayCard } from '@/components/pay-card.vue'
+import { useUserStore } from '@/store/user'
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -47,6 +55,7 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
   const isOpenPaid = ref(false)
 
   const { tg, popup } = useTelegram()
+  const { currencyBalance } = storeToRefs(useUserStore())
 
   const currentStep = computed<ShopV2FlowStep>({
     get: () => marketFlowData.value.step,
@@ -95,6 +104,16 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
     })
   }
 
+  const canPurchaseCurrentItem = () => {
+    const item = marketFlowData.value.item
+
+    if (!currencyBalance.value || !item) return
+
+    const currentBalance = +currencyBalance.value[item.currency]
+
+    return item.price <= +currentBalance
+  }
+
   const prevStep = () => {
     switch (currentStep.value) {
       case 1: {
@@ -140,7 +159,12 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
           return
         }
 
-        currentStep.value += 1
+        if (canPurchaseCurrentItem()) {
+          currentStep.value += 2
+        } else {
+          currentStep.value += 1
+        }
+
         break
       }
       case 3: {
@@ -247,6 +271,41 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
     { deep: true },
   )
 
+  const getSummaryStatus = ({
+    status,
+    category_status,
+  }: ShopV2Withdraw): ShopV2SummaryStatus => {
+    if (status === 'paid' && !category_status) {
+      return 'paid'
+    }
+
+    if (status === 'in_withdraw_progress') {
+      if (!category_status) {
+        return 'order_created'
+      }
+
+      if (category_status === 'paid') {
+        return 'find_manager'
+      }
+      if (category_status === 'friend') {
+        return 'friend'
+      }
+      if (category_status === 'in_game') {
+        return 'in_game'
+      }
+    }
+
+    if (status === 'withdraw_failed') {
+      return 'failed'
+    }
+
+    if (status === 'withdraw_success') {
+      return 'success'
+    }
+
+    return 'order_created'
+  }
+
   const data = localStorage.getItem(LocalStorageKeys.MARKET_STEPS_DATA)
   marketFlowData.value = data ? JSON.parse(data) : getDefaultMarketFlowData()
 
@@ -265,5 +324,7 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
     getSummaryPrice,
     getCurrentWithdraw,
     isOpenPaid,
+    canPurchaseCurrentItem,
+    getSummaryStatus,
   }
 })

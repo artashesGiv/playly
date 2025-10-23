@@ -35,6 +35,21 @@ export const useShopV2Store = defineStore('shop-v2', () => {
 
   const allWithdrawsPool = computed(() => toPool(allWithdraws.value))
 
+  const updateWithdraw = (
+    id: ShopV2Withdraw['id'],
+    patch: Partial<ShopV2Withdraw>,
+  ) => {
+    const index = allWithdraws.value.findIndex(withdraw => withdraw.id === id)
+    if (index !== -1) {
+      const current = allWithdraws.value[index]
+      allWithdraws.value[index] = {
+        ...current,
+        ...patch,
+        id: current.id,
+      }
+    }
+  }
+
   const getWithdraws = async () => {
     await baseRequest({
       method: () => shopV2API.fetchWithdraws(),
@@ -182,6 +197,7 @@ export const useShopV2Store = defineStore('shop-v2', () => {
     allWithdraws,
     allWithdrawsPool,
     isVisitOrders,
+    updateWithdraw,
   }
 })
 

@@ -6,7 +6,7 @@
     view="dark"
     without-header
   >
-    <div v-if="item && shopItem && game" class="order-modal__wrapper">
+    <div v-if="withdraw && shopItem && game" class="order-modal__wrapper">
       <ui-button-base
         view="secondary"
         icon="close"
@@ -25,12 +25,21 @@
       </div>
       <div class="order-modal__content">
         <shop-v2-withdraw-users
-          v-if="isFindManager && item.supplier_info"
-          :user="item.roblox_account"
-          :supplier="item.supplier_info"
+          v-if="isFindManager && withdraw.supplier_info"
+          :user="withdraw.roblox_account"
+          :supplier="withdraw.supplier_info"
         />
 
-        <ui-divider v-if="isFindManager && item.supplier_info" view="light" />
+        <div>
+          {{ withdraw.status }}
+          <br />
+          {{ withdraw.category_status }}
+        </div>
+
+        <ui-divider
+          v-if="isFindManager && withdraw.supplier_info"
+          view="light"
+        />
 
         <shop-v2-data-card :item="shopItem" :game="game" />
         <ui-divider v-if="isPaid || isInGame" view="light" />
@@ -49,21 +58,21 @@
         <!--            <ui-spinner view="light" />-->
         <!--          </div>-->
         <!--        </ui-card>-->
-        <template v-if="isFindManager && item.supplier_info">
+        <template v-if="isFindManager && withdraw.supplier_info">
           <ui-button-base
             :text="$t('market.steps.5.steps.2.buttons.link')"
             size="52"
             icon-right="foreign"
             @click="
               tg.openLink(
-                `https://www.roblox.com/users/${item.supplier_info.supplier_roblox_id}/profile`,
+                `https://www.roblox.com/users/${withdraw.supplier_info.supplier_roblox_id}/profile`,
               )
             "
           />
           <ui-button-base
             icon-right="copy-1"
             view="secondary-light"
-            :text="item.supplier_info.supplier_roblox_username"
+            :text="withdraw.supplier_info.supplier_roblox_username"
             size="52"
           />
         </template>
@@ -72,7 +81,9 @@
             :text="$t('market.steps.5.steps.3.buttons.link')"
             size="52"
             icon-right="foreign"
-            @click="tg.openLink(item.supplier_info?.supplier_roblox_url || '')"
+            @click="
+              tg.openLink(withdraw.supplier_info?.supplier_roblox_url || '')
+            "
           />
         </template>
       </div>
@@ -83,15 +94,16 @@
 <script setup lang="ts">
 import type { ShopV2SummaryStatus, ShopV2Withdraw } from '@/types'
 import type { ShopV2DataCard } from '@/components/shop-v2/data-card.vue'
+import { useShopV2FlowStore, useShopV2Store } from '@/store'
 
 export type ShopV2OrderModalProps = {
   isOpen: boolean
-  item: Maybe<ShopV2Withdraw>
-} & {
-  summaryStatus: ShopV2SummaryStatus
+  withdrawId: Maybe<ShopV2Withdraw['id']>
 }
 
 const { tg } = useTelegram()
+const { allWithdrawsPool } = storeToRefs(useShopV2Store())
+const { getSummaryStatus } = useShopV2FlowStore()
 
 type LocalStatus = 'paid' | 'find_manager' | 'in_game' | 'success' | 'failed'
 
@@ -102,20 +114,30 @@ type Emits = {
 const props = defineProps<ShopV2OrderModalProps>()
 const emits = defineEmits<Emits>()
 
+const withdraw = computed({
+  get: () => allWithdrawsPool.value[props.withdrawId!],
+  set: newValue => (allWithdrawsPool.value[props.withdrawId!] = newValue),
+})
+
 const shopItem = computed<Maybe<ShopV2DataCard['item']>>(() => {
-  if (props.item) {
+  if (withdraw.value) {
     return {
-      name: props.item.shop_item_name,
-      image_url: props.item.shop_item_image_url,
-      data: props.item.data,
+      name: withdraw.value.shop_item_name,
+      image_url: withdraw.value.shop_item_image_url,
+      data: withdraw.value.data,
     }
   }
 
   return null
 })
 
+const summaryStatus = computed<ShopV2SummaryStatus>(() => {
+  if (!withdraw.value) return 'order_created'
+  return getSummaryStatus(withdraw.value)
+})
+
 const localStatus = computed<LocalStatus>(() => {
-  switch (props.summaryStatus) {
+  switch (summaryStatus.value) {
     case 'paid':
     case 'order_created': {
       return 'paid'
@@ -143,14 +165,20 @@ const isSuccess = computed(() => localStatus.value === 'success')
 const isFailed = computed(() => localStatus.value === 'failed')
 
 const game = computed<Maybe<ShopV2DataCard['game']>>(() => {
-  if (props.item?.shop_item_category) {
+  if (withdraw.value?.shop_item_category) {
     return {
-      name: props.item.shop_item_category.category,
-      image_url: props.item.shop_item_category.image_url,
+      name: withdraw.value.shop_item_category.category,
+      image_url: withdraw.value.shop_item_category.image_url,
     }
   }
 
   return null
+})
+
+onMounted(() => {
+  if (!props.withdrawId) {
+    emits('update:isOpen', false)
+  }
 })
 </script>
 
@@ -161,12 +189,12 @@ const game = computed<Maybe<ShopV2DataCard['game']>>(() => {
 
     height: 100%;
     position: relative;
-    padding-top: 24px;
+    padding-top: 32px;
   }
 
   &__close {
     position: absolute;
-    top: 0;
+    top: 16px;
     right: 0;
   }
 
