@@ -53,6 +53,7 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
   const searchName = ref('')
   const errors = reactive(defaultErrors())
   const isOpenPaid = ref(false)
+  const isOpenTimerModal = ref(false)
 
   const { tg, popup } = useTelegram()
   const { currencyBalance } = storeToRefs(useUserStore())
@@ -142,10 +143,23 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
   const nextStep = async () => {
     switch (currentStep.value) {
       case 1: {
-        currentStep.value += 1
-        navigateTo('/shop-v2/flow', {
-          replace: true,
-        })
+        const now = new Date()
+        const moscowOffset = 3 * 60 // +03:00
+        const localOffset = now.getTimezoneOffset()
+        const moscowTime = new Date(
+          now.getTime() + (moscowOffset + localOffset) * 60000,
+        )
+        const hours = moscowTime.getHours()
+
+        if (hours < 9 || hours >= 24) {
+          isOpenTimerModal.value = true
+        } else {
+          currentStep.value += 1
+          navigateTo('/shop-v2/flow', {
+            replace: true,
+          })
+        }
+
         break
       }
       case 2: {
@@ -314,5 +328,6 @@ export const useShopV2FlowStore = defineStore('shop-v2-flow', () => {
     isOpenPaid,
     canPurchaseCurrentItem,
     getSummaryStatus,
+    isOpenTimerModal,
   }
 })

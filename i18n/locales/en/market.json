@@ -140,5 +140,11 @@
   "active_withdraws_card": {
     "title": "Receive your items",
     "description": "You have active orders"
+  },
+  "timerModal": {
+    "modalTitle": "Please note",
+    "title": "Working hours",
+    "description": "This purchase method is available from 09:00 to 00:01 (GMT+3). Please try again in the morning",
+    "button": "OK"
   }
 }

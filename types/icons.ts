@@ -69,6 +69,7 @@ export type IconsId =
   | 'swap-2'
   | 'telegram'
   | 'ticket-2'
+  | 'timer'
   | 'undo'
   | 'up-2'
   | 'up-3'

@@ -1,7 +1,7 @@
 @font-face {
     font-family: "icons";
-    src: url("/fonts/icons/icons.woff?1c87873e478e2b6e6d855130635de2b2") format("woff"),
-url("/fonts/icons/icons.woff2?1c87873e478e2b6e6d855130635de2b2") format("woff2");
+    src: url("/fonts/icons/icons.woff?a20ee3a656222f328214121b14d72c22") format("woff"),
+url("/fonts/icons/icons.woff2?a20ee3a656222f328214121b14d72c22") format("woff2");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -225,39 +225,42 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 .icon-ticket-2:before {
     content: "\f146";
 }
-.icon-undo:before {
+.icon-timer:before {
     content: "\f147";
 }
-.icon-up-2:before {
+.icon-undo:before {
     content: "\f148";
 }
-.icon-up-3:before {
+.icon-up-2:before {
     content: "\f149";
 }
-.icon-up-1:before {
+.icon-up-3:before {
     content: "\f14a";
 }
-.icon-up-circle-1:before {
+.icon-up-1:before {
     content: "\f14b";
 }
-.icon-up-circle-2:before {
+.icon-up-circle-1:before {
     content: "\f14c";
 }
-.icon-up-square-1:before {
+.icon-up-circle-2:before {
     content: "\f14d";
 }
-.icon-up-square-2:before {
+.icon-up-square-1:before {
     content: "\f14e";
 }
-.icon-upload:before {
+.icon-up-square-2:before {
     content: "\f14f";
 }
-.icon-volume-high:before {
+.icon-upload:before {
     content: "\f150";
 }
-.icon-volume-slash:before {
+.icon-volume-high:before {
     content: "\f151";
 }
-.icon-wallet:before {
+.icon-volume-slash:before {
     content: "\f152";
+}
+.icon-wallet:before {
+    content: "\f153";
 }

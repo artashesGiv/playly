@@ -24,6 +24,7 @@
       </div>
     </div>
     <shop-v2-footer class="item__footer" />
+    <shop-v2-timer-modal v-model:is-open="isOpenTimerModal" />
   </div>
 </template>
 <script setup lang="ts">
@@ -41,7 +42,8 @@ const { t } = useI18n()
 
 const id = route.params.id as ShopV2Item['id']
 
-const { marketFlowData, isOpenPaid } = storeToRefs(useShopV2FlowStore())
+const { marketFlowData, isOpenPaid, isOpenTimerModal } =
+  storeToRefs(useShopV2FlowStore())
 const { itemsPool, items } = storeToRefs(useShopV2Store())
 const { getItems } = useShopV2Store()
 
