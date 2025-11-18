@@ -1,15 +1,19 @@
 <template>
   <div class="layout">
-    <main class="layout__content">
+    <main v-if="client" class="layout__content">
       <main-header class="layout__header" />
       <slot />
     </main>
 
-    <main-navigation class="layout__footer" />
+    <main-navigation v-if="client" class="layout__footer" />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useAuthStore } from '@/store/index.ts'
+
+const { client } = storeToRefs(useAuthStore())
+</script>
 
 <style scoped lang="scss">
 .layout {
