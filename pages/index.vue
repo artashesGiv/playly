@@ -1,12 +1,12 @@
 <template>
   <div class="index">
-    <main-banner />
-    <main-coin />
-    <balance-card size="xl" />
-    <ui-divider />
-    <referral-link-card />
-    <ui-divider />
-    <bounty-lists />
+    <!--    <main-banner />-->
+    <!--    <main-coin />-->
+    <!--    <balance-card size="xl" />-->
+    <!--    <ui-divider />-->
+    <!--    <referral-link-card />-->
+    <!--    <ui-divider />-->
+    <!--    <bounty-lists />-->
   </div>
 </template>
 
@@ -15,12 +15,13 @@ import { useUserStore } from '@/store'
 
 const { getUserInfo } = useUserStore()
 
-const MainCoin = defineAsyncComponent(
-  () => import('@/components/balance/main-click.vue'),
-)
+// const MainCoin = defineAsyncComponent(
+//   () => import('@/components/balance/main-click.vue'),
+// )
 
 onMounted(async () => {
   await getUserInfo()
+  navigateTo('/shop-v2')
 })
 </script>
 

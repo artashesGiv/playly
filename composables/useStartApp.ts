@@ -13,7 +13,7 @@ export const useStartApp = async () => {
     new URLSearchParams(window.location.search).get('tgWebAppStartParam') // fallback на десктоп Web
 
   let ref = ''
-  let route = '/shop-v2'
+  let route = '/'
   const query: Record<string, string> = {}
   let isValidChannel = false
 
