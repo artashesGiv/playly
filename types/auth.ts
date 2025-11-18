@@ -24,6 +24,7 @@ export namespace Auth {
         init_data: string
         ref_code?: string
         timezone_offset_minutes: number
+        telegram_channel_name: string
       }
       export type Response = AuthResponse
     }

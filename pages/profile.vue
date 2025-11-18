@@ -13,7 +13,6 @@
         {{ allWithdraws.length }}
       </template>
     </ui-button-base>
-    <star-pets-link-card />
     <language />
     <ui-divider />
     <profile-community />

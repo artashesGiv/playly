@@ -1,4 +1,4 @@
-import type { AuthResponse, Rates } from '@/types'
+import type { AuthResponse, Rates, Clients } from '@/types'
 import {
   useCasesStore,
   useCoinsStore,
@@ -9,10 +9,12 @@ import {
 
 export const useAuthStore = defineStore('auth', () => {
   const isAuth = ref(false)
+  const client = ref<Clients>(null as never as Clients)
   const data = ref<Maybe<AuthResponse>>(null)
   const rates = ref<Maybe<Rates>>(null)
 
   const authModalOpen = ref(false)
+  const errorModalOpen = ref(false)
 
   const tokenData = ref<Maybe<TokenData>>(null)
   const refLink = ref('')
@@ -33,10 +35,12 @@ export const useAuthStore = defineStore('auth', () => {
           init_data: tg?.initData || '',
           ref_code: ref,
           timezone_offset_minutes: new Date().getTimezoneOffset() * -1,
+          telegram_channel_name: client.value,
         }),
       callback: async result => {
         isAuth.value = true
         authModalOpen.value = false
+        errorModalOpen.value = false
         data.value = result
         tokenData.value = {
           access_token: result?.access_token,
@@ -53,7 +57,7 @@ export const useAuthStore = defineStore('auth', () => {
         await Promise.all([getItems(), getCases(), getRates()])
       },
       errorCallback: () => {
-        authModalOpen.value = true
+        errorModalOpen.value = true
       },
     })
   }
@@ -124,6 +128,8 @@ export const useAuthStore = defineStore('auth', () => {
     refLink,
     rates,
     authModalOpen,
+    errorModalOpen,
+    client,
     login,
     refresh,
     setStarpetsID,

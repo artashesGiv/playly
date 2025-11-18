@@ -5,18 +5,15 @@
     @update:is-open="emits('update:isOpen', $event)"
   >
     <div class="auth-modal__content">
-      <nuxt-img
-        :src="`/images/main/logos/${client}.png`"
-        class="auth-modal__logo"
-      />
-      <h4 class="title">{{ $t('auth.title') }}</h4>
-      <span class="auth-modal__description">{{ $t('auth.description') }}</span>
+      <h4 class="title">{{ $t('error404.title') }}</h4>
+      <span class="auth-modal__description">
+        {{ $t('error404.description') }}
+      </span>
       <ui-button-base
-        :text="$t('auth.button')"
+        :text="$t('error404.button')"
         size="46"
         :loading="isLoading"
-        icon-right="telegram"
-        @click="onLogin"
+        @click="onClose"
       />
       <span class="description">{{ $t('auth.alert') }}</span>
     </div>
@@ -24,14 +21,13 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '@/store'
-
 export type AuthModalProps = {
   isOpen: boolean
 }
 
 const isLoading = ref(false)
-const { client } = storeToRefs(useAuthStore())
+
+const { tg } = useTelegram()
 
 type Emits = {
   (e: 'update:isOpen', value: boolean): void
@@ -40,16 +36,8 @@ type Emits = {
 defineProps<AuthModalProps>()
 const emits = defineEmits<Emits>()
 
-const { login } = useAuthStore()
-
-const onLogin = async () => {
-  try {
-    isLoading.value = true
-    await login('')
-    navigateTo('/')
-  } finally {
-    isLoading.value = false
-  }
+const onClose = async () => {
+  tg.close()
 }
 </script>
 

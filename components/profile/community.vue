@@ -11,7 +11,7 @@
       />
       <ui-button-base
         icon="telegram"
-        text="Starpets"
+        :text="clientsNameMap[client]"
         view="secondary"
         size="52"
         @click="onClickStarpets"
@@ -21,15 +21,18 @@
 </template>
 
 <script setup lang="ts">
+import { clientsNameMap, clientsTgLinkMap } from '@/assets/content'
+import { useAuthStore } from '@/store'
+
 const { tg } = useTelegram()
+const { client } = storeToRefs(useAuthStore())
 
 const onClickPlayly = () => {
   tg?.openTelegramLink('https://t.me/+bmusTP1u7VMwMmJi')
 }
 
 const onClickStarpets = () => {
-  // tg?.openTelegramLink('https://t.me/+qDSL72dv7kI2N2My') // starpets
-  tg?.openTelegramLink('https://t.me/+6P1jbEPGoBs5Njgy') // starpets light
+  tg?.openTelegramLink(clientsTgLinkMap[client.value])
 }
 </script>
 

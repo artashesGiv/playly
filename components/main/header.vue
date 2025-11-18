@@ -6,7 +6,6 @@
         class="header__robux"
         @click="navigateTo('/robux/balance')"
       />
-      <balance-card />
     </div>
   </header>
 </template>

@@ -21,6 +21,7 @@
     />
   </noscript>
   <auth-modal v-model:is-open="authModalOpen" />
+  <error-modal v-model:is-open="errorModalOpen" />
   <shop-v2-how-to-work-modal v-model:is-open="isOpenModal" />
 </template>
 
@@ -30,7 +31,7 @@ import { useAuthStore, useShopV2FlowStore, useShopV2Store } from '@/store'
 
 const isMounted = ref(false)
 
-const { authModalOpen } = storeToRefs(useAuthStore())
+const { authModalOpen, errorModalOpen } = storeToRefs(useAuthStore())
 const { isOpenModal } = storeToRefs(useShopV2FlowStore())
 const { getWithdraws } = useShopV2Store()
 const { allWithdraws, isVisitOrders } = storeToRefs(useShopV2Store())
@@ -70,7 +71,10 @@ onBeforeUnmount(() => {
   &__popups {
     position: absolute;
     padding: 0 16px;
-    bottom: calc(var(--navigation-height) + 18px);
+    bottom: calc(
+      var(--navigation-height) + var(--tg-content-safe-area-inset-bottom) +
+        var(--tg-safe-area-inset-bottom) + 18px
+    );
     left: 0;
     width: 100%;
     z-index: calc(var(--modal-index) - 1);

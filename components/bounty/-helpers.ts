@@ -5,6 +5,16 @@ import type { BountyCardProps } from '@/components/bounty/card.vue'
 export type BountyCard = keyof UserTasks | 'roblox_friend'
 export type BountyCardStatus = Partial<Record<BountyCard, boolean>>
 
+const tasksDefault: UserTasks = {
+  starpets_join_channel: false,
+  playly_join_channel: false,
+  starpets_light_join_channel: false,
+  playly_boost_channel: false,
+  robux_buy_100: false,
+  robux_buy_500: false,
+  item_buy: false,
+}
+
 export function useBountyMaps(): {
   mapPropsCard: ComputedRef<Record<BountyCard, BountyCardProps>>
   mapLinkTasks: Record<keyof UserTasks, string>
@@ -15,7 +25,9 @@ export function useBountyMaps(): {
   const { settings } = storeToRefs(useCoinsStore())
 
   const { userInfo } = storeToRefs(useUserStore())
-  const tasks = computed<Maybe<UserTasks>>(() => userInfo?.value?.tasks)
+  const tasks = computed<UserTasks>(
+    () => userInfo?.value?.tasks || tasksDefault,
+  )
 
   const mapPropsCard = computed<Record<BountyCard, BountyCardProps>>(() => ({
     playly_boost_channel: {

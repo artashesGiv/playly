@@ -34,20 +34,10 @@
 
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0 16px;
     box-sizing: border-box;
     transition: var(--transition-base);
     flex: 1 1 0;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: var(--navigation-height);
-    height: 50px;
-    width: 100%;
-    pointer-events: none;
-    background: linear-gradient(180deg, rgba(16, 15, 17, 0) 0%, #100f11 100%);
+    padding: 0 16px 18px;
   }
 }
 </style>

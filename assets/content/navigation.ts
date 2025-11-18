@@ -2,11 +2,11 @@ export const useNavigation = (): NavItem[] => {
   const { t } = useI18n()
 
   return [
-    {
-      src: '/',
-      icon: 'mascot',
-      text: t('nav.coins'),
-    },
+    // {
+    //   src: '/',
+    //   icon: 'mascot',
+    //   text: t('nav.coins'),
+    // },
     // {
     //   src: '/shop',
     //   icon: 'buy-1',
@@ -32,11 +32,11 @@ export const useNavigation = (): NavItem[] => {
     //   icon: 'group-2',
     //   text: t('nav.friends'),
     // },
-    {
-      src: '/cases',
-      icon: 'case-1',
-      text: t('nav.cases'),
-    },
+    // {
+    //   src: '/cases',
+    //   icon: 'case-1',
+    //   text: t('nav.cases'),
+    // },
     {
       src: '/profile',
       icon: 'profile-1',

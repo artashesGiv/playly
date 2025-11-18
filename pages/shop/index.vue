@@ -35,16 +35,16 @@ const router = useRouter()
 
 const categoryList: ShopItem['category'][] = [
   'growagarden',
-  'brawl_stars',
-  'pubg_mobile',
-  'fortnite',
-  'standoff2',
-  'clash_of_clans',
-  'call_of_duty',
-  'free_fire',
-  'mobile_legends',
-  'clash_royale',
-  'minecraft',
+  // 'brawl_stars',
+  // 'pubg_mobile',
+  // 'fortnite',
+  // 'standoff2',
+  // 'clash_of_clans',
+  // 'call_of_duty',
+  // 'free_fire',
+  // 'mobile_legends',
+  // 'clash_royale',
+  // 'minecraft',
 ]
 
 const tabs: TabsProps<ShopItem['category'] | 'all'>['list'] = [

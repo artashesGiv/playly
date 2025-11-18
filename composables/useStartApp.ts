@@ -1,8 +1,11 @@
 import { useAuthStore } from '@/store'
+import type { Clients } from '@/types'
+import { clientsIdMap } from '@/assets/content'
 
 export const useStartApp = async () => {
   const { tg } = useTelegram()
   const { setLang } = useAuthStore()
+  const { client, errorModalOpen } = storeToRefs(useAuthStore())
   const { locale } = useI18n()
 
   const raw =
@@ -10,8 +13,9 @@ export const useStartApp = async () => {
     new URLSearchParams(window.location.search).get('tgWebAppStartParam') // fallback на десктоп Web
 
   let ref = ''
-  let route = ''
+  let route = '/shop-v2'
   const query: Record<string, string> = {}
+  let isValidChannel = false
 
   if (raw) {
     const params = raw.split('_')
@@ -26,10 +30,24 @@ export const useStartApp = async () => {
         route = `/item/${id}`
       }
 
+      if (param.startsWith('channel')) {
+        const channel = param.slice('channel'.length) as Clients
+
+        if (clientsIdMap[channel]) {
+          client.value = channel
+          isValidChannel = true
+        }
+      }
+
       if (param.startsWith('messageId')) {
         query.message_id = param.slice('messageId'.length)
       }
     })
+  }
+
+  if (!isValidChannel) {
+    errorModalOpen.value = true
+    return
   }
 
   if (Object.keys(query).length) {

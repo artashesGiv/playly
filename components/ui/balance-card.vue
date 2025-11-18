@@ -10,7 +10,7 @@
           opacity: { duration: 0.3, ease: 'linear' },
         }"
         :style="{ fontSize: size === 'xl' ? '22px' : '16px' }"
-        :value="sum"
+        :value="sum || 0"
       />
 
       <main-mascot v-if="type === 'coin'" size="s" />
@@ -29,7 +29,7 @@ import { AnimateNumber } from 'motion-plus-vue'
 export type BalanceCardProps = {
   size?: 's' | 'xl'
   type?: 'coin' | 'robux'
-  sum: number
+  sum: Maybe<number>
 }
 
 const props = withDefaults(defineProps<BalanceCardProps>(), {
