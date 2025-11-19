@@ -15,7 +15,22 @@ export const useStartApp = async () => {
   let ref = ''
   let route = '/'
   const query: Record<string, string> = {}
-  let isValidChannel = false
+
+  const routeApp = useRoute()
+
+  // Проверяем имя канала клиента
+  const channel: Maybe<Clients> = routeApp.query.channel as Maybe<Clients>
+
+  console.log(channel)
+
+  if (channel && clientsMap[channel]) {
+    console.log(11111)
+    client.value = channel
+  } else {
+    console.log(22222)
+    errorModalOpen.value = true
+    return
+  }
 
   if (raw) {
     const params = raw.split('_')
@@ -30,24 +45,10 @@ export const useStartApp = async () => {
         route = `/item/${id}`
       }
 
-      if (param.startsWith('channel')) {
-        const channel = param.slice('channel'.length) as Clients
-
-        if (clientsMap[channel]) {
-          client.value = channel
-          isValidChannel = true
-        }
-      }
-
       if (param.startsWith('messageId')) {
         query.message_id = param.slice('messageId'.length)
       }
     })
-  }
-
-  if (!isValidChannel) {
-    errorModalOpen.value = true
-    return
   }
 
   if (Object.keys(query).length) {
