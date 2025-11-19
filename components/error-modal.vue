@@ -1,6 +1,8 @@
 <template>
   <ui-modal-base
     :is-open="isOpen"
+    full-height
+    without-header
     class="auth-modal"
     @update:is-open="emits('update:isOpen', $event)"
   >
