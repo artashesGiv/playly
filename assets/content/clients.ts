@@ -16,4 +16,9 @@ export const clientsMap: Record<Clients, Client> = {
     link: 'https://t.me/artashesGiv',
     logo: '/images/main/logos/channelDev.png',
   },
+  playlywl: {
+    name: 'Playlywl',
+    link: 'https://t.me/pohelon',
+    logo: '/images/main/logos/channelDev.png',
+  },
 }
