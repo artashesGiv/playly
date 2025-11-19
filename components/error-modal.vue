@@ -50,6 +50,7 @@ const onClose = async () => {
 
     align-items: center;
     text-align: center;
+    align-self: center;
   }
 
   &__logo {
