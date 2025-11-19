@@ -1,4 +1,4 @@
-export type Clients = 'playly' | 'channel' | 'channelDev' | 'playlywl'
+export type Clients = 'playly' | 'channel' | 'channelDev' | 'playly_wl'
 
 export type Client = {
   name: string

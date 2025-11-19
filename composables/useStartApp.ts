@@ -21,11 +21,15 @@ export const useStartApp = async () => {
   // Проверяем имя канала клиента
   const channel: Maybe<Clients> = routeApp.query.channel as Maybe<Clients>
 
-  console.log(channel)
+  console.log('QUERY', routeApp.query)
+  console.log('CHANNEL', channel)
+  console.log('clientsMap', clientsMap)
 
   if (channel && clientsMap[channel]) {
     client.value = channel
+    console.log(1111)
   } else {
+    console.log(2222)
     errorModalOpen.value = true
     return
   }
