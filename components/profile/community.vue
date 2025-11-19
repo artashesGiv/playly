@@ -11,7 +11,7 @@
       />
       <ui-button-base
         icon="telegram"
-        :text="clientsNameMap[client]"
+        :text="clientsMap[client].name"
         view="secondary"
         size="52"
         @click="onClickStarpets"
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { clientsNameMap, clientsTgLinkMap } from '@/assets/content'
+import { clientsMap } from '@/assets/content'
 import { useAuthStore } from '@/store'
 
 const { tg } = useTelegram()
@@ -32,7 +32,7 @@ const onClickPlayly = () => {
 }
 
 const onClickStarpets = () => {
-  tg?.openTelegramLink(clientsTgLinkMap[client.value])
+  tg?.openTelegramLink(clientsMap[client.value].link)
 }
 </script>
 

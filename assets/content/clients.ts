@@ -1,16 +1,19 @@
-import type { Clients } from '@/types'
+import type { Client, Clients } from '@/types'
 
-export const clientsIdMap: Record<Clients, number> = {
-  playly: 1,
-  channel: 2,
-}
-
-export const clientsNameMap: Record<Clients, string> = {
-  playly: 'Playly',
-  channel: 'Test',
-}
-
-export const clientsTgLinkMap: Record<Clients, string> = {
-  playly: 'https://t.me/+bmusTP1u7VMwMmJi',
-  channel: 'https://t.me/artashesGiv',
+export const clientsMap: Record<Clients, Client> = {
+  playly: {
+    name: 'Playly',
+    link: 'https://t.me/+bmusTP1u7VMwMmJi',
+    logo: '/images/main/logos/playly.png',
+  },
+  channel: {
+    name: 'Test',
+    link: 'https://t.me/artashesGiv',
+    logo: '/images/main/logos/channel.png',
+  },
+  channelDev: {
+    name: 'Channel Dev',
+    link: 'https://t.me/artashesGiv',
+    logo: '/images/main/logos/channelDev.png',
+  },
 }

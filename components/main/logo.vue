@@ -1,13 +1,13 @@
 <template>
   <div class="logo">
-    <nuxt-img :src="`/images/main/logos/${client}.png`" class="logo__square" />
-    <span> {{ clientsNameMap[client] }} </span>
+    <nuxt-img :src="clientsMap[client].logo" class="logo__square" />
+    <span> {{ clientsMap[client].name }} </span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '@/store'
-import { clientsNameMap } from '@/assets/content'
+import { clientsMap } from '@/assets/content'
 
 const { client } = storeToRefs(useAuthStore())
 </script>

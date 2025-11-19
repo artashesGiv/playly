@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/store'
 import type { Clients } from '@/types'
-import { clientsIdMap } from '@/assets/content'
+import { clientsMap } from '@/assets/content'
 
 export const useStartApp = async () => {
   const { tg } = useTelegram()
@@ -13,7 +13,7 @@ export const useStartApp = async () => {
     new URLSearchParams(window.location.search).get('tgWebAppStartParam') // fallback на десктоп Web
 
   let ref = ''
-  let route = '/shop-v2'
+  let route = '/'
   const query: Record<string, string> = {}
   let isValidChannel = false
 
@@ -33,7 +33,7 @@ export const useStartApp = async () => {
       if (param.startsWith('channel')) {
         const channel = param.slice('channel'.length) as Clients
 
-        if (clientsIdMap[channel]) {
+        if (clientsMap[channel]) {
           client.value = channel
           isValidChannel = true
         }
