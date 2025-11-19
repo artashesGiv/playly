@@ -24,10 +24,8 @@ export const useStartApp = async () => {
   console.log(channel)
 
   if (channel && clientsMap[channel]) {
-    console.log(11111)
     client.value = channel
   } else {
-    console.log(22222)
     errorModalOpen.value = true
     return
   }
