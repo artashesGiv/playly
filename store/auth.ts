@@ -1,11 +1,5 @@
-import type { AuthResponse, Rates, Clients } from '@/types'
-import {
-  useCasesStore,
-  useCoinsStore,
-  useFriendsStore,
-  useItemsStore,
-  useUserStore,
-} from '@/store'
+import type { AuthResponse, Clients, Rates } from '@/types'
+import { useItemsStore, useUserStore } from '@/store'
 
 export const useAuthStore = defineStore('auth', () => {
   const isAuth = ref(false)
@@ -20,10 +14,10 @@ export const useAuthStore = defineStore('auth', () => {
   const refLink = ref('')
 
   const { getUserInfo } = useUserStore()
-  const { getReferrals } = useFriendsStore()
+  // const { getReferrals } = useFriendsStore()
   const { getItems } = useItemsStore()
-  const { getCases } = useCasesStore()
-  const { getTaskSettings } = useCoinsStore()
+  // const { getCases } = useCasesStore()
+  // const { getTaskSettings } = useCoinsStore()
   const { popup } = useTelegram()
 
   const login = async (ref: string) => {
@@ -49,12 +43,12 @@ export const useAuthStore = defineStore('auth', () => {
 
         await Promise.all([
           getUserInfo(),
-          getRefLink(),
-          getTaskSettings(),
-          getReferrals(),
+          // getRefLink(),
+          // getTaskSettings(),
+          // getReferrals(),
         ])
 
-        await Promise.all([getItems(), getCases(), getRates()])
+        await Promise.all([getItems(), /*getCases(),*/ getRates()])
       },
       errorCallback: () => {
         errorModalOpen.value = true
@@ -77,14 +71,14 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
 
-  const getRefLink = async () => {
-    await baseRequest({
-      method: () => authAPI.fetchRefLink(),
-      callback: ({ ref_link }) => {
-        refLink.value = ref_link
-      },
-    })
-  }
+  // const getRefLink = async () => {
+  //   await baseRequest({
+  //     method: () => authAPI.fetchRefLink(),
+  //     callback: ({ ref_link }) => {
+  //       refLink.value = ref_link
+  //     },
+  //   })
+  // }
 
   const setStarpetsID = async (id: string) => {
     await baseRequest({

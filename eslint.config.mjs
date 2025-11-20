@@ -7,5 +7,6 @@ export default withNuxt({
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-namespace': 'off',
     'vue/prop-name-casing': 'off',
+    'vue/no-v-text-v-html-on-componen': 'off',
   },
 })

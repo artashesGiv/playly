@@ -1,4 +1,4 @@
-import type { PaymentParams } from '@/types/payment'
+import type { PaymentParams, PromocodeData } from '@/types'
 
 export namespace Robux {
   export namespace GET {
@@ -45,6 +45,11 @@ export namespace Robux {
         email: Maybe<string>
         amount_rub: number
       }
+    }
+
+    export namespace Promocode {
+      export type Payload = { promocode: string }
+      export type Response = PromocodeData
     }
 
     export namespace Sell {

@@ -1,58 +1,105 @@
+import type { Ref } from 'vue'
+import { isRef, onUnmounted, ref, watchEffect } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 /**
- * Реактивный обратный отсчёт до указанной даты-времени.
- * @param isoTarget  Реактивная или обычная ISO‑строка даты‑времени (`Ref<string> | string`)
+ * Реактивный обратный отсчёт до указанного времени (timestamp).
+ * @param tsTarget  Реактивный или обычный timestamp (Ref<number | string> | number | string)
+ * @param onFinish  Необязательный коллбек, вызывается при завершении таймера
  * @returns Ref<string> c текстом таймера
  */
-export function useCountdown(isoTarget: Ref<string> | string) {
-  const output = ref('')
+export function useCountdown(
+  tsTarget:
+    | Ref<number | string | null | undefined>
+    | number
+    | string
+    | null
+    | undefined,
+  onFinish?: () => void,
+): Ref<string> {
+  const output = ref<string>('')
 
-  let intervalId: ReturnType<typeof setInterval> | undefined
+  const { t } = useI18n()
 
-  const clear = () => intervalId && clearInterval(intervalId)
+  let intervalId: ReturnType<typeof setInterval> | null = null
 
-  const tick = () => {
-    const targetIso =
-      typeof isoTarget === 'string' ? isoTarget : isoTarget.value
-    if (!targetIso) {
+  const clear = (): void => {
+    if (intervalId) clearInterval(intervalId)
+    intervalId = null
+  }
+
+  const toMs = (val: number | string): number | null => {
+    if (typeof val === 'string') {
+      const parsedDate = Date.parse(val)
+      if (!isNaN(parsedDate)) return parsedDate
+      return null
+    }
+
+    return val < 1_000_000_000_000 ? val * 1000 : val
+  }
+
+  const getTargetMs = (): number | null => {
+    const raw = isRef(tsTarget) ? tsTarget.value : tsTarget
+    if (!raw) return null
+    return toMs(raw)
+  }
+
+  const tick = (): void => {
+    const targetMs = getTargetMs()
+    if (!targetMs) {
       output.value = ''
       return
     }
 
-    const diffMs = new Date(targetIso).getTime() - Date.now()
-    if (Number.isNaN(diffMs)) {
+    const diffMs = targetMs - Date.now()
+    if (!Number.isFinite(diffMs)) {
       output.value = ''
       return
     }
 
     if (diffMs <= 0) {
-      output.value = '0 мин'
+      output.value = '00:00:00'
       clear()
+      if (onFinish) onFinish()
       return
     }
 
     const totalSec = Math.floor(diffMs / 1000)
-    const hours = Math.floor(totalSec / 3600)
+    const days = Math.floor(totalSec / 86400)
+    const hours = Math.floor((totalSec % 86400) / 3600)
     const minutes = Math.floor((totalSec % 3600) / 60)
     const seconds = totalSec % 60
 
-    if (hours > 0) {
-      // ≥ 60 минут: показываем часы и минуты; секунды — при необходимости
-      output.value =
-        seconds === 0
-          ? `${hours}:${minutes.toString().padStart(2, '0')}`
-          : `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    const dayWord = t('countdown.day')
+    const hourWord = t('countdown.hour')
+    const minWord = t('countdown.min')
+    const secondWord = t('countdown.second')
+
+    if (days >= 1) {
+      output.value = `${days} ${dayWord} ${hours} ${hourWord} ${minutes} ${minWord}`
     } else {
-      // < 60 минут: прежнее поведение
-      output.value = `${minutes}:${seconds.toString().padStart(2, '0')}`
+      output.value = `${hours} ${hourWord} ${minutes} ${minWord} ${seconds} ${secondWord}`
     }
   }
 
-  const start = () => {
-    tick() // первоначальный расчёт
+  const start = (): void => {
+    tick()
     intervalId = setInterval(tick, 1000)
   }
 
-  onMounted(start)
+  watchEffect(onCleanup => {
+    const targetMs = getTargetMs()
+    clear()
+
+    if (!targetMs) {
+      output.value = ''
+      return
+    }
+
+    start()
+    onCleanup(clear)
+  })
+
   onUnmounted(clear)
 
   return output

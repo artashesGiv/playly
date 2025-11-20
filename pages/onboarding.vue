@@ -3,7 +3,7 @@
     <main-logo />
     <onboarding-content :step="activeStep" class="onboarding__content" />
     <div class="onboarding__information">
-      <ui-step-point :steps="3" :active-step="activeStep" />
+      <ui-step-point :steps="1" :active-step="activeStep" />
       <div class="onboarding__text">
         <h2>{{ textMap[activeStep].title }}</h2>
         <span>{{ textMap[activeStep].description }}</span>
@@ -20,6 +20,9 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from '@/store'
+import { clientsMap } from '@/assets/content'
+
 definePageMeta({
   layout: 'empty',
 })
@@ -28,10 +31,14 @@ const activeStep = ref<OnboardingStep>(1)
 
 const { t } = useI18n()
 
+const { client } = storeToRefs(useAuthStore())
+
 const textMap: Record<OnboardingStep, { title: string; description: string }> =
   {
     '1': {
-      title: t('onboarding.step-1.title'),
+      title: t('onboarding.step-1.title', {
+        name: clientsMap[client.value].name,
+      }),
       description: t('onboarding.step-1.description'),
     },
     '2': {
@@ -45,11 +52,11 @@ const textMap: Record<OnboardingStep, { title: string; description: string }> =
   }
 
 const onNextStep = () => {
-  if (activeStep.value + 1 <= 3) {
-    activeStep.value += 1
-  } else {
-    navigateTo('/')
-  }
+  // if (activeStep.value + 1 <= 2) {
+  //   activeStep.value += 1
+  // } else {
+  // }
+  navigateTo('/')
 }
 </script>
 

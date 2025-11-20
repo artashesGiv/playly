@@ -1,12 +1,14 @@
 <template>
   <div :class="classes" :style="style">
-    {{ text }}
+    <slot>
+      {{ text }}
+    </slot>
   </div>
 </template>
 
 <script setup lang="ts">
 export type TagProps = {
-  text: string
+  text?: string
   color?:
     | 'pink'
     | 'green'

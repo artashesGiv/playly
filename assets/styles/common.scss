@@ -47,3 +47,12 @@ body {
 .container {
   padding: 0 16px;
 }
+
+.old-value {
+  text-decoration: line-through;
+  color: var(--light-500);
+
+  &--red {
+    color: var(--red-500);
+  }
+}

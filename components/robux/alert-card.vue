@@ -3,7 +3,7 @@
     <span>{{ $t('robux.alert') }}</span>
     <div class="robux-alert__right">
       <div class="robux-alert__prev-price">
-        {{ (getValue / 1.96).toFixed(0) }}
+        {{ (getValue / COEFICENT).toFixed(0) }}
       </div>
       <div class="robux-alert__price">
         {{ getValue }}

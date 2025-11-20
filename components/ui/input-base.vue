@@ -1,5 +1,10 @@
 <template>
   <div :class="classes">
+    <span v-if="title || $slots.title" class="input__label">
+      <slot name="title">
+        {{ title }}
+      </slot>
+    </span>
     <div class="input__content">
       <slot name="icon">
         <ui-icon-base v-if="icon" class="input__icon-left" :name="icon" />
@@ -23,6 +28,7 @@
         class="input__icon-left"
         :name="iconRight"
       />
+      <slot />
     </div>
     <div
       v-if="isError && errorMessage"
@@ -41,6 +47,7 @@ export type InputBaseProps = {
   icon?: Icons
   iconRight?: Icons
   label?: string
+  title?: string
   errorMessage?: string
   iconColor?: 'base' | 'yellow'
   postfix?: string
@@ -57,6 +64,7 @@ export type InputBaseProps = {
     | 'search'
     | 'send'
   textRight?: boolean
+  uppercase?: boolean
 }
 
 type InputEmits = {
@@ -77,6 +85,8 @@ const props = withDefaults(defineProps<InputBaseProps>(), {
   postfix: '',
   min: undefined,
   max: undefined,
+  textRight: false,
+  uppercase: false,
 })
 
 const emit = defineEmits<InputEmits>()
@@ -91,7 +101,11 @@ const classes = computed(() => [
 ])
 
 const onInput = (event: Event) => {
-  const value = (event.target as HTMLInputElement).value
+  let value = (event.target as HTMLInputElement).value
+  if (props.uppercase) {
+    value = value.toUpperCase()
+    ;(event.target as HTMLInputElement).value = value
+  }
 
   let isError = false
   if (props.type === 'number' && value !== '') {

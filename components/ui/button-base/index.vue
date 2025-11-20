@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import type { SpinnerProps } from '@/components/ui/spinner.vue'
 import type { CSSProperties } from 'vue'
-import { fontBySize, iconFontSize, radiusBySize } from './-helpers' // props
+import { fontBySize, iconFontSize, radiusBySize } from './-helpers'
 
 // props
 type ButtonView = 'primary' | 'secondary' | 'secondary-light' | 'icon' | 'white'

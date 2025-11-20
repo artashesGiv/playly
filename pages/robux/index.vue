@@ -13,8 +13,8 @@
         <ui-tag
           size="l"
           color="green"
-          :text="`1₽ = ${rates?.rub2robux} R$`"
           view="secondary"
+          v-html="robuxPriceText"
         />
       </div>
       <div class="robux__inputs">
@@ -55,6 +55,27 @@
             @click="getValue = 1500"
           />
         </div>
+        <ui-input-base
+          v-model="promocode"
+          v-model:is-error="promoError"
+          :placeholder="$t('robux.input.promocodePlaceholder')"
+          icon="ticket-2"
+          :error-message="
+            $t(`robux.input.promocodeErrors.${promoCodeErrorStatus}`)
+          "
+          uppercase
+        >
+          <template #title>
+            <span v-html="promocodeTitle" />
+          </template>
+          <ui-button-base
+            icon="right-1"
+            size="34"
+            :is-disabled="!promocode"
+            :loading="promoLoading"
+            @click="promocodeActivate({ promocode })"
+          />
+        </ui-input-base>
       </div>
     </div>
     <div class="robux__footer">
@@ -71,12 +92,19 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore, useRobuxBuyStore } from '@/store'
+import { useAuthStore, useRobuxBuyStore, useUserStore } from '@/store'
 
-const { getValue, payValue, stock } = storeToRefs(useRobuxBuyStore())
+const { getValue, payValue, stock, promoError, promoCodeErrorStatus } =
+  storeToRefs(useRobuxBuyStore())
 const { rates } = storeToRefs(useAuthStore())
-const { fetchStock } = useRobuxBuyStore()
+const { userPromocodeData } = storeToRefs(useUserStore())
+const { fetchStock, promocodeActivate } = useRobuxBuyStore()
 const { popup } = useTelegram()
+
+const promocode = ref('')
+const promoLoading = useKeyLoading('activatePromocode')
+
+const { t } = useI18n()
 
 const onClick = () => {
   const MIN_RUB_ORDER = 10
@@ -97,6 +125,29 @@ const onClick = () => {
 
   navigateTo('/robux/buy?step=1')
 }
+
+const robuxPriceText = computed(() => {
+  const defaultPrice = rates.value?.rub2robux
+  const promocodePrice = userPromocodeData.value.promocode_rub2robux
+
+  if (promocodePrice) {
+    return `<span>1₽ = <s class="old-value old-value--red">${defaultPrice} R$</s> ${promocodePrice} R$</span>`
+  }
+
+  return `1₽ = ${defaultPrice} R$`
+})
+
+const promocodeExpiresTime = computed(
+  () => userPromocodeData.value.promocode_rub2robux_expires_at || '',
+)
+
+const countdownPromocode = useCountdown(promocodeExpiresTime)
+
+const promocodeTitle = computed(() => {
+  if (!promocodeExpiresTime.value) return ''
+
+  return `${t('robux.input.promocodeTitle')} <br/> ${countdownPromocode.value}`
+})
 
 useBackButton()
 

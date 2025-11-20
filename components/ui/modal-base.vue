@@ -93,6 +93,7 @@ const emits = defineEmits<Emits>()
 
   &__content {
     display: flex;
+    flex-direction: column;
     overflow: auto;
     position: relative;
 

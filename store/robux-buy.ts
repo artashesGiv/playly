@@ -72,8 +72,13 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
   const payValue = ref(769)
 
   const { rates } = storeToRefs(useAuthStore())
-  const { userInfo } = storeToRefs(useUserStore())
-  const rate = computed(() => rates.value?.rub2robux || 1)
+  const { userInfo, userPromocodeData } = storeToRefs(useUserStore())
+  const rate = computed(
+    () =>
+      userPromocodeData.value.promocode_rub2robux ||
+      rates.value?.rub2robux ||
+      1,
+  )
 
   const getValue = computed<number>({
     get: () => Math.round(payValue.value * rate.value),
@@ -116,6 +121,26 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
       callback: result => {
         stock.value = result.stock_robux
       },
+    })
+  }
+
+  // PROMO_CODE
+  const promoError = ref(false)
+  const promoCodeErrorStatus = ref<Maybe<number>>(null)
+  const promocodeActivate = async ({
+    promocode,
+  }: Robux.POST.Promocode.Payload) => {
+    await baseRequest({
+      method: () =>
+        robuxAPI.promocodeActivate({ promocode: promocode.toLowerCase() }),
+      callback: result => {
+        userPromocodeData.value = result
+      },
+      errorCallback: error => {
+        promoError.value = true
+        promoCodeErrorStatus.value = error.status
+      },
+      keyLoading: 'activatePromocode',
     })
   }
 
@@ -427,5 +452,10 @@ export const useRobuxBuyStore = defineStore('robux-buy', () => {
     fetchTransactions,
     fetchStock,
     resetErrors,
+
+    // PROMO
+    promoError,
+    promoCodeErrorStatus,
+    promocodeActivate,
   }
 })

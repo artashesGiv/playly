@@ -1,8 +1,21 @@
-import type { UserInfo } from '@/types'
+import type { PromocodeData, UserInfo } from '@/types'
 
 export const useUserStore = defineStore('user', () => {
   const userInfo = ref<Maybe<UserInfo>>(null)
   const balance = ref(0)
+
+  const userPromocodeData = computed<PromocodeData>({
+    get: () => ({
+      promocode_rub2robux: userInfo.value?.promocode_rub2robux,
+      promocode_rub2robux_expires_at:
+        userInfo.value?.promocode_rub2robux_expires_at,
+    }),
+    set: (promocodeData: PromocodeData) => {
+      if (userInfo.value) {
+        userInfo.value = { ...userInfo.value, ...promocodeData }
+      }
+    },
+  })
 
   const starpetsInfo = computed(() => userInfo.value?.starpets_info)
   const currencyBalance = computed(() => userInfo.value?.money_balance)
@@ -31,6 +44,7 @@ export const useUserStore = defineStore('user', () => {
     currencyBalance,
     userInfo,
     starpetsInfo,
+    userPromocodeData,
     getUserInfo,
   }
 })

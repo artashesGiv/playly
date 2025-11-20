@@ -97,7 +97,7 @@ export type UserInfo = {
     username: string
   }
   money_balance: Record<Currency, string>
-}
+} & PromocodeData
 
 export type CheckSubscriptionData = {
   crystals_awarded: number
@@ -105,3 +105,7 @@ export type CheckSubscriptionData = {
 }
 
 export type Rates = { robux2crystal: number; rub2robux: number }
+export type PromocodeData = {
+  promocode_rub2robux: Maybe<number>
+  promocode_rub2robux_expires_at: Maybe<string>
+}

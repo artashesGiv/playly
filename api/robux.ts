@@ -56,4 +56,10 @@ export const robuxAPI = {
   async fetchRobuxStock(): Promise<Robux.GET.Stock.Response> {
     return await this._baseApi.get('/robux_withdraws/stock_robux')
   },
+
+  async promocodeActivate(
+    payload: Robux.POST.Promocode.Payload,
+  ): Promise<Robux.POST.Promocode.Response> {
+    return await this._baseApi.post('/promocode/activate', payload)
+  },
 }
