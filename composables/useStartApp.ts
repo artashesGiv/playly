@@ -3,7 +3,14 @@ import type { Clients } from '@/types'
 import { clientsMap } from '@/assets/content'
 
 export const useStartApp = async () => {
+  const routeApp = useRoute()
   const { tg } = useTelegram()
+  const isTg = !!tg.initData
+
+  if (!isTg) {
+    return
+  }
+
   const { setLang } = useAuthStore()
   const { client, errorModalOpen } = storeToRefs(useAuthStore())
   const { locale } = useI18n()
@@ -13,10 +20,8 @@ export const useStartApp = async () => {
     new URLSearchParams(window.location.search).get('tgWebAppStartParam') // fallback на десктоп Web
 
   let ref = ''
-  let route = '/'
+  let route = '/robux'
   const query: Record<string, string> = {}
-
-  const routeApp = useRoute()
 
   // Проверяем имя канала клиента
   const channel: Maybe<Clients> = routeApp.query.channel as Maybe<Clients>
@@ -27,9 +32,10 @@ export const useStartApp = async () => {
 
   if (channel && clientsMap[channel]) {
     client.value = channel
-    console.log(1111)
+    route = clientsMap[client.value]?.indexPage
+    console.log('SUCCESS: ', channel)
   } else {
-    console.log(2222)
+    console.log('FAILED: ', routeApp.query)
     errorModalOpen.value = true
     return
   }

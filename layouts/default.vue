@@ -1,11 +1,11 @@
 <template>
   <div class="layout">
-    <main v-if="client" class="layout__content">
-      <main-header class="layout__header" />
+    <main class="layout__content">
+      <main-header v-if="client" v class="layout__header" />
       <slot />
     </main>
 
-    <main-navigation v-if="client" class="layout__footer" />
+    <main-navigation class="layout__footer" />
   </div>
 </template>
 

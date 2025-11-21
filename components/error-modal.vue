@@ -8,16 +8,16 @@
   >
     <div class="auth-modal__content">
       <h4 class="title">{{ $t('error404.title') }}</h4>
-      <span class="auth-modal__description">
+      <span class="font-normal-bold">
         {{ $t('error404.description') }}
       </span>
       <ui-button-base
         :text="$t('error404.button')"
         size="46"
         :loading="isLoading"
+        class="auth-modal__button"
         @click="onClose"
       />
-      <span class="description">{{ $t('auth.alert') }}</span>
     </div>
   </ui-modal-base>
 </template>
@@ -48,6 +48,7 @@ const onClose = async () => {
   &__content {
     @include column(12px);
 
+    width: 100%;
     align-items: center;
     text-align: center;
     align-self: center;
@@ -57,8 +58,8 @@ const onClose = async () => {
     width: 60px;
   }
 
-  &__description {
-    font: var(--font-small-medium);
+  &__button {
+    max-width: 400px;
   }
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div class="item-interactive">
     <ui-button-base
+      v-if="!hide?.includes('sell')"
       :text="$t('common.sell')"
       :is-disabled="disabled?.includes('sell')"
       :loading="loading?.includes('sell')"
@@ -10,6 +11,7 @@
       @click="onClick('sell')"
     />
     <ui-button-base
+      v-if="!hide?.includes('withdraw')"
       :text="$t('common.withdraw')"
       :is-disabled="disabled?.includes('withdraw')"
       :loading="loading?.includes('withdraw')"
@@ -19,6 +21,7 @@
       @click="onClick('withdraw')"
     />
     <ui-button-base
+      v-if="!hide?.includes('share')"
       :text="$t('common.share')"
       :loading="loading?.includes('share')"
       direction="column"
@@ -32,6 +35,7 @@
 <script setup lang="ts">
 export type InteractiveProps = {
   disabled?: ('sell' | 'withdraw' | 'share')[]
+  hide?: ('sell' | 'withdraw' | 'share')[]
   loading?: ('sell' | 'withdraw' | 'share')[]
 }
 

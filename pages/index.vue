@@ -21,7 +21,6 @@ const { getUserInfo } = useUserStore()
 
 onMounted(async () => {
   await getUserInfo()
-  navigateTo('/shop-v2')
 })
 </script>
 

@@ -2,6 +2,7 @@
   <div v-if="!isLoading" class="profile">
     <profile-main />
     <ui-button-base
+      v-if="clientAllowedRoutes.includes('shop')"
       :text="$t('market.orders.buttonText')"
       view="secondary-light"
       size="50"
@@ -31,9 +32,14 @@
 </template>
 
 <script setup lang="ts">
-import { useItemsStore, useShopV2Store } from '@/store'
+import { useAuthStore, useItemsStore, useShopV2Store } from '@/store'
+import { clientsMap } from '@/assets/content'
 
 const isLoading = ref(false)
+
+const { client } = storeToRefs(useAuthStore())
+
+const clientAllowedRoutes = computed(() => clientsMap[client.value].routes)
 
 const { getItems } = useItemsStore()
 const { allWithdraws } = storeToRefs(useShopV2Store())

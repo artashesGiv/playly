@@ -49,6 +49,8 @@ const onSetLanguage = async (lang: LanguageCode) => {
   &__content {
     @include column(18px);
 
+    width: 100%;
+
     span {
       font: var(--font-base-medium);
     }

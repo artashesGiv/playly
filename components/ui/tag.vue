@@ -10,9 +10,9 @@
 export type TagProps = {
   text?: string
   color?:
+    | 'primary'
     | 'pink'
     | 'green'
-    | 'blue'
     | 'yellow'
     | 'light'
     | 'red'
@@ -25,7 +25,7 @@ export type TagProps = {
 }
 
 const props = withDefaults(defineProps<TagProps>(), {
-  color: 'blue',
+  color: 'primary',
   size: 'm',
   view: 'base',
 })
@@ -80,6 +80,9 @@ const style = computed(() => {
   }
 
   &--color {
+    &--primary {
+      background-color: var(--primary-500);
+    }
     &--pink {
       background-color: var(--pink-500);
     }

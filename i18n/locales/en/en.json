@@ -52,7 +52,7 @@
       "promocodeTitle": "Your promo code expires in",
       "promocodeErrors": {
         "400": "Promocode not found or expired",
-        "401": "Promocode has already been used"
+        "402": "Promocode has already been used"
       }
     },
     "alert": "More profitable than in-game",

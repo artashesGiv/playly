@@ -10,11 +10,13 @@
         @click="onClickPlayly"
       />
       <ui-button-base
-        icon="telegram"
-        :text="clientsMap[client].name"
+        v-for="(link, index) in clientsLinks"
+        :key="index"
+        :icon="link.icon"
+        :text="link.text"
         view="secondary"
         size="52"
-        @click="onClickStarpets"
+        @click="onClickLink(link)"
       />
     </div>
   </div>
@@ -23,6 +25,7 @@
 <script setup lang="ts">
 import { clientsMap } from '@/assets/content'
 import { useAuthStore } from '@/store'
+import type { ClientLink } from '@/types'
 
 const { tg } = useTelegram()
 const { client } = storeToRefs(useAuthStore())
@@ -31,15 +34,38 @@ const onClickPlayly = () => {
   tg?.openTelegramLink('https://t.me/+bmusTP1u7VMwMmJi')
 }
 
-const onClickStarpets = () => {
-  tg?.openTelegramLink(clientsMap[client.value].link)
+const clientsLinks = computed(() => {
+  const clientData = clientsMap[client.value]
+
+  if (Array.isArray(clientData.link)) {
+    return clientData.link
+  }
+
+  return [clientData.link]
+})
+
+const onClickLink = (link: ClientLink) => {
+  if (link.icon === 'telegram') {
+    tg?.openTelegramLink(link.src)
+  } else {
+    tg?.openLink(link.src)
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .profile-community {
   &__buttons {
-    @include row(12px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    > * {
+      flex: 0 0 calc(50% - 6px);
+    }
+    > *:nth-child(odd):last-child {
+      flex: 0 0 100%;
+    }
   }
 }
 </style>

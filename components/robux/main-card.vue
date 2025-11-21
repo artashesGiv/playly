@@ -29,7 +29,7 @@
 
   position: relative;
   padding: 66px 14px 14px;
-  background: linear-gradient(134.09deg, #1477dd 25.4%, #0371e2 92.78%);
+  background: var(--primary-gradient);
   border-radius: 22px;
   overflow: hidden;
   min-height: 130px;

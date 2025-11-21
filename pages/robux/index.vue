@@ -6,7 +6,7 @@
       <div class="robux__info">
         <ui-tag
           size="l"
-          color="blue"
+          color="primary"
           :text="$t('common.in_stock', { value: `${formatePrice(stock)} R$` })"
           view="secondary"
         />

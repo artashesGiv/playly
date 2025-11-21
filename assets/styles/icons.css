@@ -1,7 +1,7 @@
 @font-face {
     font-family: "icons";
-    src: url("/fonts/icons/icons.woff?a20ee3a656222f328214121b14d72c22") format("woff"),
-url("/fonts/icons/icons.woff2?a20ee3a656222f328214121b14d72c22") format("woff2");
+    src: url("/fonts/icons/icons.woff?6ec65362ad903b421e38cb16a8e1e826") format("woff"),
+url("/fonts/icons/icons.woff2?6ec65362ad903b421e38cb16a8e1e826") format("woff2");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -263,4 +263,7 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
 }
 .icon-wallet:before {
     content: "\f153";
+}
+.icon-youtube:before {
+    content: "\f154";
 }

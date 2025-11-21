@@ -1,46 +1,35 @@
+import { useAuthStore } from '@/store'
+import { clientsMap } from '@/assets/content/clients'
+import type { ClientsRoutes } from '@/types'
+
 export const useNavigation = (): NavItem[] => {
   const { t } = useI18n()
+  const { client } = storeToRefs(useAuthStore())
+  const clientsRoutes = clientsMap[client.value]?.routes || [
+    'robux',
+    'shop',
+    'profile',
+  ]
 
-  return [
-    // {
-    //   src: '/',
-    //   icon: 'mascot',
-    //   text: t('nav.coins'),
-    // },
-    // {
-    //   src: '/shop',
-    //   icon: 'buy-1',
-    //   text: t('nav.shop') + 'v1',
-    // },
-    {
+  const allNav: Record<ClientsRoutes, NavItem> = {
+    shop: {
       src: '/shop-v2',
       icon: 'buy-1',
       text: t('nav.shop'),
     },
-    // {
-    //   src: '/sell',
-    //   icon: 'buy-3',
-    //   text: t('nav.sell'),
-    // },
-    {
+    robux: {
       src: '/robux',
       icon: 'robux',
       text: t('nav.robux'),
     },
-    // {
-    //   src: '/friends',
-    //   icon: 'group-2',
-    //   text: t('nav.friends'),
-    // },
-    // {
-    //   src: '/cases',
-    //   icon: 'case-1',
-    //   text: t('nav.cases'),
-    // },
-    {
+    profile: {
       src: '/profile',
       icon: 'profile-1',
       text: t('nav.profile'),
     },
-  ]
+  }
+
+  return clientsRoutes
+    .map(key => allNav[key])
+    .filter((item): item is NavItem => Boolean(item))
 }

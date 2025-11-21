@@ -15,18 +15,41 @@
   --dark-1000: #100f11;
   --dark-alpha: #2a282c26;
 
-  /*primary*/
-  --primary-100: #cfe6fe;
-  --primary-200: #9fcdfd;
-  --primary-300: #6eb4fb;
-  --primary-400: #3e9bfa;
-  --primary-500: #0e82f9;
-  --primary-600: #0b68c7;
-  --primary-700: #084e95;
-  --primary-800: #063464;
-  --primary-900: #04274b;
-  --primary-1000: #031a32;
-  --primary-alpha: #0e82f926;
+  /*playly-brand*/
+  --playly-brand-100: #cfe6fe;
+  --playly-brand-200: #9fcdfd;
+  --playly-brand-300: #6eb4fb;
+  --playly-brand-400: #3e9bfa;
+  --playly-brand-500: #0e82f9;
+  --playly-brand-600: #0b68c7;
+  --playly-brand-700: #084e95;
+  --playly-brand-800: #063464;
+  --playly-brand-900: #04274b;
+  --playly-brand-1000: #031a32;
+  --playly-brand-alpha: #0e82f926;
+  --playly-brand-main-gradient: linear-gradient(
+    134.09deg,
+    #1477dd 25.4%,
+    #0371e2 92.78%
+  );
+
+  /*babkashop-brand*/
+  --babkashop-brand-100: #fde6ff;
+  --babkashop-brand-200: #fbcfff;
+  --babkashop-brand-300: #f9b8ff;
+  --babkashop-brand-400: #f9a4fe;
+  --babkashop-brand-500: #f79bfe;
+  --babkashop-brand-600: #c67ccc;
+  --babkashop-brand-700: #955d99;
+  --babkashop-brand-800: #643e66;
+  --babkashop-brand-900: #472d4b;
+  --babkashop-brand-1000: #2b1b30;
+  --babkashop-brand-alpha: #f79bfe26;
+  --babkashop-brand-main-gradient: linear-gradient(
+    134.09deg,
+    #f28bff 25.4%,
+    #e56bff 92.78%
+  );
 
   /*light*/
   --light-100: #e8e8e9;
@@ -53,6 +76,11 @@
   --green-900: #0b3a19;
   --green-1000: #072711;
   --green-alpha: #25c35426;
+  --green-main-gradient: linear-gradient(
+    134.09deg,
+    var(--green-400) 25.4%,
+    var(--green-500) 92.78%
+  );
 
   /*pink*/
   --pink-100: #f6cfdd;
@@ -66,6 +94,11 @@
   --pink-900: #40051a;
   --pink-1000: #2a0311;
   --pink-alpha: #d4105726;
+  --pink-main-gradient: linear-gradient(
+    134.09deg,
+    var(--pink-400) 25.4%,
+    var(--pink-500) 92.78%
+  );
 
   /*blue*/
   --blue-100: #cfe8f6;
@@ -79,6 +112,11 @@
   --blue-900: #052b40;
   --blue-1000: #031c2a;
   --blue-alpha: #108ed426;
+  --blue-main-gradient: linear-gradient(
+    134.09deg,
+    var(--blue-400) 25.4%,
+    var(--blue-500) 92.78%
+  );
 
   /*yellow*/
   --yellow-100: #fff7db;
@@ -92,6 +130,11 @@
   --yellow-900: #4c4016;
   --yellow-1000: #332b0f;
   --yellow-alpha: #ffd54a26;
+  --yellow-main-gradient: linear-gradient(
+    134.09deg,
+    var(--yellow-400) 25.4%,
+    var(--yellow-500) 92.78%
+  );
 
   /*red*/
   --red-100: #f5d6d6;
@@ -105,6 +148,11 @@
   --red-900: #3d1010;
   --red-1000: #290a0a;
   --red-alpha: #cb343426;
+  --red-main-gradient: linear-gradient(
+    134.09deg,
+    var(--red-400) 25.4%,
+    var(--red-500) 92.78%
+  );
 
   /*purple*/
   --purple-100: #e4ccf8;
@@ -118,6 +166,11 @@
   --purple-900: #250540;
   --purple-1000: #19032a;
   --purple-alpha: #7e10d426;
+  --purple-main-gradient: linear-gradient(
+    134.09deg,
+    var(--purple-400) 25.4%,
+    var(--purple-500) 92.78%
+  );
 
   /*marine*/
   --marine-100: #d7f0eb;
@@ -131,6 +184,11 @@
   --marine-900: #14352f;
   --marine-1000: #0e2320;
   --marine-alpha: #42a58d26;
+  --marine-main-gradient: linear-gradient(
+    134.09deg,
+    var(--marine-400) 25.4%,
+    var(--marine-500) 92.78%
+  );
 
   /*sky-blue*/
   --sky-blue-100: #ccf7ff;
@@ -144,6 +202,11 @@
   --sky-blue-900: #003f4c;
   --sky-blue-1000: #002933;
   --sky-blue-alpha: #00d4ff26;
+  --sky-blue-main-gradient: linear-gradient(
+    134.09deg,
+    var(--sky-blue-400) 25.4%,
+    var(--sky-blue-500) 92.78%
+  );
 
   /*gradients*/
   --blue-gradient: linear-gradient(
@@ -262,4 +325,68 @@
     rgba(0, 212, 255, 0.2) 38%,
     rgba(0, 212, 255, 0) 100%
   );
+}
+
+/* тема по умолчанию */
+html.theme-playly {
+  --primary-100: var(--playly-brand-100);
+  --primary-200: var(--playly-brand-200);
+  --primary-300: var(--playly-brand-300);
+  --primary-400: var(--playly-brand-400);
+  --primary-500: var(--playly-brand-500);
+  --primary-600: var(--playly-brand-600);
+  --primary-700: var(--playly-brand-700);
+  --primary-800: var(--playly-brand-800);
+  --primary-900: var(--playly-brand-900);
+  --primary-1000: var(--playly-brand-1000);
+  --primary-alpha: var(--playly-brand-alpha);
+  --primary-gradient: var(--playly-brand-main-gradient);
+}
+
+/* розовая тема */
+html.theme-pink {
+  --primary-100: var(--pink-100);
+  --primary-200: var(--pink-200);
+  --primary-300: var(--pink-300);
+  --primary-400: var(--pink-400);
+  --primary-500: var(--pink-500);
+  --primary-600: var(--pink-600);
+  --primary-700: var(--pink-700);
+  --primary-800: var(--pink-800);
+  --primary-900: var(--pink-900);
+  --primary-1000: var(--pink-1000);
+  --primary-alpha: var(--pink-alpha);
+  --primary-gradient: var(--pink-main-gradient);
+}
+
+/* красная тема */
+html.theme-red {
+  --primary-100: var(--red-100);
+  --primary-200: var(--red-200);
+  --primary-300: var(--red-300);
+  --primary-400: var(--red-400);
+  --primary-500: var(--red-500);
+  --primary-600: var(--red-600);
+  --primary-700: var(--red-700);
+  --primary-800: var(--red-800);
+  --primary-900: var(--red-900);
+  --primary-1000: var(--red-1000);
+  --primary-alpha: var(--red-alpha);
+  --primary-gradient: var(--red-main-gradient);
+}
+
+/* babkashop тема */
+html.theme-babkashop {
+  --primary-100: var(--babkashop-brand-100);
+  --primary-200: var(--babkashop-brand-200);
+  --primary-300: var(--babkashop-brand-300);
+  --primary-400: var(--babkashop-brand-400);
+  --primary-500: var(--babkashop-brand-500);
+  --primary-600: var(--babkashop-brand-600);
+  --primary-700: var(--babkashop-brand-700);
+  --primary-800: var(--babkashop-brand-800);
+  --primary-900: var(--babkashop-brand-900);
+  --primary-1000: var(--babkashop-brand-1000);
+  --primary-alpha: var(--babkashop-brand-alpha);
+  --primary-gradient: var(--babkashop-brand-main-gradient);
 }

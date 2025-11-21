@@ -81,4 +81,5 @@ export type IconsId =
   | 'upload'
   | 'volume-high'
   | 'volume-slash'
-  | 'wallet';
+  | 'wallet'
+  | 'youtube';
